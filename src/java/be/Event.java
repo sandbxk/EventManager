@@ -28,7 +28,7 @@ public class Event {
         node = new VBox();
         node.setMaxSize(450, 150);
         node.setStyle("-fx-background-color: orange");
-        
+
 
     }
 
