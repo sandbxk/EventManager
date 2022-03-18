@@ -15,12 +15,12 @@ public class EventEntity {
 
     public @FXML ImageView imgViewbanner;
     public @FXML Label lblEventName;
-    public @FXML Label lblDateTime;
+    public @FXML Label lblEventDateTime;
 
 
     //Type cast fxml to Node and use Event as controller?
     public EventEntity() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("gui/views/EventEntity.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("gui/views/EventNode.fxml"));
         fxmlLoader.setControllerFactory(param -> this);
         try { node = fxmlLoader.load();
         } catch (IOException ignored) {}

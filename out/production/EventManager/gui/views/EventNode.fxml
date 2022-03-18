@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ToggleButton fx:id="eventRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="127.0" prefWidth="340.0" text="ToggleButton" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <graphic>
+        <VBox fx:id="eventVbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="127.0" prefWidth="324.0">
+            <children>
+                <GridPane fx:id="imgViewContainer" prefHeight="91.0" prefWidth="426.0" style="-fx-background-color: orange;">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <ImageView fx:id="imgViewBanner" fitHeight="94.0" fitWidth="325.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                            <GridPane.margin>
+                                <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
+                            </GridPane.margin>
+                        </ImageView>
+                    </children>
+                    <VBox.margin>
+                        <Insets top="5.0" />
+                    </VBox.margin>
+                </GridPane>
+                <HBox fx:id="hboxLabels" prefHeight="38.0" prefWidth="340.0">
+                    <children>
+                        <Label fx:id="lblEventName" prefHeight="30.0" prefWidth="196.0" text="NAME">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                            <padding>
+                                <Insets top="4.0" />
+                            </padding>
+                        </Label>
+                        <Label fx:id="lblEventDateTime" alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="151.0" text="02/03/22 16.00">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                            <padding>
+                                <Insets top="4.0" />
+                            </padding>
+                        </Label>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </graphic>
+</ToggleButton>
