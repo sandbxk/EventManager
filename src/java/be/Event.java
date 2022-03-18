@@ -1,5 +1,6 @@
 package be;
 
+import bll.DataManager;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -46,6 +47,7 @@ public class Event {
         try { node = fxmlLoader.load();
             node.getStylesheets().add(getClass().getResource("/gui/styles/event.css").toExternalForm());
         } catch (IOException ignored) {}
+        node.setOnAction(event -> DataManager.getInstance().setSelectedEvent(this));
     }
 
     /**
