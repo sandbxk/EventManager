@@ -15,7 +15,7 @@ public class SignInController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Event event = new Event();
-        borderPaneRoot.setCenter(event.getNode());
+        borderPaneRoot.setCenter(event.getEventTile());
     }
 
 }

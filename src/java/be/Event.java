@@ -58,7 +58,7 @@ public class Event {
         return img ;
     }
 
-    public ToggleButton getNode(){
+    public ToggleButton getEventTile(){
         return node;
     }
 
