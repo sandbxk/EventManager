@@ -1,0 +1,55 @@
+#eventRoot {
+    -fx-background-color: #C57040;
+    -fx-background-radius: 5;
+}
+
+#eventRoot:hover {
+    -fx-background-color: #fc8f51;
+    -fx-background-radius: 5;
+}
+
+#eventRoot:selected {
+    -fx-background-color: #ce5f1c;
+    -fx-border-width: 2;
+    -fx-border-color: orange;
+    -fx-background-radius: 5;
+}
+
+#eventRoot:selected:hover {
+    -fx-background-color: #8f5836;
+    -fx-border-width: 2;
+    -fx-border-color: orange;
+    -fx-background-radius: 5;
+}
+
+#eventVbox {
+
+}
+
+#imgViewContainer {
+    -fx-background-color: #CBA189;
+    -fx-background-radius: 5;
+
+}
+
+#imgViewBanner {
+    -fx-background-radius: 5;
+}
+
+#hboxLabels {
+
+}
+
+#lblEventName {
+    -fx-font-family: "Roboto";
+    -fx-font-size: 14pt;
+    -fx-font-weight: normal;
+    -fx-text-fill: #f8f8f8;
+}
+
+#lblEventDateTime{
+    -fx-font-family: "Roboto";
+    -fx-font-weight: lighter;
+    -fx-font-size: 12pt;
+    -fx-text-fill: #f8f8f8;
+}

@@ -44,6 +44,7 @@ public class Event {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/views/EventNode.fxml"));
         fxmlLoader.setControllerFactory(param -> this);
         try { node = fxmlLoader.load();
+            node.getStylesheets().add(getClass().getResource("/gui/styles/event.css").toExternalForm());
         } catch (IOException ignored) {}
     }
 
