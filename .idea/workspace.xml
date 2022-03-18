@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5d7b96bc-6cd9-4a01-a2a8-cfd6cab9b446" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/java/gui/views/EventEntity.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/gui/views/EventNode.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/be/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/be/Event.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/gui/component/EventEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/gui/component/EventEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/gui/views/EventEntity.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/gui/views/EventEntity.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +70,8 @@
       <workItem from="1647423448014" duration="4000" />
       <workItem from="1647425106180" duration="4109000" />
       <workItem from="1647502468685" duration="7143000" />
+      <workItem from="1647593563591" duration="1679000" />
+      <workItem from="1647596596810" duration="850000" />
     </task>
     <servers />
   </component>
