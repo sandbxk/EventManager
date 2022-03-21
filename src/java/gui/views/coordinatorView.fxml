@@ -35,7 +35,7 @@
                         <Insets top="6.0" />
                      </HBox.margin>
                      <padding>
-                        <Insets bottom="5.0" top="-6.0" />
+                        <Insets bottom="5.0" top="-7.0" />
                      </padding>
                   </Button>
                   <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="48.0" prefWidth="291.0">
