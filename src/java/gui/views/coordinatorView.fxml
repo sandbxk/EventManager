@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="683.0" prefWidth="960.0" styleClass="background" stylesheets="@../styles/mainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.CoordinatorController">
+<BorderPane prefHeight="750.0" prefWidth="1000.0" styleClass="background" stylesheets="@../styles/mainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.CoordinatorController">
    <top>
       <GridPane prefHeight="56.0" prefWidth="960.0" styleClass="menuBar" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -90,12 +90,150 @@
             </GridPane>
          </top>
          <left>
-            <VBox BorderPane.alignment="CENTER">
+            <GridPane BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets bottom="20.0" left="10.0" right="7.0" top="15.0" />
                </BorderPane.margin>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="50.666656494140625" minHeight="6.0" prefHeight="33.66667175292969" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="502.0" minHeight="10.0" prefHeight="474.3333282470703" vgrow="SOMETIMES" />
+               </rowConstraints>
                <children>
-                  <Label styleClass="panelHeadings" text="Details" textFill="WHITE">
+                  <GridPane maxHeight="1.7976931348623157E308" prefHeight="462.0" prefWidth="324.0" styleClass="panel" GridPane.rowIndex="1">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="455.6666564941406" minHeight="10.0" prefHeight="87.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="455.6666564941406" minHeight="0.0" prefHeight="84.33331298828125" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="455.6666564941406" minHeight="10.0" prefHeight="37.66668701171875" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="455.6666564941406" minHeight="10.0" prefHeight="155.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="455.6666564941406" minHeight="10.0" prefHeight="97.66668701171875" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <VBox prefHeight="118.0" prefWidth="324.0" GridPane.rowIndex="1">
+                           <children>
+                              <GridPane minHeight="30.0" minWidth="20.0" prefHeight="33.0" prefWidth="324.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label prefHeight="29.0" prefWidth="112.0" styleClass="InternalPanelHeading" text="Label">
+                                       <padding>
+                                          <Insets left="5.0" />
+                                       </padding>
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Button mnemonicParsing="false" text="Button" GridPane.halignment="RIGHT">
+                                       <GridPane.margin>
+                                          <Insets right="5.0" />
+                                       </GridPane.margin>
+                                    </Button>
+                                 </children>
+                              </GridPane>
+                              <HBox prefHeight="24.0" prefWidth="277.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="112.0" styleClass="InternalPanelSubHeading" text="Date">
+                                       <padding>
+                                          <Insets left="5.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label prefHeight="35.0" prefWidth="22.0" styleClass="InternalPanelSubHeading" text=" | ">
+                                       <padding>
+                                          <Insets left="5.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label prefHeight="35.0" prefWidth="59.0" styleClass="InternalPanelSubHeading" text="00.00">
+                                       <padding>
+                                          <Insets left="5.0" />
+                                       </padding>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="21.0" prefWidth="277.0">
+                                 <children>
+                                    <Label prefHeight="17.0" prefWidth="28.0" styleClass="InternalPanelSubHeading" text="\@ ">
+                                       <padding>
+                                          <Insets left="5.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label prefHeight="25.0" prefWidth="90.0" styleClass="InternalPanelSubHeading" text="Venue" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <ImageView fitHeight="73.0" fitWidth="257.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <VBox GridPane.rowIndex="2">
+                           <children>
+                              <HBox prefHeight="20.0" prefWidth="305.0">
+                                 <children>
+                                    <Label prefHeight="22.0" prefWidth="124.0" styleClass="Text" text="Tickets remaining:  ">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label prefHeight="22.0" prefWidth="67.0" styleClass="Text" text="100" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="9.0" prefWidth="305.0">
+                                 <children>
+                                    <Label prefHeight="22.0" prefWidth="87.0" styleClass="Text" text="Tickets sold:  ">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label prefHeight="22.0" prefWidth="67.0" styleClass="Text" text="100">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox GridPane.rowIndex="3">
+                           <children>
+                              <Label styleClass="Text" text="Ticket pricing:">
+                                 <padding>
+                                    <Insets left="5.0" top="20.0" />
+                                 </padding>
+                              </Label>
+                              <TableView minHeight="-Infinity" minWidth="-Infinity" prefHeight="98.0" prefWidth="314.0">
+                                <columns>
+                                  <TableColumn prefWidth="157.3333282470703" text="C1" />
+                                  <TableColumn prefWidth="155.6666717529297" text="C2" />
+                                </columns>
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </VBox.margin>
+                              </TableView>
+                           </children>
+                        </VBox>
+                        <VBox GridPane.rowIndex="4">
+                           <children>
+                              <Label prefHeight="18.0" prefWidth="79.0" styleClass="Text" text="Other Info:">
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
+                              </Label>
+                              <TextArea minHeight="-Infinity" minWidth="-Infinity" prefHeight="67.0" prefWidth="314.0">
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </VBox.margin>
+                              </TextArea>
+                           </children>
+                        </VBox>
+                     </children>
+                  </GridPane>
+                  <Label prefHeight="16.0" prefWidth="81.0" styleClass="panelHeadings" text="Details" textFill="WHITE" GridPane.valignment="BOTTOM">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -103,113 +241,8 @@
                         <Insets left="25.0" />
                      </padding>
                   </Label>
-                  <VBox styleClass="panel">
-                     <children>
-                        <ImageView fitHeight="73.0" fitWidth="257.0" pickOnBounds="true" preserveRatio="true">
-                           <VBox.margin>
-                              <Insets left="10.0" right="10.0" top="10.0" />
-                           </VBox.margin>
-                        </ImageView>
-                        <GridPane>
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                           <children>
-                              <Label prefHeight="35.0" prefWidth="61.0" styleClass="InternalPanelHeading" text="Label">
-                                 <padding>
-                                    <Insets left="5.0" />
-                                 </padding>
-                              </Label>
-                              <Button mnemonicParsing="false" text="Button" GridPane.halignment="RIGHT" />
-                           </children>
-                        </GridPane>
-                        <HBox prefHeight="24.0" prefWidth="277.0">
-                           <children>
-                              <Label prefHeight="35.0" prefWidth="112.0" styleClass="InternalPanelSubHeading" text="Date">
-                                 <padding>
-                                    <Insets left="5.0" />
-                                 </padding>
-                              </Label>
-                              <Label prefHeight="35.0" prefWidth="22.0" styleClass="InternalPanelSubHeading" text=" | ">
-                                 <padding>
-                                    <Insets left="5.0" />
-                                 </padding>
-                              </Label>
-                              <Label prefHeight="35.0" prefWidth="59.0" styleClass="InternalPanelSubHeading" text="00.00">
-                                 <padding>
-                                    <Insets left="5.0" />
-                                 </padding>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="21.0" prefWidth="277.0">
-                           <children>
-                              <Label prefHeight="17.0" prefWidth="28.0" styleClass="InternalPanelSubHeading" text="\@ ">
-                                 <padding>
-                                    <Insets left="5.0" />
-                                 </padding>
-                              </Label>
-                              <Label prefHeight="25.0" prefWidth="90.0" styleClass="InternalPanelSubHeading" text="Venue" />
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="23.0" prefWidth="272.0">
-                           <VBox.margin>
-                              <Insets left="5.0" top="25.0" />
-                           </VBox.margin>
-                           <children>
-                              <Label prefHeight="22.0" prefWidth="87.0" styleClass="Text" text="Tickets sold:  " />
-                              <Label prefHeight="22.0" prefWidth="67.0" styleClass="Text" text="100">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="41.0" prefWidth="277.0">
-                           <children>
-                              <Label prefHeight="22.0" prefWidth="124.0" styleClass="Text" text="Tickets remaining:  ">
-                                 <HBox.margin>
-                                    <Insets left="5.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <Label prefHeight="22.0" prefWidth="67.0" styleClass="Text" text="100" />
-                           </children>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </HBox>
-                        <ScrollPane prefWidth="321.0">
-                           <content>
-                              <VBox prefHeight="160.0" prefWidth="275.0">
-                                 <children>
-                                    <Label styleClass="Text" text="Ticket pricing:">
-                                       <padding>
-                                          <Insets left="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <TableView minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="264.0">
-                                      <columns>
-                                        <TableColumn prefWidth="82.0" text="C1" />
-                                        <TableColumn prefWidth="189.0" text="C2" />
-                                      </columns>
-                                    </TableView>
-                                    <Label styleClass="Text" text="Other Info:">
-                                       <VBox.margin>
-                                          <Insets top="20.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <TextArea minWidth="-Infinity" prefHeight="39.0" prefWidth="257.0" />
-                                 </children>
-                              </VBox>
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </VBox>
                </children>
-            </VBox>
+            </GridPane>
          </left>
          <center>
             <GridPane BorderPane.alignment="CENTER">
@@ -224,14 +257,6 @@
                   <Insets bottom="20.0" left="7.0" right="10.0" top="15.0" />
                </BorderPane.margin>
                <children>
-                  <GridPane styleClass="panel" GridPane.rowIndex="1">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                  </GridPane>
                   <Label styleClass="panelHeadings" text="Attendees" textFill="WHITE" GridPane.valignment="BOTTOM">
                      <font>
                         <Font size="18.0" />
@@ -240,6 +265,7 @@
                         <Insets bottom="2.0" left="25.0" />
                      </GridPane.margin>
                   </Label>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="panel" GridPane.rowIndex="1" />
                </children>
             </GridPane>
          </center>

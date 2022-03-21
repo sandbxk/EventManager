@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5d7b96bc-6cd9-4a01-a2a8-cfd6cab9b446" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/java/gui/controllers/CoordinatorController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/java/gui/views/exampleView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/gui/styles/mainStylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/gui/styles/mainStylesheet.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/gui/views/coordinatorView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/gui/views/coordinatorView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +71,7 @@
       <workItem from="1647502468685" duration="7143000" />
       <workItem from="1647593563591" duration="1679000" />
       <workItem from="1647596596810" duration="4058000" />
-      <workItem from="1647850208254" duration="3443000" />
+      <workItem from="1647850208254" duration="5021000" />
     </task>
     <servers />
   </component>
