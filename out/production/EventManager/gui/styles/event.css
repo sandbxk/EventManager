@@ -12,6 +12,7 @@
     -fx-background-color: #ce5f1c;
     -fx-border-width: 2;
     -fx-border-color: orange;
+    -fx-border-radius: 5;
     -fx-background-radius: 5;
 }
 
@@ -19,6 +20,7 @@
     -fx-background-color: #8f5836;
     -fx-border-width: 2;
     -fx-border-color: orange;
+    -fx-border-radius: 5;
     -fx-background-radius: 5;
 }
 

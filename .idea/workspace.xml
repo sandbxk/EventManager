@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5d7b96bc-6cd9-4a01-a2a8-cfd6cab9b446" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/java/gui/styles/event.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/gui/controllers/CoordinatorController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/gui/views/exampleView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/gui/views/EventEntity.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/gui/styles/mainStylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/gui/styles/mainStylesheet.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/gui/views/coordinatorView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/gui/views/coordinatorView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,9 +17,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
-        <option value="FxmlFile" />
         <option value="CSS File" />
+        <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -30,6 +33,9 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="26SiZllYBI01b5ZXSbAlATOuZ5R" />
   <component name="ProjectViewState">
@@ -69,7 +75,8 @@
       <workItem from="1647425106180" duration="4109000" />
       <workItem from="1647502468685" duration="7143000" />
       <workItem from="1647593563591" duration="1679000" />
-      <workItem from="1647596596810" duration="2347000" />
+      <workItem from="1647596596810" duration="4058000" />
+      <workItem from="1647850208254" duration="3443000" />
     </task>
     <servers />
   </component>
@@ -86,7 +93,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
