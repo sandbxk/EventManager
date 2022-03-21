@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Inline+Text:wght@600&display=swap');
+
 .background{
     -fx-background-color: #303030;
 }
@@ -52,7 +54,16 @@
 }
 
 
+.logo {
+    -fx-font-size: 28;
+    -fx-font-family: 'Big Shoulders Inline Text';
+    -fx-text-fill: #f8f8f8;
+}
 
+.imgViewDetailBackground {
+    -fx-background-color: #fc8f51;
+    -fx-background-radius: 20 20 0 0;
+}
 
 
 
