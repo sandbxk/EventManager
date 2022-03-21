@@ -1,0 +1,149 @@
+.background{
+    -fx-background-color: #303030;
+}
+
+.panel {
+    -fx-background-color: #404040;
+    -fx-background-radius: 20;
+}
+
+.menuBar {
+    -fx-background-color: #56AE4E;
+}
+
+.actionButton {
+    -fx-background-color: #f8f8f8;
+    -fx-background-radius: 30;
+    -fx-text-fill: #56AE4E;
+    -fx-font-size: 32;
+    -fx-font-weight: bold;
+}
+
+.panelHeadings {
+    -fx-text-fill: #f8f8f8;
+    -fx-font-size: 18;
+    -fx-font-family: "Roboto";
+}
+
+.InternalPanelHeading {
+    -fx-text-fill: #f8f8f8;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-font-family: "Roboto";
+}
+
+.InternalPanelSubHeading {
+    -fx-text-fill: #f8f8f8;
+    -fx-font-size: 16;
+    -fx-font-weight: lighter;
+    -fx-font-family: "Roboto";
+}
+
+.Text {
+    -fx-text-fill: #f8f8f8;
+    -fx-font-size: 14;
+    -fx-font-family: "Roboto";
+}
+
+.SubText {
+    -fx-text-fill: #f8f8f8;
+    -fx-font-size: 12;
+    -fx-font-family: "Roboto";
+}
+
+
+
+
+
+
+.scroll-pane > .viewport {
+    -fx-background-color: #404040;
+    -fx-background-radius: 20;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane > .corner {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color :transparent;
+    -fx-border-color :transparent;
+    -fx-background-radius : 0.0em;
+    -fx-border-radius :2.0em;
+}
+
+
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(248, 248, 248, 0.6);
+    -fx-background-radius: 30em;
+}
+
+.scroll-bar:horizontal .increment-button ,
+.scroll-bar:horizontal .decrement-button {
+    -fx-background-color :transparent;
+    -fx-background-radius : 0.0em;
+
+}
+
+.scroll-bar:vertical .increment-button ,
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color :transparent;
+    -fx-background-radius : 0.0em;
+
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow{
+    -fx-shape : " ";
+}
+
+.scroll-bar:vertical .increment-arrow,
+.scroll-bar:vertical .decrement-arrow{
+    -fx-shape : " ";
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color : rgba(248, 248, 248, 0.6);
+    -fx-background-radius : 2.0em;
+}
+
+.scroll-bar:horizontal .thumb:hover,
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color : #f8f8f8;
+    -fx-background-radius : 2.0em;
+}
+
+
+.scroll-bar > .virtual-flow > .scroll-bar:vertical,
+.scroll-bar > .virtual-flow > .scroll-bar:vertical > .track,
+.scroll-bar > .virtual-flow > .scroll-bar:vertical > .track-background,
+.scroll-bar > .virtual-flow > .scroll-bar:horizontal,
+.scroll-bar > .virtual-flow > .scroll-bar:horizontal > .track,
+.scroll-bar > .virtual-flow > .scroll-bar:horizontal > .track-background {
+    -fx-background-color: transparent;
+}
