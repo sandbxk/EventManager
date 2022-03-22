@@ -11,11 +11,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ToggleButton fx:id="eventRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="91.0" prefWidth="260.0" stylesheets="@../styles/event.css" text="ToggleButton" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<ToggleButton fx:id="eventRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="74.0" prefWidth="260.0" stylesheets="@../styles/event.css" text="ToggleButton" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.Event">
    <graphic>
-      <VBox fx:id="eventVbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="91.0" prefWidth="243.0">
+      <VBox fx:id="eventVbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="72.0" prefWidth="243.0">
           <children>
-              <GridPane fx:id="imgViewContainer" prefHeight="91.0" prefWidth="243.0">
+              <GridPane fx:id="imgViewContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="43.0" prefWidth="243.0">
                   <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   </columnConstraints>
@@ -23,9 +23,9 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                   <children>
-                      <ImageView fx:id="imgViewBanner" fitHeight="67.0" fitWidth="232.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                      <ImageView fx:id="imgViewBanner" fitHeight="41.0" fitWidth="239.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                           <GridPane.margin>
-                              <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
+                              <Insets bottom="7.0" left="7.0" right="7.0" top="4.0" />
                           </GridPane.margin>
                       </ImageView>
                   </children>
@@ -43,7 +43,7 @@
                         <Insets top="4.0" />
                      </padding>
                       </Label>
-                      <Label fx:id="lblEventDateTime" alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="131.0" text="02/03/22 16.00">
+                      <Label fx:id="lblEventDateTime" alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="143.0" text="02/03/22 16.00">
                           <font>
                               <Font size="16.0" />
                           </font>

@@ -17,6 +17,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import org.w3c.dom.css.RGBColor;
 
 import java.io.IOException;
@@ -35,19 +36,33 @@ public class Event {
 
     private ToggleButton node;
 
-    public @FXML ImageView imgViewbanner;
+    public @FXML ImageView imgViewBanner;
     public @FXML Label lblEventName;
     public @FXML Label lblEventDateTime;
+    public @FXML GridPane imgViewContainer;
 
 
 
     public Event() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/views/EventNode.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/views/Event.fxml"));
         fxmlLoader.setControllerFactory(param -> this);
         try { node = fxmlLoader.load();
             node.getStylesheets().add(getClass().getResource("/gui/styles/event.css").toExternalForm());
         } catch (IOException ignored) {}
         node.setOnAction(event -> DataManager.getInstance().setSelectedEvent(this));
+
+        Rectangle clip = new Rectangle(imgViewBanner.getFitWidth(), imgViewBanner.getFitHeight());
+        clip.setArcHeight(9);
+        clip.setArcWidth(9);
+        clip.setStroke(Color.TRANSPARENT);
+        imgViewBanner.setClip(clip);
+
+
+        Image image = generateBlankImage(Color.AQUAMARINE);
+
+        imgViewBanner.setPreserveRatio(false);
+        imgViewBanner.setImage(image);
+
     }
 
     public Event(int id, StringProperty eventName, LocalDateTime startDateTime, LocalDateTime endDateTime, ObjectProperty venue, int ticketsSold, int ticketsRemaining, double[] ticketPrice) {
@@ -61,7 +76,7 @@ public class Event {
         this.ticketPrice = ticketPrice;
 
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/views/EventNode.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/views/Event.fxml"));
         fxmlLoader.setControllerFactory(param -> this);
         try { node = fxmlLoader.load();
             node.getStylesheets().add(getClass().getResource("/gui/styles/event.css").toExternalForm());
