@@ -65,11 +65,136 @@
     -fx-background-radius: 20 20 0 0;
 }
 
+#tblViewTicketGroup .column-header-background {
+    -fx-opacity: 0;
 
+}
+
+.table-view {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 10pt;
+    -fx-text-fill: #f8f8f8;
+    -fx-font-weight: normal;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+    -fx-border-color: #f8f8f8;
+    -fx-border-width: 0 0 2 0;
+}
+
+.table-view .corner {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell{
+    -fx-text-fill: #f8f8f8;
+    -fx-border-color: #f8f8f8;
+    -fx-border-width: 0 0 2 0;
+}
+
+.table-row-cell:odd{
+    -fx-background-color: transparent;
+    -fx-background-opacity: 0.5;
+    -fx-font-size: 10pt;
+    -fx-font-weight: lighter;
+    -fx-font-family: "Roboto Thin";
+}
+.table-row-cell:even{
+    -fx-background-color: transparent;
+    -fx-font-size: 12pt;
+    -fx-font-family: "Roboto Thin";
+}
+
+.table-row-cell:empty {
+    -fx-background-color: transparent;
+}
 
 .scroll-pane > .viewport {
     -fx-background-color: #404040;
     -fx-background-radius: 20;
+}
+
+.text-area {
+    -fx-font-family: "Roboto Thin";
+    -fx-font-size: 10;
+    -fx-text-fill: #f8f8f8;
+    -fx-display-caret:true;
+    -fx-border-style: solid none none none;
+    -fx-border-width: 1;
+    -fx-border-color: #ababac;
+    -fx-background-color: transparent;
+
+}
+
+.text-area .content {
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: transparent;
+
+}
+
+.text-area .scroll-pane .viewport{
+    -fx-background-color: transparent;
+
+}
+
+
+.text-area .scroll-pane .content{
+    -fx-background-color: transparent;
+
+}
+
+.text-area .scroll-bar:vertical{
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-bar:horizontal .track,
+.text-area .scroll-bar:vertical .track{
+    -fx-opacity: 0;
+}
+
+.text-area .scroll-bar:horizontal .increment-button ,
+.text-area .scroll-bar:horizontal .decrement-button {
+
+    -fx-background-color: #f8f8f8;
+    -fx-background-radius: 0em;
+    -fx-padding:0 10 0 0;
+}
+
+.text-area .scroll-bar:vertical .increment-button ,
+.text-area .scroll-bar:vertical .decrement-button {
+
+    -fx-background-color: #f8f8f8;
+    -fx-background-radius: 0em;
+    -fx-padding:0 10 0 0;
+}
+
+.text-area .scroll-bar .increment-arrow,
+.text-area .scroll-bar .decrement-arrow
+{
+    -fx-shape: " ";
+    -fx-padding:0;
+}
+.text-area .scroll-bar:horizontal .thumb,
+.text-area .scroll-bar:vertical .thumb {
+    -fx-background-color: #f8f8f8;
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 2em;
+
 }
 
 .scroll-pane {
@@ -157,4 +282,190 @@
 .scroll-bar > .virtual-flow > .scroll-bar:horizontal > .track,
 .scroll-bar > .virtual-flow > .scroll-bar:horizontal > .track-background {
     -fx-background-color: transparent;
+}
+
+#txtFieldSearch {
+    -fx-font-family: "Roboto Thin";
+    -fx-font-size: 10pt;
+    -fx-text-fill: #f8f8f8;
+    -fx-border-radius: 5 0 0 5;
+    -fx-border-width: 1 0.5 1 1;
+    -fx-border-color: #f8f8f8;
+    -fx-background-radius: 5 5 0 0;
+    -fx-background-color: transparent;
+}
+
+#btnSearch {
+    -fx-font-family: "Roboto Thin";
+    -fx-font-size: 10pt;
+    -fx-text-fill: #f8f8f8;
+    -fx-border-radius: 0 5 5 0;
+    -fx-border-width: 1 1 1 0.5;
+    -fx-border-color: #f8f8f8;
+    -fx-background-radius: 5 5 5 0;
+    -fx-background-color: transparent;
+
+    -fx-background-image: url(/gui/styles/img/filter.png);
+    -fx-background-size: 17;
+    -fx-background-position: 9;
+    -fx-background-repeat: no-repeat;
+}
+
+.combo-box .list-cell
+{
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+    -fx-text-fill: #f8f8f8;
+    -fx-cell-size: 2.66667em;
+}
+
+.combo-box-popup .list-view
+{
+    -fx-background-color: #303030;
+    -fx-background-insets: 0, 1;
+}
+
+.combo-box-popup .list-view .list-cell
+{
+    -fx-padding: 4 0 4 5;
+
+    /* No alternate highlighting */
+    -fx-background-color: #56AE4E;
+}
+
+.combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover
+{
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+    -fx-text-fill: #f8f8f8;
+}
+
+.combo-box-popup .list-view .list-cell:filled:hover
+{
+    -fx-background-color: #56AE4E;
+    -fx-text-fill: #f8f8f8;
+}
+
+.combo-box-base
+{
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-border-radius: 5;
+    -fx-border-color: #f8f8f8;
+    -fx-border-width: 1;
+    -fx-mark-color: #f8f8f8;
+}
+
+.combo-box-base:hover
+{
+    -fx-color: #56AE4E;
+    -fx-border-color: #56AE4E;
+}
+
+.combo-box-base:showing
+{
+    -fx-color: #56AE4E;
+    -fx-border-color: #56AE4E;
+    -fx-background-color: transparent;
+    -fx-mark-color: #56AE4E;
+}
+
+.combo-box-base:focused {
+    -fx-color: transparent;
+    -fx-background-color: transparent;
+    -fx-border-color: #56AE4E;
+    -fx-mark-color: #56AE4E;
+
+}
+
+.combo-box-base:disabled {
+    -fx-opacity: .4;
+}
+
+.combo-box > .list-view > .placeholder > .label {
+    -fx-text-fill: #f8f8f8;
+    -fx-background-color: transparent;
+    -fx-border-color: #f8f8f8;
+}
+
+.combo-box > .list-view > .placeholder > .label:focused  {
+    -fx-text-fill: #56AE4E;
+    -fx-background-color: transparent;
+    -fx-border-color: #56AE4E;
+}
+
+.combo-box-base > .list-view > .placeholder:focused {
+    -fx-text-fill: #f8f8f8;
+    -fx-background-color: transparent;
+    -fx-border-color: #f8f8f8;
+}
+
+.combo-box > .text-field {
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #f8f8f8;
+    -fx-border-radius: 5;
+    -fx-border-width: 1;
+    -fx-border-color: #f8f8f8;
+    -fx-background-radius: 5;
+    -fx-background-color: transparent;
+}
+
+.combo-box > .text-field:focused {
+    -fx-font-family: "Roboto", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #f8f8f8;
+    -fx-border-radius: 5;
+    -fx-border-width: 1;
+    -fx-border-color: #f8f8f8;
+    -fx-background-radius: 5;
+    -fx-background-color: transparent;
+}
+
+.combo-box .combo-box-button-container{
+    -fx-background-color: transparent;
+    -fx-border-color: #56AE4E;
+
+}
+.combo-box .combo-box-selected-value-container{
+    -fx-background-color: transparent;
+    -fx-border-color: #56AE4E;
+}
+
+
+
+.EditButton {
+    -fx-border-color: #f8f8f8;
+    -fx-background-image: url(/gui/styles/img/edit.png);
+    -fx-background-size: 16px 16px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 50%;
+    -fx-content-display: CENTER;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #f8f8f8;
+}
+
+
+.EditButton:hover {
+    -fx-background-color: transparent;
+    -fx-border-color: #56AE4E;
+    -fx-text-fill: #56AE4E;
+}
+
+.EditButton:pressed {
+    -fx-background-color: transparent;
+    -fx-text-fill: #56AE4E;
+    -fx-border-color: #56AE4E;
+    -fx-border-radius: 5;
+}
+
+.EditButton:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: transparent;
+    -fx-text-fill: #d5d4d4;
 }
