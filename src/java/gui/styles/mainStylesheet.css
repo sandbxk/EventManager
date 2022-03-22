@@ -273,10 +273,34 @@
     -fx-background-color : #f8f8f8;
     -fx-background-radius : 2.0em;
 }
+#btnNewCordinator {
+    -fx-background-radius: 30;
+    -fx-min-width: 30px;
+    -fx-min-height: 30px;
+    -fx-max-width: 30px;
+    -fx-max-height: 30px;
+}
+
+.submit-btn {
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-width: 1;
+    -fx-border-color: #f8f8f8;
+    -fx-background-color: transparent;
+    -fx-text-fill: #f8f8f8;
+}
+
+.submit-textField {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-radius: 0;
+    -fx-background-color: transparent;
+    -fx-border-color: #f8f8f8;
+}
+
 
 
 .scroll-bar > .virtual-flow > .scroll-bar:vertical,
-.scroll-bar > .virtual-flow > .scroll-bar:vertical > .track,
+.scroll-bar > .virtual-flow >    .scroll-bar:vertical > .track,
 .scroll-bar > .virtual-flow > .scroll-bar:vertical > .track-background,
 .scroll-bar > .virtual-flow > .scroll-bar:horizontal,
 .scroll-bar > .virtual-flow > .scroll-bar:horizontal > .track,
