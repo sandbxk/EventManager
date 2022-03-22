@@ -21,6 +21,23 @@
     -fx-font-weight: bold;
 }
 
+
+.actionButton:hover {
+    -fx-background-color: #e0e0e0;
+    -fx-background-radius: 30;
+    -fx-text-fill: #56AE4E;
+    -fx-font-size: 32;
+    -fx-font-weight: bold;
+}
+
+.actionButton:pressed {
+    -fx-background-color: #fc8f51;
+    -fx-background-radius: 30;
+    -fx-text-fill: #56AE4E;
+    -fx-font-size: 32;
+    -fx-font-weight: bold;
+}
+
 .panelHeadings {
     -fx-text-fill: #f8f8f8;
     -fx-font-size: 18;
@@ -62,7 +79,8 @@
 
 .imgViewDetailBackground {
     -fx-background-color: #fc8f51;
-    -fx-background-radius: 20 20 0 0;
+    -fx-background-radius: 18 18 0 0;
+
 }
 
 #tblViewTicketGroup .column-header-background {
@@ -335,6 +353,20 @@
     -fx-background-repeat: no-repeat;
 }
 
+#btnSearch:hover {
+    -fx-background-color: transparent;
+    -fx-border-color: #56AE4E;
+    -fx-text-fill: #56AE4E;
+    -fx-background-image: url("../styles/img/filter_hover.png");
+}
+
+#btnSearch:pressed {
+    -fx-background-color: transparent;
+    -fx-text-fill: #70e365;
+    -fx-border-color: #70e365;
+    -fx-background-image: url("../styles/img/filter_pressed.png");
+}
+
 .combo-box .list-cell
 {
     -fx-background: transparent;
@@ -477,14 +509,16 @@
 
 .EditButton:hover {
     -fx-background-color: transparent;
+    -fx-background-image: url("../styles/img/edit_hover.png");
     -fx-border-color: #56AE4E;
     -fx-text-fill: #56AE4E;
 }
 
 .EditButton:pressed {
     -fx-background-color: transparent;
-    -fx-text-fill: #56AE4E;
-    -fx-border-color: #56AE4E;
+    -fx-background-image: url("../styles/img/edit_pressed.png");
+    -fx-text-fill: #70e365;
+    -fx-border-color: #70e365;
     -fx-border-radius: 5;
 }
 
@@ -494,19 +528,3 @@
     -fx-text-fill: #d5d4d4;
 }
 
-.context-menu {
-    -fx-background-color: #303030;
-    -fx-text-fill: #f8f8f8;
-}
-
-.menu-item .label {
-    -fx-text-fill: #f8f8f8;
-}
-
-.menu-item:focused {
-    -fx-background-color: #56AE4E;
-}
-
-.menu-item:focused .label {
-    -fx-text-fill: #f8f8f8;
-}

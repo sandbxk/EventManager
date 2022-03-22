@@ -43,15 +43,15 @@
 }
 
 #lblEventName {
-    -fx-font-family: "Roboto";
-    -fx-font-size: 14pt;
+    -fx-font-family: "Roboto Light";
+    -fx-font-size: 12pt;
     -fx-font-weight: normal;
     -fx-text-fill: #f8f8f8;
 }
 
 #lblEventDateTime{
-    -fx-font-family: "Roboto";
+    -fx-font-family: "Roboto Thin";
     -fx-font-weight: lighter;
-    -fx-font-size: 12pt;
+    -fx-font-size: 10pt;
     -fx-text-fill: #f8f8f8;
 }
