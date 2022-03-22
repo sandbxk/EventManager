@@ -296,12 +296,12 @@
                      <top>
                         <HBox prefHeight="53.0" prefWidth="642.0" BorderPane.alignment="CENTER">
                            <children>
-                              <TextField fx:id="txtFieldSearch" prefHeight="26.0" prefWidth="344.0">
+                              <TextField prefHeight="26.0" prefWidth="344.0">
                                  <HBox.margin>
                                     <Insets left="15.0" />
                                  </HBox.margin>
                               </TextField>
-                              <Button fx:id="btnSearch" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" />
+                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" />
                               <ComboBox prefHeight="31.0" prefWidth="86.0">
                                  <HBox.margin>
                                     <Insets left="10.0" />

@@ -1,19 +1,24 @@
 package bll;
 
 import be.EUserType;
+import be.UserInfo;
 import bll.interfaces.IAuthenticator;
 
 public class DatabaseAuthenticator implements IAuthenticator
 {
-    private EUserType m_UserType = EUserType.INVALID;
+    private UserInfo info;
+
 
     @Override
-    public EUserType getUserType() { return m_UserType; }
+    public UserInfo getUserInfo()
+    {
+        return info;
+    }
 
     @Override
     public boolean authenticate(String username, String password)
     {
-        m_UserType = EUserType.INVALID;
+        info = new UserInfo();
 
         return false;
     }

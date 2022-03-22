@@ -1,13 +1,14 @@
 package bll.interfaces;
 
 import be.EUserType;
+import be.UserInfo;
 
 public interface IAuthenticator
 {
     /**
      *
      * */
-    EUserType getUserType();
+    UserInfo getUserInfo();
 
     /**
      *
@@ -16,4 +17,5 @@ public interface IAuthenticator
      * @return
      * */
     boolean authenticate(String username, String password);
+
 }
