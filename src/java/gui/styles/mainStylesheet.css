@@ -21,6 +21,23 @@
     -fx-font-weight: bold;
 }
 
+
+.actionButton:hover {
+    -fx-background-color: #e0e0e0;
+    -fx-background-radius: 30;
+    -fx-text-fill: #56AE4E;
+    -fx-font-size: 32;
+    -fx-font-weight: bold;
+}
+
+.actionButton:pressed {
+    -fx-background-color: #fc8f51;
+    -fx-background-radius: 30;
+    -fx-text-fill: #56AE4E;
+    -fx-font-size: 32;
+    -fx-font-weight: bold;
+}
+
 .panelHeadings {
     -fx-text-fill: #f8f8f8;
     -fx-font-size: 18;
@@ -62,7 +79,8 @@
 
 .imgViewDetailBackground {
     -fx-background-color: #fc8f51;
-    -fx-background-radius: 20 20 0 0;
+    -fx-background-radius: 18 18 0 0;
+
 }
 
 #tblViewTicketGroup .column-header-background {
@@ -273,10 +291,34 @@
     -fx-background-color : #f8f8f8;
     -fx-background-radius : 2.0em;
 }
+#btnNewCordinator {
+    -fx-background-radius: 30;
+    -fx-min-width: 30px;
+    -fx-min-height: 30px;
+    -fx-max-width: 30px;
+    -fx-max-height: 30px;
+}
+
+.submit-btn {
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-width: 1;
+    -fx-border-color: #f8f8f8;
+    -fx-background-color: transparent;
+    -fx-text-fill: #f8f8f8;
+}
+
+.submit-textField {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-radius: 0;
+    -fx-background-color: transparent;
+    -fx-border-color: #f8f8f8;
+}
+
 
 
 .scroll-bar > .virtual-flow > .scroll-bar:vertical,
-.scroll-bar > .virtual-flow > .scroll-bar:vertical > .track,
+.scroll-bar > .virtual-flow >    .scroll-bar:vertical > .track,
 .scroll-bar > .virtual-flow > .scroll-bar:vertical > .track-background,
 .scroll-bar > .virtual-flow > .scroll-bar:horizontal,
 .scroll-bar > .virtual-flow > .scroll-bar:horizontal > .track,
@@ -305,10 +347,24 @@
     -fx-background-radius: 5 5 5 0;
     -fx-background-color: transparent;
 
-    -fx-background-image: url(/gui/styles/img/filter.png);
+    -fx-background-image: url("../styles/img/filter.png");
     -fx-background-size: 17;
     -fx-background-position: 9;
     -fx-background-repeat: no-repeat;
+}
+
+#btnSearch:hover {
+    -fx-background-color: transparent;
+    -fx-border-color: #56AE4E;
+    -fx-text-fill: #56AE4E;
+    -fx-background-image: url("../styles/img/filter_hover.png");
+}
+
+#btnSearch:pressed {
+    -fx-background-color: transparent;
+    -fx-text-fill: #70e365;
+    -fx-border-color: #70e365;
+    -fx-background-image: url("../styles/img/filter_pressed.png");
 }
 
 .combo-box .list-cell
@@ -436,7 +492,7 @@
 
 .EditButton {
     -fx-border-color: #f8f8f8;
-    -fx-background-image: url(/gui/styles/img/edit.png);
+    -fx-background-image: url("../styles/img/edit.png");
     -fx-background-size: 16px 16px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: 50%;
@@ -453,14 +509,16 @@
 
 .EditButton:hover {
     -fx-background-color: transparent;
+    -fx-background-image: url("../styles/img/edit_hover.png");
     -fx-border-color: #56AE4E;
     -fx-text-fill: #56AE4E;
 }
 
 .EditButton:pressed {
     -fx-background-color: transparent;
-    -fx-text-fill: #56AE4E;
-    -fx-border-color: #56AE4E;
+    -fx-background-image: url("../styles/img/edit_pressed.png");
+    -fx-text-fill: #70e365;
+    -fx-border-color: #70e365;
     -fx-border-radius: 5;
 }
 
@@ -469,3 +527,4 @@
     -fx-background-color: transparent;
     -fx-text-fill: #d5d4d4;
 }
+

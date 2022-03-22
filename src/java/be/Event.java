@@ -40,8 +40,27 @@ public class Event {
     public @FXML Label lblEventDateTime;
 
 
-    //Type cast fxml to Node and use Event as controller?
+
     public Event() {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/views/EventNode.fxml"));
+        fxmlLoader.setControllerFactory(param -> this);
+        try { node = fxmlLoader.load();
+            node.getStylesheets().add(getClass().getResource("/gui/styles/event.css").toExternalForm());
+        } catch (IOException ignored) {}
+        node.setOnAction(event -> DataManager.getInstance().setSelectedEvent(this));
+    }
+
+    public Event(int id, StringProperty eventName, LocalDateTime startDateTime, LocalDateTime endDateTime, ObjectProperty venue, int ticketsSold, int ticketsRemaining, double[] ticketPrice) {
+        this.id = id;
+        this.eventName = eventName;
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
+        this.location = venue;
+        this.ticketsSold = ticketsSold;
+        this.ticketsRemaining = ticketsRemaining;
+        this.ticketPrice = ticketPrice;
+
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/views/EventNode.fxml"));
         fxmlLoader.setControllerFactory(param -> this);
         try { node = fxmlLoader.load();

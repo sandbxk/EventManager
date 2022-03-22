@@ -11,12 +11,14 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -42,7 +44,7 @@
                   </Button>
                   <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="48.0" prefWidth="291.0">
                      <children>
-                        <ImageView fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imgViewUser" fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>
                               <Insets left="10.0" top="8.0" />
                            </HBox.margin>
@@ -84,13 +86,17 @@
                 <RowConstraints maxHeight="118.0" minHeight="10.0" prefHeight="118.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ScrollPane pannable="true" prefHeight="77.0" prefWidth="700.0" vbarPolicy="NEVER" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                     <content>
-                        <FlowPane fx:id="flowPaneEvents" prefHeight="113.0" prefWidth="933.0" styleClass="panel" />
-                     </content>
+                  <ScrollPane pannable="true" prefHeight="118.0" prefWidth="988.0" vbarPolicy="NEVER" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="10.0" right="10.0" />
                      </GridPane.margin>
+                     <content>
+                        <TilePane fx:id="tilePaneEvents" hgap="10.0" prefColumns="4" prefRows="1" prefTileHeight="60.0" prefTileWidth="200.0" vgap="10.0">
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </TilePane>
+                     </content>
                   </ScrollPane>
                   <Label styleClass="panelHeadings" text="Your Events" textFill="WHITE" GridPane.valignment="BOTTOM">
                      <GridPane.margin>
@@ -126,9 +132,9 @@
                   </Label>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="panel" GridPane.rowIndex="1">
                      <top>
-                        <VBox BorderPane.alignment="CENTER">
+                        <VBox prefHeight="186.0" prefWidth="324.0" BorderPane.alignment="CENTER">
                            <children>
-                              <GridPane minHeight="80.0" styleClass="imgViewDetailBackground">
+                              <GridPane minHeight="80.0" prefHeight="109.0" prefWidth="309.0">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="257.0" />
                                 </columnConstraints>
@@ -136,7 +142,12 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <ImageView fitHeight="73.0" fitWidth="257.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" />
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="imgViewDetailBackground">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" right="5.0" top="5.0" />
+                                       </GridPane.margin>
+                                    </AnchorPane>
+                                    <ImageView fx:id="imgViewEvent" fitHeight="73.0" fitWidth="257.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" />
                                  </children>
                               </GridPane>
                               <VBox prefHeight="118.0" prefWidth="324.0">
@@ -149,15 +160,15 @@
                                           <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <Label prefHeight="29.0" prefWidth="112.0" styleClass="InternalPanelHeading" text="Label">
+                                          <Label fx:id="lblEventName" prefHeight="29.0" prefWidth="112.0" styleClass="InternalPanelHeading" text="Label">
                                              <padding>
                                                 <Insets left="5.0" />
                                              </padding>
                                              <GridPane.margin>
-                                                <Insets />
+                                                <Insets top="6.0" />
                                              </GridPane.margin>
                                           </Label>
-                                          <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="41.0" styleClass="EditButton" GridPane.halignment="RIGHT">
+                                          <Button fx:id="btnEditEvent" mnemonicParsing="false" prefHeight="31.0" prefWidth="31.0" styleClass="EditButton" GridPane.halignment="RIGHT">
                                              <GridPane.margin>
                                                 <Insets right="5.0" />
                                              </GridPane.margin>
@@ -166,7 +177,7 @@
                                     </GridPane>
                                     <HBox prefHeight="24.0" prefWidth="277.0">
                                        <children>
-                                          <Label prefHeight="35.0" prefWidth="112.0" styleClass="InternalPanelSubHeading" text="Date">
+                                          <Label fx:id="lblEventDate" prefHeight="35.0" prefWidth="112.0" styleClass="InternalPanelSubHeading" text="Date">
                                              <padding>
                                                 <Insets left="5.0" />
                                              </padding>
@@ -176,12 +187,15 @@
                                                 <Insets left="5.0" />
                                              </padding>
                                           </Label>
-                                          <Label prefHeight="35.0" prefWidth="59.0" styleClass="InternalPanelSubHeading" text="00.00">
+                                          <Label fx:id="lblEventTime" prefHeight="35.0" prefWidth="59.0" styleClass="InternalPanelSubHeading" text="00.00">
                                              <padding>
                                                 <Insets left="5.0" />
                                              </padding>
                                           </Label>
                                        </children>
+                                       <VBox.margin>
+                                          <Insets top="7.0" />
+                                       </VBox.margin>
                                     </HBox>
                                     <HBox prefHeight="21.0" prefWidth="277.0">
                                        <children>
@@ -190,7 +204,7 @@
                                                 <Insets left="5.0" />
                                              </padding>
                                           </Label>
-                                          <Label prefHeight="25.0" prefWidth="90.0" styleClass="InternalPanelSubHeading" text="Venue" />
+                                          <Label fx:id="lblEventVenue" prefHeight="25.0" prefWidth="90.0" styleClass="InternalPanelSubHeading" text="Venue" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -210,7 +224,7 @@
                                                 <Insets left="5.0" />
                                              </HBox.margin>
                                           </Label>
-                                          <Label prefHeight="22.0" prefWidth="67.0" styleClass="Text" text="100" />
+                                          <Label fx:id="lblRemainingTickets" prefHeight="22.0" prefWidth="67.0" styleClass="Text" text="100" />
                                        </children>
                                     </HBox>
                                     <HBox prefHeight="9.0" prefWidth="305.0">
@@ -220,7 +234,7 @@
                                                 <Insets left="5.0" />
                                              </HBox.margin>
                                           </Label>
-                                          <Label prefHeight="22.0" prefWidth="67.0" styleClass="Text" text="100">
+                                          <Label fx:id="lblSoldTickets" prefHeight="22.0" prefWidth="67.0" styleClass="Text" text="100">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
@@ -238,8 +252,8 @@
                                     </Label>
                                     <TableView fx:id="tblViewTicketGroup" minHeight="-Infinity" minWidth="-Infinity" prefHeight="98.0" prefWidth="314.0">
                                       <columns>
-                                        <TableColumn prefWidth="157.3333282470703" text="Tier" />
-                                        <TableColumn prefWidth="155.6666717529297" text="Price" />
+                                        <TableColumn fx:id="tblClmnGroupName" prefWidth="157.3333282470703" text="Tier" />
+                                        <TableColumn fx:id="tblClmnGroupPrice" prefWidth="155.6666717529297" text="Price" />
                                       </columns>
                                        <VBox.margin>
                                           <Insets left="5.0" right="5.0" />
@@ -254,7 +268,7 @@
                                           <Insets left="5.0" />
                                        </padding>
                                     </Label>
-                                    <TextArea minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="314.0">
+                                    <TextArea fx:id="txtAreaInfo" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="314.0">
                                        <VBox.margin>
                                           <Insets left="5.0" right="5.0" />
                                        </VBox.margin>
@@ -301,8 +315,8 @@
                                     <Insets left="15.0" />
                                  </HBox.margin>
                               </TextField>
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" />
-                              <ComboBox prefHeight="31.0" prefWidth="86.0">
+                              <Button fx:id="btnSearch" mnemonicParsing="false" prefHeight="23.0" prefWidth="36.0" />
+                              <ComboBox prefHeight="28.0" prefWidth="86.0">
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin>
@@ -314,15 +328,15 @@
                         </HBox>
                      </top>
                      <center>
-                        <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="tblViewAttendees" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                           <columns>
-                            <TableColumn prefWidth="91.20000630617142" text="First Name" />
-                            <TableColumn prefWidth="99.19992065429688" text="Last Name" />
-                              <TableColumn prefWidth="150.4000701904297" text="Email" />
-                              <TableColumn prefWidth="80.79997253417969" text="Phone" />
-                              <TableColumn prefWidth="83.199951171875" text="Ticket Group" />
-                              <TableColumn prefWidth="69.5999755859375" text="Ticket no." />
-                              <TableColumn prefWidth="59.2000732421875" text="Seat no." />
+                            <TableColumn fx:id="tblClmAttFirstName" prefWidth="91.20000630617142" text="First Name" />
+                            <TableColumn fx:id="tblClmAttLastName" prefWidth="99.19992065429688" text="Last Name" />
+                              <TableColumn fx:id="tblClmAttEmail" prefWidth="150.4000701904297" text="Email" />
+                              <TableColumn fx:id="tblClmAttPhone" prefWidth="80.79997253417969" text="Phone" />
+                              <TableColumn fx:id="tblClmAttTicketGroup" prefWidth="83.199951171875" text="Ticket Group" />
+                              <TableColumn fx:id="tblClmAttTicketNo" prefWidth="69.5999755859375" text="Ticket no." />
+                              <TableColumn fx:id="tblClmAttSeatNo" prefWidth="59.2000732421875" text="Seat no." />
                           </columns>
                            <BorderPane.margin>
                               <Insets left="5.0" right="5.0" />
@@ -330,7 +344,7 @@
                         </TableView>
                      </center>
                      <bottom>
-                        <FlowPane prefHeight="45.0" prefWidth="642.0" BorderPane.alignment="CENTER" />
+                        <FlowPane fx:id="flowPaneAttendeeBtns" prefHeight="45.0" prefWidth="642.0" BorderPane.alignment="CENTER" />
                      </bottom></BorderPane>
                </children>
             </GridPane>
