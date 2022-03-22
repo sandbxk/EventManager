@@ -1,22 +1,39 @@
 package dal;
 
+import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 
 public class DBConnection
 {
-    public static final String DRIVER_CLASS         = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    public static final String CONNECTION_STRING    = "jdbc:sqlserver://";
+    private SQLServerDataSource dataSource;
+    private Properties property;
 
-    public static final String USERNAME = "";
-    public static final String PASSWORD = "";
-
-
-    public static Connection get() throws ClassNotFoundException, SQLException
-    {
-        Class.forName(DRIVER_CLASS);
-        return DriverManager.getConnection(CONNECTION_STRING, USERNAME, PASSWORD);
+    public DBConnection() throws IOException {
+        property = new Properties();
+        dataSource = new SQLServerDataSource();
     }
+
+    public Connection getConnection() throws IOException, SQLServerException {
+        property.load(new FileReader(".config.properties"));
+        dataSource.setServerName(property.getProperty("server"));
+        dataSource.setDatabaseName(property.getProperty("database"));
+        dataSource.setUser(property.getProperty("username"));
+        dataSource.setPassword(property.getProperty("password"));
+        return dataSource.getConnection();
+    }
+
+    public static void main(String[] args) throws IOException, SQLServerException {
+        DBConnection dbConnect = new DBConnection();
+        dbConnect.getConnection();
+    }
+
 }
