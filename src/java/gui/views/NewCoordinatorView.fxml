@@ -91,12 +91,12 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button fx:id="btnSubmit" mnemonicParsing="false" styleClass="submit-btn" stylesheets="@../styles/mainStylesheet.css" text="submit" GridPane.halignment="RIGHT">
+                                    <Button fx:id="btnSubmit" mnemonicParsing="false" onAction="#handleSubmit" styleClass="submit-btn" stylesheets="@../styles/mainStylesheet.css" text="submit" GridPane.halignment="RIGHT">
                                        <GridPane.margin>
                                           <Insets right="20.0" />
                                        </GridPane.margin>
                                     </Button>
-                                    <Button fx:id="btnCancel" alignment="CENTER_RIGHT" mnemonicParsing="false" styleClass="submit-btn" stylesheets="@../styles/mainStylesheet.css" text="cancel" GridPane.halignment="RIGHT">
+                                    <Button fx:id="btnCancel" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#handleCancel" styleClass="submit-btn" stylesheets="@../styles/mainStylesheet.css" text="cancel" GridPane.halignment="RIGHT">
                                        <GridPane.margin>
                                           <Insets right="90.0" />
                                        </GridPane.margin>
