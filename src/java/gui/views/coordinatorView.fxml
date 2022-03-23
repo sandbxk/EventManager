@@ -226,6 +226,23 @@
                      <center>
                         <VBox prefHeight="205.0" prefWidth="324.0" BorderPane.alignment="CENTER">
                            <children>
+                              <VBox prefHeight="84.0" prefWidth="324.0">
+                                 <children>
+                                    <Label prefHeight="18.0" prefWidth="79.0" styleClass="Text" text="Description">
+                                       <padding>
+                                          <Insets left="5.0" />
+                                       </padding>
+                                    </Label>
+                                    <TextArea fx:id="txtAreaInfo" editable="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="314.0" wrapText="true">
+                                       <VBox.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </VBox.margin>
+                                    </TextArea>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </VBox>
                               <VBox>
                                  <children>
                                     <HBox prefHeight="20.0" prefWidth="305.0">
@@ -256,12 +273,12 @@
                               </VBox>
                               <VBox>
                                  <children>
-                                    <Label styleClass="Text" text="Ticket pricing:">
+                                    <Label prefHeight="32.0" prefWidth="90.0" styleClass="Text" text="Ticket pricing:">
                                        <padding>
-                                          <Insets left="5.0" top="20.0" />
+                                          <Insets left="5.0" top="15.0" />
                                        </padding>
                                     </Label>
-                                    <TableView fx:id="tblViewTicketGroup" minHeight="-Infinity" minWidth="-Infinity" prefHeight="98.0" prefWidth="314.0">
+                                    <TableView fx:id="tblViewTicketGroup" minHeight="-Infinity" minWidth="-Infinity" prefHeight="81.0" prefWidth="314.0">
                                       <columns>
                                         <TableColumn fx:id="tblClmnGroupName" prefWidth="157.3333282470703" text="Tier" />
                                         <TableColumn fx:id="tblClmnGroupPrice" prefWidth="155.6666717529297" text="Price" />
@@ -271,23 +288,6 @@
                                        </VBox.margin>
                                     </TableView>
                                  </children>
-                              </VBox>
-                              <VBox>
-                                 <children>
-                                    <Label prefHeight="18.0" prefWidth="79.0" styleClass="Text" text="Other Info:">
-                                       <padding>
-                                          <Insets left="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <TextArea fx:id="txtAreaInfo" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="314.0">
-                                       <VBox.margin>
-                                          <Insets left="5.0" right="5.0" />
-                                       </VBox.margin>
-                                    </TextArea>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets top="10.0" />
-                                 </VBox.margin>
                               </VBox>
                            </children>
                         </VBox>
