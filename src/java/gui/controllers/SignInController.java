@@ -19,6 +19,7 @@ import javafx.stage.Window;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -40,7 +41,14 @@ public class SignInController implements Initializable {
 
     public void onLogin(ActionEvent actionEvent)
     {
-        loginAsCoordinator();
+        if (usernameField.getText().toLowerCase(Locale.ROOT).equals("admin"))
+        {
+            loginAsAdmin();
+        }
+        else
+        {
+            loginAsCoordinator();
+        }
 
 
         if (false && authenticator.authenticate(usernameField.getText(), passwordField.getText()))
