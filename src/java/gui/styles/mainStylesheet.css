@@ -662,11 +662,11 @@
 
 
 #colorPicker .color-palette{
-    -fx-background-color: #303030;
+    -fx-background-color: #ce5f1c;
     -fx-text-fill: #f8f8f8;
 }
 
-#colorPicker .color-palette .label{
+#colorPicker .color-palette .custom-color-text {
     -fx-background-color: #303030;
     -fx-text-fill: #f8f8f8;
 }
@@ -677,3 +677,4 @@
     -fx-text-fill: #f8f8f8;
     -fx-border-color: #404040;
 }
+
