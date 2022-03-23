@@ -1,23 +1,28 @@
 package bll;
 
 import be.Event;
+import javafx.beans.property.ObjectProperty;
 
 public final class DataManager {
 
     private static DataManager instance;
 
-    private Event selectedEvent;
+    private ObjectProperty<Event> selectedEvent;
 
     public DataManager() {
         this.instance = this;
     }
 
-    public Event getSelectedEvent() {
+    public ObjectProperty<Event> getSelectedEventProperty(){
         return selectedEvent;
     }
 
+    public Event getSelectedEvent() {
+        return selectedEvent.get();
+    }
+
     public void setSelectedEvent(Event selectedEvent) {
-        this.selectedEvent = selectedEvent;
+        this.selectedEvent.set(selectedEvent);
     }
 
     public static DataManager getInstance() {
