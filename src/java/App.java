@@ -1,3 +1,4 @@
+import gui.model.SceneManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,13 +12,9 @@ public class App extends Application {
 
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("gui/views/MainView.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setTitle("TicketGuru");
-        stage.setScene(scene);
-        stage.show();
+    public void start(Stage primaryStage) throws Exception
+    {
+        SceneManager.init(primaryStage);
     }
 
     public static void main(String[] args) {
