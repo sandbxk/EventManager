@@ -24,6 +24,7 @@ import org.w3c.dom.css.RGBColor;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class Event {
 
@@ -34,8 +35,7 @@ public class Event {
     private ObjectProperty<Venue> location;
     private int ticketsSold;
     private int ticketsRemaining;
-    private double[] ticketPrice;
-    private String[] ticketGroupName;
+    private List<PriceGroup> priceGroupList;
     private String description;
     private Image eventImage;
 
@@ -72,7 +72,20 @@ public class Event {
 
     }
 
-    public Event(int id, String eventName, LocalDateTime startDateTime, LocalDateTime endDateTime, Venue venue, int ticketsSold, int ticketsRemaining, double[] ticketPrice, String[] ticketGroupName, String description, Color color) {
+    /**
+     * Creates an event with a solid user defined color for the image.
+     * @param id
+     * @param eventName
+     * @param startDateTime
+     * @param endDateTime
+     * @param venue
+     * @param ticketsSold
+     * @param ticketsRemaining
+     * @param priceGroupList
+     * @param description
+     * @param color
+     */
+    public Event(int id, String eventName, LocalDateTime startDateTime, LocalDateTime endDateTime, Venue venue, int ticketsSold, int ticketsRemaining, List<PriceGroup> priceGroupList, String description, Color color) {
 
         this.id = id;
         this.eventName = new SimpleStringProperty();
@@ -85,8 +98,7 @@ public class Event {
 
         this.ticketsSold = ticketsSold;
         this.ticketsRemaining = ticketsRemaining;
-        this.ticketPrice = ticketPrice;
-        this.ticketGroupName = ticketGroupName;
+        this.priceGroupList = priceGroupList;
         this.description = description;
         this.color = color;
         this.eventImage = generateBlankImage(this.color);
@@ -108,8 +120,9 @@ public class Event {
         imgViewBanner.setImage(eventImage);
         lblEventName.setText(eventName);
         lblEventDateTime.setText(startDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE) + " " + (startDateTime.format(DateTimeFormatter.ISO_LOCAL_TIME)));
-
     }
+
+
 
     /**
      * Generates an image of a single color, with a 1x1 pixel resolution, which can then be scaled to the size of the ImageView.

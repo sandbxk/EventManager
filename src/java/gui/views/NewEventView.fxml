@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="472.0" styleClass="background" stylesheets="@../styles/mainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="737.0" prefWidth="472.0" styleClass="background" stylesheets="@../styles/mainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <center>
        <GridPane BorderPane.alignment="CENTER">
            <BorderPane.margin>
@@ -33,7 +33,7 @@
            <children>
                <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="panel">
                    <top>
-                       <VBox prefHeight="186.0" prefWidth="324.0" BorderPane.alignment="CENTER">
+                       <VBox prefHeight="231.0" prefWidth="452.0" BorderPane.alignment="CENTER">
                            <children>
                                <GridPane minHeight="80.0" prefHeight="109.0" prefWidth="309.0">
                                    <columnConstraints>
@@ -54,7 +54,7 @@
                                        </AnchorPane>
                                    </children>
                                </GridPane>
-                               <VBox prefHeight="118.0" prefWidth="324.0">
+                               <VBox prefHeight="115.0" prefWidth="452.0">
                                    <children>
                                        <GridPane minHeight="30.0" minWidth="20.0" prefHeight="64.0" prefWidth="451.0">
                                            <columnConstraints>
@@ -64,64 +64,123 @@
                                                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                                            </rowConstraints>
                                  <children>
-                                    <TextField prefHeight="45.0" prefWidth="346.0" promptText="Event Name" styleClass="submit-textField">
+                                    <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="289.0" promptText="Event Name" style="-fx-font-size: 16;" styleClass="submit-textField">
                                        <GridPane.margin>
                                           <Insets left="5.0" right="100.0" />
                                        </GridPane.margin>
                                     </TextField>
                                  </children>
                                        </GridPane>
-                                       <HBox prefHeight="24.0" prefWidth="277.0">
-                                           <children>
-                                    <Label styleClass="InternalPanelSubHeading" text="Start Date" textFill="#f8f8f8">
-                                       <HBox.margin>
-                                          <Insets left="5.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                    <DatePicker prefHeight="27.0" prefWidth="121.0">
-                                       <HBox.margin>
-                                          <Insets left="10.0" />
-                                       </HBox.margin>
-                                    </DatePicker>
-                                    <Label styleClass="InternalPanelSubHeading" text="Time">
-                                       <HBox.margin>
-                                          <Insets left="10.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                    <TextField prefHeight="26.0" prefWidth="95.0" promptText="eg. 10:15" styleClass="submit-textField">
-                                       <HBox.margin>
-                                          <Insets left="5.0" />
-                                       </HBox.margin>
-                                    </TextField>
-                                           </children>
-                                           <VBox.margin>
-                                               <Insets top="7.0" />
-                                           </VBox.margin>
-                                       </HBox>
-                                       <HBox prefHeight="21.0" prefWidth="277.0">
-                                           <children>
-                                               <Label prefHeight="17.0" prefWidth="28.0" styleClass="InternalPanelSubHeading" text="\@ ">
-                                                   <padding>
-                                                       <Insets left="5.0" />
-                                                   </padding>
-                                               </Label>
-                                               <Label fx:id="lblEventVenue" prefHeight="25.0" prefWidth="90.0" styleClass="InternalPanelSubHeading" text="Venue" />
-                                           </children>
-                                       </HBox>
+                              <VBox prefHeight="43.0" prefWidth="452.0">
+                                 <VBox.margin>
+                                    <Insets top="7.0" />
+                                 </VBox.margin>
+                                 <children>
+                                             <HBox prefHeight="24.0" prefWidth="277.0">
+                                                 <children>
+                                          <Label prefHeight="27.0" prefWidth="65.0" styleClass="InternalPanelSubHeading" text="Starts at" textFill="#f8f8f8">
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <DatePicker prefHeight="27.0" prefWidth="121.0" promptText="start date">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </DatePicker>
+                                          <Label prefHeight="45.0" prefWidth="36.0" styleClass="InternalPanelSubHeading" text="Time">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <TextField prefHeight="26.0" prefWidth="95.0" promptText="eg. 10:15" styleClass="submit-textField">
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                                 </children>
+                                             </HBox>
+                                    <HBox prefHeight="15.0" prefWidth="452.0">
+                                       <children>
+                                          <Label prefHeight="42.0" prefWidth="65.0" styleClass="InternalPanelSubHeading" text="End at" textFill="#f8f8f8">
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <DatePicker prefHeight="27.0" prefWidth="121.0" promptText="end date">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </DatePicker>
+                                          <Label prefHeight="45.0" prefWidth="36.0" styleClass="InternalPanelSubHeading" text="Time">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <TextField prefHeight="26.0" prefWidth="95.0" promptText="eg. 10:15" styleClass="submit-textField">
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="5.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                 </children>
+                              </VBox>
                                    </children>
                                </VBox>
                            </children>
                        </VBox>
                    </top>
                    <center>
-                       <VBox prefHeight="205.0" prefWidth="324.0" BorderPane.alignment="CENTER">
+                       <VBox prefHeight="456.0" prefWidth="452.0" BorderPane.alignment="CENTER">
                            <children>
-                        <ListView prefHeight="91.0" prefWidth="451.0">
+                        <VBox prefHeight="137.0" prefWidth="455.0">
+                           <children>
+                                       <HBox prefHeight="21.0" prefWidth="277.0">
+                                           <children>
+                                               <Label fx:id="lblEventVenue" prefHeight="25.0" prefWidth="90.0" styleClass="InternalPanelSubHeading" text="Venue">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin></Label>
+                                           </children>
+                                       </HBox>
+                              <HBox prefHeight="114.0" prefWidth="455.0">
+                                 <children>
+                                    <TableView prefHeight="117.0" prefWidth="418.0">
+                                      <columns>
+                                        <TableColumn prefWidth="127.0" text="Name" />
+                                        <TableColumn prefWidth="109.0" text="Address" />
+                                          <TableColumn prefWidth="64.0" text="Zipcode" />
+                                          <TableColumn prefWidth="111.0" text="City" />
+                                      </columns>
+                                    </TableView>
+                                    <VBox prefHeight="100.0" prefWidth="40.0">
+                                       <children>
+                                          <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="addButton" text="+">
+                                             <padding>
+                                                <Insets bottom="5.0" />
+                                             </padding>
+                                          </Button>
+                                          <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="addButton" text="-">
+                                             <padding>
+                                                <Insets bottom="10.0" />
+                                             </padding>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
                            <VBox.margin>
-                              <Insets left="10.0" right="10.0" />
+                              <Insets top="5.0" />
                            </VBox.margin>
-                        </ListView>
-                        <HBox prefHeight="28.0" prefWidth="451.0" />
+                        </VBox>
                                <VBox prefHeight="84.0" prefWidth="324.0">
                                    <children>
                                        <Label prefHeight="18.0" prefWidth="79.0" styleClass="Text" text="Description">
@@ -139,9 +198,9 @@
                                        <Insets top="10.0" />
                                    </VBox.margin>
                                </VBox>
-                               <VBox>
+                               <VBox prefHeight="69.0" prefWidth="455.0">
                                    <children>
-                                       <HBox prefHeight="20.0" prefWidth="305.0">
+                                       <HBox prefHeight="29.0" prefWidth="455.0">
                                            <children>
                                                <Label prefHeight="34.0" prefWidth="124.0" styleClass="Text" text="Tickets remaining:  ">
                                                    <HBox.margin>
@@ -165,20 +224,38 @@
                                </VBox>
                                <VBox>
                                    <children>
-                                       <Label prefHeight="32.0" prefWidth="90.0" styleClass="Text" text="Ticket pricing:">
+                                       <Label prefHeight="33.0" prefWidth="98.0" styleClass="Text" text="Ticket pricing:">
                                            <padding>
                                                <Insets left="5.0" top="15.0" />
                                            </padding>
                                        </Label>
-                                       <TableView fx:id="tblViewNewEventTicketGroup" editable="true" minHeight="-Infinity" minWidth="-Infinity" prefHeight="111.0" prefWidth="418.0">
-                                           <columns>
-                                               <TableColumn fx:id="tblClmnGroupName" prefWidth="157.3333282470703" text="Tier" />
-                                               <TableColumn fx:id="tblClmnGroupPrice" prefWidth="155.6666717529297" text="Price" />
-                                           </columns>
-                                           <VBox.margin>
-                                               <Insets left="5.0" right="5.0" />
-                                           </VBox.margin>
-                                       </TableView>
+                              <HBox>
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </VBox.margin>
+                                 <children>
+                                             <TableView fx:id="tblViewNewEventTicketGroup" editable="true" minHeight="-Infinity" minWidth="-Infinity" prefHeight="111.0" prefWidth="418.0">
+                                                 <columns>
+                                                     <TableColumn fx:id="tblClmnGroupName" prefWidth="157.3333282470703" text="Tier" />
+                                                     <TableColumn fx:id="tblClmnGroupPrice" prefWidth="155.6666717529297" text="Price" />
+                                                 </columns>
+                                             </TableView>
+                                    <VBox prefHeight="100.0" prefWidth="40.0">
+                                       <children>
+                                          <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="addButton" text="+">
+                                             <padding>
+                                                <Insets bottom="5.0" />
+                                             </padding>
+                                          </Button>
+                                          <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="addButton" text="-">
+                                             <padding>
+                                                <Insets bottom="10.0" />
+                                             </padding>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
                                    </children>
                                </VBox>
                            </children>

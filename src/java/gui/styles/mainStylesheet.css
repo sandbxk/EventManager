@@ -145,8 +145,8 @@
 }
 
 .text-area {
-    -fx-font-family: "Roboto Thin";
-    -fx-font-size: 10;
+    -fx-font-family: "Roboto Light";
+    -fx-font-size: 12;
     -fx-text-fill: #f8f8f8;
     -fx-display-caret:true;
     -fx-border-style: solid none none none;
@@ -679,3 +679,23 @@
     -fx-border-color: #404040;
 }
 
+.addButton {
+    -fx-background-color: transparent;
+    -fx-border-color: #f8f8f8;
+    -fx-border-width: 0;
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+    -fx-background-size: 20;
+    -fx-font-size: 20;
+    -fx-font-family: "Roboto Medium";
+    -fx-font-weight: bold;
+    -fx-text-fill: #f8f8f8;
+}
+
+.addButton:hover {
+
+}
+
+.addButton:pressed {
+
+}
