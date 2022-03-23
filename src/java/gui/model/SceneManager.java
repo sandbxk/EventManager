@@ -15,10 +15,36 @@ import java.util.Objects;
 
 public enum SceneManager
 {
-    LOGIN_FORM,
-    DASHBOARD_USER,
-    DASHBOARD_COORDINATOR,
-    DASHBOARD_ADMIN;
+    LOGIN_FORM("MainView.fxml"),
+    DASHBOARD_USER("exampleView.fxml"),
+    DASHBOARD_COORDINATOR("coordinatorView.fxml"),
+    DASHBOARD_ADMIN("adminView.fxml");
+
+    private final String rootPath = "../views/";
+
+    SceneManager(String file)
+    {
+        Parent tmp = null;
+        try
+        {
+             tmp = FXMLLoader.load(Objects.requireNonNull(SceneManager.class.getResource(rootPath + file)));
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            this.m_this_scene = tmp;
+        }
+    }
+
+    public void setAsCurrent()
+    {
+        window.getScene().setRoot(m_this_scene);
+    }
+
+    private final Parent m_this_scene;
 
     private static final Stage window = new Stage();
 

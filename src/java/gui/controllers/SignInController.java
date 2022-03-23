@@ -57,17 +57,17 @@ public class SignInController implements Initializable {
 
     private void loginAsEndUser()
     {
-        SceneManager.set(SceneManager.DASHBOARD_USER);
+        SceneManager.DASHBOARD_USER.setAsCurrent();
     }
 
     private void loginAsCoordinator()
     {
-        SceneManager.set(SceneManager.DASHBOARD_COORDINATOR);
+        SceneManager.DASHBOARD_COORDINATOR.setAsCurrent();
     }
 
     private void loginAsAdmin()
     {
-        SceneManager.set(SceneManager.DASHBOARD_ADMIN);
+        SceneManager.DASHBOARD_ADMIN.setAsCurrent();
     }
 
     private void invalidLoginAttempt()
