@@ -313,6 +313,7 @@
     -fx-border-radius: 0;
     -fx-background-color: transparent;
     -fx-border-color: #f8f8f8;
+    -fx-text-fill: #f8f8f8;
 }
 
 
@@ -527,4 +528,82 @@
     -fx-background-color: transparent;
     -fx-text-fill: #d5d4d4;
 }
+.date-picker .text-field {
+    -fx-background-color: #303030;
+    -fx-text-fill: #f8f8f8;
+}
+.date-picker .arrow-button {
+    -fx-background-color: #303030;
+    -fx-background-radius: 0;
+}
+.date-picker .arrow-button:hover {
+    -fx-background-color: #303030;
+}
+.date-picker .arrow-button .arrow {
+    -fx-background-color: #f8f8f8;
+}
 
+.date-picker .arrow-button:hover .arrow {
+    -fx-background-color: #56AE4E;
+}
+
+
+.date-picker .cell {
+    -fx-background-color: #303030;
+    -fx-text-fill: #f8f8f8;
+    -fx-border-color: #404040;
+}
+.date-picker .cell:hover {
+    -fx-background-color: #56AE4E;
+    -fx-text-fill: #f8f8f8;
+}
+.date-picker .cell:focused {
+    -fx-background-color: #56AE4E;
+    -fx-text-fill: #f8f8f8;
+}
+.date-picker .selected {
+    -fx-background-color: #70e365;
+    -fx-text-fill: #f8f8f8;
+}
+.date-picker .selected:focused {
+    -fx-background-color: #70e365;
+    -fx-text-fill: #f8f8f8;
+}
+.date-picker-popup  {
+    -fx-border-color: transparent;
+}
+.date-picker-popup .month-year-pane {
+    -fx-background-color: #ce5f1c;
+}
+.date-picker-popup .month-year-pane .label {
+    -fx-text-fill: #f8f8f8;
+}
+.date-picker-popup .week-number-cell {
+    -fx-background-color: #8f5836;
+}
+
+.date-picker-popup .spinner .button .left-arrow,
+.date-picker-popup .spinner .button .right-arrow {
+    -fx-background-color: #f8f8f8;
+}
+
+
+.date-picker-popup .spinner .button:hover .left-arrow,
+.date-picker-popup .spinner .button:hover .right-arrow {
+    -fx-background-color: #56AE4E;
+}
+
+.date-picker-popup .spinner .button:focused .left-arrow,
+.date-picker-popup .spinner .button:focused .right-arrow {
+    -fx-background-color: #f8f8f8;
+}
+
+.date-picker-popup .spinner .button:hover,
+.date-picker-popup .spinner .button:hover  {
+    -fx-background-color: transparent;
+}
+
+.date-picker-popup .spinner .button:focused,
+.date-picker-popup .spinner .button:focused {
+    -fx-background-color: transparent;
+}
