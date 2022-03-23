@@ -1,21 +1,22 @@
 CREATE DATABASE Ticket_GuruDB;
 
+CREATE TABLE CityName (
+    zipCode VARCHAR(10) UNIQUE,
+    cityName VARCHAR (85),
+    PRIMARY KEY (zipCode)
+)
+
 CREATE TABLE UserTable (
     userID INT IDENTITY(1,1) NOT NULL,
     userName VARCHAR(50),
     loginName VARCHAR(50),
     loginPass VARCHAR(50),
-    zipCode VARCHAR(50),
-    userAuth VARCHAR(255),
+    zipCode INT,
+    userAuth INT,
     PRIMARY KEY (userID),
     FOREIGN KEY (zipCode) REFERENCES CityName (zipCode)
 )
 
-CREATE TABLE CityName (
-    zipCode INT UNIQUE,
-    cityName VARCHAR (85),
-    PRIMARY KEY (zipCode)
-)
 
 CREATE TABLE Venue (
     VenueID INT IDENTITY(1,1) NOT NULL,

@@ -70,7 +70,7 @@ public class SignInController implements Initializable {
 
     private void loginAsCoordinator()
     {
-        SceneManager.DASHBOARD_COORDINATOR.setAsCurrent();
+        //SceneManager.DASHBOARD_COORDINATOR.setAsCurrent();
     }
 
     private void loginAsAdmin()

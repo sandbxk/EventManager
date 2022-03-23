@@ -1,16 +1,16 @@
 package be;
 
-public record UserInfo(long id, String name, EUserType type, String email, String phone)
+public record UserInfo(int id, String name, EUserType type,int zipCode, String email)
 {
     public UserInfo()
     {
-        this(-1, "Unknown", EUserType.INVALID, "Example@Address.com", "12345678");
+        this(-1, "Unknown", EUserType.INVALID,0000 , "Example@Address.com");
     }
 
 
-    public UserInfo(long id, String name, EUserType type)
+    public UserInfo(int id, String name, EUserType type)
     {
-        this(id, name, type, "Example@Address.com", "12345678");
+        this(id, name, type,0000, "Example@Address.com");
     }
 
     @Override
@@ -21,4 +21,6 @@ public record UserInfo(long id, String name, EUserType type, String email, Strin
                 ", type=" + type +
                 '}';
     }
+
+
 }
