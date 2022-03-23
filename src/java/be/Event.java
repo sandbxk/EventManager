@@ -39,6 +39,8 @@ public class Event {
     private String description;
     private Image eventImage;
 
+    private Color color;
+
     private ToggleButton node;
 
     public @FXML ImageView imgViewBanner;
@@ -70,7 +72,7 @@ public class Event {
 
     }
 
-    public Event(int id, String eventName, LocalDateTime startDateTime, LocalDateTime endDateTime, Venue venue, int ticketsSold, int ticketsRemaining, double[] ticketPrice, String[] ticketGroupName, String description, Image eventImage) {
+    public Event(int id, String eventName, LocalDateTime startDateTime, LocalDateTime endDateTime, Venue venue, int ticketsSold, int ticketsRemaining, double[] ticketPrice, String[] ticketGroupName, String description, Color color) {
 
         this.id = id;
         this.eventName = new SimpleStringProperty();
@@ -86,7 +88,8 @@ public class Event {
         this.ticketPrice = ticketPrice;
         this.ticketGroupName = ticketGroupName;
         this.description = description;
-        this.eventImage = eventImage;
+        this.color = color;
+        this.eventImage = generateBlankImage(this.color);
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/views/Event.fxml"));
@@ -214,6 +217,10 @@ public class Event {
 
     public void setEventImage(Image eventImage){
         this.eventImage = eventImage;
+    }
+
+    public Color getColor(){
+        return this.color;
     }
 
 }

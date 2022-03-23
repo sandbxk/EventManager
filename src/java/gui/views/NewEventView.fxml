@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -42,15 +42,15 @@
                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                    </rowConstraints>
                                    <children>
+                                       <ImageView fx:id="imgViewEvent" fitHeight="71.0" fitWidth="390.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" />
                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="imgViewDetailBackground">
                                            <GridPane.margin>
                                                <Insets left="5.0" right="5.0" top="5.0" />
                                            </GridPane.margin>
                                  <children>
-                                    <Button layoutX="395.0" layoutY="49.0" mnemonicParsing="false" styleClass="EditButton" />
+                                    <ColorPicker layoutX="290.0" layoutY="50.0" prefHeight="27.0" prefWidth="118.0" />
                                  </children>
                                        </AnchorPane>
-                                       <ImageView fx:id="imgViewEvent" fitHeight="73.0" fitWidth="257.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" />
                                    </children>
                                </GridPane>
                                <VBox prefHeight="118.0" prefWidth="324.0">
@@ -103,7 +103,7 @@
                                                <Insets left="5.0" />
                                            </padding>
                                        </Label>
-                                       <TextArea fx:id="txtAreaInfo" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="314.0" wrapText="true">
+                                       <TextArea fx:id="txtAreaNewEventInfo" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="314.0" promptText="The description of the event" style="-fx-border-width: 1;" wrapText="true">
                                            <VBox.margin>
                                                <Insets left="5.0" right="5.0" />
                                            </VBox.margin>
@@ -144,7 +144,7 @@
                                                <Insets left="5.0" top="15.0" />
                                            </padding>
                                        </Label>
-                                       <TableView fx:id="tblViewTicketGroup" minHeight="-Infinity" minWidth="-Infinity" prefHeight="81.0" prefWidth="314.0">
+                                       <TableView fx:id="tblViewNewEventTicketGroup" editable="true" minHeight="-Infinity" minWidth="-Infinity" prefHeight="111.0" prefWidth="418.0">
                                            <columns>
                                                <TableColumn fx:id="tblClmnGroupName" prefWidth="157.3333282470703" text="Tier" />
                                                <TableColumn fx:id="tblClmnGroupPrice" prefWidth="155.6666717529297" text="Price" />

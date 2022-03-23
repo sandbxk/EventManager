@@ -327,7 +327,7 @@
                                  </HBox.margin>
                               </TextField>
                               <Button fx:id="btnSearch" mnemonicParsing="false" prefHeight="23.0" prefWidth="36.0" />
-                              <ComboBox prefHeight="28.0" prefWidth="86.0">
+                              <ComboBox prefHeight="31.0" prefWidth="86.0">
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin>

@@ -607,3 +607,30 @@
 .date-picker-popup .spinner .button:focused {
     -fx-background-color: transparent;
 }
+
+
+.color-picker {
+    -fx-background-color: #303030;
+    -fx-background-radius: 20;
+    -fx-padding: 0;
+    -fx-background-insets: 0, 1;
+    -fx-border-width: 0;
+
+}
+
+.color-picker .text-field {
+    -fx-text-fill: #f8f8f8;
+    -fx-font-size: 12;
+}
+
+.color-picker .color-picker-label .text {
+}
+
+.color-picker .color-picker-label{
+    -fx-text-fill: #f8f8f8;
+    -fx-font-size: 12;
+}
+
+.color-picker .color-picker-popup{
+    -fx-background-color: #303030;
+}
