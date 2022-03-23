@@ -6,15 +6,21 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.TilePane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class CoordinatorController implements Initializable {
@@ -88,6 +94,19 @@ public class CoordinatorController implements Initializable {
 
     public void onCreate(ActionEvent event)
     {
+        Parent root = null;
+        Stage stage = new Stage();
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gui/views/NewEventView.fxml")));
+            stage.setTitle("New Event");
+            stage.setMinWidth(511);
+            stage.setMinHeight(737);
+            stage.setScene(new Scene(root, 511, 737));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         Event event1 = new Event();
         flowPaneEvents.getChildren().add(event1.getEventTile());
         eventToggle.getToggles().add(event1.getEventTile());

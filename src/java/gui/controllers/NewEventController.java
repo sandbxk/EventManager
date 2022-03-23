@@ -5,6 +5,7 @@ import be.Venue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -54,6 +55,8 @@ public class NewEventController implements Initializable {
         initTableViews();
     }
 
+    //TODO: Fix Tableview CSS. Make Tableviews expandable
+
     public void onColorPicker(ActionEvent event) {
     imgViewEvent.setImage(generateBlankImage(colorPicker.getValue()));
     }
@@ -82,16 +85,21 @@ public class NewEventController implements Initializable {
     }
 
     public void onDeleteVenue(ActionEvent event) {
+        Venue selctedItem = tblViewVenues.getSelectionModel().getSelectedItem();
+        tblViewVenues.getItems().remove(selctedItem);
     }
 
     public void onNewPriceGroup(ActionEvent event) {
+        tblViewNewEventTicketGroup.getItems().add(new PriceGroup("n", 1, "DKK"));
     }
 
     public void OnDeletePriceGroup(ActionEvent event) {
+        PriceGroup selectedItem = tblViewNewEventTicketGroup.getSelectionModel().getSelectedItem();
+        tblViewNewEventTicketGroup.getItems().remove(selectedItem);
     }
 
     public void onSave(ActionEvent event) {
 
-
+        ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 }

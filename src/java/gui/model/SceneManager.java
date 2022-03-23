@@ -13,7 +13,8 @@ public enum SceneManager
     LOGIN_FORM("MainView.fxml"),
     DASHBOARD_USER("exampleView.fxml"),
     DASHBOARD_COORDINATOR("coordinatorView.fxml"),
-    DASHBOARD_ADMIN("adminView.fxml");
+    DASHBOARD_ADMIN("adminView.fxml"),
+    COORDINATOR_NEW_EVENT("NewEventView.fxml");
 
     private final String rootPath = "../views/";
 

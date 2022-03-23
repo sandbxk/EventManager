@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="737.0" prefWidth="472.0" styleClass="background" stylesheets="@../styles/mainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.NewEventController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="737.0" prefWidth="511.0" styleClass="background" stylesheets="@../styles/mainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.NewEventController">
    <center>
        <GridPane BorderPane.alignment="CENTER">
            <BorderPane.margin>
@@ -147,14 +147,14 @@
                                        </HBox.margin></Label>
                                            </children>
                                        </HBox>
-                              <HBox prefHeight="114.0" prefWidth="455.0">
+                              <HBox prefHeight="114.0">
                                  <children>
-                                    <TableView fx:id="tblViewVenues" prefHeight="117.0" prefWidth="418.0">
+                                    <TableView fx:id="tblViewVenues" editable="true" prefHeight="112.0" prefWidth="477.0">
                                       <columns>
-                                        <TableColumn fx:id="tblClmVenueName" prefWidth="127.0" text="Name" />
-                                        <TableColumn fx:id="tblClmVenueAddress" prefWidth="109.0" text="Address" />
-                                          <TableColumn fx:id="tblClmVenueZipcode" prefWidth="64.0" text="Zipcode" />
-                                          <TableColumn fx:id="tblClmVenueCity" prefWidth="111.0" text="City" />
+                                        <TableColumn fx:id="tblClmVenueName" prefWidth="150.0" text="Name" />
+                                        <TableColumn fx:id="tblClmVenueAddress" prefWidth="120.0" text="Address" />
+                                          <TableColumn fx:id="tblClmVenueZipcode" prefWidth="73.0" text="Zipcode" />
+                                          <TableColumn fx:id="tblClmVenueCity" prefWidth="96.0" text="City" />
                                       </columns>
                                     </TableView>
                                     <VBox prefHeight="100.0" prefWidth="40.0">
@@ -234,14 +234,14 @@
                                     <Insets left="5.0" right="5.0" />
                                  </VBox.margin>
                                  <children>
-                                             <TableView fx:id="tblViewNewEventTicketGroup" editable="true" minHeight="-Infinity" minWidth="-Infinity" prefHeight="111.0" prefWidth="418.0">
+                                             <TableView fx:id="tblViewNewEventTicketGroup" editable="true" minHeight="-Infinity" minWidth="-Infinity" prefHeight="111.0" prefWidth="453.0">
                                                  <columns>
                                                      <TableColumn fx:id="tblClmnGroupName" prefWidth="212.0" text="Tier" />
                                                      <TableColumn fx:id="tblClmnGroupPrice" prefWidth="165.0" text="Price" />
-                                          <TableColumn fx:id="tblClmnGroupCurrency" prefWidth="40.0" />
+                                          <TableColumn fx:id="tblClmnGroupCurrency" prefWidth="61.0" />
                                                  </columns>
                                              </TableView>
-                                    <VBox prefHeight="100.0" prefWidth="40.0">
+                                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="25.0">
                                        <children>
                                           <Button fx:id="btnNewPriceGroup" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onNewPriceGroup" prefHeight="25.0" prefWidth="25.0" styleClass="textButton" text="+">
                                              <padding>
