@@ -58,7 +58,7 @@ public class CoordinatorController implements Initializable {
 
     public CoordinatorController() {
         selectedEvent = new SimpleObjectProperty();
-        selectedEvent.bind(DataManager.getInstance().getSelectedEventProperty());
+        // fixme: //selectedEvent.bind(DataManager.getInstance().getSelectedEventProperty());
     }
 
     @Override
