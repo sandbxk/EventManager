@@ -19,7 +19,7 @@ public class CoordinatorController implements Initializable {
     @FXML public Label lblUser;
     @FXML public ImageView imgViewUser;
 
-    @FXML public TilePane tilePaneEvents;
+    @FXML public FlowPane flowPaneEvents;
 
     @FXML public ImageView imgViewEvent;
     @FXML public Button btnEditEvent;
@@ -47,17 +47,21 @@ public class CoordinatorController implements Initializable {
 
     @FXML public FlowPane flowPaneAttendeeBtns;
 
+    ToggleGroup eventToggle;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
+        eventToggle = new ToggleGroup();
 
     }
 
     public void onCreate(ActionEvent event)
     {
         Event event1 = new Event();
-        tilePaneEvents.getChildren().add(event1.getEventTile());
+        flowPaneEvents.getChildren().add(event1.getEventTile());
+        eventToggle.getToggles().add(event1.getEventTile());
     }
 
 }
