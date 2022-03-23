@@ -4,6 +4,7 @@ import be.EUserType;
 import be.Event;
 import bll.DatabaseAuthenticator;
 import bll.interfaces.IAuthenticator;
+import gui.model.SceneManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -56,32 +57,21 @@ public class SignInController implements Initializable {
 
     private void loginAsEndUser()
     {
-
+        SceneManager.set(SceneManager.DASHBOARD_USER);
     }
 
     private void loginAsCoordinator()
     {
-        Parent root = null;
-
-        try
-        {
-            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../views/coordinatorView.fxml")));
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-
-        this.borderPaneRoot.getScene().setRoot(root);
+        SceneManager.set(SceneManager.DASHBOARD_COORDINATOR);
     }
 
     private void loginAsAdmin()
     {
-
+        SceneManager.set(SceneManager.DASHBOARD_ADMIN);
     }
 
     private void invalidLoginAttempt()
     {
-
+        // failed login
     }
 }
