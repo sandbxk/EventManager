@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="737.0" prefWidth="472.0" styleClass="background" stylesheets="@../styles/mainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="737.0" prefWidth="472.0" styleClass="background" stylesheets="@../styles/mainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.NewEventController">
    <center>
        <GridPane BorderPane.alignment="CENTER">
            <BorderPane.margin>
@@ -43,13 +43,13 @@
                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                    </rowConstraints>
                                    <children>
-                                       <ImageView fx:id="imgViewEvent" fitHeight="71.0" fitWidth="390.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" />
                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="imgViewDetailBackground">
                                            <GridPane.margin>
                                                <Insets left="5.0" right="5.0" top="5.0" />
                                            </GridPane.margin>
                                  <children>
-                                    <ColorPicker fx:id="colorPicker" layoutX="290.0" layoutY="50.0" prefHeight="27.0" prefWidth="118.0" AnchorPane.bottomAnchor="6.800000000000001" AnchorPane.rightAnchor="9.999999999999972" />
+                                             <ImageView fx:id="imgViewEvent" fitHeight="81.0" fitWidth="428.0" layoutX="7.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ColorPicker fx:id="colorPicker" layoutX="290.0" layoutY="50.0" onAction="#onColorPicker" prefHeight="27.0" prefWidth="118.0" AnchorPane.bottomAnchor="6.800000000000001" AnchorPane.rightAnchor="9.999999999999972" />
                                  </children>
                                        </AnchorPane>
                                    </children>
@@ -64,7 +64,7 @@
                                                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                                            </rowConstraints>
                                  <children>
-                                    <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="289.0" promptText="Event Name" style="-fx-font-size: 16;" styleClass="submit-textField">
+                                    <TextField fx:id="txtFieldEventName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="289.0" promptText="Event Name" style="-fx-font-size: 16;" styleClass="submit-textField">
                                        <GridPane.margin>
                                           <Insets left="5.0" right="100.0" />
                                        </GridPane.margin>
@@ -83,7 +83,7 @@
                                                 <Insets left="5.0" />
                                              </HBox.margin>
                                           </Label>
-                                          <DatePicker prefHeight="27.0" prefWidth="121.0" promptText="start date">
+                                          <DatePicker fx:id="datePickerStartDate" prefHeight="27.0" prefWidth="121.0" promptText="start date">
                                              <HBox.margin>
                                                 <Insets left="10.0" />
                                              </HBox.margin>
@@ -93,7 +93,7 @@
                                                 <Insets left="10.0" />
                                              </HBox.margin>
                                           </Label>
-                                          <TextField prefHeight="26.0" prefWidth="95.0" promptText="eg. 10:15" styleClass="submit-textField">
+                                          <TextField fx:id="txtFieldStartTime" prefHeight="26.0" prefWidth="95.0" promptText="eg. 10:15" styleClass="submit-textField">
                                              <HBox.margin>
                                                 <Insets left="5.0" />
                                              </HBox.margin>
@@ -102,12 +102,12 @@
                                              </HBox>
                                     <HBox prefHeight="15.0" prefWidth="452.0">
                                        <children>
-                                          <Label prefHeight="42.0" prefWidth="65.0" styleClass="InternalPanelSubHeading" text="End at" textFill="#f8f8f8">
+                                          <Label prefHeight="42.0" prefWidth="65.0" styleClass="InternalPanelSubHeading" text="Ends at" textFill="#f8f8f8">
                                              <HBox.margin>
                                                 <Insets left="5.0" />
                                              </HBox.margin>
                                           </Label>
-                                          <DatePicker prefHeight="27.0" prefWidth="121.0" promptText="end date">
+                                          <DatePicker fx:id="datePickerEndDate" prefHeight="27.0" prefWidth="121.0" promptText="end date">
                                              <HBox.margin>
                                                 <Insets left="10.0" />
                                              </HBox.margin>
@@ -117,7 +117,7 @@
                                                 <Insets left="10.0" />
                                              </HBox.margin>
                                           </Label>
-                                          <TextField prefHeight="26.0" prefWidth="95.0" promptText="eg. 10:15" styleClass="submit-textField">
+                                          <TextField fx:id="txtFieldEndTime" prefHeight="26.0" prefWidth="95.0" promptText="eg. 10:15" styleClass="submit-textField">
                                              <HBox.margin>
                                                 <Insets left="5.0" />
                                              </HBox.margin>
@@ -149,22 +149,22 @@
                                        </HBox>
                               <HBox prefHeight="114.0" prefWidth="455.0">
                                  <children>
-                                    <TableView prefHeight="117.0" prefWidth="418.0">
+                                    <TableView fx:id="tblViewVenues" prefHeight="117.0" prefWidth="418.0">
                                       <columns>
-                                        <TableColumn prefWidth="127.0" text="Name" />
-                                        <TableColumn prefWidth="109.0" text="Address" />
-                                          <TableColumn prefWidth="64.0" text="Zipcode" />
-                                          <TableColumn prefWidth="111.0" text="City" />
+                                        <TableColumn fx:id="tblClmVenueName" prefWidth="127.0" text="Name" />
+                                        <TableColumn fx:id="tblClmVenueAddress" prefWidth="109.0" text="Address" />
+                                          <TableColumn fx:id="tblClmVenueZipcode" prefWidth="64.0" text="Zipcode" />
+                                          <TableColumn fx:id="tblClmVenueCity" prefWidth="111.0" text="City" />
                                       </columns>
                                     </TableView>
                                     <VBox prefHeight="100.0" prefWidth="40.0">
                                        <children>
-                                          <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="addButton" text="+">
+                                          <Button fx:id="btnNewVenue" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="textButton" text="+">
                                              <padding>
                                                 <Insets bottom="5.0" />
                                              </padding>
                                           </Button>
-                                          <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="addButton" text="-">
+                                          <Button fx:id="btnDeleteVenue" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="textButton" text="-">
                                              <padding>
                                                 <Insets bottom="10.0" />
                                              </padding>
@@ -207,7 +207,7 @@
                                                        <Insets left="5.0" />
                                                    </HBox.margin>
                                                </Label>
-                                    <TextField prefHeight="26.0" prefWidth="85.0" promptText="Eg. 100" styleClass="submit-textField" />
+                                    <TextField fx:id="txtFieldTicketRemaining" prefHeight="26.0" prefWidth="85.0" promptText="Eg. 100" styleClass="submit-textField" />
                                            </children>
                                        </HBox>
                                        <HBox prefHeight="9.0" prefWidth="305.0">
@@ -217,7 +217,7 @@
                                                        <Insets left="5.0" />
                                                    </HBox.margin>
                                                </Label>
-                                    <TextField prefHeight="26.0" prefWidth="86.0" styleClass="submit-textField" text="0" />
+                                    <TextField fx:id="txtFieldTicketsSold" prefHeight="26.0" prefWidth="86.0" styleClass="submit-textField" text="0" />
                                            </children>
                                        </HBox>
                                    </children>
@@ -236,18 +236,18 @@
                                  <children>
                                              <TableView fx:id="tblViewNewEventTicketGroup" editable="true" minHeight="-Infinity" minWidth="-Infinity" prefHeight="111.0" prefWidth="418.0">
                                                  <columns>
-                                                     <TableColumn fx:id="tblClmnGroupName" prefWidth="157.3333282470703" text="Tier" />
-                                                     <TableColumn fx:id="tblClmnGroupPrice" prefWidth="155.6666717529297" text="Price" />
+                                                     <TableColumn fx:id="tblClmnGroupName" prefWidth="212.0" text="Tier" />
+                                                     <TableColumn fx:id="tblClmnGroupPrice" prefWidth="198.0" text="Price" />
                                                  </columns>
                                              </TableView>
                                     <VBox prefHeight="100.0" prefWidth="40.0">
                                        <children>
-                                          <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="addButton" text="+">
+                                          <Button fx:id="btnNewPriceGroup" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="textButton" text="+">
                                              <padding>
                                                 <Insets bottom="5.0" />
                                              </padding>
                                           </Button>
-                                          <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="addButton" text="-">
+                                          <Button fx:id="btnDeletePriceGroup" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="textButton" text="-">
                                              <padding>
                                                 <Insets bottom="10.0" />
                                              </padding>
@@ -261,6 +261,13 @@
                            </children>
                        </VBox>
                    </center>
+               <bottom>
+                  <Button fx:id="btnSaveNewEvent" mnemonicParsing="false" onAction="#onSave" styleClass="textButton" text="Save" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets bottom="5.0" left="350.0" />
+                     </BorderPane.margin>
+                  </Button>
+               </bottom>
                </BorderPane>
            </children>
        </GridPane>

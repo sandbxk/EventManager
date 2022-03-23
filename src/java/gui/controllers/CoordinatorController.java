@@ -75,7 +75,7 @@ public class CoordinatorController implements Initializable {
             lblEventName.setText(newValue.getEventName());
             lblEventDate.setText(newValue.getStartDateTime().toLocalDate().toString());
             lblEventTime.setText(newValue.getStartDateTime().toLocalTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)));
-            lblEventVenue.setText(newValue.getLocation().getVenueLocation());
+            lblEventVenue.setText(newValue.getLocation().getVenueName());
 
             txtAreaInfo.setText(newValue.getDescription());
 

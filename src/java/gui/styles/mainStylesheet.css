@@ -679,7 +679,7 @@
     -fx-border-color: #404040;
 }
 
-.addButton {
+.textButton {
     -fx-background-color: transparent;
     -fx-border-color: #f8f8f8;
     -fx-border-width: 0;
@@ -692,10 +692,10 @@
     -fx-text-fill: #f8f8f8;
 }
 
-.addButton:hover {
-
+.textButton:hover {
+    -fx-text-fill: #fc8f51;
 }
 
-.addButton:pressed {
-
+.textButton:pressed {
+    -fx-text-fill: #C57040;
 }

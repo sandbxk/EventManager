@@ -7,8 +7,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
@@ -16,10 +14,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import org.w3c.dom.css.RGBColor;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -200,21 +196,14 @@ public class Event {
         this.ticketsRemaining = ticketsRemaining;
     }
 
-    public double[] getTicketPrice() {
-        return ticketPrice;
+    public List<PriceGroup> getPriceGroups() {
+        return priceGroupList;
     }
 
-    public void setTicketPrice(double[] ticketPrice) {
-        this.ticketPrice = ticketPrice;
+    public void setTicketPrice(List<PriceGroup> priceGroupList) {
+        this.priceGroupList = priceGroupList;
     }
 
-    public String[] getTicketGroupName() {
-        return ticketGroupName;
-    }
-
-    public void setTicketGroupName(String[] ticketGroupName) {
-        this.ticketGroupName = ticketGroupName;
-    }
 
     public String getDescription() {
         return description;
