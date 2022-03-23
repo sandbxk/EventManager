@@ -610,6 +610,26 @@
 
 
 .color-picker {
+    -fx-skin: CustomSkin;
+    -fx-background-color: #303030;
+    -fx-background-radius: 20;
+    -fx-padding: 0;
+    -fx-background-insets: 0, 1;
+    -fx-border-width: 0;
+}
+
+.color-picker:hover {
+    -fx-skin: CustomSkin;
+    -fx-background-color: #404040;
+    -fx-background-radius: 20;
+    -fx-padding: 0;
+    -fx-background-insets: 0, 1;
+    -fx-border-width: 0;
+
+}
+
+.color-picker:focused {
+    -fx-skin: CustomSkin;
     -fx-background-color: #303030;
     -fx-background-radius: 20;
     -fx-padding: 0;
@@ -618,19 +638,42 @@
 
 }
 
-.color-picker .text-field {
+#colorPicker .arrow-button .arrow, color-picker:focused .arrow-button .arrow {
+    -fx-background-color: #f8f8f8;
+}
+
+#colorPicker .text-field {
     -fx-text-fill: #f8f8f8;
     -fx-font-size: 12;
 }
 
-.color-picker .color-picker-label .text {
+#colorPicker .color-picker-label .text {
+    -fx-text-fill: #f8f8f8;
 }
 
-.color-picker .color-picker-label{
+#colorPicker .color-picker-label{
     -fx-text-fill: #f8f8f8;
     -fx-font-size: 12;
 }
 
-.color-picker .color-picker-popup{
+#colorPicker .color-palette-region{
     -fx-background-color: #303030;
+}
+
+
+#colorPicker .color-palette{
+    -fx-background-color: #303030;
+    -fx-text-fill: #f8f8f8;
+}
+
+#colorPicker .color-palette .label{
+    -fx-background-color: #303030;
+    -fx-text-fill: #f8f8f8;
+}
+
+
+#colorPicker .color-picker-grid {
+    -fx-background-color: #404040;
+    -fx-text-fill: #f8f8f8;
+    -fx-border-color: #404040;
 }
