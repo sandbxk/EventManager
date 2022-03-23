@@ -61,10 +61,7 @@ public class Event {
         imgViewBanner.setClip(clip);
 
 
-        Image image = generateBlankImage(Color.AQUAMARINE);
 
-        imgViewBanner.setPreserveRatio(false);
-        imgViewBanner.setImage(image);
 
     }
 
@@ -79,9 +76,8 @@ public class Event {
      * @param ticketsRemaining
      * @param priceGroupList
      * @param description
-     * @param color
      */
-    public Event(int id, String eventName, LocalDateTime startDateTime, LocalDateTime endDateTime, Venue venue, int ticketsSold, int ticketsRemaining, List<PriceGroup> priceGroupList, String description, Color color) {
+    public Event(int id, String eventName, LocalDateTime startDateTime, LocalDateTime endDateTime, Venue venue, int ticketsSold, int ticketsRemaining, List<PriceGroup> priceGroupList, String description, Image image) {
 
         this.id = id;
         this.eventName = new SimpleStringProperty();
@@ -96,8 +92,7 @@ public class Event {
         this.ticketsRemaining = ticketsRemaining;
         this.priceGroupList = priceGroupList;
         this.description = description;
-        this.color = color;
-        this.eventImage = generateBlankImage(this.color);
+        this.eventImage = image;
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/views/Event.fxml"));
@@ -120,16 +115,6 @@ public class Event {
 
 
 
-    /**
-     * Generates an image of a single color, with a 1x1 pixel resolution, which can then be scaled to the size of the ImageView.
-     * @return a blank image.
-     */
-    private Image generateBlankImage(Color color) {
-        WritableImage img = new WritableImage(1, 1);
-        PixelWriter pw = img.getPixelWriter();
-        pw.setColor(0, 0, color);
-        return img ;
-    }
 
     public ToggleButton getEventTile(){
         return node;

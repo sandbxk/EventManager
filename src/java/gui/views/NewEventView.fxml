@@ -159,12 +159,12 @@
                                     </TableView>
                                     <VBox prefHeight="100.0" prefWidth="40.0">
                                        <children>
-                                          <Button fx:id="btnNewVenue" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="textButton" text="+">
+                                          <Button fx:id="btnNewVenue" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onNewVenue" prefHeight="25.0" prefWidth="25.0" styleClass="textButton" text="+">
                                              <padding>
                                                 <Insets bottom="5.0" />
                                              </padding>
                                           </Button>
-                                          <Button fx:id="btnDeleteVenue" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="textButton" text="-">
+                                          <Button fx:id="btnDeleteVenue" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onDeleteVenue" prefHeight="24.0" prefWidth="27.0" styleClass="textButton" text="-">
                                              <padding>
                                                 <Insets bottom="10.0" />
                                              </padding>
@@ -237,17 +237,18 @@
                                              <TableView fx:id="tblViewNewEventTicketGroup" editable="true" minHeight="-Infinity" minWidth="-Infinity" prefHeight="111.0" prefWidth="418.0">
                                                  <columns>
                                                      <TableColumn fx:id="tblClmnGroupName" prefWidth="212.0" text="Tier" />
-                                                     <TableColumn fx:id="tblClmnGroupPrice" prefWidth="198.0" text="Price" />
+                                                     <TableColumn fx:id="tblClmnGroupPrice" prefWidth="165.0" text="Price" />
+                                          <TableColumn fx:id="tblClmnGroupCurrency" prefWidth="40.0" />
                                                  </columns>
                                              </TableView>
                                     <VBox prefHeight="100.0" prefWidth="40.0">
                                        <children>
-                                          <Button fx:id="btnNewPriceGroup" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="textButton" text="+">
+                                          <Button fx:id="btnNewPriceGroup" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onNewPriceGroup" prefHeight="25.0" prefWidth="25.0" styleClass="textButton" text="+">
                                              <padding>
                                                 <Insets bottom="5.0" />
                                              </padding>
                                           </Button>
-                                          <Button fx:id="btnDeletePriceGroup" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="textButton" text="-">
+                                          <Button fx:id="btnDeletePriceGroup" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#OnDeletePriceGroup" prefHeight="24.0" prefWidth="27.0" styleClass="textButton" text="-">
                                              <padding>
                                                 <Insets bottom="10.0" />
                                              </padding>
