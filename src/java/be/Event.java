@@ -2,6 +2,7 @@ package be;
 
 import bll.DataManager;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
@@ -22,6 +23,7 @@ import org.w3c.dom.css.RGBColor;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Event {
 
@@ -29,10 +31,13 @@ public class Event {
     private StringProperty eventName;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
-    private ObjectProperty location;
+    private ObjectProperty<Venue> location;
     private int ticketsSold;
     private int ticketsRemaining;
     private double[] ticketPrice;
+    private String[] ticketGroupName;
+    private String description;
+    private Image eventImage;
 
     private ToggleButton node;
 
@@ -65,15 +70,23 @@ public class Event {
 
     }
 
-    public Event(int id, StringProperty eventName, LocalDateTime startDateTime, LocalDateTime endDateTime, ObjectProperty venue, int ticketsSold, int ticketsRemaining, double[] ticketPrice) {
+    public Event(int id, String eventName, LocalDateTime startDateTime, LocalDateTime endDateTime, Venue venue, int ticketsSold, int ticketsRemaining, double[] ticketPrice, String[] ticketGroupName, String description, Image eventImage) {
+
         this.id = id;
-        this.eventName = eventName;
+        this.eventName = new SimpleStringProperty();
+        this.eventName.set(eventName);
+
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
-        this.location = venue;
+        this.location = new SimpleObjectProperty<>();
+        this.location.set(venue);
+
         this.ticketsSold = ticketsSold;
         this.ticketsRemaining = ticketsRemaining;
         this.ticketPrice = ticketPrice;
+        this.ticketGroupName = ticketGroupName;
+        this.description = description;
+        this.eventImage = eventImage;
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/views/Event.fxml"));
@@ -82,6 +95,17 @@ public class Event {
             node.getStylesheets().add(getClass().getResource("/gui/styles/event.css").toExternalForm());
         } catch (IOException ignored) {}
         node.setOnAction(event -> DataManager.getInstance().setSelectedEvent(this));
+
+        Rectangle clip = new Rectangle(imgViewBanner.getFitWidth(), imgViewBanner.getFitHeight());
+        clip.setArcHeight(9);
+        clip.setArcWidth(9);
+        clip.setStroke(Color.TRANSPARENT);
+        imgViewBanner.setClip(clip);
+        imgViewBanner.setPreserveRatio(false);
+        imgViewBanner.setImage(eventImage);
+        lblEventName.setText(eventName);
+        lblEventDateTime.setText(startDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE) + " " + (startDateTime.format(DateTimeFormatter.ISO_LOCAL_TIME)));
+
     }
 
     /**
@@ -99,5 +123,97 @@ public class Event {
         return node;
     }
 
+
+    public int getId() {
+        return id;
+    }
+
+    public String getEventName() {
+        return eventName.get();
+    }
+
+    public StringProperty eventNameProperty() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName.set(eventName);
+    }
+
+    public LocalDateTime getStartDateTime() {
+        return startDateTime;
+    }
+
+    public void setStartDateTime(LocalDateTime startDateTime) {
+        this.startDateTime = startDateTime;
+    }
+
+    public LocalDateTime getEndDateTime() {
+        return endDateTime;
+    }
+
+    public void setEndDateTime(LocalDateTime endDateTime) {
+        this.endDateTime = endDateTime;
+    }
+
+    public Venue getLocation() {
+        return location.get();
+    }
+
+    public ObjectProperty locationProperty() {
+        return location;
+    }
+
+    public void setLocation(Venue location) {
+        this.location.set(location);
+    }
+
+    public int getTicketsSold() {
+        return ticketsSold;
+    }
+
+    public void setTicketsSold(int ticketsSold) {
+        this.ticketsSold = ticketsSold;
+    }
+
+    public int getTicketsRemaining() {
+        return ticketsRemaining;
+    }
+
+    public void setTicketsRemaining(int ticketsRemaining) {
+        this.ticketsRemaining = ticketsRemaining;
+    }
+
+    public double[] getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public void setTicketPrice(double[] ticketPrice) {
+        this.ticketPrice = ticketPrice;
+    }
+
+    public String[] getTicketGroupName() {
+        return ticketGroupName;
+    }
+
+    public void setTicketGroupName(String[] ticketGroupName) {
+        this.ticketGroupName = ticketGroupName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Image getEventImage(){
+        return eventImage;
+    }
+
+    public void setEventImage(Image eventImage){
+        this.eventImage = eventImage;
+    }
 
 }
