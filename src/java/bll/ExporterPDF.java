@@ -1,21 +1,20 @@
 package bll;
 
-import bll.interfaces.IExporter;
-import bll.interfaces.IPrintable;
+import com.itextpdf.html2pdf.ConverterProperties;
+import com.itextpdf.html2pdf.HtmlConverter;
 
-public class ExporterPDF implements IExporter
+import java.io.*;
+
+public class ExporterPDF
 {
-    @Override
-    public void toFile(IPrintable print)
+    public void export() throws IOException
     {
-        Object pdfDoc = null;
+        File htmlSource = new File("input.html");
+        File pdfDest = new File("output.pdf");
 
-        print.print(pdfDoc);
-    }
-
-    @Override
-    public void toPrint(IPrintable print)
-    {
-
+        // pdfHTML specific code
+        ConverterProperties converterProperties = new ConverterProperties();
+        HtmlConverter.convertToPdf(new FileInputStream(htmlSource),
+                new FileOutputStream(pdfDest), converterProperties);
     }
 }
