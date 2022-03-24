@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="264.0" prefWidth="271.0" style="-fx-border-color: #fc8f51; -fx-border-radius: 20;" styleClass="panel" stylesheets="@../styles/mainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.NewEventController">
+    <children>
+        <Text fill="#f8f8f8" layoutX="76.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="InternalPanelSubHeading" text="Edit Price Group" />
+        <VBox layoutX="92.0" layoutY="66.0">
+            <children>
+                <TextField fx:id="txtFieldEditPriceGroupName" styleClass="submit-textField">
+                    <VBox.margin>
+                        <Insets bottom="10.0" />
+                    </VBox.margin>
+                </TextField>
+                <TextField fx:id="txtFieldEditPriceGroupPrice" styleClass="submit-textField">
+                    <VBox.margin>
+                        <Insets bottom="10.0" />
+                    </VBox.margin>
+                </TextField>
+                <TextField fx:id="txtFieldEditPriceGroupCurrency" styleClass="submit-textField" text="DKK">
+                    <VBox.margin>
+                        <Insets bottom="10.0" />
+                    </VBox.margin>
+                </TextField>
+            </children>
+        </VBox>
+        <Text fill="#f8f8f8" layoutX="30.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="Name" />
+        <Text fill="#f8f8f8" layoutX="30.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="Price" />
+        <Text fill="#f8f8f8" layoutX="30.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="Currency" />
+        <Button layoutX="199.0" layoutY="216.0" mnemonicParsing="false" onAction="#onSaveEditPriceGroup" styleClass="roundButton" text="Save" />
+        <Button layoutX="123.0" layoutY="216.0" mnemonicParsing="false" onAction="#onCancelEditPriceGroup" styleClass="roundButton" text="Cancel" />
+    </children>
+</AnchorPane>

@@ -722,3 +722,53 @@ table-view:focused .table-row-cell:filled:focused:selected {
 .textButton:pressed {
     -fx-text-fill: #C57040;
 }
+
+.SmallEditButton {
+    -fx-background-image: url("../styles/img/edit.png");
+    -fx-background-size: 10px 10px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 50%;
+    -fx-content-display: CENTER;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #f8f8f8;
+}
+
+
+.SmallEditButton:hover {
+    -fx-background-color: transparent;
+    -fx-background-image: url("../styles/img/edit_hover.png");
+    -fx-text-fill: #56AE4E;
+}
+
+.SmallEditButton:pressed {
+    -fx-background-color: transparent;
+    -fx-background-image: url("../styles/img/edit_pressed.png");
+    -fx-text-fill: #70e365;
+}
+
+
+.roundButton {
+    -fx-background-color: transparent;
+    -fx-border-color: #f8f8f8;
+    -fx-border-width: 1;
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+    -fx-background-size: 20;
+    -fx-font-size: 14;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: normal;
+    -fx-text-fill: #f8f8f8;
+}
+
+.roundButton:hover {
+    -fx-text-fill: #fc8f51;
+    -fx-border-color: #fc8f51;
+}
+
+.roundButton:pressed {
+    -fx-text-fill: #C57040;
+    -fx-border-color: #C57040;
+}

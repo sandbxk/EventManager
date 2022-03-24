@@ -45,7 +45,7 @@ public class SignInController implements Initializable {
         {
             loginAsAdmin();
         }
-        else
+        else if (usernameField.getText().toLowerCase(Locale.ROOT).equals("c") || (usernameField.getText().toLowerCase(Locale.ROOT).equals("coordinator")))
         {
             loginAsCoordinator();
         }
@@ -70,7 +70,7 @@ public class SignInController implements Initializable {
 
     private void loginAsCoordinator()
     {
-        //SceneManager.DASHBOARD_COORDINATOR.setAsCurrent();
+        SceneManager.DASHBOARD_COORDINATOR.setAsCurrent();
     }
 
     private void loginAsAdmin()

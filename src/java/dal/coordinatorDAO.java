@@ -72,8 +72,10 @@ public class coordinatorDAO implements IUserCrudDAO<UserInfo> {
             else return false;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            return false;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
 

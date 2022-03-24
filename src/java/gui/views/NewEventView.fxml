@@ -164,9 +164,14 @@
                                                 <Insets bottom="5.0" />
                                              </padding>
                                           </Button>
-                                          <Button fx:id="btnDeleteVenue" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onDeleteVenue" prefHeight="24.0" prefWidth="27.0" styleClass="textButton" text="-">
+                                          <Button fx:id="btnDeleteVenue" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onDeleteVenue" prefHeight="30.0" prefWidth="25.0" styleClass="textButton" text="-">
                                              <padding>
-                                                <Insets bottom="10.0" />
+                                                <Insets bottom="12.0" />
+                                             </padding>
+                                          </Button>
+                                          <Button fx:id="btnEditVenue" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onEditVenue" prefHeight="22.0" prefWidth="26.0" styleClass="SmallEditButton" text="-">
+                                             <padding>
+                                                <Insets bottom="12.0" />
                                              </padding>
                                           </Button>
                                        </children>
@@ -248,9 +253,14 @@
                                                 <Insets bottom="5.0" />
                                              </padding>
                                           </Button>
-                                          <Button fx:id="btnDeletePriceGroup" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#OnDeletePriceGroup" prefHeight="24.0" prefWidth="27.0" styleClass="textButton" text="-">
+                                          <Button fx:id="btnDeletePriceGroup" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#OnDeletePriceGroup" prefHeight="30.0" prefWidth="25.0" styleClass="textButton" text="-">
                                              <padding>
-                                                <Insets bottom="10.0" />
+                                                <Insets bottom="12.0" />
+                                             </padding>
+                                          </Button>
+                                          <Button fx:id="btnEditPriceGroup" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#OnEditPriceGroup" prefHeight="22.0" prefWidth="26.0" styleClass="SmallEditButton" text="-">
+                                             <padding>
+                                                <Insets bottom="12.0" />
                                              </padding>
                                           </Button>
                                        </children>
