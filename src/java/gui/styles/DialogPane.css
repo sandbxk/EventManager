@@ -1,0 +1,212 @@
+.dialog-pane{
+}
+
+/**Costumization of The Bar where the buttons are located**/
+.dialog-pane > .button-bar > .container {
+    -fx-background-color: #303030;
+}
+
+.dialog-pane > .content.label {
+    -fx-padding: 0.5em 0.5em 0.5em 0.5em;
+    -fx-background-color: #303030;
+    -fx-text-fill:#f8f8f8;
+    -fx-font-family: Roboto;
+    -fx-font-size: 14px;
+    -fx-wrap-text: true;
+
+}
+
+.dialog-pane > .content {
+    -fx-background-color: #303030;
+}
+
+/**Costumization of DialogPane Header**/
+.dialog-pane:header .header-panel {
+    -fx-background-color: #303030;
+    -fx-border-color: #56AE4E;
+    -fx-border-width: 0px 0px 2px 0px
+
+}
+
+.dialog-pane:header .header-panel .label{;
+    -fx-background-radius:10px;
+    -fx-text-fill:#f8f8f8;
+    -fx-font-weight: bold;
+    -fx-font-size:16px;
+}
+
+
+/**Costumization of Buttons**/
+.dialog-pane .button{
+    -fx-background-color: #262626;
+    -fx-wrap-text: true;
+    -fx-cursor:hand;
+    -fx-font-family: Roboto;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #f8f8f8;
+    -fx-content-display: CENTER;
+    -fx-border-radius: 20;
+    -fx-border-width: 2;
+    -fx-border-color: #f8f8f8;
+    -fx-background-radius: 20;
+}
+
+.dialog-pane .button:hover{
+    -fx-background-color:#404040;
+    -fx-text-fill:#f8f8f8;
+    -fx-border-color: #56AE4E;
+    -fx-font-weight:bold;
+}
+
+.dialog-pane .button:pressed{
+    -fx-background-color: #505050;
+    -fx-text-fill: #70e365;
+    -fx-border-color: #70e365b;
+    -fx-border-radius: 20;
+}
+
+
+.dialog-pane .content.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: #56AE4E;
+    -fx-text-fill: #f8f8f8;
+}
+
+.dialog-pane .content.list-cell:even {
+    -fx-background-color: #303030;
+}
+
+.dialog-pane .content.list-cell:filled:hover {
+    -fx-background-color: #303030;
+    -fx-text-fill: #f8f8f8;
+}
+
+.dialog-pane .content.list-view{
+    -fx-background-color: #303030;
+    -fx-text-fill: #f8f8f8;
+}
+
+.dialog-pane .content.list-cell {
+    -fx-control-inner-background: transparent;
+
+}
+
+/* The main scrollbar **track** CSS class  */
+.workspace-grid .scroll-bar:horizontal .track,
+.workspace-grid .scroll-bar:vertical .track{
+    -fx-background-color: #404040;
+    -fx-border-color:transparent;
+    -fx-background-radius: 0em;
+    -fx-border-radius:2em;
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+.workspace-grid .scroll-bar:horizontal .increment-button ,
+.workspace-grid .scroll-bar:horizontal .decrement-button {
+    -fx-background-color: #404040;
+    -fx-background-radius: 0em;
+    -fx-padding:0 0 10 0;
+
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+
+.workspace-grid .scroll-bar:vertical .increment-button ,
+.workspace-grid .scroll-bar:vertical .decrement-button {
+
+    -fx-background-color: #404040;
+    -fx-background-radius: 0em;
+    -fx-padding:0 10 0 0;
+
+}
+
+.workspace-grid .scroll-bar .increment-arrow,
+.workspace-grid .scroll-bar .decrement-arrow
+{
+    -fx-shape: " ";
+    -fx-padding:0;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.workspace-grid .scroll-bar:horizontal .thumb,
+.workspace-grid .scroll-bar:vertical .thumb {
+    -fx-background-color: #404040;
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 2em;
+
+}
+
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: #56AE4E;
+    -fx-text-fill: #f8f8f8;
+}
+
+.list-cell:even {
+    -fx-background-color: transparent;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: transparent;
+    -fx-text-fill: #f8f8f8;
+}
+
+.list-view{
+    -fx-background-color: #transparent;
+    -fx-text-fill: #f8f8f8;
+}
+
+.list-cell {
+    -fx-control-inner-background: transparent;
+
+}
+
+/* The main scrollbar **track** CSS class  */
+.workspace-grid .scroll-bar:horizontal .track,
+.workspace-grid .scroll-bar:vertical .track{
+    -fx-background-color: #404040;
+    -fx-border-color:transparent;
+    -fx-background-radius: 0em;
+    -fx-border-radius:2em;
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+.workspace-grid .scroll-bar:horizontal .increment-button ,
+.workspace-grid .scroll-bar:horizontal .decrement-button {
+    -fx-background-color: #404040;
+    -fx-background-radius: 0em;
+    -fx-padding:0 0 10 0;
+
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+
+.workspace-grid .scroll-bar:vertical .increment-button ,
+.workspace-grid .scroll-bar:vertical .decrement-button {
+
+    -fx-background-color: #404040;
+    -fx-background-radius: 0em;
+    -fx-padding:0 10 0 0;
+
+}
+
+.workspace-grid .scroll-bar .increment-arrow,
+.workspace-grid .scroll-bar .decrement-arrow
+{
+    -fx-shape: " ";
+    -fx-padding:0;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.workspace-grid .scroll-bar:horizontal .thumb,
+.workspace-grid .scroll-bar:vertical .thumb {
+    -fx-background-color:#404040;
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 2em;
+
+}
+
+.label {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Roboto";
+    -fx-text-fill: #f8f8f8;
+}
+

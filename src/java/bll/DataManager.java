@@ -64,8 +64,9 @@ public final class DataManager {
      * EVENTS
      */
 
-    public void newEvent(){
+    public void newEvent(Event event){
         //TODO: DB
+        this.events.add(event);
     }
 
     public void deleteEvent(Event event){
@@ -76,7 +77,7 @@ public final class DataManager {
         //TODO: DB
     }
 
-    public List<Event> getAllEvents() {
+    public ObservableList<Event> getAllEvents() {
         //TODO: DB
         return this.events;
     }
@@ -168,7 +169,7 @@ public final class DataManager {
     }
 
     public void updateVenue(Venue venue) {
-
+        //TODO: DB
     }
 
     public void removeVenue(Venue selectedItem) {

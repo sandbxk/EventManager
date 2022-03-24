@@ -1,5 +1,6 @@
 package gui.controllers;
 
+import be.Event;
 import be.PriceGroup;
 import be.Venue;
 import bll.DataManager;
@@ -28,6 +29,9 @@ import javafx.util.converter.IntegerStringConverter;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
@@ -180,6 +184,48 @@ public class NewEventController implements Initializable {
     }
 
     public void onSave(ActionEvent event) {
+        if (tblViewVenues.getSelectionModel().getSelectedItem() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "No Venue selected");
+            alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/DialogPane.css")).toExternalForm());
+            alert.show();
+            return;
+        }
+        if (tblViewNewEventTicketGroup.getSelectionModel().getSelectedItem() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "No Ticket Group selected");
+            alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/DialogPane.css")).toExternalForm());
+            alert.show();
+            return;
+        }
+
+        int id = -1;
+        String name = txtFieldEventName.getText();
+
+        LocalDate startDate = datePickerStartDate.getValue();
+        LocalTime startTime = LocalTime.of(0,0);
+        if (txtFieldStartTime.getText() != null && !txtFieldStartTime.getText().isEmpty() && !txtFieldStartTime.getText().isBlank()){
+            startTime = LocalTime.parse(txtFieldStartTime.getText());
+        }
+        LocalDateTime startDateTime = startDate.atTime(startTime);
+
+
+        LocalDate endDate = datePickerEndDate.getValue();
+        LocalTime endTime = LocalTime.of(0,0);
+        if (txtFieldEndTime.getText() != null && !txtFieldEndTime.getText().isEmpty() && !txtFieldEndTime.getText().isBlank()){
+            endTime = LocalTime.parse(txtFieldStartTime.getText());
+        }
+        LocalDateTime endDateTime = endDate.atTime(endTime);
+
+        Venue venue = tblViewVenues.getSelectionModel().getSelectedItem();
+        int ticketSold = Integer.parseInt(txtFieldTicketsSold.getText());
+        int ticketsRemaining = Integer.parseInt(txtFieldTicketRemaining.getText());
+        ObservableList<PriceGroup> priceGroups = DataManager.getInstance().getPriceGroups(null);
+        String description = txtAreaNewEventInfo.getText();
+        Color color = colorPicker.getValue();
+
+        Event newEvent = new Event(id, name, startDateTime, endDateTime, venue, ticketSold, ticketsRemaining, priceGroups, description, color);
+        DataManager.getInstance().newEvent(newEvent); //TODO: TEMP
+
+
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
