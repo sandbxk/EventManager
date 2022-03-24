@@ -1,7 +1,11 @@
 package bll;
 
 import be.Event;
+import be.PriceGroup;
+import be.Venue;
 import javafx.beans.property.ObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public final class DataManager {
 
@@ -23,6 +27,14 @@ public final class DataManager {
 
     public void setSelectedEvent(Event selectedEvent) {
         this.selectedEvent.set(selectedEvent);
+    }
+
+    public ObservableList<Venue> getAllVenues(){
+        return FXCollections.observableArrayList();
+    }
+
+    public ObservableList<PriceGroup> getPriceGroups(Event event){
+        return FXCollections.observableArrayList();
     }
 
     public static DataManager getInstance() {

@@ -101,7 +101,7 @@ public class CoordinatorController implements Initializable {
             stage.setTitle("New Event");
             stage.setMinWidth(511);
             stage.setMinHeight(737);
-            stage.setScene(new Scene(root, 511, 737));
+            stage.setScene(new Scene(root, 549, 750));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

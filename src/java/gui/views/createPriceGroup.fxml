@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="264.0" prefWidth="271.0" style="-fx-border-color: #fc8f51; -fx-border-radius: 20;" styleClass="panel" stylesheets="@../styles/mainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.NewEventController">
+<AnchorPane prefHeight="264.0" prefWidth="271.0" style="-fx-border-color: #fc8f51;" styleClass="background" stylesheets="@../styles/mainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.NewEventController">
     <children>
         <Text fill="#f8f8f8" layoutX="76.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="InternalPanelSubHeading" text="New Price Group" />
         <VBox layoutX="92.0" layoutY="66.0">
