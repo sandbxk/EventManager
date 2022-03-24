@@ -60,7 +60,11 @@ public final class DataManager {
     }
 
     public ObservableList<PriceGroup> getPriceGroups(Event event){
-        return FXCollections.observableArrayList();
+
+        if (event == null) {
+            return this.priceGroups;
+        }
+        else return event.getPriceGroups();
     }
 
     public PriceGroup getSelectedPriceGroup() {
@@ -80,6 +84,8 @@ public final class DataManager {
     }
 
     public void newVenue(Venue venue) {
+
+        //TODO: TEMP
         this.allVenues.add(venue);
     }
 
@@ -92,8 +98,12 @@ public final class DataManager {
      * @param event
      * @param priceGroup
      */
-    public void newPriceGroup(Event event, PriceGroup priceGroup){
-        this.priceGroups.add(priceGroup);
+    public void newPriceGroup(Event event, PriceGroup priceGroup) {
+
+
+        if (event == null) {
+            this.priceGroups.add(priceGroup);
+        }
     }
 
     public void setPriceGroups(ObservableList<PriceGroup> priceGroups){
@@ -102,5 +112,8 @@ public final class DataManager {
 
     public void updatePriceGroup(PriceGroup selectedPriceGroup) {
 
+    }
+
+    public void removeVenue(Venue selectedItem) {
     }
 }

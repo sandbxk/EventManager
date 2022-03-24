@@ -121,6 +121,9 @@ public class NewEventController implements Initializable {
     public void onDeleteVenue(ActionEvent event) {
         if (tblViewVenues.getSelectionModel().getSelectedItem() != null) {
             Venue selectedItem = tblViewVenues.getSelectionModel().getSelectedItem();
+            DataManager.getInstance().removeVenue(selectedItem);
+
+            //TODO: TEMP
             tblViewVenues.getItems().remove(selectedItem);
         }
     }
@@ -131,7 +134,6 @@ public class NewEventController implements Initializable {
             openStage("editVenue.fxml", "Edit Venue", new EventHandler<WindowEvent>() {
                 @Override
                 public void handle(WindowEvent event) {
-                    DataManager.getInstance().updateVenue(DataManager.getInstance().getSelectVenue());
                 }
             });
         }

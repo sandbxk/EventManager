@@ -122,7 +122,7 @@ public class VenuePriceGroupController implements Initializable {
         editedVenue.setZipCode(txtFieldEditVenueZipcode.getText());
         editedVenue.setCity(txtFieldEditVenueCity.getText());
 
-        //DataManger.getInstance.updateVenue(editedVenue)
+        DataManager.getInstance().updateVenue(editedVenue);
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
@@ -167,7 +167,7 @@ public class VenuePriceGroupController implements Initializable {
         editedPriceGroup.setPrice(Integer.parseInt(txtFieldEditPriceGroupPrice.getText()));
         editedPriceGroup.setCurrency(txtFieldEditPriceGroupCurrency.getText());
 
-        //DataManger.getInstance.updatePriceGroup(editedPriceGroup)
+        DataManager.getInstance().updatePriceGroup(editedPriceGroup);
 
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }

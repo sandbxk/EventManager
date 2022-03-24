@@ -19,6 +19,8 @@ public class AdminController {
             root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gui/views/NewCoordinatorView.fxml")));
             stage.setTitle("New Event");
             stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

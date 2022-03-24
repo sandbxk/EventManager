@@ -73,4 +73,7 @@ public class UserInfo
     }
 
 
+    public EUserType type() {
+        return type;
+    }
 }
