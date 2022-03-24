@@ -71,7 +71,7 @@
                         </Label>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="panel" GridPane.rowIndex="1">
                      <bottom>
-                        <Button fx:id="btnNewCoordinator" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="42.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="42.0" styleClass="submit-btn" text="+" BorderPane.alignment="CENTER_RIGHT">
+                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="42.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="40.0" prefWidth="42.0" styleClass="submit-btn" text="+" BorderPane.alignment="CENTER_RIGHT">
                            <BorderPane.margin>
                               <Insets bottom="30.0" right="30.0" />
                            </BorderPane.margin>

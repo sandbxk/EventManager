@@ -19,18 +19,16 @@ public class coordinatorDAO implements IUserCrudDAO<UserInfo> {
     }
 
     @Override
-    public boolean create(UserInfo input,String username,String password) {
+    public boolean create(UserInfo input, String username, String password) {
 
-        String sqlUser = "INSERT INTO userTable (userName, loginName, loginPass, zipCode, userAuth) VALUES (?, ?, ?, ?, ?)";
-        try (Connection connection = DBconnect.getConnection())
-        {
+        String sqlUser = "INSERT INTO userTable (userName, loginName, loginPass, userAuth) VALUES (?, ?, ?, ?)";
+        try (Connection connection = DBconnect.getConnection()) {
             PreparedStatement psUser = connection.prepareStatement(sqlUser);
 
-            psUser.setString(1, input.name());
+            psUser.setString(1, input.getName());
             psUser.setString(2, username);
             psUser.setString(3, password);
-            psUser.setInt(4, input.zipCode());
-            psUser.setInt(5, input.type().ordinal());
+            psUser.setInt(4, input.getType().ordinal());
 
             return psUser.execute();
         } catch (SQLException | IOException throwables) {
@@ -43,44 +41,51 @@ public class coordinatorDAO implements IUserCrudDAO<UserInfo> {
     public UserInfo read(int id) throws SQLException, IOException {
         String sqlUser = "SELECT userName FROM UserTable WHERE userID = ?";
 
-        try (Connection connection = DBconnect.getConnection())
-        {
+        try (Connection connection = DBconnect.getConnection()) {
             PreparedStatement psSQL = connection.prepareStatement(sqlUser);
-            psSQL.setInt(1,id);
+            psSQL.setInt(1, id);
             ResultSet rsUser = psSQL.executeQuery();
 
             String name = rsUser.getString("userName");
 
-            return new UserInfo(id,name, EUserType.EVENT_COORDINATOR);
+            return new UserInfo(id, name, EUserType.EVENT_COORDINATOR);
         }
     }
 
     @Override
     public boolean update(UserInfo input) {
-        try (Connection connection = DBconnect.getConnection())
-        {
+        try (Connection connection = DBconnect.getConnection()) {
             String SQLUpdate = "UPDATE UserTable SET userName=?, zipCode=?, userAuth=?";
             PreparedStatement psUpdate = connection.prepareStatement(SQLUpdate);
-            psUpdate.setString(1,input.name());
-            psUpdate.setInt(2,input.zipCode());
-            psUpdate.setInt(3,input.type().ordinal());
+            psUpdate.setString(1, input.getName());
+            psUpdate.setInt(2, input.getZipCode());
+            psUpdate.setInt(3, input.getType().ordinal());
 
-            if (psUpdate.executeUpdate() != 1)
-            {
+            if (psUpdate.executeUpdate() != 1) {
                 return true;
             }
-            else return false;
-        } catch (SQLException throwables) {
+            return false;
+
+        } catch (SQLException | IOException throwables) {
             throwables.printStackTrace();
             return false;
+
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+
         }
     }
 
     @Override
     public boolean delete(UserInfo input) {
-        return false;
+        try (Connection connection = DBconnect.getConnection()) {
+            String SQLDelete = "DELETE FROM UserTable WHERE userID=?";
+            PreparedStatement psDelete = connection.prepareStatement(SQLDelete);
+            return psDelete.execute();
+        } catch (SQLException | IOException throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
     }
 }
