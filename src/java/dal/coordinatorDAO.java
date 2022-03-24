@@ -28,7 +28,7 @@ public class coordinatorDAO implements IUserCrudDAO<UserInfo> {
             psUser.setString(1, input.getName());
             psUser.setString(2, username);
             psUser.setString(3, password);
-            psUser.setInt(4, input.getType().ordinal());
+            psUser.setInt(4, 2);
 
             return psUser.execute();
         } catch (SQLException | IOException throwables) {

@@ -53,7 +53,7 @@ public class SignInController implements Initializable {
 
         if (false && authenticator.authenticate(usernameField.getText(), passwordField.getText()))
         {
-            switch (authenticator.getUserInfo().type())
+            switch (authenticator.getUserInfo().getType())
             {
                 case INVALID -> invalidLoginAttempt();
                 case END_USER -> loginAsEndUser();

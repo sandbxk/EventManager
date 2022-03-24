@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
@@ -18,6 +19,7 @@ public class AdminController {
         try {
             root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gui/views/NewCoordinatorView.fxml")));
             stage.setTitle("New Event");
+            stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
