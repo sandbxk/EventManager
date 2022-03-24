@@ -33,6 +33,7 @@ public class Event {
     private Image eventImage;
     private Color color;
 
+    //TODO: List of categories
     //TODO: List of attendees
 
 
@@ -100,6 +101,7 @@ public class Event {
         } catch (IOException ignored) {}
         node.setOnAction(event -> DataManager.getInstance().setSelectedEvent(this));
 
+        imgViewContainer.setStyle("-fx-background-color: rgb(" + color.getRed() +", " + color.getGreen() + ", " + color.getBlue() + ");");
         Rectangle clip = new Rectangle(imgViewBanner.getFitWidth(), imgViewBanner.getFitHeight());
         clip.setArcHeight(9);
         clip.setArcWidth(9);

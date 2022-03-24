@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
@@ -36,6 +37,7 @@ public class CoordinatorController implements Initializable {
 
     @FXML public FlowPane flowPaneEvents;
 
+    @FXML public AnchorPane imgDetailBackground;
     @FXML public ImageView imgViewEvent;
     @FXML public Button btnEditEvent;
     @FXML public Label lblEventName;
@@ -94,6 +96,7 @@ public class CoordinatorController implements Initializable {
     private void initEventListener() {
         selectedEvent.addListener((observable, oldValue, newValue) -> {
             imgViewEvent.setImage(newValue.getEventImage());
+            imgDetailBackground.setStyle("-fx-background-color: rgb(" + newValue.getColor().getRed() +", " + newValue.getColor().getGreen() + ", " + newValue.getColor().getBlue() + ");");
             lblEventName.setText(newValue.getEventName());
             lblEventDate.setText(newValue.getStartDateTime().toLocalDate().toString());
             lblEventTime.setText(newValue.getStartDateTime().toLocalTime().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)));
