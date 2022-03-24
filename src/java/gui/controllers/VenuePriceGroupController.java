@@ -65,7 +65,7 @@ public class VenuePriceGroupController implements Initializable {
         if (txtFieldEditVenueName != null) {
             txtFieldEditVenueZipcode.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), 0, integerFilter()));
 
-            Venue selectedVenue = DataManager.getInstance().getSelectVenue();
+            Venue selectedVenue = DataManager.getInstance().getSelectedVenue();
 
             txtFieldEditVenueName.setText(selectedVenue.getVenueName());
             txtFieldEditVenueAddress.setText(selectedVenue.getAddress());
@@ -115,7 +115,7 @@ public class VenuePriceGroupController implements Initializable {
 
 
     public void onSaveEditVenue(ActionEvent event) {
-        Venue editedVenue = DataManager.getInstance().getSelectVenue();
+        Venue editedVenue = DataManager.getInstance().getSelectedVenue();
 
         editedVenue.setVenueName(txtFieldEditVenueName.getText());
         editedVenue.setAddress(txtFieldEditVenueAddress.getText());

@@ -9,8 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.PixelWriter;
-import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -18,7 +16,6 @@ import javafx.scene.shape.Rectangle;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 public class Event {
 
@@ -32,6 +29,7 @@ public class Event {
     private ListProperty<PriceGroup> priceGroupsList;
     private String description;
     private Image eventImage;
+    private Color color;
 
     private ToggleButton node;
 
@@ -55,10 +53,6 @@ public class Event {
         clip.setArcWidth(9);
         clip.setStroke(Color.TRANSPARENT);
         imgViewBanner.setClip(clip);
-
-
-
-
     }
 
     /**
@@ -72,10 +66,12 @@ public class Event {
      * @param ticketsRemaining
      * @param priceGroupList
      * @param description
+     * @param color
      */
-    public Event(int id, String eventName, LocalDateTime startDateTime, LocalDateTime endDateTime, Venue venue, int ticketsSold, int ticketsRemaining, ObservableList<PriceGroup> priceGroupList, String description, Image image) {
+    public Event(int id, String eventName, LocalDateTime startDateTime, LocalDateTime endDateTime, Venue venue, int ticketsSold, int ticketsRemaining, ObservableList<PriceGroup> priceGroupList, String description, Image image, Color color) {
 
         this.id = id;
+        this.color = color;
         this.eventName = new SimpleStringProperty();
         this.eventName.set(eventName);
 
@@ -212,5 +208,13 @@ public class Event {
 
     public void setEventImage(Image eventImage){
         this.eventImage = eventImage;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }

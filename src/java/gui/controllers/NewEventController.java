@@ -68,6 +68,10 @@ public class NewEventController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         priceGroups = FXCollections.observableArrayList();
         DataManager.getInstance().setPriceGroups(priceGroups);
+
+        txtFieldTicketRemaining.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), 0, integerFilter()));
+        txtFieldTicketsSold.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), 0, integerFilter()));
+
         initTableViews();
         initImageView();
     }
@@ -84,6 +88,11 @@ public class NewEventController implements Initializable {
     imgViewEvent.setImage(generateBlankImage(colorPicker.getValue()));
     }
 
+    /**
+     * Generates a static image of the given color, which can then be scaled to the imageview.
+     * @param color
+     * @return
+     */
     private Image generateBlankImage(Color color) {
         WritableImage img = new WritableImage(1, 1);
         PixelWriter pw = img.getPixelWriter();
@@ -153,7 +162,8 @@ public class NewEventController implements Initializable {
     public void OnDeletePriceGroup(ActionEvent event) {
         if (tblViewNewEventTicketGroup.getSelectionModel().getSelectedItem() != null) {
             PriceGroup selectedItem = tblViewNewEventTicketGroup.getSelectionModel().getSelectedItem();
-            tblViewNewEventTicketGroup.getItems().remove(selectedItem);
+            DataManager.getInstance().removePriceGroup(null, selectedItem);
+            tblViewNewEventTicketGroup.setItems(DataManager.getInstance().getPriceGroups(null));
         }
     }
 
@@ -192,5 +202,19 @@ public class NewEventController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private UnaryOperator<TextFormatter.Change> integerFilter(){
+        UnaryOperator<TextFormatter.Change> integerFilter = change -> {
+            String newText = change.getControlNewText();
+            //if (newText.matches("-?([1-9][0-9]*)?")) {
+            if (newText.matches("-?([1-9][0-9]*)?")) {
+
+                return change;
+            }
+            return null;
+        };
+
+        return integerFilter;
     }
 }
