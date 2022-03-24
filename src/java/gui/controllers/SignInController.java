@@ -3,6 +3,7 @@ package gui.controllers;
 import be.EUserType;
 import be.Event;
 import bll.DatabaseAuthenticator;
+import bll.SessionManager;
 import bll.interfaces.IAuthenticator;
 import gui.model.SceneManager;
 import javafx.event.ActionEvent;
@@ -41,6 +42,8 @@ public class SignInController implements Initializable {
 
     public void onLogin(ActionEvent actionEvent)
     {
+        SessionManager.login(usernameField.getText(), passwordField.getText());
+
         if (usernameField.getText().toLowerCase(Locale.ROOT).equals("admin"))
         {
             loginAsAdmin();
@@ -50,17 +53,14 @@ public class SignInController implements Initializable {
             loginAsCoordinator();
         }
 
-
-        if (false && authenticator.authenticate(usernameField.getText(), passwordField.getText()))
+        switch (SessionManager.getCurrent().getLoggedInUser().type())
         {
-            switch (authenticator.getUserInfo().getType())
-            {
-                case INVALID -> invalidLoginAttempt();
-                case END_USER -> loginAsEndUser();
-                case EVENT_COORDINATOR -> loginAsCoordinator();
-                case ADMINISTRATOR -> loginAsAdmin();
-            }
+            case INVALID -> invalidLoginAttempt();
+            case END_USER -> loginAsEndUser();
+            case EVENT_COORDINATOR -> loginAsCoordinator();
+            case ADMINISTRATOR -> loginAsAdmin();
         }
+
     }
 
     private void loginAsEndUser()
@@ -80,6 +80,7 @@ public class SignInController implements Initializable {
 
     private void invalidLoginAttempt()
     {
+        System.out.println("failed login");
         // failed login
     }
 }
