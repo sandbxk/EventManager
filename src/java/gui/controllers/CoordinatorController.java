@@ -1,9 +1,11 @@
 package gui.controllers;
 
 import be.Event;
+import be.PriceGroup;
 import bll.DataManager;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
@@ -27,6 +30,7 @@ public class CoordinatorController implements Initializable {
 
 
     @FXML public Button btnCreateActions;
+    @FXML public Button btnDeleteEvent;
     @FXML public Label lblUser;
     @FXML public ImageView imgViewUser;
 
@@ -40,9 +44,9 @@ public class CoordinatorController implements Initializable {
     @FXML public Label lblEventVenue;
     @FXML public Label lblRemainingTickets;
     @FXML public Label lblSoldTickets;
-    @FXML public TableView tblViewTicketGroup;
-    @FXML public TableColumn tblClmnGroupName;
-    @FXML public TableColumn tblClmnGroupPrice;
+    @FXML public TableView<PriceGroup> tblViewTicketGroup;
+    @FXML public TableColumn<PriceGroup, String> tblClmnGroupName;
+    @FXML public TableColumn<PriceGroup, Number> tblClmnGroupPrice;
     @FXML public TextArea txtAreaInfo;
 
     @FXML public TextField txtFieldSearch;
@@ -64,15 +68,27 @@ public class CoordinatorController implements Initializable {
 
     public CoordinatorController() {
         selectedEvent = new SimpleObjectProperty();
-        // fixme: //selectedEvent.bind(DataManager.getInstance().getSelectedEventProperty());
+        selectedEvent.bind(DataManager.getInstance().getSelectedEventProperty());
     }
+
+    //TODO: Fix event CSS, Fix tablecell text alignment, fix tblviewTicketGroup width, header and height in coordinatorView
+    //TODO: Fix detailImageView
+    //TODO: tblViewAttendees with
+    //TODO: Fix alert CSS error
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
         eventToggle = new ToggleGroup();
+        initTableViewPriceGroups();
         initEventListener();
 
+    }
+
+    private void initTableViewPriceGroups(){
+        tblClmnGroupName.setCellValueFactory(param -> param.getValue().nameProperty());
+        tblClmnGroupPrice.setCellValueFactory(param -> param.getValue().priceProperty());
     }
 
     private void initEventListener() {
@@ -80,7 +96,7 @@ public class CoordinatorController implements Initializable {
             imgViewEvent.setImage(newValue.getEventImage());
             lblEventName.setText(newValue.getEventName());
             lblEventDate.setText(newValue.getStartDateTime().toLocalDate().toString());
-            lblEventTime.setText(newValue.getStartDateTime().toLocalTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)));
+            lblEventTime.setText(newValue.getStartDateTime().toLocalTime().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)));
             lblEventVenue.setText(newValue.getLocation().getVenueName());
 
             txtAreaInfo.setText(newValue.getDescription());
@@ -88,7 +104,9 @@ public class CoordinatorController implements Initializable {
             lblSoldTickets.setText(newValue.getTicketsSold() + "");
             lblRemainingTickets.setText(newValue.getTicketsRemaining() + "");
 
-            //tblview
+            tblViewTicketGroup.setItems(newValue.getPriceGroups());
+            
+            //TODO: tblview Attendees
         });
     }
 
@@ -106,10 +124,22 @@ public class CoordinatorController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        Event event1 = new Event();
-        flowPaneEvents.getChildren().add(event1.getEventTile());
-        eventToggle.getToggles().add(event1.getEventTile());
+        stage.setOnHiding(event1 -> {
+            flowPaneEvents.getChildren().clear();
+            ObservableList<Event> allEvents = DataManager.getInstance().getAllEvents();
+            for (Event e : allEvents){
+                flowPaneEvents.getChildren().add(e.getEventTile());
+                eventToggle.getToggles().add(e.getEventTile());
+            }
+        });
     }
 
+    public void onUser(MouseEvent mouseEvent) {
+    }
+
+    public void onDeleteEvent(ActionEvent event) {
+    }
+
+    public void onEditEvent(ActionEvent event) {
+    }
 }

@@ -9,6 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -30,6 +32,9 @@ public class Event {
     private String description;
     private Image eventImage;
     private Color color;
+
+    //TODO: List of attendees
+
 
     private ToggleButton node;
 
@@ -68,7 +73,7 @@ public class Event {
      * @param description
      * @param color
      */
-    public Event(int id, String eventName, LocalDateTime startDateTime, LocalDateTime endDateTime, Venue venue, int ticketsSold, int ticketsRemaining, ObservableList<PriceGroup> priceGroupList, String description, Image image, Color color) {
+    public Event(int id, String eventName, LocalDateTime startDateTime, LocalDateTime endDateTime, Venue venue, int ticketsSold, int ticketsRemaining, ObservableList<PriceGroup> priceGroupList, String description, Color color) {
 
         this.id = id;
         this.color = color;
@@ -85,7 +90,7 @@ public class Event {
         this.priceGroupsList = new SimpleListProperty<>();
         this.priceGroupsList.set(priceGroupList);
         this.description = description;
-        this.eventImage = image;
+        this.eventImage = generateBlankImage(color);
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/views/Event.fxml"));
@@ -103,7 +108,7 @@ public class Event {
         imgViewBanner.setPreserveRatio(false);
         imgViewBanner.setImage(eventImage);
         lblEventName.setText(eventName);
-        lblEventDateTime.setText(startDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE) + " " + (startDateTime.format(DateTimeFormatter.ISO_LOCAL_TIME)));
+        lblEventDateTime.setText(startDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE));
     }
 
 
@@ -113,6 +118,17 @@ public class Event {
         return node;
     }
 
+    /**
+     * Generates a static image of the given color, which can then be scaled to the imageview.
+     * @param color
+     * @return
+     */
+    private Image generateBlankImage(Color color) {
+        WritableImage img = new WritableImage(1, 1);
+        PixelWriter pw = img.getPixelWriter();
+        pw.setColor(0, 0, color);
+        return img ;
+    }
 
     public int getId() {
         return id;
