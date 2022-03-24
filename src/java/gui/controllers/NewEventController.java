@@ -5,7 +5,9 @@ import be.Venue;
 import bll.DataManager;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,6 +23,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 import javafx.util.converter.IntegerStringConverter;
 
 import java.io.IOException;
@@ -58,56 +61,15 @@ public class NewEventController implements Initializable {
     @FXML public Button btnEditVenue;
     @FXML public Button btnEditPriceGroup;
 
-    @FXML public TextField txtFieldNewVenueCity;
-    @FXML public TextField txtFieldNewVenueName;
-    @FXML public TextField txtFieldNewVenueAddress;
-    @FXML public TextField txtFieldNewVenueZipcode;
+    private ObservableList<PriceGroup> priceGroups;
 
-    @FXML public TextField txtFieldEditVenueName;
-    @FXML public TextField txtFieldEditVenueAddress;
-    @FXML public TextField txtFieldEditVenueZipcode;
-    @FXML public TextField txtFieldEditVenueCity;
-
-    @FXML public TextField txtFieldNewPriceGroupName;
-    @FXML public TextField txtFieldNewPriceGroupPrice;
-    @FXML public TextField txtFieldNewPriceGroupCurrency;
-
-    @FXML public TextField txtFieldEditPriceGroupName;
-    @FXML public TextField txtFieldEditPriceGroupPrice;
-    @FXML public TextField txtFieldEditPriceGroupCurrency;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //Init for Edit PriceGroup
-        if (txtFieldEditVenueName == null && txtFieldNewVenueName == null
-                && txtFieldEditPriceGroupName != null && txtFieldNewPriceGroupName == null) {
-            txtFieldEditPriceGroupPrice.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), 0, integerFilter()));
-        }
-
-        //Init for New PriceGroup
-        if (txtFieldEditVenueName == null && txtFieldNewVenueName == null
-                && txtFieldEditPriceGroupName == null && txtFieldNewPriceGroupName != null) {
-                    txtFieldNewPriceGroupPrice.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), 0, integerFilter()));
-        }
-
-        //Init for Edit Venue
-        if (txtFieldEditVenueName != null && txtFieldNewVenueName == null
-                && txtFieldEditPriceGroupName == null && txtFieldNewPriceGroupName == null) {
-            txtFieldEditVenueZipcode.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), 0, integerFilter()));
-        }
-
-        //Init for New Venue
-        if (txtFieldEditVenueName == null && txtFieldNewVenueName == null
-                && txtFieldEditPriceGroupName != null && txtFieldNewPriceGroupName == null) {
-        txtFieldNewVenueZipcode.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), 0, integerFilter()));
-        }
-
-        //Init for New Event
-        if (txtFieldEditVenueName == null && txtFieldNewVenueName == null
-                && txtFieldEditPriceGroupName == null && txtFieldNewPriceGroupName == null) {
-            initTableViews();
-            initImageView();
-        }
+        priceGroups = FXCollections.observableArrayList();
+        DataManager.getInstance().setPriceGroups(priceGroups);
+        initTableViews();
+        initImageView();
     }
 
     private void initImageView(){
@@ -140,16 +102,19 @@ public class NewEventController implements Initializable {
         tblClmnGroupCurrency.setCellValueFactory(param -> param.getValue().currencyProperty());
 
 
-        tblViewVenues = new TableView<>();
         tblViewVenues.setItems(DataManager.getInstance().getAllVenues());
+        tblViewNewEventTicketGroup.setItems(priceGroups);
 
-        tblViewNewEventTicketGroup.setItems(FXCollections.observableArrayList());
-        tblViewNewEventTicketGroup = new TableView<>();
     }
 
 
     public void onNewVenue(ActionEvent event) {
-        openStage("createVenue.fxml", "New Venue");
+        openStage("createVenue.fxml", "New Venue", new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                tblViewVenues.setItems(DataManager.getInstance().getAllVenues());
+            }
+        });
 
     }
 
@@ -162,17 +127,24 @@ public class NewEventController implements Initializable {
 
     public void onEditVenue(ActionEvent event) {
         if (!tblViewVenues.getItems().isEmpty() && tblViewVenues.getSelectionModel().getSelectedItem() != null) {
-            openStage("editVenue.fxml", "Edit Venue");
-            txtFieldEditVenueName.setText(tblViewVenues.getSelectionModel().getSelectedItem().getVenueName());
-            txtFieldEditVenueAddress.setText(tblViewVenues.getSelectionModel().getSelectedItem().getAddress());
-            txtFieldEditVenueZipcode.setText(tblViewVenues.getSelectionModel().getSelectedItem().getZipCode());
-            txtFieldEditVenueCity.setText(tblViewVenues.getSelectionModel().getSelectedItem().getCity());
+            DataManager.getInstance().setSelectedVenue(tblViewVenues.getSelectionModel().getSelectedItem());
+            openStage("editVenue.fxml", "Edit Venue", new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent event) {
+                    DataManager.getInstance().updateVenue(DataManager.getInstance().getSelectVenue());
+                }
+            });
         }
     }
 
 
     public void onNewPriceGroup(ActionEvent event) {
-        openStage("createPriceGroup.fxml", "New Price Group");
+        openStage("createPriceGroup.fxml", "New Price Group", new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                priceGroups = DataManager.getInstance().getPriceGroups(null);
+            }
+        });
 
     }
 
@@ -185,117 +157,21 @@ public class NewEventController implements Initializable {
 
     public void OnEditPriceGroup(ActionEvent event) {
         if (!tblViewNewEventTicketGroup.getItems().isEmpty() && tblViewNewEventTicketGroup.getSelectionModel().getSelectedItem() != null) {
-            openStage("editPriceGroup.fxml", "Edit Price Group");
-            txtFieldEditPriceGroupName.setText(tblViewNewEventTicketGroup.getSelectionModel().getSelectedItem().getName());
-            txtFieldEditPriceGroupPrice.setText(String.valueOf(tblViewNewEventTicketGroup.getSelectionModel().getSelectedItem().getPrice()));
-            txtFieldEditPriceGroupCurrency.setText(tblViewNewEventTicketGroup.getSelectionModel().getSelectedItem().getCurrency());
+            DataManager.getInstance().setSelectedPriceGroup(tblViewNewEventTicketGroup.getSelectionModel().getSelectedItem());
+            openStage("editPriceGroup.fxml", "Edit Price Group", new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent event) {
+                    DataManager.getInstance().updatePriceGroup(DataManager.getInstance().getSelectedPriceGroup());
+                }
+            });
         }
     }
 
     public void onSave(ActionEvent event) {
-
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
-
-    public void onSaveNewVenue(ActionEvent event) {
-
-        Venue venue = new Venue("Unnamed", "---", "---", "---");
-
-        if (txtFieldNewVenueName.getText() != null && !txtFieldNewVenueName.getText().isEmpty() && !txtFieldNewVenueName.getText().isBlank())
-        {
-            String name = txtFieldNewVenueName.getText();
-            venue.setVenueName(name);
-        }
-        if (txtFieldNewVenueAddress.getText() != null && !txtFieldNewVenueAddress.getText().isEmpty() && !txtFieldNewVenueAddress.getText().isBlank())
-        {
-            String address = txtFieldNewVenueAddress.getText();
-            venue.setAddress(address);
-        }
-        if (txtFieldNewVenueZipcode.getText() != null && !txtFieldNewVenueZipcode.getText().isEmpty() && !txtFieldNewVenueZipcode.getText().isBlank()) {
-            String zipcode = txtFieldNewVenueZipcode.getText();
-            venue.setZipCode(zipcode);
-        }
-        if (txtFieldNewVenueCity.getText() != null && !txtFieldNewVenueCity.getText().isEmpty() && !txtFieldNewVenueCity.getText().isBlank()) {
-            String city = txtFieldNewVenueCity.getText();
-            venue.setCity(city);
-        }
-
-        tblViewVenues.getItems().add(venue);
-
-        ((Node) (event.getSource())).getScene().getWindow().hide();
-    }
-
-    public void onCancelNewVenue(ActionEvent event) {
-
-        ((Node) (event.getSource())).getScene().getWindow().hide();
-    }
-
-
-
-    public void onSaveEditVenue(ActionEvent event) {
-        Venue editedVenue = tblViewVenues.getSelectionModel().getSelectedItem();
-
-        editedVenue.setVenueName(txtFieldEditVenueName.getText());
-        editedVenue.setAddress(txtFieldEditVenueAddress.getText());
-        editedVenue.setZipCode(txtFieldEditVenueZipcode.getText());
-        editedVenue.setCity(txtFieldEditVenueCity.getText());
-
-        //DataManger.getInstance.updateVenue(editedVenue)
-        ((Node) (event.getSource())).getScene().getWindow().hide();
-    }
-
-    public void onCancelEditVenue(ActionEvent event) {
-        ((Node) (event.getSource())).getScene().getWindow().hide();
-    }
-
-
-    public void onSaveNewPriceGroup(ActionEvent event) {
-
-        PriceGroup newPriceGroup = new PriceGroup("Blank", 0, "DKK");
-
-        if (txtFieldNewPriceGroupName.getText() != null && !txtFieldNewPriceGroupName.getText().isEmpty() && !txtFieldNewPriceGroupName.getText().isBlank())
-        {
-            String name = txtFieldNewPriceGroupName.getText();
-            newPriceGroup.setName(name);
-        }
-        if (txtFieldNewPriceGroupPrice.getText() != null && !txtFieldNewPriceGroupPrice.getText().isEmpty() && !txtFieldNewPriceGroupPrice.getText().isBlank())
-        {
-            int price = Integer.parseInt(txtFieldNewPriceGroupPrice.getText());
-            newPriceGroup.setPrice(price);
-        }
-        if (txtFieldNewPriceGroupCurrency.getText() != null && !txtFieldNewPriceGroupCurrency.getText().isEmpty() && !txtFieldNewPriceGroupCurrency.getText().isBlank()) {
-            String currency = txtFieldNewPriceGroupCurrency.getText();
-            newPriceGroup.setCurrency(currency);
-        }
-
-        tblViewNewEventTicketGroup.getItems().add(newPriceGroup);
-
-        ((Node) (event.getSource())).getScene().getWindow().hide();
-    }
-
-    public void onCancelNewPriceGroup(ActionEvent event) {
-        ((Node) (event.getSource())).getScene().getWindow().hide();
-    }
-
-
-    public void onSaveEditPriceGroup(ActionEvent event) {
-        PriceGroup editedPriceGroup = tblViewNewEventTicketGroup.getSelectionModel().getSelectedItem();
-
-        editedPriceGroup.setName(txtFieldEditPriceGroupName.getText());
-        editedPriceGroup.setPrice(Integer.parseInt(txtFieldEditPriceGroupPrice.getText()));
-        editedPriceGroup.setCurrency(txtFieldEditPriceGroupCurrency.getText());
-
-        //DataManger.getInstance.updatePriceGroup(editedPriceGroup)
-
-        ((Node) (event.getSource())).getScene().getWindow().hide();
-    }
-
-    public void onCancelEditPriceGroup(ActionEvent event) {
-        ((Node) (event.getSource())).getScene().getWindow().hide();
-    }
-
-    private void openStage(String fxml, String title) {
+    private void openStage(String fxml, String title, EventHandler<WindowEvent> event) {
         Parent root = null;
         Stage stage = new Stage();
         try {
@@ -309,22 +185,10 @@ public class NewEventController implements Initializable {
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.show();
 
+            stage.setOnHiding(event);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private UnaryOperator<TextFormatter.Change> integerFilter(){
-        UnaryOperator<TextFormatter.Change> integerFilter = change -> {
-            String newText = change.getControlNewText();
-            //if (newText.matches("-?([1-9][0-9]*)?")) {
-                if (newText.matches("-?([1-9][0-9]*)?")) {
-
-                    return change;
-            }
-            return null;
-        };
-
-        return integerFilter;
     }
 }

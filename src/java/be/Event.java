@@ -1,10 +1,8 @@
 package be;
 
 import bll.DataManager;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -31,11 +29,9 @@ public class Event {
     private ObjectProperty<Venue> location;
     private int ticketsSold;
     private int ticketsRemaining;
-    private List<PriceGroup> priceGroupList;
+    private ListProperty<PriceGroup> priceGroupsList;
     private String description;
     private Image eventImage;
-
-    private Color color;
 
     private ToggleButton node;
 
@@ -77,7 +73,7 @@ public class Event {
      * @param priceGroupList
      * @param description
      */
-    public Event(int id, String eventName, LocalDateTime startDateTime, LocalDateTime endDateTime, Venue venue, int ticketsSold, int ticketsRemaining, List<PriceGroup> priceGroupList, String description, Image image) {
+    public Event(int id, String eventName, LocalDateTime startDateTime, LocalDateTime endDateTime, Venue venue, int ticketsSold, int ticketsRemaining, ObservableList<PriceGroup> priceGroupList, String description, Image image) {
 
         this.id = id;
         this.eventName = new SimpleStringProperty();
@@ -90,7 +86,8 @@ public class Event {
 
         this.ticketsSold = ticketsSold;
         this.ticketsRemaining = ticketsRemaining;
-        this.priceGroupList = priceGroupList;
+        this.priceGroupsList = new SimpleListProperty<>();
+        this.priceGroupsList.set(priceGroupList);
         this.description = description;
         this.eventImage = image;
 
@@ -181,14 +178,25 @@ public class Event {
         this.ticketsRemaining = ticketsRemaining;
     }
 
-    public List<PriceGroup> getPriceGroups() {
-        return priceGroupList;
+    public ObservableList<PriceGroup> getPriceGroups() {
+        return this.priceGroupsList.get();
     }
 
-    public void setTicketPrice(List<PriceGroup> priceGroupList) {
-        this.priceGroupList = priceGroupList;
+    public ListProperty<PriceGroup> getPriceGroupsProperty(){
+        return this.priceGroupsList;
     }
 
+    public void setPriceGroups(ObservableList<PriceGroup> list) {
+        this.priceGroupsList.set(list);
+    }
+
+    public void addPriceGroup(PriceGroup priceGroup){
+        this.priceGroupsList.get().add(priceGroup);
+    }
+
+    public void removePriceGroup(PriceGroup priceGroup){
+        this.priceGroupsList.get().remove(priceGroup);
+    }
 
     public String getDescription() {
         return description;
@@ -205,9 +213,4 @@ public class Event {
     public void setEventImage(Image eventImage){
         this.eventImage = eventImage;
     }
-
-    public Color getColor(){
-        return this.color;
-    }
-
 }
