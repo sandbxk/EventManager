@@ -110,6 +110,7 @@
     -fx-background-color: transparent;
 }
 
+
 .table-view .column-header .label {
     -fx-content-display: center;
     -fx-text-fill: #f8f8f8;
@@ -143,7 +144,7 @@
 
 .table-row-cell:odd{
     -fx-content-display: center;
-    -fx-background-color: rgba(30,30,30, 0.1);
+    -fx-background-color: transparent;
     -fx-background-insets: 0, 1 0 1 0;
     -fx-padding: 0.0em; /* 0 */
     -fx-border-color: #6e6e6e;
