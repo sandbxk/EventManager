@@ -7,8 +7,8 @@
     </content>
     <orderEntry type="jdk" jdkName="liberica-17" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="mssql-jdbc-9.4.1.jre16" level="project" />
     <orderEntry type="library" name="j2html" level="project" />
     <orderEntry type="library" name="itextpdf.html2pdf" level="project" />
+    <orderEntry type="library" name="bcpkix-jdk15on-1.69" level="project" />
   </component>
 </module>

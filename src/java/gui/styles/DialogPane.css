@@ -61,7 +61,7 @@
 .dialog-pane .button:pressed{
     -fx-background-color: #505050;
     -fx-text-fill: #70e365;
-    -fx-border-color: #70e365b;
+    -fx-border-color: #70e365;
     -fx-border-radius: 20;
 }
 
@@ -150,7 +150,7 @@
 }
 
 .list-view{
-    -fx-background-color: #transparent;
+    -fx-background-color: transparent;
     -fx-text-fill: #f8f8f8;
 }
 

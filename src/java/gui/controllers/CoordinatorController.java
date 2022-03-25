@@ -5,6 +5,7 @@ import be.PriceGroup;
 import bll.DataManager;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -96,7 +97,7 @@ public class CoordinatorController implements Initializable {
     private void initEventListener() {
         selectedEvent.addListener((observable, oldValue, newValue) -> {
             imgViewEvent.setImage(newValue.getEventImage());
-            imgDetailBackground.setStyle("-fx-background-color: rgb(" + newValue.getColor().getRed() +", " + newValue.getColor().getGreen() + ", " + newValue.getColor().getBlue() + ");");
+            imgDetailBackground.setStyle("-fx-background-color: rgb(" + newValue.getColor().getRed()*255 +", " + newValue.getColor().getGreen()*255 + ", " + newValue.getColor().getBlue()*255 + ");");
             lblEventName.setText(newValue.getEventName());
             lblEventDate.setText(newValue.getStartDateTime().toLocalDate().toString());
             lblEventTime.setText(newValue.getStartDateTime().toLocalTime().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)));
@@ -127,13 +128,16 @@ public class CoordinatorController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        ObservableList toggles = FXCollections.observableArrayList();
         stage.setOnHiding(event1 -> {
             flowPaneEvents.getChildren().clear();
             ObservableList<Event> allEvents = DataManager.getInstance().getAllEvents();
             for (Event e : allEvents){
                 flowPaneEvents.getChildren().add(e.getEventTile());
-                eventToggle.getToggles().add(e.getEventTile());
+                toggles.addAll(e.getEventTile());
             }
+            eventToggle.getToggles().clear();
+            eventToggle.getToggles().addAll(toggles);
         });
     }
 

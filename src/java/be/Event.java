@@ -101,7 +101,7 @@ public class Event {
         } catch (IOException ignored) {}
         node.setOnAction(event -> DataManager.getInstance().setSelectedEvent(this));
 
-        imgViewContainer.setStyle("-fx-background-color: rgb(" + color.getRed() +", " + color.getGreen() + ", " + color.getBlue() + ");");
+        imgViewContainer.setStyle("-fx-background-color: rgb(" + color.getRed()*255 + ", " + color.getGreen()*255 + ", " + color.getBlue()*255 + ");");
         Rectangle clip = new Rectangle(imgViewBanner.getFitWidth(), imgViewBanner.getFitHeight());
         clip.setArcHeight(9);
         clip.setArcWidth(9);

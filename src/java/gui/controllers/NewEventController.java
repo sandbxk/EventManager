@@ -190,8 +190,15 @@ public class NewEventController implements Initializable {
             alert.show();
             return;
         }
-        if (tblViewNewEventTicketGroup.getSelectionModel().getSelectedItem() == null) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "No Ticket Group selected");
+        if (tblViewNewEventTicketGroup.getItems().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "No Ticket Groups added");
+            alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/DialogPane.css")).toExternalForm());
+            alert.show();
+            return;
+        }
+
+        if (datePickerStartDate.getValue() == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING, "No start date chosen");
             alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/DialogPane.css")).toExternalForm());
             alert.show();
             return;
