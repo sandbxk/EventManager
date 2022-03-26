@@ -184,4 +184,10 @@ public final class DataManager {
     public void setSelectedVenue(Venue venue) {
         this.selectedVenue = venue;
     }
+
+    public void createNewUser()
+    {
+        
+    }
 }
+

@@ -10,11 +10,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class coordinatorDAO implements IUserCrudDAO<UserInfo> {
+public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
     private DBConnection DBconnect;
 
-    public coordinatorDAO() throws IOException {
+    public CoordinatorDAO() throws IOException {
         DBconnect = new DBConnection();
     }
 

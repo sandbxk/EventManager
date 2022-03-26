@@ -10,7 +10,7 @@
 <AnchorPane prefHeight="290.0" prefWidth="298.0" style="-fx-border-color: #fc8f51;" styleClass="background" stylesheets="@../styles/mainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.AddNewUserController">
     <children>
         <Text fill="#f8f8f8" layoutX="95.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="InternalPanelSubHeading" text="New Venue" />
-        <VBox layoutX="82.0" layoutY="35.0" prefHeight="134.0" prefWidth="189.0">
+        <VBox layoutX="92.0" layoutY="35.0" prefHeight="134.0" prefWidth="179.0">
             <children>
                 <TextField fx:id="txtFieldNewUserName" styleClass="submit-textField">
                     <VBox.margin>
@@ -30,7 +30,7 @@
                 <TextField fx:id="txtFieldNewUserEmail" styleClass="submit-textField" />
             </children>
         </VBox>
-        <Text fill="#f8f8f8" layoutX="14.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="Nickname" wrappingWidth="70.3505859375" />
+        <Text fill="#f8f8f8" layoutX="14.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="User Name" wrappingWidth="70.3505859375" />
         <Text fill="#f8f8f8" layoutX="14.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="Login" wrappingWidth="70.3505859375" />
         <Text fill="#f8f8f8" layoutX="14.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="Password" wrappingWidth="81.0625" />
         <Text fill="#f8f8f8" layoutX="14.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="Email" wrappingWidth="61.0" />
