@@ -185,9 +185,9 @@ public final class DataManager {
         this.selectedVenue = venue;
     }
 
-    public void createNewUser()
+    public void createNewUser(String userName, String login, String password, String email)
     {
-        
+        //TODO: DB
     }
 }
 
