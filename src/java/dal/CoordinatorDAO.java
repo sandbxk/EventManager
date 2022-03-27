@@ -88,4 +88,19 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
             return false;
         }
     }
+
+    public void createUser(String userName, String login, String password, String email)
+    {
+        try (Connection connection = DBconnect.getConnection())
+        {
+            String SQLInsert = "";
+            PreparedStatement statement = connection.prepareStatement(SQLInsert);
+        } catch (SQLServerException throwables) {
+            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
