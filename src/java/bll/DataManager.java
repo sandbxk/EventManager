@@ -3,15 +3,15 @@ package bll;
 import be.Event;
 import be.PriceGroup;
 import be.Venue;
+import dal.CoordinatorDAO;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.List;
-
 public final class DataManager {
 
+    private CoordinatorDAO database;
 
     private static DataManager instance;
 
@@ -43,7 +43,8 @@ public final class DataManager {
     private ObservableList<PriceGroup> priceGroups;
 
 
-    public DataManager() {
+    public DataManager()
+    {
         this.instance = this;
         this.selectedEvent = new SimpleObjectProperty<>();
 
@@ -51,9 +52,12 @@ public final class DataManager {
         this.events = FXCollections.observableArrayList();
         this.allVenues = FXCollections.observableArrayList();
         this.priceGroups = FXCollections.observableArrayList();
+
+        database = new CoordinatorDAO();
     }
 
-    public static DataManager getInstance() {
+    public static DataManager getInstance()
+    {
         if (instance == null) {
             instance = new DataManager();
         }
@@ -64,20 +68,24 @@ public final class DataManager {
      * EVENTS
      */
 
-    public void newEvent(Event event){
+    public void newEvent(Event event)
+    {
         //TODO: DB
         this.events.add(event);
     }
 
-    public void deleteEvent(Event event){
+    public void deleteEvent(Event event)
+    {
         //TODO: DB
     }
 
-    public void updateEvent(Event event){
+    public void updateEvent(Event event)
+    {
         //TODO: DB
     }
 
-    public ObservableList<Event> getAllEvents() {
+    public ObservableList<Event> getAllEvents()
+    {
         //TODO: DB
         return this.events;
     }
@@ -187,7 +195,7 @@ public final class DataManager {
 
     public void createNewUser(String userName, String login, String password, String email)
     {
-        //TODO: DB
+        database.createUser(userName, login, password, email);
     }
 }
 

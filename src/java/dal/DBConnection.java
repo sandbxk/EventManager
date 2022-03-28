@@ -3,12 +3,9 @@ package dal;
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Properties;
 
 
@@ -22,8 +19,12 @@ public class DBConnection
         dataSource = new SQLServerDataSource();
     }
 
-    public Connection getConnection() throws IOException, SQLServerException {
-        property.load(new FileReader(".config.properties"));
+    public Connection getConnection() throws SQLServerException {
+        try {
+            property.load(new FileReader(".config.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         dataSource.setServerName(property.getProperty("server"));
         dataSource.setDatabaseName(property.getProperty("database"));
         dataSource.setUser(property.getProperty("username"));

@@ -5,17 +5,30 @@ import be.UserInfo;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
     private DBConnection DBconnect;
 
-    public CoordinatorDAO() throws IOException {
-        DBconnect = new DBConnection();
+    public CoordinatorDAO() {
+        try {
+            DBconnect = new DBConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void execute(String sql)
+    {
+        try
+        {
+            Statement statement = DBconnect.getConnection().createStatement();
+            statement.execute(sql);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -31,7 +44,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
             psUser.setInt(4, 2);
 
             return psUser.execute();
-        } catch (SQLException | IOException throwables) {
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
             return false;
         }
@@ -66,7 +79,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
             }
             return false;
 
-        } catch (SQLException | IOException throwables) {
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
             return false;
 
@@ -83,7 +96,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
             String SQLDelete = "DELETE FROM UserTable WHERE userID=?";
             PreparedStatement psDelete = connection.prepareStatement(SQLDelete);
             return psDelete.execute();
-        } catch (SQLException | IOException throwables) {
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
             return false;
         }
@@ -93,13 +106,70 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
     {
         try (Connection connection = DBconnect.getConnection())
         {
-            String SQLInsert = "";
-            PreparedStatement statement = connection.prepareStatement(SQLInsert);
+            String sql = """
+            INSERT INTO UserTable (userName, loginName, loginPass, userAuth ,email)
+            VALUES ('%s', '%s', '%s', 1, '%s')
+            """.formatted(userName, login, password, email);
+
+            this.execute(sql);
         } catch (SQLServerException throwables) {
             throwables.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (IOException e) {
+        }
+    }
+
+    public void createVenue (String location, String street, String zipcode)
+    {
+        try (Connection connection = DBconnect.getConnection())
+        {
+            String sql = """
+                    INSERT INTO Venue (locationName, Streetname, venueZipCode)
+                    VALUES ('%s', '%s', '%s')
+                    """.formatted(location, street, zipcode);
+
+            this.execute(sql);
+
+        } catch (SQLServerException throwables) {
+            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateVenue (String location, String street, String zipcode, int venueID)
+    {
+        try (Connection connection = DBconnect.getConnection())
+        {
+            String sql = """
+                    UPDATE Venue
+                    SET locatioName = '%s', '%s', '%s' 
+                    WHERE VenueID = '%s';
+                    """.formatted(location, street, zipcode, venueID);
+
+            this.execute(sql);
+
+        } catch (SQLServerException throwables) {
+            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteVenue (int venueID)
+    {
+        try (Connection connection = DBconnect.getConnection())
+        {
+            String sql = """
+                    DELETE FROM Venue
+                    WHERE VenueID = '%s';
+                    """.formatted(venueID);
+
+            this.execute(sql);
+
+        } catch (SQLServerException throwables) {
+            throwables.printStackTrace();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
