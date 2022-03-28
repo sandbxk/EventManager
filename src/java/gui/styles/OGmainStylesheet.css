@@ -1,29 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Inline+Text:wght@600&display=swap');
 
 * {
-    -fx-bgBase: #F5F5F5;
-    -fx-panelBase: #DFE5DF;
+    -fx-bgBase: #303030;
+    -fx-panelBase: #404040;
     -fx-borderBase: #ababab;
-    -fx-txtBase: #494949;
-    -fx-txtBaseHover: #a4a4a4;
-    -fx-accent1: #b2da41;
-    -fx-accent1Hover: #88de07;
-    -fx-accent1Pressed: #eede2e;
-    -fx-accent2Hover: #9ec530;
-    -fx-accent2Pressed: #c2b635;
-    -fx-accent2Derive1: #a1be4e;
-    -fx-accent2Derive2: #d2ca5a;
+    -fx-txtBase: #f8f8f8;
+    -fx-txtBaseHover: #e0e0e0;
+    -fx-accent1: #56AE4E;
+    -fx-accent1Hover: #70e365;
+    -fx-accent1Pressed: #70e365;
+    -fx-accent2Hover: #fc8f51;
+    -fx-accent2Pressed: #C57040;
+    -fx-accent2Derive1: #ce5f1c;
+    -fx-accent2Derive2: #8f5836;
 
 
     /*For Event Node representation*/
-    -fx-eventRoot: #b2da41;
-    -fx-eventRootHover: #88de07;
-    -fx-eventRootSelected: #eede2e;
-    -fx-eventBorderSelected: #B2E51F;
-    -fx-eventRootSelectedHover: #e1d982;
-    -fx-eventBorderSelectedHover: #c6e371;
-    -fx-eventImgContainer: #dae1aa;
-    -fx-eventTxt: #676767;
+    -fx-eventRoot: #C57040;
+    -fx-eventRootHover: #fc8f51;
+    -fx-eventRootSelected: #ce5f1c;
+    -fx-eventBorderSelected: #ce5f1c;
+    -fx-eventRootSelectedHover: #8f5836;
+    -fx-eventBorderSelectedHover: #8f5836;
+    -fx-eventImgContainer: #CBA189;
+    -fx-eventTxt: #f8f8f8;
 }
 
 
