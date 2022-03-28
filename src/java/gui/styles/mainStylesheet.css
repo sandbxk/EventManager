@@ -46,25 +46,25 @@
     -fx-background-color: -fx-txtBase;
     -fx-background-radius: 30;
     -fx-text-fill: -fx-accent1;
-    -fx-font-size: 32;
-    -fx-font-weight: bold;
+    -fx-font-size: 20;
+    -fx-font-family: "Roboto";
 }
 
 
 .actionButton:hover {
-    -fx-background-color: -fx-txtBaseHover;
+    -fx-background-color: derive(-fx-eventRootSelected, 80%);
     -fx-background-radius: 30;
     -fx-text-fill: -fx-accent1;
-    -fx-font-size: 32;
-    -fx-font-weight: bold;
+    -fx-font-size: 20;
+    -fx-font-family: "Roboto";
 }
 
 .actionButton:pressed {
-    -fx-background-color: -fx-accent2Hover;
+    -fx-background-color: derive(-fx-accent1Pressed, 10%)/*derive(-fx-eventRootSelectedHover, 150%)*/;
     -fx-background-radius: 30;
     -fx-text-fill: -fx-accent1;
-    -fx-font-size: 32;
-    -fx-font-weight: bold;
+    -fx-font-size: 20;
+    -fx-font-family: "Roboto";
 }
 
 .panelHeadings {

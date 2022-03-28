@@ -31,19 +31,19 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="390.0" GridPane.halignment="RIGHT">
+            <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="464.0" GridPane.halignment="RIGHT">
                <children>
-                  <Button fx:id="btnCreateActions" contentDisplay="CENTER" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onCreate" prefHeight="36.0" prefWidth="36.0" styleClass="actionButton" text="+" wrapText="true">
+                  <Button fx:id="btnCreateActions" contentDisplay="CENTER" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onCreate" prefHeight="36.0" prefWidth="116.0" styleClass="actionButton" text="New event" wrapText="true">
                      <HBox.margin>
                         <Insets top="6.0" />
                      </HBox.margin>
                      <padding>
-                        <Insets bottom="5.0" top="-7.0" />
+                        <Insets bottom="1.0" />
                      </padding>
                   </Button>
                   <Button fx:id="btnDeleteEvent" contentDisplay="CENTER" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onDeleteEvent" prefHeight="36.0" prefWidth="36.0" styleClass="actionButton" text="-" wrapText="true">
                      <padding>
-                        <Insets bottom="5.0" top="-7.0" />
+                        <Insets bottom="1.0" />
                      </padding>
                      <HBox.margin>
                         <Insets left="40.0" top="6.0" />
