@@ -186,20 +186,20 @@ public class NewEventController implements Initializable {
     public void onSave(ActionEvent event) {
         if (tblViewVenues.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "No Venue selected");
-            alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/DialogPane.css")).toExternalForm());
+            alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
             alert.show();
             return;
         }
         if (tblViewNewEventTicketGroup.getItems().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "No Ticket Groups added");
-            alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/DialogPane.css")).toExternalForm());
+            alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
             alert.show();
             return;
         }
 
         if (datePickerStartDate.getValue() == null){
             Alert alert = new Alert(Alert.AlertType.WARNING, "No start date chosen");
-            alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/DialogPane.css")).toExternalForm());
+            alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
             alert.show();
             return;
         }
