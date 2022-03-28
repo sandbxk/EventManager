@@ -2,7 +2,10 @@ package dal;
 
 import be.EUserType;
 import be.UserInfo;
+import be.Venue;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.sql.*;
@@ -28,6 +31,17 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         }
         catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    private ResultSet query(String sql)
+    {
+        try {
+            Statement statement = DBconnect.getConnection().createStatement();
+            return statement.executeQuery(sql);
+        }
+        catch (SQLException e) {
+            return null;
         }
     }
 
@@ -172,5 +186,29 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public ObservableList<Venue> getAllVenues()
+    {
+        ObservableList<Venue> returnList = FXCollections.observableArrayList();
+
+        String sql = "SELECT * FROM Venue";
+
+        try (Connection connection = DBconnect.getConnection())
+        {
+            Statement statement = DBconnect.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+            while (result.next())
+            {
+
+            }
+
+        } catch (SQLServerException throwables) {
+            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

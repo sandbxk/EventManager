@@ -1,5 +1,7 @@
 package be;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -23,8 +25,8 @@ public class Venue {
         this.address.set(address);
         this.zipCode.set(zipCode);
         this.city.set(city);
-    }
 
+    }
 
     public String getVenueName() {
         return venueName.get();
