@@ -242,10 +242,10 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         try (Connection connection = DBconnect.getConnection())
         {
             String sql = """
-                    INSERT INTO Events (locationName, StreetName, venueZipCode)
+                    INSERT INTO Events (eventTitle, VenueID, DESCRIPTION, maxSeats, beginAt, endAt, price)
                     VALUES ('%s', '%s', '%s')
                     
-                    """.formatted(event.getLocation(), event.getLocation(), event.getLocation()); //Needs to store name
+                    """.formatted(event.getEventName(), event.getLocation(), event.getDescription(), event.getLocation(), event.getStartDateTime(), event.getEndDateTime(), event.getPriceGroupsProperty()); //Needs to store name
 
             this.execute(sql);
 
@@ -265,7 +265,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
     public void deleteEvent(Event event)
     {
         String sql = """
-                    DELETE FROM UserTable WHERE VenueID = '%s'                    
+                    DELETE FROM Events WHERE EventID = '%s'                    
                     """.formatted(event.getId());
 
         this.execute(sql);
