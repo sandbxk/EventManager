@@ -13,9 +13,9 @@
     <orderEntry type="library" name="bcpkix-jdk15on-1.69" level="project" />
     <orderEntry type="library" name="commons-email-1.5" level="project" />
     <orderEntry type="library" name="mssql-jdbc-9.4.1.jre16" level="project" />
-    <orderEntry type="library" name="commons-email-1.5-javadoc" level="project" />
     <orderEntry type="library" name="commons-email-1.5-sources" level="project" />
     <orderEntry type="library" name="commons-email-1.5-test-sources" level="project" />
     <orderEntry type="library" name="commons-email-1.5-tests" level="project" />
+    <orderEntry type="library" name="commons-email-1.5-javadoc" level="project" />
   </component>
 </module>
