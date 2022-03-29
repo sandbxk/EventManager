@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -369,7 +370,20 @@
                         </TableView>
                      </center>
                      <bottom>
-                        <FlowPane fx:id="flowPaneAttendeeBtns" prefHeight="45.0" prefWidth="642.0" BorderPane.alignment="CENTER" />
+                        <AnchorPane prefHeight="60.0" prefWidth="642.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button layoutX="22.0" layoutY="14.0" maxHeight="35.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="121.0" style="-fx-font-size: 16;" styleClass="actionButton" text="Add attendee" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="10.0" />
+                              <AnchorPane fx:id="anchorPaneAttendeeMenu" layoutX="143.0" layoutY="9.0" prefHeight="43.0" prefWidth="487.0" styleClass="actionPane" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="143.0">
+                                 <children>
+                                    <Button fx:id="btnDLTicket" layoutX="136.0" layoutY="9.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#onDownloadTicket" prefHeight="30.0" prefWidth="119.0" styleClass="baseMenuButton" text="Download Ticket" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="142.0" />
+                                    <Button fx:id="btnSendTicket" layoutX="48.0" layoutY="7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#onSendTicket" prefHeight="30.0" prefWidth="88.0" styleClass="baseMenuButton" text="Send Ticket" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="48.0" />
+                                    <Button fx:id="btnEditAttendeeInfo" layoutX="256.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#onEditInfo" prefHeight="30.0" prefWidth="68.0" styleClass="baseMenuButton" text="Edit Info" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="267.0" />
+                                    <Button fx:id="btnRemoveAttendee" layoutX="332.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#onRemoveAttendee" prefHeight="30.0" prefWidth="124.0" styleClass="baseMenuButton" text="Remove Attendee" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="341.0" />
+                                 </children>
+                              </AnchorPane>
+                              <ToggleButton fx:id="tglBtnShowHideMenu" layoutX="114.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onShowHideMenu" prefHeight="35.0" prefWidth="35.0" styleClass="actionToggle" text="˅" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="146.0" />
+                           </children>
+                        </AnchorPane>
                      </bottom></BorderPane>
                </children>
             </GridPane>

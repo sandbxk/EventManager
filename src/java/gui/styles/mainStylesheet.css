@@ -67,6 +67,111 @@
     -fx-font-family: "Roboto";
 }
 
+.actionPane {
+    -fx-background-color: -fx-txtBase;
+    -fx-background-radius: 20;
+}
+
+.actionToggle {
+    -fx-background-color: -fx-txtBase;
+    -fx-background-radius: 30;
+    -fx-text-fill: -fx-accent1;
+    -fx-border-width: 0;
+    -fx-font-size: 17;
+    -fx-font-weight: bold;
+}
+
+.actionToggle:hover {
+    -fx-background-color: derive(-fx-eventRootSelected, 80%);
+    -fx-background-radius: 30;
+    -fx-text-fill: -fx-accent1;
+    -fx-border-width: 0;
+    -fx-font-size: 17;
+    -fx-font-weight: bold;
+
+}
+
+.actionToggle:selected:hover {
+    -fx-background-color: derive(-fx-eventRootSelected, 80%);
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-border-width: 2;
+    -fx-border-color: -fx-borderBase;
+    -fx-text-fill: -fx-accent1;
+    -fx-font-size: 17;
+    -fx-font-weight: bold;
+
+}
+.actionToggle:selected:focused:hover {
+    -fx-background-color: derive(-fx-eventRootSelected, 80%);
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-border-width: 2;
+    -fx-border-color: -fx-accent1;
+    -fx-text-fill: -fx-accent1;
+    -fx-font-size: 17;
+    -fx-font-weight: bold;
+}
+
+.actionToggle:selected {
+    -fx-background-color: -fx-txtBase;
+    -fx-background-radius: 30;
+    -fx-border-width: 2;
+    -fx-border-radius: 30;
+    -fx-border-color: -fx-borderBase;
+    -fx-text-fill: -fx-accent1;
+    -fx-font-size: 17;
+    -fx-font-weight: bold;
+
+}
+.actionToggle:selected:focused {
+    -fx-background-color: -fx-txtBase;
+    -fx-background-radius: 30;
+    -fx-border-width: 2;
+    -fx-border-color: -fx-borderBase;
+    -fx-text-fill: -fx-accent1;
+    -fx-font-size: 17;
+    -fx-font-weight: bold;
+}
+
+.baseMenuButton {
+    -fx-background-color: transparent;
+    -fx-background-radius: 30;
+    -fx-padding: 0;
+    -fx-border-radius: 30;
+    -fx-text-fill: -fx-bgBase;
+    -fx-border-width: 1;
+    -fx-border-color: -fx-bgBase;
+    -fx-font-size: 14;
+    -fx-font-family: "Roboto";
+}
+
+
+.baseMenuButton:hover {
+    -fx-background-color: transparent;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-padding: 0;
+    -fx-text-fill: -fx-accent1;
+    -fx-border-width: 1;
+    -fx-border-color: -fx-accent1;
+    -fx-font-size: 14;
+    -fx-font-family: "Roboto";
+}
+
+
+.baseMenuButton:pressed {
+    -fx-background-color: transparent;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-padding: 0;
+    -fx-text-fill: -fx-accent1Pressed;
+    -fx-border-width: 1;
+    -fx-border-color: -fx-accent1Pressed;
+    -fx-font-size: 14;
+    -fx-font-family: "Roboto";
+}
+
 .panelHeadings {
     -fx-text-fill: -fx-txtBase;
     -fx-font-size: 18;

@@ -3,6 +3,9 @@ package gui.controllers;
 import be.Event;
 import be.PriceGroup;
 import bll.DataManager;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -20,6 +23,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -63,11 +67,18 @@ public class CoordinatorController implements Initializable {
     @FXML public TableColumn tblClmAttTicketNo;
     @FXML public TableColumn tblClmAttSeatNo;
 
-    @FXML public FlowPane flowPaneAttendeeBtns;
+    @FXML public ToggleButton tglBtnShowHideMenu;
+    @FXML public AnchorPane anchorPaneAttendeeMenu;
+    @FXML public Button btnSendTicket;
+    @FXML public Button btnDLTicket;
+    @FXML public Button btnEditAttendeeInfo;
+    @FXML public Button btnRemoveAttendee;
 
-    ToggleGroup eventToggle;
-
+    private ToggleGroup eventToggle;
+    private static final double SLIDE_MENU_WIDTH = 500;
     private ObjectProperty<Event> selectedEvent;
+
+
 
     public CoordinatorController() {
         selectedEvent = new SimpleObjectProperty();
@@ -84,6 +95,7 @@ public class CoordinatorController implements Initializable {
     public void initialize(URL location, ResourceBundle resources)
     {
         eventToggle = new ToggleGroup();
+        hideMenuInit();
         initTableViewPriceGroups();
         initEventListener();
 
@@ -148,5 +160,79 @@ public class CoordinatorController implements Initializable {
     }
 
     public void onEditEvent(ActionEvent event) {
+    }
+
+    private void hideMenuInit(){
+        btnSendTicket.setOpacity(0);
+        btnDLTicket.setOpacity(0);
+        btnEditAttendeeInfo.setOpacity(0);
+        btnRemoveAttendee.setOpacity(0);
+        anchorPaneAttendeeMenu.setOpacity(0);
+    }
+
+    public void onShowHideMenu(ActionEvent event) {
+        Timeline timeline = new Timeline();
+        Timeline opacity = new Timeline();
+        if (tglBtnShowHideMenu.isSelected()){
+            tglBtnShowHideMenu.setText("a");
+
+
+            KeyFrame btn1KF = new KeyFrame(Duration.millis(100), new KeyValue(btnSendTicket.opacityProperty(), 1));
+            KeyFrame btn2KF = new KeyFrame(Duration.millis(100), new KeyValue(btnDLTicket.opacityProperty(), 1));
+            KeyFrame btn3KF = new KeyFrame(Duration.millis(100), new KeyValue(btnEditAttendeeInfo.opacityProperty(), 1));
+            KeyFrame btn4KF = new KeyFrame(Duration.millis(100), new KeyValue(btnRemoveAttendee.opacityProperty(), 1));
+            opacity.getKeyFrames().addAll(btn1KF, btn2KF, btn3KF, btn4KF);
+
+            KeyFrame paneKF= new KeyFrame(Duration.millis(100), new KeyValue(anchorPaneAttendeeMenu.opacityProperty(), 1));
+            Timeline paneOpacity = new Timeline(paneKF);
+
+
+
+            KeyFrame kf1 = new KeyFrame(Duration.millis(200), new KeyValue(anchorPaneAttendeeMenu.maxWidthProperty(), SLIDE_MENU_WIDTH));
+            KeyFrame kf2 = new KeyFrame(Duration.millis(200), new KeyValue(anchorPaneAttendeeMenu.prefWidthProperty(), SLIDE_MENU_WIDTH));
+            KeyFrame kf3 = new KeyFrame(Duration.millis(200), new KeyValue(anchorPaneAttendeeMenu.minWidthProperty(), SLIDE_MENU_WIDTH));
+
+            timeline.getKeyFrames().addAll(kf1, kf2, kf3);
+
+            paneOpacity.play();
+            paneOpacity.setOnFinished(event1 -> timeline.play());
+            timeline.setOnFinished(event1 -> opacity.play());
+        }
+        else {
+            tglBtnShowHideMenu.setText("˅");
+
+            KeyFrame kf1 = new KeyFrame(Duration.millis(200), new KeyValue(anchorPaneAttendeeMenu.maxWidthProperty(),0));
+            KeyFrame kf2 = new KeyFrame(Duration.millis(200), new KeyValue(anchorPaneAttendeeMenu.prefWidthProperty(), 0));
+            KeyFrame kf3 = new KeyFrame(Duration.millis(200), new KeyValue(anchorPaneAttendeeMenu.minWidthProperty(), 0));
+
+            KeyFrame btn1KF = new KeyFrame(Duration.millis(100), new KeyValue(btnSendTicket.opacityProperty(), 0));
+            KeyFrame btn2KF = new KeyFrame(Duration.millis(100), new KeyValue(btnDLTicket.opacityProperty(), 0));
+            KeyFrame btn3KF = new KeyFrame(Duration.millis(100), new KeyValue(btnEditAttendeeInfo.opacityProperty(), 0));
+            KeyFrame btn4KF = new KeyFrame(Duration.millis(100), new KeyValue(btnRemoveAttendee.opacityProperty(), 0));
+
+            Timeline btnOpacity = new Timeline(btn1KF, btn2KF, btn3KF, btn4KF);
+            timeline.getKeyFrames().addAll(kf1, kf2, kf3);
+
+            btnOpacity.play();
+
+            btnOpacity.setOnFinished(event1 -> timeline.play());
+            timeline.setOnFinished(event1 -> {
+                KeyFrame paneKF = new KeyFrame(Duration.millis(100), new KeyValue(anchorPaneAttendeeMenu.opacityProperty(), 0));
+                opacity.getKeyFrames().add(paneKF);
+                opacity.play();
+            });
+        }
+    }
+
+    public void onDownloadTicket(ActionEvent event) {
+    }
+
+    public void onSendTicket(ActionEvent event) {
+    }
+
+    public void onEditInfo(ActionEvent event) {
+    }
+
+    public void onRemoveAttendee(ActionEvent event) {
     }
 }
