@@ -1,6 +1,7 @@
 package dal;
 
 import be.EUserType;
+import be.Event;
 import be.UserInfo;
 import be.Venue;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -210,5 +211,25 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public ObservableList<Event> getAllEvents()
+    {
+        return null;
+    }
+
+    public void createEvent()
+    {
+
+    }
+
+    public void updateEvent(Event event)
+    {
+
+    }
+
+    public void deleteEvent(Event event)
+    {
+
     }
 }
