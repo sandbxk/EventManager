@@ -215,11 +215,45 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
     public ObservableList<Event> getAllEvents()
     {
+        ObservableList<Venue> returnList = FXCollections.observableArrayList();
+
+        String sql = "SELECT * FROM Events";
+
+        try (Connection connection = DBconnect.getConnection())
+        {
+            Statement statement = DBconnect.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+            while (result.next())
+            {
+
+            }
+
+        } catch (SQLServerException throwables) {
+            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
-    public void createEvent()
+    public void createEvent(Event event)
     {
+        try (Connection connection = DBconnect.getConnection())
+        {
+            String sql = """
+                    INSERT INTO Events (locationName, StreetName, venueZipCode)
+                    VALUES ('%s', '%s', '%s')
+                    
+                    """.formatted(event.getLocation(), event.getLocation(), event.getLocation()); //Needs to store name
+
+            this.execute(sql);
+
+        } catch (SQLServerException throwables) {
+            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -230,6 +264,10 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
     public void deleteEvent(Event event)
     {
+        String sql = """
+                    DELETE FROM UserTable WHERE VenueID = '%s'                    
+                    """.formatted(event.getId());
 
+        this.execute(sql);
     }
 }
