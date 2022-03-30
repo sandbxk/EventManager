@@ -278,7 +278,12 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
     public void removeUserFromEvent(UserInfo user, Event event)
     {
+        String sql = """
+                DELETE FROM userEvent
+                WHERE UserID_FK = '%s' AND EventID_FK = '%s'
+                """.formatted(user.getId(), event.getId());
 
+        execute(sql);
     }
 
     public ObservableList<UserInfo> getUsersForEvent()
