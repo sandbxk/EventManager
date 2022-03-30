@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -25,6 +26,7 @@ import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
@@ -44,7 +46,7 @@ public class CoordinatorController implements Initializable {
 
     @FXML public AnchorPane imgDetailBackground;
     @FXML public ImageView imgViewEvent;
-    @FXML public Button btnEditEvent;
+    @FXML public Button btnEventActions;
     @FXML public Label lblEventName;
     @FXML public Label lblEventDate;
     @FXML public Label lblEventTime;
@@ -77,6 +79,7 @@ public class CoordinatorController implements Initializable {
     private ToggleGroup eventToggle;
     private static final double SLIDE_MENU_WIDTH = 490;
     private ObjectProperty<Event> selectedEvent;
+    private ContextMenu eventActionsMenu;
 
 
 
@@ -98,6 +101,7 @@ public class CoordinatorController implements Initializable {
         onShowHideMenu(new ActionEvent());
         initTableViewPriceGroups();
         initEventListener();
+        initEventActionsMenu();
 
     }
 
@@ -156,10 +160,12 @@ public class CoordinatorController implements Initializable {
     public void onUser(MouseEvent mouseEvent) {
     }
 
-    public void onDeleteEvent(ActionEvent event) {
+    public void onDeleteEvent() {
+        System.out.println("delete");
     }
 
-    public void onEditEvent(ActionEvent event) {
+    public void onEditEvent() {
+        System.out.println("edit");
     }
 
     /**
@@ -233,9 +239,32 @@ public class CoordinatorController implements Initializable {
     public void onSendTicket(ActionEvent event) {
     }
 
-    public void onEditInfo(ActionEvent event) {
+    public void onAttendeeEditInfo(ActionEvent event) {
     }
 
     public void onRemoveAttendee(ActionEvent event) {
+    }
+
+    public void onEventActions(ActionEvent event) {
+        //Location of the pressed button
+        double onScreenX = btnEventActions.getScene().getWindow().getX() + btnEventActions.getHeight() + btnEventActions.localToScene(btnEventActions.getBoundsInLocal()).getMinX();
+        double onScreenY = btnEventActions.getScene().getWindow().getY() + btnEventActions.getWidth() + btnEventActions.localToScene(btnEventActions.getBoundsInLocal()).getMinY();
+
+        double offsetX = btnEventActions.getWidth() * 2;
+        double offsetY = btnEventActions.getHeight()*1.5;
+
+        //ContextMenu showed at the location of the button, with offsets applied
+        eventActionsMenu.show(btnEventActions, onScreenX - offsetX, onScreenY + offsetY);
+    }
+
+    private void initEventActionsMenu(){
+        MenuItem editEvent = new MenuItem("Edit Event");
+        editEvent.setOnAction(event -> onEditEvent());
+        MenuItem deleteEvent = new MenuItem("Delete Event");
+        deleteEvent.setOnAction(event -> onDeleteEvent());
+
+
+        eventActionsMenu = new ContextMenu(editEvent, deleteEvent);
+        eventActionsMenu.setAutoHide(true);
     }
 }

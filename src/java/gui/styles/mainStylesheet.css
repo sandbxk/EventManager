@@ -1073,5 +1073,29 @@ table-view:focused .table-row-cell:filled:focused:selected {
 
 .dialog-pane .content.list-cell {
     -fx-control-inner-background: transparent;
+}
 
+.context-menu {
+    -fx-background-color: -fx-bgBase;
+    -fx-text-fill: -fx-txtBase;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 12pt;
+}
+
+.menu-item .label {
+    -fx-text-fill: -fx-txtBase;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 12pt;
+}
+.menu-item:focused {
+    -fx-background-color: -fx-accent1;
+    -fx-text-fill: -fx-bgBase;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 12pt;
+}
+
+.menu-item:focused .label {
+    -fx-text-fill: -fx-bgBase;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 12pt;
 }

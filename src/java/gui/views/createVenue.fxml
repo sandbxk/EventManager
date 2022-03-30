@@ -2,15 +2,14 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="264.0" prefWidth="271.0" style="-fx-border-color: #fc8f51;" styleClass="background" stylesheets="@../styles/mainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.VenuePriceGroupController">
     <children>
-        <Text fill="#f8f8f8" layoutX="95.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="InternalPanelSubHeading" text="New Venue" />
-        <VBox layoutX="84.0" layoutY="35.0">
+        <VBox layoutX="92.0" layoutY="52.0">
             <children>
                 <TextField fx:id="txtFieldNewVenueName" styleClass="submit-textField">
                     <VBox.margin>
@@ -30,11 +29,12 @@
                 <TextField fx:id="txtFieldNewVenueCity" styleClass="submit-textField" />
             </children>
         </VBox>
-        <Text fill="#f8f8f8" layoutX="22.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="Name" />
-        <Text fill="#f8f8f8" layoutX="22.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="Address" />
-        <Text fill="#f8f8f8" layoutX="22.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="Zipcode" />
-        <Text fill="#f8f8f8" layoutX="22.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="City" wrappingWidth="30.5771484375" />
         <Button layoutX="199.0" layoutY="216.0" mnemonicParsing="false" onAction="#onSaveNewVenue" styleClass="roundButton" text="Save" />
         <Button layoutX="123.0" layoutY="216.0" mnemonicParsing="false" onAction="#onCancelNewVenue" styleClass="roundButton" text="Cancel" />
+      <Label layoutX="45.0" layoutY="168.0" styleClass="Text" text="City" />
+      <Label layoutX="31.0" layoutY="131.0" styleClass="Text" text="Zipcode" />
+      <Label layoutX="31.0" layoutY="95.0" styleClass="Text" text="Address" />
+      <Label layoutX="38.0" layoutY="58.0" styleClass="Text" text="Name" />
+      <Label layoutX="105.0" layoutY="6.0" styleClass="InternalPanelSubHeading" text="New Venue" />
     </children>
 </AnchorPane>

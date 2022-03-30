@@ -2,14 +2,13 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="264.0" prefWidth="271.0" style="-fx-border-color: #fc8f51;" styleClass="background" stylesheets="@../styles/mainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.VenuePriceGroupController">
     <children>
-        <Text fill="#f8f8f8" layoutX="76.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="InternalPanelSubHeading" text="Edit Price Group" />
         <VBox layoutX="92.0" layoutY="66.0">
             <children>
                 <TextField fx:id="txtFieldEditPriceGroupName" styleClass="submit-textField">
@@ -29,9 +28,10 @@
                 </TextField>
             </children>
         </VBox>
-        <Text fill="#f8f8f8" layoutX="30.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="Name" />
-        <Text fill="#f8f8f8" layoutX="30.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="Price" />
-        <Text fill="#f8f8f8" layoutX="30.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="Currency" />
+        <Label layoutX="39.0" layoutY="76.0" styleClass="Text" text="Name" />
+        <Label layoutX="42.0" layoutY="111.0" styleClass="Text" text="Price" />
+        <Label layoutX="30.0" layoutY="148.0" styleClass="Text" text="Currency" />
+        <Label layoutX="78.0" layoutY="14.0" styleClass="InternalPanelSubHeading" text="Edit Price Group" />
         <Button layoutX="199.0" layoutY="216.0" mnemonicParsing="false" onAction="#onSaveEditPriceGroup" styleClass="roundButton" text="Save" />
         <Button layoutX="123.0" layoutY="216.0" mnemonicParsing="false" onAction="#onCancelEditPriceGroup" styleClass="roundButton" text="Cancel" />
     </children>
