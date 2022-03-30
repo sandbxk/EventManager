@@ -146,7 +146,7 @@
                      <top>
                         <VBox prefHeight="164.0" prefWidth="324.0" BorderPane.alignment="CENTER">
                            <children>
-                              <GridPane minHeight="50.0" prefHeight="50.0" prefWidth="324.0">
+                              <GridPane minHeight="50.0" prefHeight="95.0" prefWidth="324.0">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="257.0" />
                                 </columnConstraints>
@@ -250,34 +250,46 @@
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </VBox>
-                              <VBox>
+                              <HBox>
                                  <children>
-                                    <HBox prefHeight="20.0" prefWidth="305.0">
+                                    <ImageView fitHeight="35.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../styles/img/ticket200x.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="1.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <VBox>
                                        <children>
-                                          <Label prefHeight="22.0" prefWidth="124.0" styleClass="Text" text="Tickets remaining:  ">
-                                             <HBox.margin>
-                                                <Insets left="5.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label fx:id="lblRemainingTickets" prefHeight="22.0" prefWidth="67.0" styleClass="Text" text="100" />
+                                          <HBox prefHeight="20.0" prefWidth="305.0">
+                                             <children>
+                                                <Label prefHeight="20.0" prefWidth="81.0" styleClass="Text" text="Remaining:">
+                                                   <HBox.margin>
+                                                      <Insets left="5.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <Label fx:id="lblRemainingTickets" prefHeight="22.0" prefWidth="67.0" styleClass="Text" text="100" />
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="9.0" prefWidth="305.0">
+                                             <children>
+                                                <Label prefHeight="18.0" prefWidth="44.0" styleClass="Text" text="Sold:  ">
+                                                   <HBox.margin>
+                                                      <Insets left="5.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <Label fx:id="lblSoldTickets" prefHeight="22.0" prefWidth="67.0" styleClass="Text" text="100">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
                                        </children>
-                                    </HBox>
-                                    <HBox prefHeight="9.0" prefWidth="305.0">
-                                       <children>
-                                          <Label prefHeight="22.0" prefWidth="87.0" styleClass="Text" text="Tickets sold:  ">
-                                             <HBox.margin>
-                                                <Insets left="5.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label fx:id="lblSoldTickets" prefHeight="22.0" prefWidth="67.0" styleClass="Text" text="100">
-                                             <HBox.margin>
-                                                <Insets />
-                                             </HBox.margin>
-                                          </Label>
-                                       </children>
-                                    </HBox>
+                                    </VBox>
                                  </children>
-                              </VBox>
+                              </HBox>
                               <VBox>
                                  <children>
                                     <Label prefHeight="33.0" prefWidth="98.0" styleClass="Text" text="Ticket pricing:">
