@@ -81,7 +81,7 @@ public class VenuePriceGroupController implements Initializable {
 
     public void onSaveNewVenue(ActionEvent event) {
 
-        Venue venue = new Venue("Unnamed", "---", "---", "---");
+        Venue venue = new Venue(-1,"Unnamed", "---", "---", "---");
 
         if (txtFieldNewVenueName.getText() != null && !txtFieldNewVenueName.getText().isEmpty() && !txtFieldNewVenueName.getText().isBlank())
         {

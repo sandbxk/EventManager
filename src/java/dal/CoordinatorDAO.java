@@ -291,7 +291,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         execute(sql);
     }
 
-    public ObservableList<UserInfo> getUsersForEvent()
+    public ObservableList<UserInfo> getUsersForEvent(Event event)
     {
         ObservableList<UserInfo> returnList = FXCollections.observableArrayList();
 

@@ -9,24 +9,31 @@ import java.awt.datatransfer.StringSelection;
 
 public class Venue {
 
+    private IntegerProperty id;
     private StringProperty venueName;
     private StringProperty address;
     private StringProperty zipCode;
     private StringProperty city;
 
 
-    public Venue(String venueName, String address, String zipCode, String city) {
+    public Venue(int id, String venueName, String address, String zipCode, String city) {
+        this.id = new SimpleIntegerProperty();
         this.venueName = new SimpleStringProperty();
         this.address = new SimpleStringProperty();
         this.zipCode = new SimpleStringProperty();
         this.city = new SimpleStringProperty();
 
+        this.id.set(id);
         this.venueName.set(venueName);
         this.address.set(address);
         this.zipCode.set(zipCode);
         this.city.set(city);
 
     }
+
+    public int getID(){return id.get();};
+
+    public void setID(int id){this.id.set(id);};
 
     public String getVenueName() {
         return venueName.get();
