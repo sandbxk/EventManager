@@ -202,7 +202,13 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
             while (result.next())
             {
+                int id = result.getInt("VenueID");
+                String location = result.getString("locationName");
+                String streetName = result.getString("StreetName");
+                String zipCode = Integer.toString(result.getInt("venueZipCode"));
+                String city = "Place Holder";
 
+                returnList.add(new Venue(id, location, streetName, zipCode, city));
             }
 
         } catch (SQLServerException throwables) {
