@@ -270,4 +270,39 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
         this.execute(sql);
     }
+
+    public void addUserToEvent(UserInfo user, Event event)
+    {
+
+    }
+
+    public void removeUserFromEvent(UserInfo user, Event event)
+    {
+
+    }
+
+    public ObservableList<UserInfo> getUsersForEvent()
+    {
+        ObservableList<UserInfo> returnList = FXCollections.observableArrayList();
+
+        String sql = "SELECT * FROM Users";
+
+        try (Connection connection = DBconnect.getConnection())
+        {
+            Statement statement = DBconnect.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+            while (result.next())
+            {
+
+            }
+
+        } catch (SQLServerException throwables) {
+            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
 }
