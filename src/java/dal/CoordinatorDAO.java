@@ -139,7 +139,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         try (Connection connection = DBconnect.getConnection())
         {
             String sql = """
-                    INSERT INTO Venue (locationName, Streetname, venueZipCode)
+                    INSERT INTO Venue (locationName, StreetName, venueZipCode)
                     VALUES ('%s', '%s', '%s')
                     """.formatted(location, street, zipcode);
 
