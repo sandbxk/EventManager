@@ -75,7 +75,7 @@ public class CoordinatorController implements Initializable {
     @FXML public Button btnRemoveAttendee;
 
     private ToggleGroup eventToggle;
-    private static final double SLIDE_MENU_WIDTH = 500;
+    private static final double SLIDE_MENU_WIDTH = 490;
     private ObjectProperty<Event> selectedEvent;
 
 
@@ -95,7 +95,7 @@ public class CoordinatorController implements Initializable {
     public void initialize(URL location, ResourceBundle resources)
     {
         eventToggle = new ToggleGroup();
-        hideMenuInit();
+        onShowHideMenu(new ActionEvent());
         initTableViewPriceGroups();
         initEventListener();
 
@@ -162,60 +162,63 @@ public class CoordinatorController implements Initializable {
     public void onEditEvent(ActionEvent event) {
     }
 
-    private void hideMenuInit(){
-        btnSendTicket.setOpacity(0);
-        btnDLTicket.setOpacity(0);
-        btnEditAttendeeInfo.setOpacity(0);
-        btnRemoveAttendee.setOpacity(0);
-        anchorPaneAttendeeMenu.setOpacity(0);
-    }
-
+    /**
+     * Hides or shows the menu for attendee action (e.g. delete, edit, send ticket) through an animation.
+     * Both the size, opacity, and rotation of the showHide button are rotated for a smooth look.
+     * @param event
+     */
     public void onShowHideMenu(ActionEvent event) {
         Timeline timeline = new Timeline();
         Timeline opacity = new Timeline();
         if (tglBtnShowHideMenu.isSelected()){
-            tglBtnShowHideMenu.setText("a");
+            //Rotation of the pressed button
+            Timeline btnRotate = new Timeline(new KeyFrame(Duration.millis(100), new KeyValue(tglBtnShowHideMenu.rotateProperty(), -90)));
 
-
+            //Opacity of the buttons inside the menu
             KeyFrame btn1KF = new KeyFrame(Duration.millis(100), new KeyValue(btnSendTicket.opacityProperty(), 1));
             KeyFrame btn2KF = new KeyFrame(Duration.millis(100), new KeyValue(btnDLTicket.opacityProperty(), 1));
             KeyFrame btn3KF = new KeyFrame(Duration.millis(100), new KeyValue(btnEditAttendeeInfo.opacityProperty(), 1));
             KeyFrame btn4KF = new KeyFrame(Duration.millis(100), new KeyValue(btnRemoveAttendee.opacityProperty(), 1));
             opacity.getKeyFrames().addAll(btn1KF, btn2KF, btn3KF, btn4KF);
 
+            //Opacity for the menu container
             KeyFrame paneKF= new KeyFrame(Duration.millis(100), new KeyValue(anchorPaneAttendeeMenu.opacityProperty(), 1));
             Timeline paneOpacity = new Timeline(paneKF);
 
-
-
+            //Size for the menu container
             KeyFrame kf1 = new KeyFrame(Duration.millis(200), new KeyValue(anchorPaneAttendeeMenu.maxWidthProperty(), SLIDE_MENU_WIDTH));
             KeyFrame kf2 = new KeyFrame(Duration.millis(200), new KeyValue(anchorPaneAttendeeMenu.prefWidthProperty(), SLIDE_MENU_WIDTH));
             KeyFrame kf3 = new KeyFrame(Duration.millis(200), new KeyValue(anchorPaneAttendeeMenu.minWidthProperty(), SLIDE_MENU_WIDTH));
-
             timeline.getKeyFrames().addAll(kf1, kf2, kf3);
 
-            paneOpacity.play();
+            btnRotate.play();
+            btnRotate.setOnFinished(event1 -> paneOpacity.play());
             paneOpacity.setOnFinished(event1 -> timeline.play());
             timeline.setOnFinished(event1 -> opacity.play());
         }
         else {
-            tglBtnShowHideMenu.setText("˅");
+            //Rotation of the pressed button
+            Timeline btnRotate = new Timeline(new KeyFrame(Duration.millis(100), new KeyValue(tglBtnShowHideMenu.rotateProperty(), 0)));
 
+            //Size of the menu container
             KeyFrame kf1 = new KeyFrame(Duration.millis(200), new KeyValue(anchorPaneAttendeeMenu.maxWidthProperty(),0));
             KeyFrame kf2 = new KeyFrame(Duration.millis(200), new KeyValue(anchorPaneAttendeeMenu.prefWidthProperty(), 0));
             KeyFrame kf3 = new KeyFrame(Duration.millis(200), new KeyValue(anchorPaneAttendeeMenu.minWidthProperty(), 0));
+            timeline.getKeyFrames().addAll(kf1, kf2, kf3);
 
+            //Opacity of the buttons inside the menu
             KeyFrame btn1KF = new KeyFrame(Duration.millis(100), new KeyValue(btnSendTicket.opacityProperty(), 0));
             KeyFrame btn2KF = new KeyFrame(Duration.millis(100), new KeyValue(btnDLTicket.opacityProperty(), 0));
             KeyFrame btn3KF = new KeyFrame(Duration.millis(100), new KeyValue(btnEditAttendeeInfo.opacityProperty(), 0));
             KeyFrame btn4KF = new KeyFrame(Duration.millis(100), new KeyValue(btnRemoveAttendee.opacityProperty(), 0));
-
             Timeline btnOpacity = new Timeline(btn1KF, btn2KF, btn3KF, btn4KF);
-            timeline.getKeyFrames().addAll(kf1, kf2, kf3);
 
-            btnOpacity.play();
 
+            btnRotate.play();
+
+            btnRotate.setOnFinished(event1 -> btnOpacity.play());
             btnOpacity.setOnFinished(event1 -> timeline.play());
+            //Opacity of the menu container
             timeline.setOnFinished(event1 -> {
                 KeyFrame paneKF = new KeyFrame(Duration.millis(100), new KeyValue(anchorPaneAttendeeMenu.opacityProperty(), 0));
                 opacity.getKeyFrames().add(paneKF);
