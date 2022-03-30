@@ -32,6 +32,7 @@ import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CoordinatorController implements Initializable {
@@ -161,7 +162,15 @@ public class CoordinatorController implements Initializable {
     }
 
     public void onDeleteEvent() {
-        System.out.println("delete");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Are you sure you want to delete the event?");
+        alert.setContentText("This cannot be undone");
+        alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            System.out.println("delete");
+        }
     }
 
     public void onEditEvent() {
