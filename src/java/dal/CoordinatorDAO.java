@@ -273,7 +273,12 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
     public void addUserToEvent(UserInfo user, Event event)
     {
+        String sql = """
+                INSERT INTO userEvent (UserID_FK, EventID_FK)
+                VALUES ('%s', '%s')
+                """.formatted(user.getId(), event.getId());
 
+        execute(sql);
     }
 
     public void removeUserFromEvent(UserInfo user, Event event)
