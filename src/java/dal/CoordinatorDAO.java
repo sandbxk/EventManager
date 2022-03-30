@@ -173,32 +173,25 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
     public void deleteVenue (int venueID)
     {
-        try (Connection connection = DBconnect.getConnection())
-        {
-            String sql = """
-                    DELETE FROM Venue
-                    WHERE VenueID = '%s';
-                    """.formatted(venueID);
 
-            this.execute(sql);
+        String sql = """
+                   DELETE FROM Venue
+                   WHERE VenueID = '%s';
+                   """.formatted(venueID);
 
-        } catch (SQLServerException throwables) {
-            throwables.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        this.execute(sql);
     }
 
-    public ObservableList<Venue> getAllVenues()
+    public ObservableList<Venue> getAllVenues() throws SQLException
     {
         ObservableList<Venue> returnList = FXCollections.observableArrayList();
 
-        String sql = "SELECT * FROM Venue";
+        String sql = """
+                       SELECT * FROM Venue
+                       """;
 
-        try (Connection connection = DBconnect.getConnection())
-        {
-            Statement statement = DBconnect.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(sql);
+        Statement statement = DBconnect.getConnection().createStatement();
+        ResultSet result = statement.executeQuery(sql);
 
             while (result.next())
             {
@@ -211,22 +204,15 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
                 returnList.add(new Venue(id, location, streetName, zipCode, city));
             }
 
-        } catch (SQLServerException throwables) {
-            throwables.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         return null;
     }
 
-    public ObservableList<Event> getAllEvents()
+    public ObservableList<Event> getAllEvents() throws SQLException
     {
         ObservableList<Venue> returnList = FXCollections.observableArrayList();
 
         String sql = "SELECT * FROM Events";
 
-        try (Connection connection = DBconnect.getConnection())
-        {
             Statement statement = DBconnect.getConnection().createStatement();
             ResultSet result = statement.executeQuery(sql);
 
@@ -235,18 +221,11 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
             }
 
-        } catch (SQLServerException throwables) {
-            throwables.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         return null;
     }
 
-    public void createEvent(Event event)
+    public void createEvent(Event event) throws SQLException
     {
-        try (Connection connection = DBconnect.getConnection())
-        {
             String sql = """
                     INSERT INTO Events (eventTitle, VenueID, DESCRIPTION, maxSeats, beginAt, endAt, price)
                     VALUES ('%s', '%s', '%s')
@@ -254,13 +233,6 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
                     """.formatted(event.getEventName(), event.getLocation(), event.getDescription(), event.getLocation(), event.getStartDateTime(), event.getEndDateTime(), event.getPriceGroupsProperty()); //Needs to store name
 
             this.execute(sql);
-
-        } catch (SQLServerException throwables) {
-            throwables.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
     }
 
     public void updateEvent(Event event)
@@ -297,14 +269,14 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         execute(sql);
     }
 
-    public ObservableList<UserInfo> getUsersForEvent(Event event)
+    public ObservableList<UserInfo> getUsersForEvent(Event event) throws SQLException
     {
         ObservableList<UserInfo> returnList = FXCollections.observableArrayList();
 
-        String sql = "SELECT * FROM Users";
+        String sql = """
+                    SELECT * FROM userEvent WHERE EventID_FK = '%s'
+                    """.formatted(event.getId());
 
-        try (Connection connection = DBconnect.getConnection())
-        {
             Statement statement = DBconnect.getConnection().createStatement();
             ResultSet result = statement.executeQuery(sql);
 
@@ -313,11 +285,6 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
             }
 
-        } catch (SQLServerException throwables) {
-            throwables.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         return null;
 
     }
