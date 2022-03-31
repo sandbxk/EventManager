@@ -242,8 +242,8 @@
                                                 <TableView fx:id="tblViewNewEventTicketGroup" editable="true" minHeight="-Infinity" minWidth="-Infinity" prefHeight="106.0" prefWidth="484.0">
                                                     <columns>
                                                         <TableColumn fx:id="tblClmnGroupName" prefWidth="212.0" text="Tier" />
-                                                        <TableColumn fx:id="tblClmnGroupPrice" prefWidth="183.99993896484375" text="Price" />
-                                                        <TableColumn fx:id="tblClmnGroupCurrency" prefWidth="69.60003662109375" />
+                                                        <TableColumn fx:id="tblClmnGroupPrice" maxWidth="150.0" minWidth="-Infinity" prefWidth="200.0" text="Price" />
+                                                        <TableColumn fx:id="tblClmnGroupCurrency" maxWidth="90.0" prefWidth="90.0" text="Currency" />
                                                     </columns>
                                                 </TableView>
                                                 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="25.0">

@@ -223,9 +223,8 @@
 }
 
 .table-view{
-    -fx-content-display: center;
     -fx-background-color: transparent;
-    -fx-base: transparent;
+    -fx-base: -fx-paneBase;
     -fx-control-inner-background: transparent;
     -fx-background-color: transparent;
     -fx-table-cell-border-color: transparent;
@@ -235,18 +234,18 @@
 }
 
 .table-view:focused{
-    -fx-content-display: center;
+
     -fx-background-color: transparent;
 }
 
 .table-view .column-header-background {
-    -fx-content-display: center;
+
     -fx-background-color: transparent;
 }
 
 
 .table-view .column-header .label {
-    -fx-content-display: center;
+
     -fx-text-fill: -fx-txtBase;
     -fx-background-color: transparent;
     -fx-font-size: 14;
@@ -254,12 +253,12 @@
 }
 
 .table-view .column-header {
-    -fx-content-display: center;
     -fx-background-color: transparent;
 }
 
 .table-view .table-cell{
     -fx-content-display: center;
+    -fx-alignment: center;
     -fx-text-fill: -fx-txtBase;
     -fx-table-cell-border-color: transparent;
     -fx-font-family: Roboto;

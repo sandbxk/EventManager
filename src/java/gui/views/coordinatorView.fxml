@@ -252,7 +252,7 @@
                               </VBox>
                               <HBox>
                                  <children>
-                                    <ImageView fitHeight="35.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="imgViewTicketIcon" fitHeight="35.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../styles/img/ticket200x.png" />
                                        </image>
@@ -299,8 +299,9 @@
                                     </Label>
                                     <TableView fx:id="tblViewTicketGroup" minHeight="-Infinity" minWidth="-Infinity" prefHeight="123.0" prefWidth="314.0">
                                       <columns>
-                                        <TableColumn fx:id="tblClmnGroupName" prefWidth="140.0" text="Tier" />
-                                        <TableColumn fx:id="tblClmnGroupPrice" prefWidth="161.0" text="Price" />
+                                        <TableColumn fx:id="tblClmnGroupName" maxWidth="150.0" prefWidth="150.0" text="Tier" />
+                                        <TableColumn fx:id="tblClmnGroupPrice" maxWidth="75.0" prefWidth="75.0" text="Price" />
+                                          <TableColumn fx:id="tblClmnGroupCurrency" maxWidth="75.0" prefWidth="75.0" text="Currency" />
                                       </columns>
                                        <VBox.margin>
                                           <Insets left="5.0" right="5.0" />

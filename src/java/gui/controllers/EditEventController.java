@@ -68,7 +68,6 @@ public class EditEventController implements Initializable {
     private Event editedEvent;
     private ObservableList<PriceGroup> priceGroups;
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         editedEvent = DataManager.getInstance().getSelectedEvent();
@@ -94,6 +93,9 @@ public class EditEventController implements Initializable {
         if (editedEvent.getEndDateTime() != null) {
             datePickerEndDate.setValue(editedEvent.getEndDateTime().toLocalDate());
             txtFieldEndTime.setText(editedEvent.getEndDateTime().toLocalTime().toString());
+        }
+        if (editedEvent.getColor() != null){
+            colorPicker.setValue(editedEvent.getColor());
         }
 
         txtAreaEditEventInfo.setText(editedEvent.getDescription());

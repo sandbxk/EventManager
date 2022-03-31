@@ -48,7 +48,7 @@ public class VenuePriceGroupController implements Initializable {
         //Init for Edit PriceGroup
         if (txtFieldEditPriceGroupName != null) {
             txtFieldEditPriceGroupPrice.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), 0, integerFilter()));
-
+            txtFieldEditPriceGroupPrice.setOnMouseClicked(event -> txtFieldEditPriceGroupPrice.clear());
             PriceGroup selectedPriceGroup = DataManager.getInstance().getSelectedPriceGroup();
 
             txtFieldEditPriceGroupName.setText(selectedPriceGroup.getName());
@@ -59,11 +59,13 @@ public class VenuePriceGroupController implements Initializable {
         //Init for New PriceGroup
         if (txtFieldNewPriceGroupName != null) {
             txtFieldNewPriceGroupPrice.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), 0, integerFilter()));
+            txtFieldNewPriceGroupPrice.setOnMouseClicked(event -> txtFieldNewPriceGroupPrice.clear());
         }
 
         //Init for Edit Venue
         if (txtFieldEditVenueName != null) {
             txtFieldEditVenueZipcode.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), 0, integerFilter()));
+            txtFieldEditVenueZipcode.setOnMouseClicked(event -> txtFieldEditVenueZipcode.clear());
 
             Venue selectedVenue = DataManager.getInstance().getSelectedVenue();
 
@@ -76,6 +78,7 @@ public class VenuePriceGroupController implements Initializable {
         //Init for New Venue
         if (txtFieldNewVenueName != null) {
             txtFieldNewVenueZipcode.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), 0, integerFilter()));
+            txtFieldNewVenueZipcode.setOnMouseClicked(event -> txtFieldNewVenueZipcode.clear());
         }
     }
 

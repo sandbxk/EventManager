@@ -57,8 +57,10 @@ public class CoordinatorController implements Initializable {
     @FXML public TableView<PriceGroup> tblViewTicketGroup;
     @FXML public TableColumn<PriceGroup, String> tblClmnGroupName;
     @FXML public TableColumn<PriceGroup, Number> tblClmnGroupPrice;
+    @FXML public TableColumn<PriceGroup, String> tblClmnGroupCurrency;
     @FXML public TextArea txtAreaInfo;
 
+    @FXML public ImageView imgViewTicketIcon;
     @FXML public Label lblEventDateSpacer;
     @FXML public Label lblAtVenue;
     @FXML public Label lblDescriptionHeader;
@@ -107,6 +109,7 @@ public class CoordinatorController implements Initializable {
     {
         eventToggle = new ToggleGroup();
         onShowHideMenu(new ActionEvent());
+        hideDetailsPanelComponents(true);
         initTableViewPriceGroups();
         initEventListener();
         initEventActionsMenu();
@@ -116,9 +119,17 @@ public class CoordinatorController implements Initializable {
     private void initTableViewPriceGroups(){
         tblClmnGroupName.setCellValueFactory(param -> param.getValue().nameProperty());
         tblClmnGroupPrice.setCellValueFactory(param -> param.getValue().priceProperty());
+        tblClmnGroupCurrency.setCellValueFactory(param -> param.getValue().currencyProperty());
     }
 
     private void initEventListener() {
+        eventToggle.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == null)
+                hideDetailsPanelComponents(true);
+
+            else hideDetailsPanelComponents(false);
+        });
+
         selectedEvent.addListener((observable, oldValue, newValue) -> {
 
             if (newValue == null){
@@ -150,7 +161,7 @@ public class CoordinatorController implements Initializable {
     private void hideDetailsPanelComponents(boolean hidden){
         Timeline timeline = new Timeline();
         int endValue = 0;
-
+        int duration = 300;
         if (hidden){
             endValue = 0;
         }
@@ -158,31 +169,40 @@ public class CoordinatorController implements Initializable {
             endValue = 1;
         }
 
-        KeyFrame op1 = new KeyFrame(Duration.millis(150), new KeyValue(imgViewEvent.opacityProperty(), endValue));
-        KeyFrame op2 = new KeyFrame(Duration.millis(150), new KeyValue(imgDetailBackground.opacityProperty(), endValue));
-        KeyFrame op3 = new KeyFrame(Duration.millis(150), new KeyValue(lblEventName.opacityProperty(), endValue));
-        KeyFrame op4 = new KeyFrame(Duration.millis(150), new KeyValue(lblEventDate.opacityProperty(), endValue));
-        KeyFrame op5 = new KeyFrame(Duration.millis(150), new KeyValue(lblEventTime.opacityProperty(), endValue));
-        KeyFrame op6 = new KeyFrame(Duration.millis(150), new KeyValue(lblEventVenue.opacityProperty(), endValue));
+        KeyFrame op1 = new KeyFrame(Duration.millis(duration), new KeyValue(imgViewEvent.opacityProperty(), endValue));
+        KeyFrame op2 = new KeyFrame(Duration.millis(duration), new KeyValue(imgDetailBackground.opacityProperty(), endValue));
+        KeyFrame op3 = new KeyFrame(Duration.millis(duration), new KeyValue(lblEventName.opacityProperty(), endValue));
+        KeyFrame op4 = new KeyFrame(Duration.millis(duration), new KeyValue(lblEventDate.opacityProperty(), endValue));
+        KeyFrame op5 = new KeyFrame(Duration.millis(duration), new KeyValue(lblEventTime.opacityProperty(), endValue));
+        KeyFrame op6 = new KeyFrame(Duration.millis(duration), new KeyValue(lblEventVenue.opacityProperty(), endValue));
 
-        KeyFrame op7 = new KeyFrame(Duration.millis(150), new KeyValue(txtAreaInfo.opacityProperty(), endValue));
-        KeyFrame op8 = new KeyFrame(Duration.millis(150), new KeyValue(lblRemainingTickets.opacityProperty(), endValue));
-        KeyFrame op9 = new KeyFrame(Duration.millis(150), new KeyValue(lblSoldTickets.opacityProperty(), endValue));
+        KeyFrame op7 = new KeyFrame(Duration.millis(duration), new KeyValue(txtAreaInfo.opacityProperty(), endValue));
+        KeyFrame op8 = new KeyFrame(Duration.millis(duration), new KeyValue(lblRemainingTickets.opacityProperty(), endValue));
+        KeyFrame op9 = new KeyFrame(Duration.millis(duration), new KeyValue(lblSoldTickets.opacityProperty(), endValue));
 
-        KeyFrame op10 = new KeyFrame(Duration.millis(150), new KeyValue(tblViewTicketGroup.opacityProperty(), endValue));
+        KeyFrame op10 = new KeyFrame(Duration.millis(duration), new KeyValue(tblViewTicketGroup.opacityProperty(), endValue));
 
-        KeyFrame opLbl1 = new KeyFrame(Duration.millis(150), new KeyValue(lblEventDateSpacer.opacityProperty(), endValue));
-        KeyFrame opLbl2 = new KeyFrame(Duration.millis(150), new KeyValue(lblAtVenue.opacityProperty(), endValue));
-        KeyFrame opLbl3 = new KeyFrame(Duration.millis(150), new KeyValue(lblDescriptionHeader.opacityProperty(), endValue));
-        KeyFrame opLbl4 = new KeyFrame(Duration.millis(150), new KeyValue(lblRemaining.opacityProperty(), endValue));
-        KeyFrame opLbl5 = new KeyFrame(Duration.millis(150), new KeyValue(lblSold.opacityProperty(), endValue));
-        KeyFrame opLbl6 = new KeyFrame(Duration.millis(150), new KeyValue(lblTicketPricing.opacityProperty(), endValue));
+        KeyFrame opLbl1 = new KeyFrame(Duration.millis(duration), new KeyValue(lblEventDateSpacer.opacityProperty(), endValue));
+        KeyFrame opLbl2 = new KeyFrame(Duration.millis(duration), new KeyValue(lblAtVenue.opacityProperty(), endValue));
+        KeyFrame opLbl3 = new KeyFrame(Duration.millis(duration), new KeyValue(lblDescriptionHeader.opacityProperty(), endValue));
+        KeyFrame opLbl4 = new KeyFrame(Duration.millis(duration), new KeyValue(lblRemaining.opacityProperty(), endValue));
+        KeyFrame opLbl5 = new KeyFrame(Duration.millis(duration), new KeyValue(lblSold.opacityProperty(), endValue));
+        KeyFrame opLbl6 = new KeyFrame(Duration.millis(duration), new KeyValue(lblTicketPricing.opacityProperty(), endValue));
+        KeyFrame opImg7 = new KeyFrame(Duration.millis(duration), new KeyValue(imgViewTicketIcon.opacityProperty(), endValue));
+        KeyFrame opBtn8 = new KeyFrame(Duration.millis(duration), new KeyValue(btnEventActions.opacityProperty(), endValue));
+
+
+        timeline.getKeyFrames().addAll(op1, op2, op3, op4, op5, op6, op7, op8, op9, op10,  opLbl1, opLbl2, opLbl3, opLbl4, opLbl5, opLbl6, opImg7, opBtn8);
 
         timeline.play();
     }
 
     public void onCreate(ActionEvent event)
     {
+        if (eventToggle.getSelectedToggle() != null)
+            eventToggle.getSelectedToggle().setSelected(false);
+        DataManager.getInstance().setSelectedEvent(null);
+
         Parent root = null;
         Stage stage = new Stage();
         try {
@@ -243,6 +263,23 @@ public class CoordinatorController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        stage.setOnHiding(event -> updateEventDetail());
+    }
+
+    private void updateEventDetail(){
+        imgViewEvent.setImage(selectedEvent.get().getEventImage());
+        imgDetailBackground.setStyle("-fx-background-color: rgb(" + selectedEvent.get().getColor().getRed()*255 +", " + selectedEvent.get().getColor().getGreen()*255 + ", " + selectedEvent.get().getColor().getBlue()*255 + ");");
+        lblEventName.setText(selectedEvent.get().getEventName());
+        lblEventDate.setText(selectedEvent.get().getStartDateTime().toLocalDate().toString());
+        lblEventTime.setText(selectedEvent.get().getStartDateTime().toLocalTime().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)));
+        lblEventVenue.setText(selectedEvent.get().getLocation().getVenueName());
+
+        txtAreaInfo.setText(selectedEvent.get().getDescription());
+
+        lblSoldTickets.setText(selectedEvent.get().getTicketsSold() + "");
+        lblRemainingTickets.setText(selectedEvent.get().getTicketsRemaining() + "");
+
+        tblViewTicketGroup.setItems(selectedEvent.get().getPriceGroups());
     }
 
     /**

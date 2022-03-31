@@ -72,7 +72,6 @@ public class NewEventController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         priceGroups = FXCollections.observableArrayList();
         DataManager.getInstance().setPriceGroups(priceGroups);
-        DataManager.getInstance().setSelectedEvent(null);
 
         txtFieldTicketRemaining.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), 0, integerFilter()));
         txtFieldTicketsSold.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), 0, integerFilter()));
