@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>D:/GITHUB/EventManager/src/java</OriginalElement>
+  <nodes>
+    <node x="72.5" y="1884.5">App</node>
+    <node x="516.5432556497168" y="172.0">be.UserInfo</node>
+    <node x="20.0" y="2455.0">bll.MailConnector</node>
+    <node x="1690.9182556497167" y="922.0">be.Event</node>
+    <node x="1147.0" y="2455.0">bll.ExporterPDF</node>
+    <node x="570.50158898305" y="0.0">be.EUserType</node>
+    <node x="234.0000000000001" y="1076.0">bll.SessionManager</node>
+    <node x="859.5457274011294" y="205.0">dal.DBConnection</node>
+    <node x="988.0808615819208" y="1586.0">gui.controllers.NewEventController</node>
+    <node x="2003.1682556497167" y="1021.0">gui.controllers.AddNewUserController</node>
+    <node x="568.0241878531073" y="420.0">gui.model.UserModel</node>
+    <node x="1731.0849223163832" y="172.0">be.Venue</node>
+    <node x="708.1024011299429" y="641.0">gui.controllers.NewCoordinatorController</node>
+    <node x="1779.75" y="1575.0">gui.controllers.EditEventController</node>
+    <node x="1693.1682556497167" y="630.0">bll.DataManager</node>
+    <node x="244.0" y="2455.0">gui.component.EventEntity</node>
+    <node x="363.0000000000001" y="1828.0">gui.controllers.SignInController</node>
+    <node x="333.62658898305006" y="432.5">bll.interfaces.IAuthenticator</node>
+    <node x="1103.5457274011294" y="228.5">dal.IUserCrudDAO</node>
+    <node x="2214.375" y="1388.0">gui.controllers.CoordinatorController</node>
+    <node x="1360.9182556497167" y="944.0">gui.controllers.VenuePriceGroupController</node>
+    <node x="716.0" y="2455.0">gui.controllers.MainViewController</node>
+    <node x="1007.3100282485874" y="420.0">dal.CoordinatorDAO</node>
+    <node x="942.0" y="2455.0">gui.controllers.AdminController</node>
+    <node x="482.0" y="2455.0">gui.component.EventEntityController</node>
+    <node x="0.0" y="1010.0">gui.model.SceneManager</node>
+    <node x="1654.4350282485875" y="398.0">be.PriceGroup</node>
+    <node x="0.0" y="2581.0">bll.MailService</node>
+    <node x="483.1024011299429" y="707.0">bll.DatabaseAuthenticator</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="bll.DataManager" target="be.PriceGroup" relationship="DEPENDENCY">
+      <point x="89.33333333333326" y="-104.0" />
+      <point x="1916.50158898305" y="608.0" />
+      <point x="1889.25" y="608.0" />
+      <point x="1889.25" y="588.0" />
+      <point x="1904.7332274011294" y="588.0" />
+      <point x="1904.7332274011294" y="518.0" />
+      <point x="1799.4350282485875" y="518.0" />
+      <point x="58.0" y="49.0" />
+    </edge>
+    <edge source="dal.CoordinatorDAO" target="be.Event" relationship="DEPENDENCY">
+      <point x="62.33333333333337" y="27.0" />
+      <point x="1163.1433615819208" y="568.0" />
+      <point x="1682.6682556497167" y="568.0" />
+      <point x="1682.6682556497167" y="870.0" />
+      <point x="1913.2899011299428" y="870.0" />
+      <point x="1913.2899011299428" y="900.0" />
+      <point x="1894.9182556497167" y="900.0" />
+      <point x="68.0" y="-192.0" />
+    </edge>
+    <edge source="bll.DataManager" target="dal.CoordinatorDAO" relationship="TO_ONE">
+      <point x="0.0" y="-104.0" />
+      <point x="1827.1682556497167" y="608.0" />
+      <point x="1808.128354519774" y="608.0" />
+      <point x="1808.128354519774" y="538.0" />
+      <point x="1100.8100282485875" y="538.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="gui.controllers.EditEventController" target="be.Event" relationship="TO_ONE">
+      <point x="-89.75" y="-324.0" />
+      <point x="1869.5" y="1367.0" />
+      <point x="1767.0" y="1367.0" />
+      <point x="1767.0" y="1347.0" />
+      <point x="1826.9182556497167" y="1347.0" />
+      <point x="0.0" y="192.0" />
+    </edge>
+    <edge source="gui.controllers.NewCoordinatorController" target="dal.CoordinatorDAO" relationship="TO_ONE">
+      <point x="76.0" y="-93.0" />
+      <point x="898.1024011299429" y="568.0" />
+      <point x="1100.8100282485875" y="568.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="gui.controllers.NewEventController" target="bll.DataManager" relationship="DEPENDENCY">
+      <point x="119.66666666666674" y="-313.0" />
+      <point x="1287.2475282485875" y="1367.0" />
+      <point x="1576.7899011299428" y="1367.0" />
+      <point x="1576.7899011299428" y="1347.0" />
+      <point x="1645.4182556497167" y="1347.0" />
+      <point x="1645.4182556497167" y="890.0" />
+      <point x="2036.6850282485875" y="890.0" />
+      <point x="2036.6850282485875" y="860.0" />
+      <point x="1894.1682556497167" y="860.0" />
+      <point x="67.0" y="104.0" />
+    </edge>
+    <edge source="be.UserInfo" target="be.EUserType" relationship="DEPENDENCY">
+      <point x="32.25" y="-71.0" />
+      <point x="613.2932556497168" y="151.0" />
+      <point x="783.7932556497167" y="151.0" />
+      <point x="783.7932556497167" y="141.0" />
+      <point x="702.50158898305" y="141.0" />
+      <point x="44.0" y="60.0" />
+    </edge>
+    <edge source="App" target="gui.model.SceneManager" relationship="DEPENDENCY">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="104.0" />
+    </edge>
+    <edge source="gui.controllers.CoordinatorController" target="be.Event" relationship="DEPENDENCY">
+      <point x="-2.2737367544323206E-13" y="-511.0" />
+      <point x="2393.875" y="1347.0" />
+      <point x="2318.128354519774" y="1347.0" />
+      <point x="2318.128354519774" y="1337.0" />
+      <point x="1917.5849223163834" y="1337.0" />
+      <point x="90.66666666666674" y="192.0" />
+    </edge>
+    <edge source="gui.controllers.CoordinatorController" target="be.Venue" relationship="DEPENDENCY">
+      <point x="-2.2737367544323206E-13" y="-511.0" />
+      <point x="2393.875" y="376.0" />
+      <point x="1982.1682556497167" y="376.0" />
+      <point x="1982.1682556497167" y="366.0" />
+      <point x="1891.0849223163832" y="366.0" />
+      <point x="64.0" y="71.0" />
+    </edge>
+    <edge source="gui.controllers.SignInController" target="be.UserInfo" relationship="DEPENDENCY">
+      <point x="-66.33333333333331" y="-71.0" />
+      <point x="396.16666666666674" y="1367.0" />
+      <point x="235.7475282485873" y="1367.0" />
+      <point x="235.7475282485873" y="1347.0" />
+      <point x="223.5" y="1347.0" />
+      <point x="223.5" y="376.0" />
+      <point x="364.37658898305006" y="376.0" />
+      <point x="364.37658898305006" y="366.0" />
+      <point x="538.0432556497168" y="366.0" />
+      <point x="-43.0" y="71.0" />
+    </edge>
+    <edge source="gui.controllers.EditEventController" target="be.Event" relationship="DEPENDENCY">
+      <point x="89.75" y="-324.0" />
+      <point x="2049.0" y="1367.0" />
+      <point x="2167.039901129943" y="1367.0" />
+      <point x="2167.039901129943" y="1357.0" />
+      <point x="2318.128354519774" y="1357.0" />
+      <point x="2318.128354519774" y="1337.0" />
+      <point x="1917.5849223163834" y="1337.0" />
+      <point x="90.66666666666674" y="192.0" />
+    </edge>
+    <edge source="bll.DataManager" target="dal.CoordinatorDAO" relationship="CREATE">
+      <point x="-89.33333333333326" y="-104.0" />
+      <point x="1737.8349223163834" y="548.0" />
+      <point x="1054.5600282485875" y="548.0" />
+      <point x="1054.5600282485875" y="538.0" />
+      <point x="1038.476694915254" y="538.0" />
+      <point x="-62.33333333333337" y="27.0" />
+    </edge>
+    <edge source="bll.DataManager" target="be.Venue" relationship="TO_ONE">
+      <point x="0.0" y="-104.0" />
+      <point x="1827.1682556497167" y="608.0" />
+      <point x="1808.128354519774" y="608.0" />
+      <point x="1808.128354519774" y="588.0" />
+      <point x="1853.9565677966095" y="588.0" />
+      <point x="1853.9565677966095" y="366.0" />
+      <point x="1827.0849223163832" y="366.0" />
+      <point x="0.0" y="71.0" />
+    </edge>
+    <edge source="gui.controllers.VenuePriceGroupController" target="be.Venue" relationship="CREATE">
+      <point x="-67.25" y="-170.0" />
+      <point x="1428.1682556497167" y="900.0" />
+      <point x="1033.5600282485875" y="900.0" />
+      <point x="1033.5600282485875" y="890.0" />
+      <point x="957.6024011299429" y="890.0" />
+      <point x="957.6024011299429" y="376.0" />
+      <point x="962.8524011299429" y="376.0" />
+      <point x="962.8524011299429" y="336.0" />
+      <point x="1763.0849223163832" y="336.0" />
+      <point x="-64.0" y="71.0" />
+    </edge>
+    <edge source="bll.DataManager" target="be.Venue" relationship="TO_MANY">
+      <point x="0.0" y="-104.0" />
+      <point x="1827.1682556497167" y="608.0" />
+      <point x="1808.128354519774" y="608.0" />
+      <point x="1808.128354519774" y="588.0" />
+      <point x="1853.9565677966095" y="588.0" />
+      <point x="1853.9565677966095" y="366.0" />
+      <point x="1827.0849223163832" y="366.0" />
+      <point x="0.0" y="71.0" />
+    </edge>
+    <edge source="gui.controllers.CoordinatorController" target="bll.DataManager" relationship="DEPENDENCY">
+      <point x="-2.2737367544323206E-13" y="-511.0" />
+      <point x="2393.875" y="890.0" />
+      <point x="2036.6850282485875" y="890.0" />
+      <point x="2036.6850282485875" y="860.0" />
+      <point x="1894.1682556497167" y="860.0" />
+      <point x="67.0" y="104.0" />
+    </edge>
+    <edge source="gui.controllers.NewEventController" target="be.PriceGroup" relationship="TO_MANY">
+      <point x="-119.66666666666674" y="-313.0" />
+      <point x="1047.914194915254" y="1367.0" />
+      <point x="946.6024011299429" y="1367.0" />
+      <point x="946.6024011299429" y="588.0" />
+      <point x="1741.4350282485875" y="588.0" />
+      <point x="0.0" y="49.0" />
+    </edge>
+    <edge source="gui.controllers.VenuePriceGroupController" target="bll.DataManager" relationship="DEPENDENCY">
+      <point x="67.25" y="-170.0" />
+      <point x="1562.6682556497167" y="890.0" />
+      <point x="2036.6850282485875" y="890.0" />
+      <point x="2036.6850282485875" y="860.0" />
+      <point x="1894.1682556497167" y="860.0" />
+      <point x="67.0" y="104.0" />
+    </edge>
+    <edge source="gui.controllers.NewEventController" target="be.Venue" relationship="DEPENDENCY">
+      <point x="119.66666666666674" y="-313.0" />
+      <point x="1287.2475282485875" y="1367.0" />
+      <point x="1576.7899011299428" y="1367.0" />
+      <point x="1576.7899011299428" y="1347.0" />
+      <point x="1350.4182556497167" y="1347.0" />
+      <point x="1350.4182556497167" y="376.0" />
+      <point x="1982.1682556497167" y="376.0" />
+      <point x="1982.1682556497167" y="366.0" />
+      <point x="1891.0849223163832" y="366.0" />
+      <point x="64.0" y="71.0" />
+    </edge>
+    <edge source="bll.MailService" target="bll.MailConnector" relationship="CREATE">
+      <point x="-49.75" y="-27.0" />
+      <point x="49.75" y="2556.0" />
+      <point x="59.75" y="2556.0" />
+      <point x="-39.75" y="38.0" />
+    </edge>
+    <edge source="dal.CoordinatorDAO" target="be.EUserType" relationship="DEPENDENCY">
+      <point x="70.125" y="-27.0" />
+      <point x="1170.9350282485875" y="376.0" />
+      <point x="1304.0457274011294" y="376.0" />
+      <point x="1304.0457274011294" y="151.0" />
+      <point x="783.7932556497167" y="151.0" />
+      <point x="783.7932556497167" y="141.0" />
+      <point x="702.50158898305" y="141.0" />
+      <point x="44.0" y="60.0" />
+    </edge>
+    <edge source="bll.SessionManager" target="bll.interfaces.IAuthenticator" relationship="DEPENDENCY">
+      <point x="-72.66666666666669" y="-38.0" />
+      <point x="270.3333333333335" y="900.0" />
+      <point x="313.41419491525403" y="900.0" />
+      <point x="313.41419491525403" y="890.0" />
+      <point x="318.66419491525403" y="890.0" />
+      <point x="318.66419491525403" y="598.0" />
+      <point x="357.62658898305006" y="598.0" />
+      <point x="-48.0" y="14.5" />
+    </edge>
+    <edge source="be.Event" target="be.PriceGroup" relationship="DEPENDENCY">
+      <point x="68.0" y="-192.0" />
+      <point x="1894.9182556497167" y="900.0" />
+      <point x="1913.2899011299428" y="900.0" />
+      <point x="1913.2899011299428" y="870.0" />
+      <point x="1971.6682556497167" y="870.0" />
+      <point x="1971.6682556497167" y="598.0" />
+      <point x="1904.7332274011294" y="598.0" />
+      <point x="1904.7332274011294" y="518.0" />
+      <point x="1799.4350282485875" y="518.0" />
+      <point x="58.0" y="49.0" />
+    </edge>
+    <edge source="gui.model.UserModel" target="be.UserInfo" relationship="TO_ONE">
+      <point x="31.0" y="-27.0" />
+      <point x="661.0241878531073" y="366.0" />
+      <point x="597.7123940677961" y="366.0" />
+      <point x="597.7123940677961" y="356.0" />
+      <point x="581.0432556497168" y="356.0" />
+      <point x="0.0" y="71.0" />
+    </edge>
+    <edge source="gui.controllers.SignInController" target="gui.model.SceneManager" relationship="DEPENDENCY">
+      <point x="-66.33333333333331" y="-71.0" />
+      <point x="396.16666666666674" y="1367.0" />
+      <point x="235.7475282485873" y="1367.0" />
+      <point x="235.7475282485873" y="1357.0" />
+      <point x="106.5" y="1357.0" />
+      <point x="0.0" y="104.0" />
+    </edge>
+    <edge source="gui.controllers.SignInController" target="bll.interfaces.IAuthenticator" relationship="TO_ONE">
+      <point x="0.0" y="-71.0" />
+      <point x="462.5000000000001" y="608.0" />
+      <point x="405.62658898305006" y="608.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="bll.SessionManager" target="bll.DatabaseAuthenticator" relationship="CREATE">
+      <point x="72.66666666666669" y="-38.0" />
+      <point x="415.66666666666674" y="900.0" />
+      <point x="585.6024011299429" y="900.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="gui.controllers.EditEventController" target="be.PriceGroup" relationship="DEPENDENCY">
+      <point x="89.75" y="-324.0" />
+      <point x="2049.0" y="1367.0" />
+      <point x="2167.039901129943" y="1367.0" />
+      <point x="2167.039901129943" y="1327.0" />
+      <point x="2230.6682556497167" y="1327.0" />
+      <point x="2230.6682556497167" y="598.0" />
+      <point x="1904.7332274011294" y="598.0" />
+      <point x="1904.7332274011294" y="518.0" />
+      <point x="1799.4350282485875" y="518.0" />
+      <point x="58.0" y="49.0" />
+    </edge>
+    <edge source="dal.CoordinatorDAO" target="dal.DBConnection" relationship="TO_ONE">
+      <point x="-23.375" y="-27.0" />
+      <point x="1077.4350282485875" y="366.0" />
+      <point x="1027.5457274011294" y="366.0" />
+      <point x="56.0" y="38.0" />
+    </edge>
+    <edge source="gui.controllers.SignInController" target="bll.interfaces.IAuthenticator" relationship="DEPENDENCY">
+      <point x="-66.33333333333331" y="-71.0" />
+      <point x="396.16666666666674" y="1367.0" />
+      <point x="235.7475282485873" y="1367.0" />
+      <point x="235.7475282485873" y="1347.0" />
+      <point x="223.5" y="1347.0" />
+      <point x="223.5" y="608.0" />
+      <point x="318.66419491525403" y="608.0" />
+      <point x="318.66419491525403" y="598.0" />
+      <point x="357.62658898305006" y="598.0" />
+      <point x="-48.0" y="14.5" />
+    </edge>
+    <edge source="bll.DataManager" target="be.Event" relationship="TO_MANY">
+      <point x="-67.0" y="104.0" />
+      <point x="1760.1682556497167" y="880.0" />
+      <point x="1671.9182556497167" y="880.0" />
+      <point x="1671.9182556497167" y="900.0" />
+      <point x="1758.9182556497167" y="900.0" />
+      <point x="-68.0" y="-192.0" />
+    </edge>
+    <edge source="bll.DatabaseAuthenticator" target="be.UserInfo" relationship="TO_ONE">
+      <point x="0.0" y="-27.0" />
+      <point x="585.6024011299429" y="608.0" />
+      <point x="557.5241878531073" y="608.0" />
+      <point x="557.5241878531073" y="366.0" />
+      <point x="597.7123940677961" y="366.0" />
+      <point x="597.7123940677961" y="356.0" />
+      <point x="581.0432556497168" y="356.0" />
+      <point x="0.0" y="71.0" />
+    </edge>
+    <edge source="bll.MailService" target="bll.MailConnector" relationship="TO_ONE">
+      <point x="49.75" y="-27.0" />
+      <point x="149.25" y="2556.0" />
+      <point x="139.25" y="2556.0" />
+      <point x="39.75" y="38.0" />
+    </edge>
+    <edge source="bll.SessionManager" target="bll.interfaces.IAuthenticator" relationship="TO_ONE">
+      <point x="0.0" y="-38.0" />
+      <point x="343.0000000000001" y="900.0" />
+      <point x="360.16419491525403" y="900.0" />
+      <point x="360.16419491525403" y="608.0" />
+      <point x="405.62658898305006" y="608.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="bll.DataManager" target="be.Venue" relationship="DEPENDENCY">
+      <point x="89.33333333333326" y="-104.0" />
+      <point x="1916.50158898305" y="608.0" />
+      <point x="1889.25" y="608.0" />
+      <point x="1889.25" y="578.0" />
+      <point x="1878.75" y="578.0" />
+      <point x="1878.75" y="376.0" />
+      <point x="1982.1682556497167" y="376.0" />
+      <point x="1982.1682556497167" y="366.0" />
+      <point x="1891.0849223163832" y="366.0" />
+      <point x="64.0" y="71.0" />
+    </edge>
+    <edge source="gui.controllers.SignInController" target="bll.DatabaseAuthenticator" relationship="CREATE">
+      <point x="66.33333333333331" y="-71.0" />
+      <point x="528.8333333333335" y="1367.0" />
+      <point x="585.6024011299429" y="1367.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="gui.controllers.EditEventController" target="be.Venue" relationship="DEPENDENCY">
+      <point x="89.75" y="-324.0" />
+      <point x="2049.0" y="1367.0" />
+      <point x="2167.039901129943" y="1367.0" />
+      <point x="2167.039901129943" y="1327.0" />
+      <point x="2230.6682556497167" y="1327.0" />
+      <point x="2230.6682556497167" y="376.0" />
+      <point x="1982.1682556497167" y="376.0" />
+      <point x="1982.1682556497167" y="366.0" />
+      <point x="1891.0849223163832" y="366.0" />
+      <point x="64.0" y="71.0" />
+    </edge>
+    <edge source="gui.controllers.AddNewUserController" target="bll.DataManager" relationship="DEPENDENCY">
+      <point x="0.0" y="-93.0" />
+      <point x="2111.6682556497167" y="890.0" />
+      <point x="2036.6850282485875" y="890.0" />
+      <point x="2036.6850282485875" y="860.0" />
+      <point x="1894.1682556497167" y="860.0" />
+      <point x="67.0" y="104.0" />
+    </edge>
+    <edge source="gui.controllers.EditEventController" target="bll.DataManager" relationship="DEPENDENCY">
+      <point x="89.75" y="-324.0" />
+      <point x="2049.0" y="1367.0" />
+      <point x="2167.039901129943" y="1367.0" />
+      <point x="2167.039901129943" y="1327.0" />
+      <point x="1992.6682556497167" y="1327.0" />
+      <point x="1992.6682556497167" y="890.0" />
+      <point x="2036.6850282485875" y="890.0" />
+      <point x="2036.6850282485875" y="860.0" />
+      <point x="1894.1682556497167" y="860.0" />
+      <point x="67.0" y="104.0" />
+    </edge>
+    <edge source="bll.DataManager" target="be.Event" relationship="DEPENDENCY">
+      <point x="67.0" y="104.0" />
+      <point x="1894.1682556497167" y="860.0" />
+      <point x="2036.6850282485875" y="860.0" />
+      <point x="2036.6850282485875" y="880.0" />
+      <point x="1913.2899011299428" y="880.0" />
+      <point x="1913.2899011299428" y="900.0" />
+      <point x="1894.9182556497167" y="900.0" />
+      <point x="68.0" y="-192.0" />
+    </edge>
+    <edge source="be.Event" target="bll.DataManager" relationship="DEPENDENCY">
+      <point x="68.0" y="-192.0" />
+      <point x="1894.9182556497167" y="900.0" />
+      <point x="1913.2899011299428" y="900.0" />
+      <point x="1913.2899011299428" y="880.0" />
+      <point x="2036.6850282485875" y="880.0" />
+      <point x="2036.6850282485875" y="860.0" />
+      <point x="1894.1682556497167" y="860.0" />
+      <point x="67.0" y="104.0" />
+    </edge>
+    <edge source="be.UserInfo" target="be.EUserType" relationship="TO_ONE">
+      <point x="-32.25" y="-71.0" />
+      <point x="548.7932556497168" y="141.0" />
+      <point x="614.50158898305" y="141.0" />
+      <point x="-44.0" y="60.0" />
+    </edge>
+    <edge source="gui.controllers.NewEventController" target="be.Event" relationship="CREATE">
+      <point x="0.0" y="-313.0" />
+      <point x="1167.5808615819208" y="1357.0" />
+      <point x="1736.25158898305" y="1357.0" />
+      <point x="-90.66666666666674" y="192.0" />
+    </edge>
+    <edge source="dal.CoordinatorDAO" target="dal.IUserCrudDAO" relationship="REALIZATION">
+      <point x="23.375" y="-27.0" />
+      <point x="1124.1850282485875" y="366.0" />
+      <point x="1198.5457274011294" y="366.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="dal.CoordinatorDAO" target="dal.DBConnection" relationship="CREATE">
+      <point x="-70.125" y="-27.0" />
+      <point x="1030.6850282485875" y="376.0" />
+      <point x="968.1024011299429" y="376.0" />
+      <point x="968.1024011299429" y="356.0" />
+      <point x="915.5457274011294" y="356.0" />
+      <point x="-56.0" y="38.0" />
+    </edge>
+    <edge source="gui.controllers.NewEventController" target="be.PriceGroup" relationship="DEPENDENCY">
+      <point x="119.66666666666674" y="-313.0" />
+      <point x="1287.2475282485875" y="1367.0" />
+      <point x="1576.7899011299428" y="1367.0" />
+      <point x="1576.7899011299428" y="1347.0" />
+      <point x="1640.4182556497167" y="1347.0" />
+      <point x="1640.4182556497167" y="598.0" />
+      <point x="1904.7332274011294" y="598.0" />
+      <point x="1904.7332274011294" y="518.0" />
+      <point x="1799.4350282485875" y="518.0" />
+      <point x="58.0" y="49.0" />
+    </edge>
+    <edge source="gui.model.UserModel" target="be.UserInfo" relationship="DEPENDENCY">
+      <point x="-31.0" y="-27.0" />
+      <point x="599.0241878531073" y="376.0" />
+      <point x="364.37658898305006" y="376.0" />
+      <point x="364.37658898305006" y="366.0" />
+      <point x="538.0432556497168" y="366.0" />
+      <point x="-43.0" y="71.0" />
+    </edge>
+    <edge source="bll.DatabaseAuthenticator" target="bll.interfaces.IAuthenticator" relationship="REALIZATION">
+      <point x="-68.33333333333331" y="-27.0" />
+      <point x="517.2690677966095" y="598.0" />
+      <point x="453.62658898305006" y="598.0" />
+      <point x="48.0" y="14.5" />
+    </edge>
+    <edge source="be.Event" target="be.Venue" relationship="DEPENDENCY">
+      <point x="68.0" y="-192.0" />
+      <point x="1894.9182556497167" y="900.0" />
+      <point x="1913.2899011299428" y="900.0" />
+      <point x="1913.2899011299428" y="870.0" />
+      <point x="1982.1682556497167" y="870.0" />
+      <point x="1982.1682556497167" y="366.0" />
+      <point x="1891.0849223163832" y="366.0" />
+      <point x="64.0" y="71.0" />
+    </edge>
+    <edge source="gui.controllers.NewCoordinatorController" target="be.UserInfo" relationship="CREATE">
+      <point x="0.0" y="-93.0" />
+      <point x="822.1024011299429" y="608.0" />
+      <point x="812.0000000000001" y="608.0" />
+      <point x="812.0000000000001" y="356.0" />
+      <point x="624.0432556497168" y="356.0" />
+      <point x="43.0" y="71.0" />
+    </edge>
+    <edge source="dal.CoordinatorDAO" target="be.UserInfo" relationship="CREATE">
+      <point x="-70.125" y="-27.0" />
+      <point x="1030.6850282485875" y="376.0" />
+      <point x="968.1024011299429" y="376.0" />
+      <point x="968.1024011299429" y="366.0" />
+      <point x="812.0000000000001" y="366.0" />
+      <point x="812.0000000000001" y="356.0" />
+      <point x="624.0432556497168" y="356.0" />
+      <point x="43.0" y="71.0" />
+    </edge>
+    <edge source="gui.controllers.SignInController" target="bll.SessionManager" relationship="DEPENDENCY">
+      <point x="-66.33333333333331" y="-71.0" />
+      <point x="396.16666666666674" y="1367.0" />
+      <point x="235.7475282485873" y="1367.0" />
+      <point x="235.7475282485873" y="1347.0" />
+      <point x="343.0000000000001" y="1347.0" />
+      <point x="0.0" y="38.0" />
+    </edge>
+    <edge source="be.Event" target="be.PriceGroup" relationship="TO_MANY">
+      <point x="-68.0" y="-192.0" />
+      <point x="1758.9182556497167" y="900.0" />
+      <point x="1671.9182556497167" y="900.0" />
+      <point x="1671.6682556497167" y="588.0" />
+      <point x="1741.4350282485875" y="588.0" />
+      <point x="0.0" y="49.0" />
+    </edge>
+    <edge source="bll.interfaces.IAuthenticator" target="be.UserInfo" relationship="DEPENDENCY">
+      <point x="0.0" y="-14.5" />
+      <point x="405.62658898305006" y="376.0" />
+      <point x="364.37658898305006" y="376.0" />
+      <point x="364.37658898305006" y="366.0" />
+      <point x="538.0432556497168" y="366.0" />
+      <point x="-43.0" y="71.0" />
+    </edge>
+    <edge source="gui.controllers.NewCoordinatorController" target="be.EUserType" relationship="DEPENDENCY">
+      <point x="-76.0" y="-93.0" />
+      <point x="746.1024011299429" y="608.0" />
+      <point x="779.9975282485874" y="608.0" />
+      <point x="779.9975282485874" y="151.0" />
+      <point x="783.7932556497167" y="151.0" />
+      <point x="783.7932556497167" y="141.0" />
+      <point x="702.50158898305" y="141.0" />
+      <point x="44.0" y="60.0" />
+    </edge>
+    <edge source="gui.controllers.CoordinatorController" target="be.PriceGroup" relationship="DEPENDENCY">
+      <point x="-2.2737367544323206E-13" y="-511.0" />
+      <point x="2393.875" y="598.0" />
+      <point x="1904.7332274011294" y="598.0" />
+      <point x="1904.7332274011294" y="518.0" />
+      <point x="1799.4350282485875" y="518.0" />
+      <point x="58.0" y="49.0" />
+    </edge>
+    <edge source="gui.controllers.NewCoordinatorController" target="dal.CoordinatorDAO" relationship="CREATE">
+      <point x="0.0" y="-93.0" />
+      <point x="822.1024011299429" y="608.0" />
+      <point x="812.0000000000001" y="608.0" />
+      <point x="812.0000000000001" y="558.0" />
+      <point x="1054.5600282485875" y="558.0" />
+      <point x="1054.5600282485875" y="538.0" />
+      <point x="1038.476694915254" y="538.0" />
+      <point x="-62.33333333333337" y="27.0" />
+    </edge>
+    <edge source="gui.controllers.EditEventController" target="be.PriceGroup" relationship="TO_MANY">
+      <point x="-89.75" y="-324.0" />
+      <point x="1869.5" y="1367.0" />
+      <point x="1767.0" y="1367.0" />
+      <point x="1767.0" y="1347.0" />
+      <point x="1661.4182556497167" y="1347.0" />
+      <point x="1661.4182556497167" y="588.0" />
+      <point x="1741.4350282485875" y="588.0" />
+      <point x="0.0" y="49.0" />
+    </edge>
+    <edge source="bll.DataManager" target="be.PriceGroup" relationship="TO_MANY">
+      <point x="0.0" y="-104.0" />
+      <point x="1827.1682556497167" y="608.0" />
+      <point x="1808.128354519774" y="608.0" />
+      <point x="1808.128354519774" y="528.0" />
+      <point x="1741.4350282485875" y="528.0" />
+      <point x="0.0" y="49.0" />
+    </edge>
+    <edge source="dal.CoordinatorDAO" target="be.Venue" relationship="CREATE">
+      <point x="-70.125" y="-27.0" />
+      <point x="1030.6850282485875" y="376.0" />
+      <point x="968.1024011299429" y="376.0" />
+      <point x="968.1024011299429" y="346.0" />
+      <point x="962.8524011299429" y="346.0" />
+      <point x="962.8524011299429" y="336.0" />
+      <point x="1763.0849223163832" y="336.0" />
+      <point x="-64.0" y="71.0" />
+    </edge>
+    <edge source="bll.SessionManager" target="be.UserInfo" relationship="DEPENDENCY">
+      <point x="-72.66666666666669" y="-38.0" />
+      <point x="270.3333333333335" y="900.0" />
+      <point x="313.41419491525403" y="900.0" />
+      <point x="313.41419491525403" y="890.0" />
+      <point x="308.1641949152539" y="890.0" />
+      <point x="308.1641949152539" y="376.0" />
+      <point x="364.37658898305006" y="376.0" />
+      <point x="364.37658898305006" y="366.0" />
+      <point x="538.0432556497168" y="366.0" />
+      <point x="-43.0" y="71.0" />
+    </edge>
+    <edge source="bll.DataManager" target="be.PriceGroup" relationship="TO_ONE">
+      <point x="0.0" y="-104.0" />
+      <point x="1827.1682556497167" y="608.0" />
+      <point x="1808.128354519774" y="608.0" />
+      <point x="1808.128354519774" y="528.0" />
+      <point x="1741.4350282485875" y="528.0" />
+      <point x="0.0" y="49.0" />
+    </edge>
+    <edge source="bll.DatabaseAuthenticator" target="be.UserInfo" relationship="CREATE">
+      <point x="68.33333333333337" y="-27.0" />
+      <point x="653.9357344632763" y="608.0" />
+      <point x="702.5241878531073" y="608.0" />
+      <point x="702.5241878531073" y="376.0" />
+      <point x="812.0000000000001" y="376.0" />
+      <point x="812.0000000000001" y="356.0" />
+      <point x="624.0432556497168" y="356.0" />
+      <point x="43.0" y="71.0" />
+    </edge>
+    <edge source="gui.controllers.VenuePriceGroupController" target="be.PriceGroup" relationship="CREATE">
+      <point x="-67.25" y="-170.0" />
+      <point x="1428.1682556497167" y="900.0" />
+      <point x="1033.5600282485875" y="900.0" />
+      <point x="1033.5600282485875" y="890.0" />
+      <point x="1057.3958333333335" y="890.0" />
+      <point x="1057.3958333333335" y="578.0" />
+      <point x="1683.4350282485875" y="578.0" />
+      <point x="-58.0" y="49.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.3333333333333333" showDependencies="true" x="1287.0" y="1317.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
