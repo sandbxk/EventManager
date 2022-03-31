@@ -918,7 +918,76 @@ table-view:focused .table-row-cell:filled:focused:selected {
     -fx-border-color: -fx-accent2Pressed;
 }
 
+.radio-button .radio {
+    -fx-border-width: 1px;
+    -fx-border-color: -fx-borderBase;
+    -fx-background-color: -fx-bgBase;
+    -fx-background-image: null;
+    -fx-border-radius: 30px;
+    -fx-padding: 3px;
+}
+.radio-button .radio:selected {
+    -fx-background-color: -fx-bgBase;
+    -fx-background-image: null;
+}
+.radio-button -radio:armed {
+    -fx-background-color: -fx-bgBase;
+    -fx-background-image: null;
+}
+.radio-button -radio:determinate {
+    -fx-background-color: -fx-bgBase;
+    -fx-background-image: null;
+}
+.radio-button -radio:indeterminate {
+    -fx-background-color: -fx-bgBase;
+    -fx-background-image: null;
+}
+.radio-button .dot {
+    -fx-background-radius: 5px;
+    -fx-padding: 2px;
+}
 
+.radio-button .text {
+    -fx-font-family: "Roboto";
+}
+
+.baseMenuBGButton {
+    -fx-background-color: -fx-txtBase;
+    -fx-background-radius: 30;
+    -fx-padding: 0;
+    -fx-border-radius: 30;
+    -fx-text-fill: -fx-bgBase;
+    -fx-border-width: 1;
+    -fx-border-color: -fx-bgBase;
+    -fx-font-size: 14;
+    -fx-font-family: "Roboto";
+}
+
+
+.baseMenuBGButton:hover {
+    -fx-background-color: derive(-fx-txtBase, 10%);
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-padding: 0;
+    -fx-text-fill: -fx-accent1;
+    -fx-border-width: 1;
+    -fx-border-color: -fx-accent1;
+    -fx-font-size: 14;
+    -fx-font-family: "Roboto";
+}
+
+
+.baseMenuBGButton:pressed {
+    -fx-background-color: -fx-txtBase;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-padding: 0;
+    -fx-text-fill: -fx-accent1Pressed;
+    -fx-border-width: 1;
+    -fx-border-color: -fx-accent1Pressed;
+    -fx-font-size: 14;
+    -fx-font-family: "Roboto";
+}
 
 /****************       EventNode       *****************/
 #eventRoot {

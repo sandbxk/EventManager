@@ -18,6 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.RadioButton?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="549.0" styleClass="background" stylesheets="@../styles/mainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.EditEventController">
     <center>
         <GridPane BorderPane.alignment="CENTER">
@@ -48,6 +49,7 @@
                                                 <Insets left="5.0" right="5.0" top="5.0" />
                                             </GridPane.margin>
                                             <children>
+                                                <Button fx:id="btnAddImage" layoutX="411.0" layoutY="6.0" mnemonicParsing="false" onAction="#onAddImage" prefHeight="30.0" prefWidth="94.0" styleClass="baseMenuBGButton" text="Add Image" />
                                                 <ImageView fx:id="imgViewEvent" fitHeight="81.0" fitWidth="428.0" layoutX="7.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" />
                                                 <ColorPicker fx:id="colorPicker" layoutX="290.0" layoutY="50.0" onAction="#onColorPicker" prefHeight="27.0" prefWidth="118.0" AnchorPane.bottomAnchor="6.800000000000001" AnchorPane.rightAnchor="9.999999999999972" />
                                             </children>
@@ -69,6 +71,16 @@
                                                         <Insets left="5.0" right="100.0" />
                                                     </GridPane.margin>
                                                 </TextField>
+                                                <RadioButton fx:id="radioButtonImage" mnemonicParsing="false" text="Use Image" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="5.0" right="5.0" />
+                                                    </GridPane.margin>
+                                                </RadioButton>
+                                                <RadioButton fx:id="radioButtonColor" mnemonicParsing="false" text="Use Color" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+                                                    <GridPane.margin>
+                                                        <Insets right="10.0" top="5.0" />
+                                                    </GridPane.margin>
+                                                </RadioButton>
                                             </children>
                                         </GridPane>
                                         <VBox prefHeight="43.0" prefWidth="452.0">

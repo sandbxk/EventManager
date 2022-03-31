@@ -32,6 +32,8 @@ public class Event {
     private String description;
     private Image eventImage;
     private Color color;
+    private boolean hasImage;
+
 
     //TODO: List of categories
     //TODO: List of attendees
@@ -74,7 +76,7 @@ public class Event {
      * @param description
      * @param color
      */
-    public Event(int id, String eventName, LocalDateTime startDateTime, LocalDateTime endDateTime, Venue venue, int ticketsSold, int ticketsRemaining, ObservableList<PriceGroup> priceGroupList, String description, Color color) {
+    public Event(int id, String eventName, LocalDateTime startDateTime, LocalDateTime endDateTime, Venue venue, int ticketsSold, int ticketsRemaining, ObservableList<PriceGroup> priceGroupList, String description, Color color, Image image) {
 
         this.id = id;
         this.color = color;
@@ -91,13 +93,20 @@ public class Event {
         this.priceGroupsList = new SimpleListProperty<>();
         this.priceGroupsList.set(priceGroupList);
         this.description = description;
-        this.eventImage = generateBlankImage(color);
+
+        if (image == null){
+            this.eventImage = generateBlankImage(color);
+            this.hasImage = false;
+        }
+        else {
+            this.eventImage = image;
+            this.hasImage = true;
+        }
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/views/Event.fxml"));
         fxmlLoader.setControllerFactory(param -> this);
         try { node = fxmlLoader.load();
-            //node.getStylesheets().add(getClass().getResource("/gui/styles/event.css").toExternalForm());
         } catch (IOException ignored) {}
         node.setOnAction(event -> DataManager.getInstance().setSelectedEvent(this));
 
@@ -234,5 +243,13 @@ public class Event {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public boolean isHasImage() {
+        return hasImage;
+    }
+
+    public void setHasImage(boolean hasImage) {
+        this.hasImage = hasImage;
     }
 }

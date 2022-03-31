@@ -22,11 +22,13 @@ import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javafx.util.converter.IntegerStringConverter;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -41,8 +43,11 @@ public class NewEventController implements Initializable {
     @FXML public Button btnNewPriceGroup;
     @FXML public Button btnDeletePriceGroup;
     @FXML public ImageView imgViewEvent;
+    @FXML public Button btnAddImage;
     @FXML public ColorPicker colorPicker;
     @FXML public TextField txtFieldEventName;
+    @FXML public RadioButton radioButtonImage;
+    @FXML public RadioButton radioButtonColor;
     @FXML public DatePicker datePickerStartDate;
     @FXML public TextField txtFieldStartTime;
     @FXML public DatePicker datePickerEndDate;
@@ -66,6 +71,8 @@ public class NewEventController implements Initializable {
     @FXML public Button btnEditPriceGroup;
 
     private ObservableList<PriceGroup> priceGroups;
+    private ToggleGroup imageColorToggleGroup;
+
 
 
     @Override
@@ -80,6 +87,9 @@ public class NewEventController implements Initializable {
 
         initTableViews();
         initImageView();
+        initRadioBtnListener();
+        colorPicker.setValue(Color.DARKGREEN);
+        imageColorToggleGroup.selectToggle(radioButtonColor);
     }
 
     private void initImageView(){
@@ -88,6 +98,45 @@ public class NewEventController implements Initializable {
         clip.setArcWidth(9);
         clip.setStroke(Color.TRANSPARENT);
         imgViewEvent.setClip(clip);
+    }
+
+    private void initRadioBtnListener(){
+        imageColorToggleGroup = new ToggleGroup();
+        imageColorToggleGroup.getToggles().add(radioButtonColor);
+        imageColorToggleGroup.getToggles().add(radioButtonImage);
+
+        imageColorToggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            
+            if (newValue == null){
+                imageColorToggleGroup.selectToggle(radioButtonColor);
+            }
+            
+            if (newValue == radioButtonColor){
+                imgViewEvent.setImage(generateBlankImage(colorPicker.getValue()));
+                btnAddImage.setDisable(true);
+                btnAddImage.setOpacity(0);
+                colorPicker.setDisable(false);
+                colorPicker.setOpacity(1);
+            }
+            else if (newValue == radioButtonImage){
+                colorPicker.setDisable(true);
+                colorPicker.setOpacity(0);
+                btnAddImage.setDisable(false);
+                btnAddImage.setOpacity(1);
+            }
+            
+            
+        });
+    }
+
+    public void onAddImage(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Standard image files", "*.png", "*.jpg", "*.jpeg"));
+        File imageFile = fileChooser.showOpenDialog((Stage) btnAddImage.getScene().getWindow());
+        Image image = new Image(imageFile.getAbsolutePath());
+        imgViewEvent.setImage(image);
+        imgViewEvent.setFitWidth(367);
+        imgViewEvent.setFitHeight(81);
     }
 
     public void onColorPicker(ActionEvent event) {
@@ -231,8 +280,11 @@ public class NewEventController implements Initializable {
             ObservableList<PriceGroup> priceGroups = DataManager.getInstance().getPriceGroups(null);
             String description = txtAreaNewEventInfo.getText();
             Color color = colorPicker.getValue();
+            Image image = null;
+            if (imageColorToggleGroup.getSelectedToggle() == radioButtonImage)
+                image = imgViewEvent.getImage();
 
-            Event newEvent = new Event(id, name, startDateTime, endDateTime, venue, ticketSold, ticketsRemaining, priceGroups, description, color);
+            Event newEvent = new Event(id, name, startDateTime, endDateTime, venue, ticketSold, ticketsRemaining, priceGroups, description, color, image);
             DataManager.getInstance().newEvent(newEvent); //TODO: TEMP
 
 
@@ -279,4 +331,5 @@ public class NewEventController implements Initializable {
 
         return integerFilter;
     }
+
 }

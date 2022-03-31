@@ -4,7 +4,6 @@ import be.Event;
 import be.PriceGroup;
 import be.Venue;
 import bll.DataManager;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,12 +20,13 @@ import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javafx.util.converter.IntegerStringConverter;
 
-import javax.xml.crypto.Data;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -41,8 +41,11 @@ public class EditEventController implements Initializable {
     @FXML public Button btnNewPriceGroup;
     @FXML public Button btnDeletePriceGroup;
     @FXML public ImageView imgViewEvent;
+    @FXML public Button btnAddImage;
     @FXML public ColorPicker colorPicker;
     @FXML public TextField txtFieldEventName;
+    @FXML public RadioButton radioButtonImage;
+    @FXML public RadioButton radioButtonColor;
     @FXML public DatePicker datePickerStartDate;
     @FXML public TextField txtFieldStartTime;
     @FXML public DatePicker datePickerEndDate;
@@ -65,6 +68,7 @@ public class EditEventController implements Initializable {
     @FXML public Button btnEditVenue;
     @FXML public Button btnEditPriceGroup;
 
+    private ToggleGroup imageColorToggleGroup;
     private Event editedEvent;
     private ObservableList<PriceGroup> priceGroups;
 
@@ -82,6 +86,9 @@ public class EditEventController implements Initializable {
         initTableViews();
         initImageView();
         initValues();
+        initRadioBtnListener();
+        colorPicker.setValue(Color.DARKGREEN);
+        imageColorToggleGroup.selectToggle(radioButtonColor);
     }
 
     private void initValues(){
@@ -102,6 +109,8 @@ public class EditEventController implements Initializable {
         txtFieldTicketRemaining.setText(editedEvent.getTicketsRemaining()+"");
         txtFieldTicketsSold.setText(editedEvent.getTicketsSold() + "");
 
+        imgViewEvent.setImage(editedEvent.getEventImage());
+
     }
 
     private void initImageView(){
@@ -112,8 +121,47 @@ public class EditEventController implements Initializable {
         imgViewEvent.setClip(clip);
     }
 
+    private void initRadioBtnListener(){
+        imageColorToggleGroup = new ToggleGroup();
+        imageColorToggleGroup.getToggles().add(radioButtonColor);
+        imageColorToggleGroup.getToggles().add(radioButtonImage);
+
+        imageColorToggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+
+            if (newValue == null){
+                imageColorToggleGroup.selectToggle(radioButtonColor);
+            }
+
+            if (newValue == radioButtonColor){
+                imgViewEvent.setImage(generateBlankImage(colorPicker.getValue()));
+                btnAddImage.setDisable(true);
+                btnAddImage.setOpacity(0);
+                colorPicker.setDisable(false);
+                colorPicker.setOpacity(1);
+            }
+            else if (newValue == radioButtonImage){
+                colorPicker.setDisable(true);
+                colorPicker.setOpacity(0);
+                btnAddImage.setDisable(false);
+                btnAddImage.setOpacity(1);
+            }
+
+
+        });
+    }
+
     public void onColorPicker(ActionEvent event) {
         imgViewEvent.setImage(generateBlankImage(colorPicker.getValue()));
+    }
+
+    public void onAddImage(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Standard image files", "*.png", "*.jpg", "*.jpeg"));
+        File imageFile = fileChooser.showOpenDialog((Stage) btnAddImage.getScene().getWindow());
+        Image image = new Image(imageFile.getAbsolutePath());
+        imgViewEvent.setImage(image);
+        imgViewEvent.setFitWidth(367);
+        imgViewEvent.setFitHeight(81);
     }
 
     /**
@@ -267,6 +315,15 @@ public class EditEventController implements Initializable {
         if (!color.equals(editedEvent.getColor()))
         editedEvent.setColor(color);
 
+        if (imageColorToggleGroup.getSelectedToggle() == radioButtonImage){
+            editedEvent.setEventImage(imgViewEvent.getImage());
+            editedEvent.setHasImage(true);
+        }
+        else {
+            editedEvent.setHasImage(false);
+            editedEvent.setEventImage(generateBlankImage(colorPicker.getValue()));
+        }
+
         DataManager.getInstance().updateEvent(editedEvent);
 
         ((Node) (event.getSource())).getScene().getWindow().hide();
@@ -306,4 +363,5 @@ public class EditEventController implements Initializable {
 
         return integerFilter;
     }
+
 }
