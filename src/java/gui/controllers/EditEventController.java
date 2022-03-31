@@ -4,7 +4,6 @@ import be.Event;
 import be.PriceGroup;
 import be.Venue;
 import bll.DataManager;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,6 +26,7 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javafx.util.converter.IntegerStringConverter;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -36,8 +36,8 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 
-public class NewEventController implements Initializable {
-    
+public class EditEventController implements Initializable {
+
     @FXML public Button btnNewPriceGroup;
     @FXML public Button btnDeletePriceGroup;
     @FXML public ImageView imgViewEvent;
@@ -54,33 +54,52 @@ public class NewEventController implements Initializable {
     @FXML public TableColumn<Venue, String> tblClmVenueCity;
     @FXML public Button btnNewVenue;
     @FXML public Button btnDeleteVenue;
-    @FXML public TextArea txtAreaNewEventInfo;
+    @FXML public TextArea txtAreaEditEventInfo;
     @FXML public TextField txtFieldTicketRemaining;
     @FXML public TextField txtFieldTicketsSold;
     @FXML public TableView<PriceGroup> tblViewNewEventTicketGroup;
     @FXML public TableColumn<PriceGroup, String> tblClmnGroupName;
     @FXML public TableColumn<PriceGroup, Number> tblClmnGroupPrice;
     @FXML public TableColumn<PriceGroup, String> tblClmnGroupCurrency;
-    @FXML public Button btnSaveNewEvent;
+    @FXML public Button btnSaveEditEvent;
     @FXML public Button btnEditVenue;
     @FXML public Button btnEditPriceGroup;
 
+    private Event editedEvent;
     private ObservableList<PriceGroup> priceGroups;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        priceGroups = FXCollections.observableArrayList();
+        editedEvent = DataManager.getInstance().getSelectedEvent();
+
+        priceGroups = editedEvent.getPriceGroups();
         DataManager.getInstance().setPriceGroups(priceGroups);
-        DataManager.getInstance().setSelectedEvent(null);
 
         txtFieldTicketRemaining.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), 0, integerFilter()));
         txtFieldTicketsSold.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), 0, integerFilter()));
         txtFieldTicketsSold.setOnMouseClicked(event -> txtFieldTicketsSold.clear());
         txtFieldTicketRemaining.setOnMouseClicked(event -> txtFieldTicketRemaining.clear());
-
         initTableViews();
         initImageView();
+        initValues();
+    }
+
+    private void initValues(){
+        imgViewEvent.setImage(editedEvent.getEventImage());
+        txtFieldEventName.setText(editedEvent.getEventName());
+
+        datePickerStartDate.setValue(editedEvent.getStartDateTime().toLocalDate());
+        txtFieldStartTime.setText(editedEvent.getStartDateTime().toLocalTime().toString());
+        if (editedEvent.getEndDateTime() != null) {
+            datePickerEndDate.setValue(editedEvent.getEndDateTime().toLocalDate());
+            txtFieldEndTime.setText(editedEvent.getEndDateTime().toLocalTime().toString());
+        }
+
+        txtAreaEditEventInfo.setText(editedEvent.getDescription());
+        txtFieldTicketRemaining.setText(editedEvent.getTicketsRemaining()+"");
+        txtFieldTicketsSold.setText(editedEvent.getTicketsSold() + "");
+
     }
 
     private void initImageView(){
@@ -92,7 +111,7 @@ public class NewEventController implements Initializable {
     }
 
     public void onColorPicker(ActionEvent event) {
-    imgViewEvent.setImage(generateBlankImage(colorPicker.getValue()));
+        imgViewEvent.setImage(generateBlankImage(colorPicker.getValue()));
     }
 
     /**
@@ -119,6 +138,8 @@ public class NewEventController implements Initializable {
 
 
         tblViewVenues.setItems(DataManager.getInstance().getAllVenues());
+        tblViewVenues.getSelectionModel().select(editedEvent.getLocation());
+
         tblViewNewEventTicketGroup.setItems(priceGroups);
 
     }
@@ -160,7 +181,7 @@ public class NewEventController implements Initializable {
         openStage("createPriceGroup.fxml", "New Price Group", new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
-                priceGroups = DataManager.getInstance().getPriceGroups(null);
+                priceGroups = DataManager.getInstance().getPriceGroups(editedEvent);
             }
         });
 
@@ -169,8 +190,8 @@ public class NewEventController implements Initializable {
     public void OnDeletePriceGroup(ActionEvent event) {
         if (tblViewNewEventTicketGroup.getSelectionModel().getSelectedItem() != null) {
             PriceGroup selectedItem = tblViewNewEventTicketGroup.getSelectionModel().getSelectedItem();
-            DataManager.getInstance().removePriceGroup(null, selectedItem);
-            tblViewNewEventTicketGroup.setItems(DataManager.getInstance().getPriceGroups(null));
+            DataManager.getInstance().removePriceGroup(editedEvent, selectedItem);
+            tblViewNewEventTicketGroup.setItems(DataManager.getInstance().getPriceGroups(editedEvent));
         }
     }
 
@@ -186,64 +207,67 @@ public class NewEventController implements Initializable {
         }
     }
 
-    public void onSave(ActionEvent event) {
-        try {
-            if (tblViewVenues.getSelectionModel().getSelectedItem() == null) {
-                Alert alert = new Alert(Alert.AlertType.WARNING, "No Venue selected");
-                alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
-                alert.show();
-                return;
-            }
-            if (tblViewNewEventTicketGroup.getItems().isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.WARNING, "No Ticket Groups added");
-                alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
-                alert.show();
-                return;
-            }
-
-            if (datePickerStartDate.getValue() == null) {
-                Alert alert = new Alert(Alert.AlertType.WARNING, "No start date chosen");
-                alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
-                alert.show();
-                return;
-            }
-
-            int id = -1;
-            String name = txtFieldEventName.getText();
-
-            LocalDate startDate = datePickerStartDate.getValue();
-            LocalTime startTime = LocalTime.of(0, 0);
-            if (txtFieldStartTime.getText() != null && !txtFieldStartTime.getText().isEmpty() && !txtFieldStartTime.getText().isBlank()) {
-                startTime = LocalTime.parse(txtFieldStartTime.getText());
-            }
-            LocalDateTime startDateTime = startDate.atTime(startTime);
-
-
-            LocalDate endDate = datePickerEndDate.getValue();
-            LocalTime endTime = LocalTime.of(0, 0);
-            if (txtFieldEndTime.getText() != null && !txtFieldEndTime.getText().isEmpty() && !txtFieldEndTime.getText().isBlank()) {
-                endTime = LocalTime.parse(txtFieldStartTime.getText());
-            }
-            LocalDateTime endDateTime = endDate.atTime(endTime);
-
-            Venue venue = tblViewVenues.getSelectionModel().getSelectedItem();
-            int ticketSold = Integer.parseInt(txtFieldTicketsSold.getText());
-            int ticketsRemaining = Integer.parseInt(txtFieldTicketRemaining.getText());
-            ObservableList<PriceGroup> priceGroups = DataManager.getInstance().getPriceGroups(null);
-            String description = txtAreaNewEventInfo.getText();
-            Color color = colorPicker.getValue();
-
-            Event newEvent = new Event(id, name, startDateTime, endDateTime, venue, ticketSold, ticketsRemaining, priceGroups, description, color);
-            DataManager.getInstance().newEvent(newEvent); //TODO: TEMP
-
-
-            ((Node) (event.getSource())).getScene().getWindow().hide();
-        }
-        catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "The program ran into an error. Please check your input values.");
+    public void onSaveEdit(ActionEvent event) {
+        if (tblViewVenues.getSelectionModel().getSelectedItem() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "No Venue selected");
             alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
             alert.show();
+            return;
         }
+        if (tblViewNewEventTicketGroup.getItems().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "No Ticket Groups added");
+            alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
+            alert.show();
+            return;
+        }
+
+        if (datePickerStartDate.getValue() == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING, "No start date chosen");
+            alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
+            alert.show();
+            return;
+        }
+
+        editedEvent.setEventName(txtFieldEventName.getText());
+
+        LocalDate startDate = datePickerStartDate.getValue();
+        LocalTime startTime = LocalTime.of(0,0);
+        if (txtFieldStartTime.getText() != null && !txtFieldStartTime.getText().isEmpty() && !txtFieldStartTime.getText().isBlank()){
+            startTime = LocalTime.parse(txtFieldStartTime.getText());
+        }
+        LocalDateTime startDateTime = startDate.atTime(startTime);
+        editedEvent.setStartDateTime(startDateTime);
+
+
+        LocalDate endDate = datePickerEndDate.getValue();
+        LocalTime endTime = LocalTime.of(0,0);
+        if (txtFieldEndTime.getText() != null && !txtFieldEndTime.getText().isEmpty() && !txtFieldEndTime.getText().isBlank()){
+            endTime = LocalTime.parse(txtFieldStartTime.getText());
+        }
+        LocalDateTime endDateTime = endDate.atTime(endTime);
+        editedEvent.setEndDateTime(endDateTime);
+
+        Venue venue = tblViewVenues.getSelectionModel().getSelectedItem();
+        editedEvent.setLocation(venue);
+
+        int ticketSold = Integer.parseInt(txtFieldTicketsSold.getText());
+        editedEvent.setTicketsSold(ticketSold);
+
+        int ticketsRemaining = Integer.parseInt(txtFieldTicketRemaining.getText());
+        editedEvent.setTicketsRemaining(ticketsRemaining);
+
+        editedEvent.setPriceGroups(tblViewNewEventTicketGroup.getItems());
+
+        String description = txtAreaEditEventInfo.getText();
+        editedEvent.setDescription(description);
+
+        Color color = colorPicker.getValue();
+        if (!color.equals(editedEvent.getColor()))
+        editedEvent.setColor(color);
+
+        DataManager.getInstance().updateEvent(editedEvent);
+
+        ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
     private void openStage(String fxml, String title, EventHandler<WindowEvent> event) {

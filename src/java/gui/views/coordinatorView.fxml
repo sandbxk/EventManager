@@ -200,7 +200,7 @@
                                                 <Insets left="5.0" />
                                              </padding>
                                           </Label>
-                                          <Label prefHeight="35.0" prefWidth="22.0" styleClass="InternalPanelSubHeading" text=" | ">
+                                          <Label fx:id="lblEventDateSpacer" prefHeight="35.0" prefWidth="22.0" styleClass="InternalPanelSubHeading" text=" | ">
                                              <padding>
                                                 <Insets left="5.0" />
                                              </padding>
@@ -217,7 +217,7 @@
                                     </HBox>
                                     <HBox prefHeight="21.0" prefWidth="277.0">
                                        <children>
-                                          <Label prefHeight="17.0" prefWidth="28.0" styleClass="InternalPanelSubHeading" text="\@ ">
+                                          <Label fx:id="lblAtVenue" prefHeight="17.0" prefWidth="28.0" styleClass="InternalPanelSubHeading" text="\@ ">
                                              <padding>
                                                 <Insets left="5.0" />
                                              </padding>
@@ -235,7 +235,7 @@
                            <children>
                               <VBox prefHeight="94.0" prefWidth="324.0">
                                  <children>
-                                    <Label prefHeight="18.0" prefWidth="79.0" styleClass="Text" text="Description">
+                                    <Label fx:id="lblDescriptionHeader" prefHeight="18.0" prefWidth="79.0" styleClass="Text" text="Description">
                                        <padding>
                                           <Insets left="5.0" />
                                        </padding>
@@ -264,7 +264,7 @@
                                        <children>
                                           <HBox prefHeight="20.0" prefWidth="305.0">
                                              <children>
-                                                <Label prefHeight="20.0" prefWidth="81.0" styleClass="Text" text="Remaining:">
+                                                <Label fx:id="lblRemaining" prefHeight="20.0" prefWidth="81.0" styleClass="Text" text="Remaining:">
                                                    <HBox.margin>
                                                       <Insets left="5.0" />
                                                    </HBox.margin>
@@ -274,7 +274,7 @@
                                           </HBox>
                                           <HBox prefHeight="9.0" prefWidth="305.0">
                                              <children>
-                                                <Label prefHeight="18.0" prefWidth="44.0" styleClass="Text" text="Sold:  ">
+                                                <Label fx:id="lblSold" prefHeight="18.0" prefWidth="44.0" styleClass="Text" text="Sold:  ">
                                                    <HBox.margin>
                                                       <Insets left="5.0" />
                                                    </HBox.margin>
@@ -292,7 +292,7 @@
                               </HBox>
                               <VBox>
                                  <children>
-                                    <Label prefHeight="33.0" prefWidth="98.0" styleClass="Text" text="Ticket pricing:">
+                                    <Label fx:id="lblTicketPricing" prefHeight="33.0" prefWidth="98.0" styleClass="Text" text="Ticket pricing:">
                                        <padding>
                                           <Insets left="5.0" top="15.0" />
                                        </padding>

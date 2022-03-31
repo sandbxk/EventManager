@@ -169,7 +169,7 @@
                                                 <Insets bottom="12.0" />
                                              </padding>
                                           </Button>
-                                          <Button fx:id="btnEditVenue" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onEditVenue" prefHeight="22.0" prefWidth="26.0" styleClass="SmallEditButton" text="-">
+                                          <Button fx:id="btnEditVenue" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onEditVenue" prefHeight="22.0" prefWidth="26.0" styleClass="SmallEditButton">
                                              <padding>
                                                 <Insets bottom="12.0" />
                                              </padding>
@@ -258,7 +258,7 @@
                                                 <Insets bottom="12.0" />
                                              </padding>
                                           </Button>
-                                          <Button fx:id="btnEditPriceGroup" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#OnEditPriceGroup" prefHeight="22.0" prefWidth="26.0" styleClass="SmallEditButton" text="-">
+                                          <Button fx:id="btnEditPriceGroup" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#OnEditPriceGroup" prefHeight="22.0" prefWidth="26.0" styleClass="SmallEditButton">
                                              <padding>
                                                 <Insets bottom="12.0" />
                                              </padding>

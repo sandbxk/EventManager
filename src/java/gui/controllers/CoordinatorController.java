@@ -39,11 +39,11 @@ public class CoordinatorController implements Initializable {
 
 
     @FXML public Button btnCreateActions;
-    @FXML public Button btnDeleteEvent;
     @FXML public Label lblUser;
     @FXML public ImageView imgViewUser;
 
     @FXML public FlowPane flowPaneEvents;
+
 
     @FXML public AnchorPane imgDetailBackground;
     @FXML public ImageView imgViewEvent;
@@ -58,6 +58,13 @@ public class CoordinatorController implements Initializable {
     @FXML public TableColumn<PriceGroup, String> tblClmnGroupName;
     @FXML public TableColumn<PriceGroup, Number> tblClmnGroupPrice;
     @FXML public TextArea txtAreaInfo;
+
+    @FXML public Label lblEventDateSpacer;
+    @FXML public Label lblAtVenue;
+    @FXML public Label lblDescriptionHeader;
+    @FXML public Label lblRemaining;
+    @FXML public Label lblSold;
+    @FXML public Label lblTicketPricing;
 
     @FXML public TextField txtFieldSearch;
     @FXML public Button btnSearch;
@@ -113,6 +120,12 @@ public class CoordinatorController implements Initializable {
 
     private void initEventListener() {
         selectedEvent.addListener((observable, oldValue, newValue) -> {
+
+            if (newValue == null){
+                hideDetailsPanelComponents(true);
+                return;
+            }
+
             imgViewEvent.setImage(newValue.getEventImage());
             imgDetailBackground.setStyle("-fx-background-color: rgb(" + newValue.getColor().getRed()*255 +", " + newValue.getColor().getGreen()*255 + ", " + newValue.getColor().getBlue()*255 + ");");
             lblEventName.setText(newValue.getEventName());
@@ -126,9 +139,46 @@ public class CoordinatorController implements Initializable {
             lblRemainingTickets.setText(newValue.getTicketsRemaining() + "");
 
             tblViewTicketGroup.setItems(newValue.getPriceGroups());
+            hideDetailsPanelComponents(false);
+
+            //tblViewAttendees.setItems();
             
             //TODO: tblview Attendees
         });
+    }
+
+    private void hideDetailsPanelComponents(boolean hidden){
+        Timeline timeline = new Timeline();
+        int endValue = 0;
+
+        if (hidden){
+            endValue = 0;
+        }
+        else if (!hidden){
+            endValue = 1;
+        }
+
+        KeyFrame op1 = new KeyFrame(Duration.millis(150), new KeyValue(imgViewEvent.opacityProperty(), endValue));
+        KeyFrame op2 = new KeyFrame(Duration.millis(150), new KeyValue(imgDetailBackground.opacityProperty(), endValue));
+        KeyFrame op3 = new KeyFrame(Duration.millis(150), new KeyValue(lblEventName.opacityProperty(), endValue));
+        KeyFrame op4 = new KeyFrame(Duration.millis(150), new KeyValue(lblEventDate.opacityProperty(), endValue));
+        KeyFrame op5 = new KeyFrame(Duration.millis(150), new KeyValue(lblEventTime.opacityProperty(), endValue));
+        KeyFrame op6 = new KeyFrame(Duration.millis(150), new KeyValue(lblEventVenue.opacityProperty(), endValue));
+
+        KeyFrame op7 = new KeyFrame(Duration.millis(150), new KeyValue(txtAreaInfo.opacityProperty(), endValue));
+        KeyFrame op8 = new KeyFrame(Duration.millis(150), new KeyValue(lblRemainingTickets.opacityProperty(), endValue));
+        KeyFrame op9 = new KeyFrame(Duration.millis(150), new KeyValue(lblSoldTickets.opacityProperty(), endValue));
+
+        KeyFrame op10 = new KeyFrame(Duration.millis(150), new KeyValue(tblViewTicketGroup.opacityProperty(), endValue));
+
+        KeyFrame opLbl1 = new KeyFrame(Duration.millis(150), new KeyValue(lblEventDateSpacer.opacityProperty(), endValue));
+        KeyFrame opLbl2 = new KeyFrame(Duration.millis(150), new KeyValue(lblAtVenue.opacityProperty(), endValue));
+        KeyFrame opLbl3 = new KeyFrame(Duration.millis(150), new KeyValue(lblDescriptionHeader.opacityProperty(), endValue));
+        KeyFrame opLbl4 = new KeyFrame(Duration.millis(150), new KeyValue(lblRemaining.opacityProperty(), endValue));
+        KeyFrame opLbl5 = new KeyFrame(Duration.millis(150), new KeyValue(lblSold.opacityProperty(), endValue));
+        KeyFrame opLbl6 = new KeyFrame(Duration.millis(150), new KeyValue(lblTicketPricing.opacityProperty(), endValue));
+
+        timeline.play();
     }
 
     public void onCreate(ActionEvent event)
@@ -174,7 +224,25 @@ public class CoordinatorController implements Initializable {
     }
 
     public void onEditEvent() {
-        System.out.println("edit");
+        if (DataManager.getInstance().getSelectedEvent() == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("No event selected");
+            alert.setContentText("Please select an event to edit");
+            alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
+        }
+
+        Parent root = null;
+        Stage stage = new Stage();
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gui/views/EditEventView.fxml")));
+            stage.setTitle("Edit Event");
+            stage.setMinWidth(511);
+            stage.setMinHeight(737);
+            stage.setScene(new Scene(root, 549, 750));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

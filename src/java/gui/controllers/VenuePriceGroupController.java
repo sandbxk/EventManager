@@ -150,7 +150,7 @@ public class VenuePriceGroupController implements Initializable {
             newPriceGroup.setCurrency(currency);
         }
 
-        DataManager.getInstance().newPriceGroup(null, newPriceGroup);
+        DataManager.getInstance().newPriceGroup(DataManager.getInstance().getSelectedEvent(), newPriceGroup);
 
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
