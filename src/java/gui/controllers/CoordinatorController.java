@@ -158,6 +158,10 @@ public class CoordinatorController implements Initializable {
         });
     }
 
+    /**
+     * Fade animation for the event details panel. Fades out if no event is selected, fades in if an event is selected.
+     * @param hidden
+     */
     private void hideDetailsPanelComponents(boolean hidden){
         Timeline timeline = new Timeline();
         int endValue = 0;
@@ -197,6 +201,10 @@ public class CoordinatorController implements Initializable {
         timeline.play();
     }
 
+    /**
+     * Opens the NewEventView.fxml. On closing, updates the list of events in flowPaneEvents with a list of all events.getEventTile.
+     * @param event
+     */
     public void onCreate(ActionEvent event)
     {
         if (eventToggle.getSelectedToggle() != null)
@@ -215,22 +223,32 @@ public class CoordinatorController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         ObservableList toggles = FXCollections.observableArrayList();
+
         stage.setOnHiding(event1 -> {
             flowPaneEvents.getChildren().clear();
+
             ObservableList<Event> allEvents = DataManager.getInstance().getAllEvents();
-            for (Event e : allEvents){
+
+            for (Event e : allEvents)
+            {
                 flowPaneEvents.getChildren().add(e.getEventTile());
                 toggles.addAll(e.getEventTile());
             }
+
             eventToggle.getToggles().clear();
             eventToggle.getToggles().addAll(toggles);
         });
     }
 
+
     public void onUser(MouseEvent mouseEvent) {
     }
 
+    /**
+     * Deletes the selected event.
+     */
     public void onDeleteEvent() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText("Are you sure you want to delete the event?");
@@ -239,10 +257,13 @@ public class CoordinatorController implements Initializable {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
-            System.out.println("delete");
+            DataManager.getInstance().deleteEvent(selectedEvent.get());
         }
     }
 
+    /**
+     * Opens the EditEventView.fxml. Updates the event details panel upon closing.
+     */
     public void onEditEvent() {
         if (DataManager.getInstance().getSelectedEvent() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -266,6 +287,9 @@ public class CoordinatorController implements Initializable {
         stage.setOnHiding(event -> updateEventDetail());
     }
 
+    /**
+     * Re sets every component present in the details panel.
+     */
     private void updateEventDetail(){
         imgViewEvent.setImage(selectedEvent.get().getEventImage());
         imgDetailBackground.setStyle("-fx-background-color: rgb(" + selectedEvent.get().getColor().getRed()*255 +", " + selectedEvent.get().getColor().getGreen()*255 + ", " + selectedEvent.get().getColor().getBlue()*255 + ");");
@@ -359,6 +383,10 @@ public class CoordinatorController implements Initializable {
     public void onRemoveAttendee(ActionEvent event) {
     }
 
+    /**
+     * Shows a dropdown/contextmenu from the btnEventActions button.
+     * @param event
+     */
     public void onEventActions(ActionEvent event) {
         //Location of the pressed button
         double onScreenX = btnEventActions.getScene().getWindow().getX() + btnEventActions.getHeight() + btnEventActions.localToScene(btnEventActions.getBoundsInLocal()).getMinX();
@@ -371,6 +399,7 @@ public class CoordinatorController implements Initializable {
         eventActionsMenu.show(btnEventActions, onScreenX - offsetX, onScreenY + offsetY);
     }
 
+    
     private void initEventActionsMenu(){
         MenuItem editEvent = new MenuItem("Edit Event");
         editEvent.setOnAction(event -> onEditEvent());

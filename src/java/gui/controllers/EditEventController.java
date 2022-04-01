@@ -211,7 +211,8 @@ public class EditEventController implements Initializable {
     }
 
 
-
+    /** Opens the newVenue windows. Updates the list of venues upon closing.
+     */
     public void onNewVenue(ActionEvent event) {
         openStage("createVenue.fxml", "New Venue", new EventHandler<WindowEvent>() {
             @Override
@@ -226,6 +227,8 @@ public class EditEventController implements Initializable {
 
     }
 
+    /** Deletes the selected venue from both the tableView list and the Database.
+     */
     public void onDeleteVenue(ActionEvent event) {
         if (tblViewVenues.getSelectionModel().getSelectedItem() != null) {
             Venue selectedItem = tblViewVenues.getSelectionModel().getSelectedItem();
@@ -236,6 +239,8 @@ public class EditEventController implements Initializable {
         }
     }
 
+    /** Opens the EditVenue windows. Updates the selected Venue upon closing.
+     */
     public void onEditVenue(ActionEvent event) {
         if (!tblViewVenues.getItems().isEmpty() && tblViewVenues.getSelectionModel().getSelectedItem() != null) {
             DataManager.getInstance().setSelectedVenue(tblViewVenues.getSelectionModel().getSelectedItem());
@@ -247,7 +252,8 @@ public class EditEventController implements Initializable {
         }
     }
 
-
+    /** Opens the NewPriceGroup windows. Updates the list of pricegroups upon closing.
+     */
     public void onNewPriceGroup(ActionEvent event) {
         openStage("createPriceGroup.fxml", "New Price Group", new EventHandler<WindowEvent>() {
             @Override
@@ -258,6 +264,8 @@ public class EditEventController implements Initializable {
 
     }
 
+    /** Deletes the selected pricegroup.
+     */
     public void OnDeletePriceGroup(ActionEvent event) {
         if (tblViewNewEventTicketGroup.getSelectionModel().getSelectedItem() != null) {
             PriceGroup selectedItem = tblViewNewEventTicketGroup.getSelectionModel().getSelectedItem();
@@ -266,6 +274,8 @@ public class EditEventController implements Initializable {
         }
     }
 
+    /** Opens the EditPriceGroup windows. Updates the selected pricegroup upon closing.
+     */
     public void OnEditPriceGroup(ActionEvent event) {
         if (!tblViewNewEventTicketGroup.getItems().isEmpty() && tblViewNewEventTicketGroup.getSelectionModel().getSelectedItem() != null) {
             DataManager.getInstance().setSelectedPriceGroup(tblViewNewEventTicketGroup.getSelectionModel().getSelectedItem());
@@ -363,6 +373,12 @@ public class EditEventController implements Initializable {
         return times;
     }
 
+    /**
+     * Extracts a LocalDateTime object from a TextField with a valid time input and a datepicker.
+     * @param datePicker
+     * @param timeField
+     * @return
+     */
     private LocalDateTime DateTimeExtract(DatePicker datePicker, TextField timeField) {
         LocalDate date = datePicker.getValue();
         LocalTime time = LocalTime.of(0, 0);
@@ -400,7 +416,12 @@ public class EditEventController implements Initializable {
         }
     }
 
-
+    /**
+     * Utility function to open a new transparent stage as a pop-up windows, with a defined onHiding event.
+     * @param fxml
+     * @param title
+     * @param event
+     */
     private void openStage(String fxml, String title, EventHandler<WindowEvent> event) {
         Parent root = null;
         Stage stage = new Stage();
@@ -422,6 +443,10 @@ public class EditEventController implements Initializable {
         }
     }
 
+    /**
+     * An interger filter, for use in a textFormatter. Only allows whole numbers.
+     * @return
+     */
     private UnaryOperator<TextFormatter.Change> integerFilter(){
         UnaryOperator<TextFormatter.Change> integerFilter = change -> {
             String newText = change.getControlNewText();
