@@ -200,6 +200,10 @@ public class EditEventController implements Initializable {
         tblClmnGroupCurrency.setCellValueFactory(param -> param.getValue().currencyProperty());
 
         try {
+            tblViewVenues.setItems(DataManager.getInstance().getAllVenues());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         tblViewVenues.getSelectionModel().select(editedEvent.getLocation());
 
         tblViewNewEventTicketGroup.setItems(priceGroups);
