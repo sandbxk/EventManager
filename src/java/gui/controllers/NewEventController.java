@@ -30,6 +30,7 @@ import javafx.util.converter.IntegerStringConverter;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -173,7 +174,11 @@ public class NewEventController implements Initializable {
         tblClmnGroupCurrency.setCellValueFactory(param -> param.getValue().currencyProperty());
 
 
-        tblViewVenues.setItems(DataManager.getInstance().getAllVenues());
+        try {
+            tblViewVenues.setItems(DataManager.getInstance().getAllVenues());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         tblViewNewEventTicketGroup.setItems(priceGroups);
 
     }
@@ -184,7 +189,11 @@ public class NewEventController implements Initializable {
         openStage("createVenue.fxml", "New Venue", new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
-                tblViewVenues.setItems(DataManager.getInstance().getAllVenues());
+                try {
+                    tblViewVenues.setItems(DataManager.getInstance().getAllVenues());
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

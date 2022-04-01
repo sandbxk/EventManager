@@ -134,7 +134,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         }
     }
 
-    public void createVenue (String location, String street, String zipcode)
+    public void createVenue (String location, String street, int zipcode)
     {
         try (Connection connection = DBconnect.getConnection())
         {
@@ -158,7 +158,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         {
             String sql = """
                     UPDATE Venue
-                    SET locatioName = '%s', '%s', '%s' 
+                    SET locationName = '%s', '%s', '%s' 
                     WHERE VenueID = '%s';
                     """.formatted(location, street, zipcode, venueID);
 
@@ -188,6 +188,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
         String sql = """
                        SELECT * FROM Venue
+                       JOIN CityName ON Venue.venueZipCode=CityName.zipCode
                        """;
 
         Statement statement = DBconnect.getConnection().createStatement();
@@ -195,16 +196,16 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
             while (result.next())
             {
-                int id = result.getInt("VenueID");
+                int id = result.getInt("venueID");
                 String location = result.getString("locationName");
-                String streetName = result.getString("StreetName");
+                String streetName = result.getString("streetName");
                 String zipCode = Integer.toString(result.getInt("venueZipCode"));
-                String city = "Place Holder";
+                String city = result.getString("cityName");
 
                 returnList.add(new Venue(id, location, streetName, zipCode, city));
             }
 
-        return null;
+        return returnList;
     }
 
     public ObservableList<Event> getAllEvents() throws SQLException
@@ -227,7 +228,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
     public void createEvent(Event event) throws SQLException
     {
             String sql = """
-                    INSERT INTO Events (eventTitle, VenueID, DESCRIPTION, maxSeats, beginAt, endAt, price)
+                    INSERT INTO Events (eventTitle, venueID, description, maxSeats, beginAt, endAt, price)
                     VALUES ('%s', '%s', '%s')
                     
                     """.formatted(event.getEventName(), event.getLocation(), event.getDescription(), event.getLocation(), event.getStartDateTime(), event.getEndDateTime(), event.getPriceGroupsProperty()); //Needs to store name
