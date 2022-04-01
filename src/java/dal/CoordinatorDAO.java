@@ -139,7 +139,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         try (Connection connection = DBconnect.getConnection())
         {
             String sql = """
-                    INSERT INTO Venue (locationName, StreetName, venueZipCode)
+                    INSERT INTO venue (venueName, StreetName, venueZipCode)
                     VALUES ('%s', '%s', '%s')
                     """.formatted(location, street, zipcode);
 
@@ -158,8 +158,8 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         {
             String sql = """
                     UPDATE Venue
-                    SET locationName = '%s', '%s', '%s' 
-                    WHERE VenueID = '%s';
+                    SET venueName = '%s', '%s', '%s' 
+                    WHERE id = '%s';
                     """.formatted(location, street, zipcode, venueID);
 
             this.execute(sql);
@@ -176,7 +176,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
         String sql = """
                    DELETE FROM Venue
-                   WHERE VenueID = '%s';
+                   WHERE id = '%s';
                    """.formatted(venueID);
 
         this.execute(sql);
@@ -188,7 +188,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
         String sql = """
                        SELECT * FROM Venue
-                       JOIN CityName ON Venue.venueZipCode=CityName.zipCode
+                       JOIN cityName ON venue.venueZipCode=cityName.zipCode
                        """;
 
         Statement statement = DBconnect.getConnection().createStatement();
@@ -196,8 +196,8 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
             while (result.next())
             {
-                int id = result.getInt("venueID");
-                String location = result.getString("locationName");
+                int id = result.getInt("id");
+                String location = result.getString("venueName");
                 String streetName = result.getString("streetName");
                 String zipCode = Integer.toString(result.getInt("venueZipCode"));
                 String city = result.getString("cityName");
