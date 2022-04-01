@@ -48,21 +48,6 @@ public class Event {
 
 
 
-    public Event() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/views/Event.fxml"));
-        fxmlLoader.setControllerFactory(param -> this);
-        try { node = fxmlLoader.load();
-            //node.getStylesheets().add(getClass().getResource("/gui/styles/event.css").toExternalForm());
-        } catch (IOException ignored) {}
-        node.setOnAction(event -> DataManager.getInstance().setSelectedEvent(this));
-
-        Rectangle clip = new Rectangle(imgViewBanner.getFitWidth(), imgViewBanner.getFitHeight());
-        clip.setArcHeight(9);
-        clip.setArcWidth(9);
-        clip.setStroke(Color.TRANSPARENT);
-        imgViewBanner.setClip(clip);
-    }
-
     /**
      * Creates an event with a solid user defined color for the image.
      * @param id
@@ -79,7 +64,6 @@ public class Event {
     public Event(int id, String eventName, LocalDateTime startDateTime, LocalDateTime endDateTime, Venue venue, int ticketsSold, int ticketsRemaining, ObservableList<PriceGroup> priceGroupList, String description, Color color, Image image) {
 
         this.id = id;
-        this.color = color;
         this.eventName = new SimpleStringProperty();
         this.eventName.set(eventName);
 
@@ -94,22 +78,16 @@ public class Event {
         this.priceGroupsList.set(priceGroupList);
         this.description = description;
 
-        if (image == null){
-            this.eventImage = generateBlankImage(color);
-            this.hasImage = false;
-        }
-        else {
-            this.eventImage = image;
-            this.hasImage = true;
-        }
+        initImageAndColor(image, color);
 
-
+        //NODE representation
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/views/Event.fxml"));
         fxmlLoader.setControllerFactory(param -> this);
         try { node = fxmlLoader.load();
         } catch (IOException ignored) {}
         node.setOnAction(event -> DataManager.getInstance().setSelectedEvent(this));
 
+        //Event Node init
         imgViewContainer.setStyle("-fx-background-color: rgb(" + color.getRed()*255 + ", " + color.getGreen()*255 + ", " + color.getBlue()*255 + ");");
         Rectangle clip = new Rectangle(imgViewBanner.getFitWidth(), imgViewBanner.getFitHeight());
         clip.setArcHeight(9);
@@ -122,8 +100,18 @@ public class Event {
         lblEventDateTime.setText(startDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE));
     }
 
-
-
+    private void initImageAndColor(Image image, Color color){
+        if (image == null){
+            this.color = color;
+            this.eventImage = generateBlankImage(color);
+            this.hasImage = false;
+        }
+        else {
+            this.color = Color.TRANSPARENT;
+            this.eventImage = image;
+            this.hasImage = true;
+        }
+    }
 
     public ToggleButton getEventTile(){
         return node;
@@ -140,6 +128,9 @@ public class Event {
         pw.setColor(0, 0, color);
         return img ;
     }
+
+
+    /* Getters and Setters */
 
     public int getId() {
         return id;
@@ -245,7 +236,7 @@ public class Event {
         this.color = color;
     }
 
-    public boolean isHasImage() {
+    public boolean HasImage() {
         return hasImage;
     }
 

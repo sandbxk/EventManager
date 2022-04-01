@@ -85,10 +85,9 @@ public class EditEventController implements Initializable {
         txtFieldTicketRemaining.setOnMouseClicked(event -> txtFieldTicketRemaining.clear());
         initTableViews();
         initImageView();
-        initValues();
         initRadioBtnListener();
+        initValues();
         colorPicker.setValue(Color.DARKGREEN);
-        imageColorToggleGroup.selectToggle(radioButtonColor);
     }
 
     private void initValues(){
@@ -97,6 +96,7 @@ public class EditEventController implements Initializable {
 
         datePickerStartDate.setValue(editedEvent.getStartDateTime().toLocalDate());
         txtFieldStartTime.setText(editedEvent.getStartDateTime().toLocalTime().toString());
+
         if (editedEvent.getEndDateTime() != null) {
             datePickerEndDate.setValue(editedEvent.getEndDateTime().toLocalDate());
             txtFieldEndTime.setText(editedEvent.getEndDateTime().toLocalTime().toString());
@@ -110,6 +110,14 @@ public class EditEventController implements Initializable {
         txtFieldTicketsSold.setText(editedEvent.getTicketsSold() + "");
 
         imgViewEvent.setImage(editedEvent.getEventImage());
+
+        if (editedEvent.HasImage()){
+            imageColorToggleGroup.selectToggle(radioButtonImage);
+        }
+        else {
+            imageColorToggleGroup.selectToggle(radioButtonColor);
+            colorPicker.setValue(editedEvent.getColor());
+        }
 
     }
 
@@ -133,6 +141,7 @@ public class EditEventController implements Initializable {
             }
 
             if (newValue == radioButtonColor){
+                colorPicker.setValue(Color.DARKGREEN);
                 imgViewEvent.setImage(generateBlankImage(colorPicker.getValue()));
                 btnAddImage.setDisable(true);
                 btnAddImage.setOpacity(0);
@@ -145,8 +154,6 @@ public class EditEventController implements Initializable {
                 btnAddImage.setDisable(false);
                 btnAddImage.setOpacity(1);
             }
-
-
         });
     }
 
@@ -154,6 +161,11 @@ public class EditEventController implements Initializable {
         imgViewEvent.setImage(generateBlankImage(colorPicker.getValue()));
     }
 
+    /**
+     * Opens a filechooser to choose a basic image file of the .png or .jpg type.
+     * Sets the imageView accordingly to the chosen file.
+     * @param event
+     */
     public void onAddImage(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Standard image files", "*.png", "*.jpg", "*.jpeg"));
@@ -186,13 +198,13 @@ public class EditEventController implements Initializable {
         tblClmnGroupPrice.setCellValueFactory(param -> param.getValue().priceProperty());
         tblClmnGroupCurrency.setCellValueFactory(param -> param.getValue().currencyProperty());
 
-
         tblViewVenues.setItems(DataManager.getInstance().getAllVenues());
         tblViewVenues.getSelectionModel().select(editedEvent.getLocation());
 
         tblViewNewEventTicketGroup.setItems(priceGroups);
 
     }
+
 
 
     public void onNewVenue(ActionEvent event) {
@@ -257,6 +269,10 @@ public class EditEventController implements Initializable {
         }
     }
 
+    /**
+     * Saves every parameter of the event, ensuring all changes made are updated.
+     * @param event
+     */
     public void onSaveEdit(ActionEvent event) {
         if (tblViewVenues.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "No Venue selected");
@@ -278,56 +294,103 @@ public class EditEventController implements Initializable {
             return;
         }
 
-        editedEvent.setEventName(txtFieldEventName.getText());
+        try {
+            //Event Name
+            editedEvent.setEventName(txtFieldEventName.getText());
 
-        LocalDate startDate = datePickerStartDate.getValue();
-        LocalTime startTime = LocalTime.of(0,0);
-        if (txtFieldStartTime.getText() != null && !txtFieldStartTime.getText().isEmpty() && !txtFieldStartTime.getText().isBlank()){
-            startTime = LocalTime.parse(txtFieldStartTime.getText());
+            //Dates and times
+            LocalDateTime[] times = saveDate();
+            editedEvent.setStartDateTime(times[0]);
+            editedEvent.setEndDateTime(times[1]);
+
+            //Venue
+            Venue venue = tblViewVenues.getSelectionModel().getSelectedItem();
+            editedEvent.setLocation(venue);
+
+            //Tickets
+            int ticketSold = Integer.parseInt(txtFieldTicketsSold.getText());
+            editedEvent.setTicketsSold(ticketSold);
+            int ticketsRemaining = Integer.parseInt(txtFieldTicketRemaining.getText());
+            editedEvent.setTicketsRemaining(ticketsRemaining);
+
+            //PriceGroups
+            editedEvent.setPriceGroups(tblViewNewEventTicketGroup.getItems());
+
+            //Description
+            String description = txtAreaEditEventInfo.getText();
+            editedEvent.setDescription(description);
+
+            //Image and Color
+            saveEditImageAndColor();
+
+
+            DataManager.getInstance().updateEvent(editedEvent);
+
+            ((Node) (event.getSource())).getScene().getWindow().hide();
+
+
         }
-        LocalDateTime startDateTime = startDate.atTime(startTime);
-        editedEvent.setStartDateTime(startDateTime);
 
-
-        LocalDate endDate = datePickerEndDate.getValue();
-        LocalTime endTime = LocalTime.of(0,0);
-        if (txtFieldEndTime.getText() != null && !txtFieldEndTime.getText().isEmpty() && !txtFieldEndTime.getText().isBlank()){
-            endTime = LocalTime.parse(txtFieldStartTime.getText());
+        catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "The program ran into an error. Please check your input values.");
+            alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
+            alert.show();
         }
-        LocalDateTime endDateTime = endDate.atTime(endTime);
-        editedEvent.setEndDateTime(endDateTime);
+    }
 
-        Venue venue = tblViewVenues.getSelectionModel().getSelectedItem();
-        editedEvent.setLocation(venue);
 
-        int ticketSold = Integer.parseInt(txtFieldTicketsSold.getText());
-        editedEvent.setTicketsSold(ticketSold);
+    /**
+     * Gets the dateTime of the new event object;
+     * @return an array of startDateTime at [1], and endDateTime at [2]
+     */
+    private LocalDateTime[] saveDate(){
+        //Start DateTime
+        LocalDateTime startDateTime = DateTimeExtract(datePickerStartDate, txtFieldStartTime);
 
-        int ticketsRemaining = Integer.parseInt(txtFieldTicketRemaining.getText());
-        editedEvent.setTicketsRemaining(ticketsRemaining);
+        //End DateTime
+        LocalDateTime endDateTime = DateTimeExtract(datePickerEndDate, txtFieldEndTime);
 
-        editedEvent.setPriceGroups(tblViewNewEventTicketGroup.getItems());
+        LocalDateTime[] times = {startDateTime, endDateTime};
+        return times;
+    }
 
-        String description = txtAreaEditEventInfo.getText();
-        editedEvent.setDescription(description);
+    private LocalDateTime DateTimeExtract(DatePicker datePicker, TextField timeField) {
+        LocalDate date = datePicker.getValue();
+        LocalTime time = LocalTime.of(0, 0);
+        if (timeField.getText() != null && !timeField.getText().isEmpty() && !timeField.getText().isBlank())
+        {
+            time = LocalTime.parse(txtFieldStartTime.getText());
+        }
+        LocalDateTime dateTime = date.atTime(time);
 
-        Color color = colorPicker.getValue();
-        if (!color.equals(editedEvent.getColor()))
-        editedEvent.setColor(color);
+        return dateTime;
+    }
 
-        if (imageColorToggleGroup.getSelectedToggle() == radioButtonImage){
-            editedEvent.setEventImage(imgViewEvent.getImage());
+    /**
+     * Gets the image and color of the new event.
+     * @return an array of color at [1], and image at [2]
+     */
+    private void saveEditImageAndColor(){
+        Color color = null;
+        Image image = null;
+
+        if (imageColorToggleGroup.getSelectedToggle().equals(radioButtonColor)){
+            color = colorPicker.getValue();
+            image = generateBlankImage(color);
+            editedEvent.setColor(color);
+            editedEvent.setEventImage(image);
+            editedEvent.setHasImage(false);
+
+        }
+        else if (imageColorToggleGroup.getSelectedToggle() == radioButtonImage) {
+            color = Color.TRANSPARENT;
+            image = imgViewEvent.getImage();
+            editedEvent.setColor(color);
+            editedEvent.setEventImage(image);
             editedEvent.setHasImage(true);
         }
-        else {
-            editedEvent.setHasImage(false);
-            editedEvent.setEventImage(generateBlankImage(colorPicker.getValue()));
-        }
-
-        DataManager.getInstance().updateEvent(editedEvent);
-
-        ((Node) (event.getSource())).getScene().getWindow().hide();
     }
+
 
     private void openStage(String fxml, String title, EventHandler<WindowEvent> event) {
         Parent root = null;

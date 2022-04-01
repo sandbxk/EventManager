@@ -4,7 +4,6 @@ import be.Event;
 import be.PriceGroup;
 import be.Venue;
 import bll.DataManager;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -112,6 +111,7 @@ public class NewEventController implements Initializable {
             }
             
             if (newValue == radioButtonColor){
+                colorPicker.setValue(Color.DARKGREEN);
                 imgViewEvent.setImage(generateBlankImage(colorPicker.getValue()));
                 btnAddImage.setDisable(true);
                 btnAddImage.setOpacity(0);
@@ -119,6 +119,7 @@ public class NewEventController implements Initializable {
                 colorPicker.setOpacity(1);
             }
             else if (newValue == radioButtonImage){
+                colorPicker.setValue(null);
                 colorPicker.setDisable(true);
                 colorPicker.setOpacity(0);
                 btnAddImage.setDisable(false);
@@ -235,57 +236,56 @@ public class NewEventController implements Initializable {
     }
 
     public void onSave(ActionEvent event) {
+        if (tblViewVenues.getSelectionModel().getSelectedItem() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "No Venue selected");
+            alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
+            alert.show();
+            return;
+        }
+        if (tblViewNewEventTicketGroup.getItems().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "No Ticket Groups added");
+            alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
+            alert.show();
+            return;
+        }
+
+        if (datePickerStartDate.getValue() == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING, "No start date chosen");
+            alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
+            alert.show();
+            return;
+        }
+
         try {
-            if (tblViewVenues.getSelectionModel().getSelectedItem() == null) {
-                Alert alert = new Alert(Alert.AlertType.WARNING, "No Venue selected");
-                alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
-                alert.show();
-                return;
-            }
-            if (tblViewNewEventTicketGroup.getItems().isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.WARNING, "No Ticket Groups added");
-                alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
-                alert.show();
-                return;
-            }
 
-            if (datePickerStartDate.getValue() == null) {
-                Alert alert = new Alert(Alert.AlertType.WARNING, "No start date chosen");
-                alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
-                alert.show();
-                return;
-            }
-
+            //Temp ID
             int id = -1;
+
+            //EventName
             String name = txtFieldEventName.getText();
 
-            LocalDate startDate = datePickerStartDate.getValue();
-            LocalTime startTime = LocalTime.of(0, 0);
-            if (txtFieldStartTime.getText() != null && !txtFieldStartTime.getText().isEmpty() && !txtFieldStartTime.getText().isBlank()) {
-                startTime = LocalTime.parse(txtFieldStartTime.getText());
-            }
-            LocalDateTime startDateTime = startDate.atTime(startTime);
+            //StartDateTime and EndDateTime
+            LocalDateTime[] times = saveDate();
 
-
-            LocalDate endDate = datePickerEndDate.getValue();
-            LocalTime endTime = LocalTime.of(0, 0);
-            if (txtFieldEndTime.getText() != null && !txtFieldEndTime.getText().isEmpty() && !txtFieldEndTime.getText().isBlank()) {
-                endTime = LocalTime.parse(txtFieldStartTime.getText());
-            }
-            LocalDateTime endDateTime = endDate.atTime(endTime);
-
+            //Venue
             Venue venue = tblViewVenues.getSelectionModel().getSelectedItem();
+
+            //Ticket counts
             int ticketSold = Integer.parseInt(txtFieldTicketsSold.getText());
             int ticketsRemaining = Integer.parseInt(txtFieldTicketRemaining.getText());
-            ObservableList<PriceGroup> priceGroups = DataManager.getInstance().getPriceGroups(null);
-            String description = txtAreaNewEventInfo.getText();
-            Color color = colorPicker.getValue();
-            Image image = null;
-            if (imageColorToggleGroup.getSelectedToggle() == radioButtonImage)
-                image = imgViewEvent.getImage();
 
-            Event newEvent = new Event(id, name, startDateTime, endDateTime, venue, ticketSold, ticketsRemaining, priceGroups, description, color, image);
-            DataManager.getInstance().newEvent(newEvent); //TODO: TEMP
+            //PriceGroups
+            ObservableList<PriceGroup> priceGroups = DataManager.getInstance().getPriceGroups(null);
+
+            //Description
+            String description = txtAreaNewEventInfo.getText();
+
+            //Color and Image
+            Object[] imageAndColor = saveImageAndColor();
+
+
+            Event newEvent = new Event(id, name, times[0], times[1], venue, ticketSold, ticketsRemaining, priceGroups, description, (Color) imageAndColor[0], (Image) imageAndColor[1]);
+            DataManager.getInstance().newEvent(newEvent);
 
 
             ((Node) (event.getSource())).getScene().getWindow().hide();
@@ -295,6 +295,55 @@ public class NewEventController implements Initializable {
             alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
             alert.show();
         }
+    }
+
+
+    /**
+     * Gets the dateTime of the new event object;
+     * @return an array of startDateTime at [1], and endDateTime at [2]
+     */
+    private LocalDateTime[] saveDate(){
+        //Start DateTime
+        LocalDateTime startDateTime = DateTimeExtract(datePickerStartDate, txtFieldStartTime);
+
+        //End DateTime
+        LocalDateTime endDateTime = DateTimeExtract(datePickerEndDate, txtFieldEndTime);
+
+        LocalDateTime[] times = {startDateTime, endDateTime};
+        return times;
+    }
+
+    private LocalDateTime DateTimeExtract(DatePicker datePicker, TextField timeField) {
+        LocalDate date = datePicker.getValue();
+        LocalTime time = LocalTime.of(0, 0);
+        if (timeField.getText() != null && !timeField.getText().isEmpty() && !timeField.getText().isBlank())
+        {
+            time = LocalTime.parse(txtFieldStartTime.getText());
+        }
+        LocalDateTime dateTime = date.atTime(time);
+
+        return dateTime;
+    }
+
+    /**
+     * Gets the image and color of the new event.
+     * @return an array of color at [1], and image at [2]
+     */
+    private Object[] saveImageAndColor(){
+        Color color = null;
+        Image image = null;
+
+        if (imageColorToggleGroup.getSelectedToggle().equals(radioButtonColor)){
+            color = colorPicker.getValue();
+        }
+        else if (imageColorToggleGroup.getSelectedToggle() == radioButtonImage) {
+            color = Color.TRANSPARENT;
+            image = imgViewEvent.getImage();
+        }
+
+        Object[] imageAndColor = {color, image};
+
+        return imageAndColor;
     }
 
     private void openStage(String fxml, String title, EventHandler<WindowEvent> event) {

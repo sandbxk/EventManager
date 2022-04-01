@@ -53,13 +53,15 @@ public class SignInController implements Initializable {
             loginAsCoordinator();
         }
 
-        switch (SessionManager.getCurrent().getLoggedInUser().type())
+       /* switch (SessionManager.getCurrent().getLoggedInUser().type())
         {
             case INVALID -> invalidLoginAttempt();
             case END_USER -> loginAsEndUser();
             case EVENT_COORDINATOR -> loginAsCoordinator();
             case ADMINISTRATOR -> loginAsAdmin();
         }
+
+        */
 
     }
 
