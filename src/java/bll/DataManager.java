@@ -193,6 +193,9 @@ public final class DataManager {
         this.selectedVenue = venue;
     }
 
+
+
+
     public void createNewUser(String userName, String login, String password, String email)
     {
         database.createUser(userName, login, password, email);

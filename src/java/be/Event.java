@@ -100,6 +100,12 @@ public class Event {
         lblEventDateTime.setText(startDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE));
     }
 
+    /**
+     * Sets the image and color of the event.
+     * If the image is null, the eventImage is set to the color of the event.
+     * @param image
+     * @param color
+     */
     private void initImageAndColor(Image image, Color color){
         if (image == null){
             this.color = color;
@@ -113,6 +119,10 @@ public class Event {
         }
     }
 
+    /**
+     * The node representation of the event object.
+     * @return
+     */
     public ToggleButton getEventTile(){
         return node;
     }
