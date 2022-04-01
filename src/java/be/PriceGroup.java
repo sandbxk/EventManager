@@ -7,11 +7,13 @@ import javafx.beans.property.StringProperty;
 
 public class PriceGroup {
 
+    private IntegerProperty id;
     private StringProperty name;
     private IntegerProperty price;
     private StringProperty currency;
 
-    public PriceGroup(String name, int price, String currency) {
+    public PriceGroup(int id, String name, int price, String currency) {
+        this.id = new SimpleIntegerProperty();
         this.name = new SimpleStringProperty();
         this.price = new SimpleIntegerProperty();
         this.currency = new SimpleStringProperty();
@@ -20,6 +22,10 @@ public class PriceGroup {
         this.price.set(price);
         this.currency.set(currency);
     }
+
+    public int getID(){return id.get();};
+
+    public void setID(int id){this.id.set(id);};
 
     public String getName() {
         return name.get();

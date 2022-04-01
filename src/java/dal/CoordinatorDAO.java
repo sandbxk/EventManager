@@ -1,9 +1,6 @@
 package dal;
 
-import be.EUserType;
-import be.Event;
-import be.UserInfo;
-import be.Venue;
+import be.*;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -158,7 +155,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         {
             String sql = """
                     UPDATE Venue
-                    SET venueName = '%s', '%s', '%s' 
+                    SET venueName = '%s', streetName = '%s', venueZipCode = '%s' 
                     WHERE id = '%s';
                     """.formatted(location, street, zipcode, venueID);
 
@@ -244,7 +241,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
     public void deleteEvent(Event event)
     {
         String sql = """
-                    DELETE FROM Events WHERE EventID = '%s'                    
+                    DELETE FROM events WHERE id = '%s'                    
                     """.formatted(event.getId());
 
         this.execute(sql);
@@ -253,21 +250,21 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
     public void addUserToEvent(UserInfo user, Event event)
     {
         String sql = """
-                INSERT INTO userEvent (UserID_FK, EventID_FK)
+                INSERT INTO userEvent (userID, eventID)
                 VALUES ('%s', '%s')
                 """.formatted(user.getId(), event.getId());
 
-        execute(sql);
+        this.execute(sql);
     }
 
     public void removeUserFromEvent(UserInfo user, Event event)
     {
         String sql = """
                 DELETE FROM userEvent
-                WHERE UserID_FK = '%s' AND EventID_FK = '%s'
+                WHERE userID = '%s' AND eventID = '%s'
                 """.formatted(user.getId(), event.getId());
 
-        execute(sql);
+        this.execute(sql);
     }
 
     public ObservableList<UserInfo> getUsersForEvent(Event event) throws SQLException
@@ -287,6 +284,66 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
             }
 
         return null;
+    }
 
+    public void createPrice(PriceGroup price)
+    {
+        String sql = """
+                    INSERT INTO priceGroups (name, price, currency)
+                    VALUES ('%s', '%s', '%s')
+                    
+                    """.formatted(price.getName(), price.getPrice(), price.getCurrency());
+
+        this.execute(sql);
+    }
+
+    public void deletePrice(PriceGroup price)
+    {
+        String sql = """
+                DELETE FROM priceGroups
+                WHERE id = '%s'
+                """.formatted(price.getID());
+
+        execute(sql);
+    }
+
+    public void updatePrice (PriceGroup price)
+    {
+         String sql = """
+                 UPDATE priceGroups
+                 SET name = '%s', price = '%s', currency = '%s'
+                 WHERE id = '%s'
+                 """.formatted(price.getName(), price.getPrice(), price.getCurrency(), price.getID());
+
+         this.execute(sql);
+    }
+
+    public ObservableList<PriceGroup> getPriceGroup()
+    {
+        try {
+            ObservableList<PriceGroup> returnList = FXCollections.observableArrayList();
+
+            String sql = """
+                       SELECT * FROM priceGroups
+                       """;
+
+        Statement statement = DBconnect.getConnection().createStatement();
+        ResultSet result = statement.executeQuery(sql);
+
+        while (result.next())
+        {
+            int id = result.getInt("id");
+            String name = result.getString("name");
+            int price = result.getInt("price");
+            String currency = result.getString("currency");
+
+            returnList.add(new PriceGroup(id, name, price, currency));
+        }
+            return returnList;
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

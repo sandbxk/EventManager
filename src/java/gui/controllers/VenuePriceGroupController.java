@@ -136,7 +136,7 @@ public class VenuePriceGroupController implements Initializable {
 
     public void onSaveNewPriceGroup(ActionEvent event) {
 
-        PriceGroup newPriceGroup = new PriceGroup("Blank", 0, "DKK");
+        PriceGroup newPriceGroup = new PriceGroup(-1, "Blank", 0, "DKK");
 
         if (txtFieldNewPriceGroupName.getText() != null && !txtFieldNewPriceGroupName.getText().isEmpty() && !txtFieldNewPriceGroupName.getText().isBlank())
         {

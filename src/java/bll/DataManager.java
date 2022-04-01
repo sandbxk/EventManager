@@ -176,7 +176,7 @@ public final class DataManager {
     }
 
     public void updateVenue(Venue venue) {
-        //TODO: DB
+        database.updateVenue(venue.getVenueName(), venue.getAddress(), venue.getZipCode(), venue.getID());
     }
 
     public void removeVenue(Venue selectedItem) {
