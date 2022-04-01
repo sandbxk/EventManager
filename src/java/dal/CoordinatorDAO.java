@@ -196,9 +196,9 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
             while (result.next())
             {
-                int id = result.getInt("VenueID");
+                int id = result.getInt("venueID");
                 String location = result.getString("locationName");
-                String streetName = result.getString("StreetName");
+                String streetName = result.getString("streetName");
                 String zipCode = Integer.toString(result.getInt("venueZipCode"));
                 String city = result.getString("cityName");
 
@@ -228,7 +228,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
     public void createEvent(Event event) throws SQLException
     {
             String sql = """
-                    INSERT INTO Events (eventTitle, VenueID, DESCRIPTION, maxSeats, beginAt, endAt, price)
+                    INSERT INTO Events (eventTitle, venueID, description, maxSeats, beginAt, endAt, price)
                     VALUES ('%s', '%s', '%s')
                     
                     """.formatted(event.getEventName(), event.getLocation(), event.getDescription(), event.getLocation(), event.getStartDateTime(), event.getEndDateTime(), event.getPriceGroupsProperty()); //Needs to store name
