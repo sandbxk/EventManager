@@ -3,6 +3,7 @@ package gui.controllers;
 import be.Event;
 import be.PriceGroup;
 import bll.DataManager;
+import gui.model.SceneManager;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -90,6 +91,7 @@ public class CoordinatorController implements Initializable {
     private static final double SLIDE_MENU_WIDTH = 490;
     private ObjectProperty<Event> selectedEvent;
     private ContextMenu eventActionsMenu;
+    private ContextMenu signOutMenu;
 
 
 
@@ -113,7 +115,7 @@ public class CoordinatorController implements Initializable {
         initTableViewPriceGroups();
         initEventListener();
         initEventActionsMenu();
-
+        initSignOutMenu();
     }
 
     private void initTableViewPriceGroups(){
@@ -244,6 +246,15 @@ public class CoordinatorController implements Initializable {
 
 
     public void onUser(MouseEvent mouseEvent) {
+        //Location of the pressed button
+        double onScreenX = lblUser.getScene().getWindow().getX() + lblUser.getHeight() + lblUser.localToScene(lblUser.getBoundsInLocal()).getMinX();
+        double onScreenY = lblUser.getScene().getWindow().getY() + lblUser.getWidth() + lblUser.localToScene(lblUser.getBoundsInLocal()).getMinY();
+
+        double offsetX = lblUser.getWidth() * 2;
+        double offsetY = lblUser.getHeight()*1.5;
+
+        //ContextMenu showed at the location of the button, with offsets applied
+        signOutMenu.show(lblUser, onScreenX - offsetX, onScreenY + offsetY);
     }
 
     /**
@@ -399,6 +410,20 @@ public class CoordinatorController implements Initializable {
         eventActionsMenu.show(btnEventActions, onScreenX - offsetX, onScreenY + offsetY);
     }
 
+    private void signOut(){
+        //TODO: Temp?
+        Parent root = null;
+        Stage thisStage = (Stage) lblUser.getScene().getWindow();
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gui/views/EditEventView.fxml")));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+        thisStage.setScene(new Scene(root));
+
+    }
+
 
     private void initEventActionsMenu(){
         MenuItem editEvent = new MenuItem("Edit Event");
@@ -409,5 +434,13 @@ public class CoordinatorController implements Initializable {
 
         eventActionsMenu = new ContextMenu(editEvent, deleteEvent);
         eventActionsMenu.setAutoHide(true);
+    }
+
+    private void initSignOutMenu(){
+        MenuItem signOut = new MenuItem("Sign out");
+        signOut.setOnAction(event -> signOut());
+
+        signOutMenu = new ContextMenu(signOut);
+        signOutMenu.setAutoHide(true);
     }
 }
