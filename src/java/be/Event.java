@@ -155,7 +155,11 @@ public class Event {
     }
 
     public void setEventName(String eventName) {
+        if (eventName == null || eventName.isEmpty() || eventName.isBlank())
+            eventName = "Unamed";
+
         this.eventName.set(eventName);
+        this.lblEventName.setText(eventName);
     }
 
     public LocalDateTime getStartDateTime() {
@@ -164,6 +168,7 @@ public class Event {
 
     public void setStartDateTime(LocalDateTime startDateTime) {
         this.startDateTime = startDateTime;
+        this.lblEventDateTime.setText(startDateTime.toLocalTime().toString());
     }
 
     public LocalDateTime getEndDateTime() {
@@ -236,6 +241,7 @@ public class Event {
 
     public void setEventImage(Image eventImage){
         this.eventImage = eventImage;
+        this.imgViewBanner.setImage(eventImage);
     }
 
     public Color getColor() {
@@ -244,6 +250,7 @@ public class Event {
 
     public void setColor(Color color) {
         this.color = color;
+        this.imgViewContainer.setStyle("-fx-background-color: rgb(" + color.getRed()*255 + ", " + color.getGreen()*255 + ", " + color.getBlue()*255 + ");");
     }
 
     public boolean HasImage() {

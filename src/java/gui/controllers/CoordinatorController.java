@@ -98,9 +98,9 @@ public class CoordinatorController implements Initializable {
         selectedEvent.bind(DataManager.getInstance().getSelectedEventProperty());
     }
 
-    //TODO: Fix event CSS, Fix tablecell text alignment, fix tblviewTicketGroup width, header and height in coordinatorView
-    //TODO: Fix detailImageView
-    //TODO: tblViewAttendees with
+    //TODO: On user lbl imageView --> Signout
+    //TODO: on Venue clicked
+    //TODO: Coordinator TableView init
     //TODO: Fix alert CSS error
 
 
@@ -399,7 +399,7 @@ public class CoordinatorController implements Initializable {
         eventActionsMenu.show(btnEventActions, onScreenX - offsetX, onScreenY + offsetY);
     }
 
-    
+
     private void initEventActionsMenu(){
         MenuItem editEvent = new MenuItem("Edit Event");
         editEvent.setOnAction(event -> onEditEvent());
