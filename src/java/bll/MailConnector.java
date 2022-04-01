@@ -21,12 +21,12 @@ public class MailConnector {
 
     public Session getSession()
     {
-        Properties properties = new Properties();
+        Properties properties = System.getProperties();
         properties.put("mail.smtp.auth", true);
         properties.put("mail.smtp.host", "smtp.gmail.com");
-        properties.put("mail.smtp.port", 587);
+        properties.put("mail.smtp.port", 465);
         properties.put("mail.smtp.starttls.enable", true);
-        properties.put("mail.transport.protocol", "smtp");
+        properties.put("mail.transport.protocol", "mapi");
 
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
