@@ -9,6 +9,8 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.sql.SQLException;
+
 public final class DataManager {
 
     private CoordinatorDAO database;
@@ -68,20 +70,19 @@ public final class DataManager {
      * EVENTS
      */
 
-    public void newEvent(Event event)
+    public void newEvent(Event event) throws SQLException
     {
-        //TODO: DB
-        this.events.add(event);
+        database.createEvent(event);
     }
 
     public void deleteEvent(Event event)
     {
-        //TODO: DB
+        database.deleteEvent(event);
     }
 
     public void updateEvent(Event event)
     {
-        //TODO: DB
+        database.updateEvent(event);
     }
 
     public ObservableList<Event> getAllEvents()
@@ -165,15 +166,13 @@ public final class DataManager {
 
     /** VENUE */
 
-    public ObservableList<Venue> getAllVenues(){
-        //TODO: DB
-        return this.allVenues;
+    public ObservableList<Venue> getAllVenues() throws SQLException
+    {
+            return database.getAllVenues();
     }
 
     public void newVenue(Venue venue) {
-
-        //TODO: TEMP
-        this.allVenues.add(venue);
+        database.createVenue(venue.getVenueName(), venue.getAddress(), Integer.parseInt(venue.getZipCode()));
     }
 
     public void updateVenue(Venue venue) {
@@ -181,8 +180,7 @@ public final class DataManager {
     }
 
     public void removeVenue(Venue selectedItem) {
-        this.priceGroups.remove(selectedItem);
-        //TODO: DB
+        database.deleteVenue(selectedItem.getID());
     }
 
     public Venue getSelectedVenue() {
