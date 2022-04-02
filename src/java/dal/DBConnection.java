@@ -25,7 +25,7 @@ public class DBConnection
         }
         dataSource.setServerName(property.getProperty("server"));
         dataSource.setDatabaseName(property.getProperty("database"));
-        dataSource.setUser(property.getProperty("usernames"));
+        dataSource.setUser(property.getProperty("username"));
         dataSource.setPassword(property.getProperty("password"));
         dataSource.setPortNumber(Integer.parseInt(property.getProperty("port")));
     }
