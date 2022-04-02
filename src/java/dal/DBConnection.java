@@ -17,7 +17,9 @@ public class DBConnection
     public DBConnection() throws IOException {
         property = new Properties();
         dataSource = new SQLServerDataSource();
+    }
 
+    public Connection getConnection() throws SQLServerException {
         try {
             property.load(new FileReader("config.properties"));
         } catch (IOException e) {
@@ -25,15 +27,13 @@ public class DBConnection
         }
         dataSource.setServerName(property.getProperty("server"));
         dataSource.setDatabaseName(property.getProperty("database"));
-        dataSource.setUser(property.getProperty("usernames"));
+        dataSource.setUser(property.getProperty("username"));
         dataSource.setPassword(property.getProperty("password"));
         dataSource.setPortNumber(Integer.parseInt(property.getProperty("port")));
-    }
-
-    public Connection getConnection() throws SQLServerException
-    {
         return dataSource.getConnection();
     }
+
+    
 
     public static void main(String[] args) throws IOException, SQLServerException {
         DBConnection dbConnect = new DBConnection();
