@@ -106,10 +106,7 @@ public class CoordinatorController implements Initializable {
 
     }
 
-    //TODO: On user lbl imageView --> Signout
-    //TODO: on Venue clicked
     //TODO: Coordinator TableView init
-    //TODO: Fix alert CSS error
 
 
     @Override
@@ -118,13 +115,13 @@ public class CoordinatorController implements Initializable {
         eventToggle = new ToggleGroup();
         onShowHideMenu(new ActionEvent());
         hideDetailsPanelComponents(true);
-        initTableViewPriceGroups();
+        initTableViews();
         initEventListener();
         initEventActionsMenu();
         initSignOutMenu();
     }
 
-    private void initTableViewPriceGroups(){
+    private void initTableViews(){
         tblClmnGroupName.setCellValueFactory(param -> param.getValue().nameProperty());
         tblClmnGroupPrice.setCellValueFactory(param -> param.getValue().priceProperty());
         tblClmnGroupCurrency.setCellValueFactory(param -> param.getValue().currencyProperty());
