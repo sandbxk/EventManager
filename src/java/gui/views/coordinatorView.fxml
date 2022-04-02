@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -51,10 +52,13 @@
                            <image>
                               <Image url="@../styles/img/usericon128-2.png" />
                            </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </ImageView>
-                        <Label fx:id="lblUser" onMouseClicked="#onUser" prefHeight="48.0" prefWidth="214.0" styleClass="Text" text="coordinator">
+                        <Label fx:id="lblUser" prefHeight="25.0" prefWidth="214.0" styleClass="Text" text="coordinator">
                            <HBox.margin>
-                              <Insets left="10.0" />
+                              <Insets left="10.0" top="11.0" />
                            </HBox.margin>
                         </Label>
                      </children>

@@ -7,7 +7,9 @@ import gui.model.SceneManager;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -92,12 +94,16 @@ public class CoordinatorController implements Initializable {
     private ObjectProperty<Event> selectedEvent;
     private ContextMenu eventActionsMenu;
     private ContextMenu signOutMenu;
+    private BooleanProperty showingAddress;
 
 
 
     public CoordinatorController() {
         selectedEvent = new SimpleObjectProperty();
         selectedEvent.bind(DataManager.getInstance().getSelectedEventProperty());
+        showingAddress = new SimpleBooleanProperty();
+        showingAddress.set(false);
+
     }
 
     //TODO: On user lbl imageView --> Signout
@@ -125,6 +131,16 @@ public class CoordinatorController implements Initializable {
     }
 
     private void initEventListener() {
+        lblEventVenue.setOnMouseClicked(event -> showingAddress.set(!showingAddress.get()));
+        showingAddress.addListener((observable, oldValue, newValue) -> {
+            if (showingAddress.get() && selectedEvent != null){
+                String address = selectedEvent.get().getLocation().getAddress();
+                String zipcode = selectedEvent.get().getLocation().getZipCode();
+                String city = selectedEvent.get().getLocation().getCity();
+                lblEventVenue.setText(address + ", " + zipcode + " " + city);
+            }
+        });
+
         eventToggle.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue == null)
                 hideDetailsPanelComponents(true);
@@ -246,15 +262,15 @@ public class CoordinatorController implements Initializable {
 
 
     public void onUser(MouseEvent mouseEvent) {
-        //Location of the pressed button
-        double onScreenX = lblUser.getScene().getWindow().getX() + lblUser.getHeight() + lblUser.localToScene(lblUser.getBoundsInLocal()).getMinX();
-        double onScreenY = lblUser.getScene().getWindow().getY() + lblUser.getWidth() + lblUser.localToScene(lblUser.getBoundsInLocal()).getMinY();
+        //Location of the node
+        double onScreenX = imgViewUser.getScene().getWindow().getX() + imgViewUser.getFitHeight() + imgViewUser.localToScene(imgViewUser.getBoundsInLocal()).getMinX();
+        double onScreenY = imgViewUser.getScene().getWindow().getY() + imgViewUser.getFitWidth() + imgViewUser.localToScene(imgViewUser.getBoundsInLocal()).getMinY();
 
-        double offsetX = lblUser.getWidth() * 2;
-        double offsetY = lblUser.getHeight()*1.5;
+        double offsetX = imgViewUser.getFitWidth() * 2;
+        double offsetY = imgViewUser.getFitHeight()*0.8;
 
         //ContextMenu showed at the location of the button, with offsets applied
-        signOutMenu.show(lblUser, onScreenX - offsetX, onScreenY + offsetY);
+        signOutMenu.show(imgViewUser, onScreenX - offsetX, onScreenY + offsetY);
     }
 
     /**
@@ -415,7 +431,7 @@ public class CoordinatorController implements Initializable {
         Parent root = null;
         Stage thisStage = (Stage) lblUser.getScene().getWindow();
         try {
-            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gui/views/EditEventView.fxml")));
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gui/views/SignIn.fxml")));
         } catch (IOException e) {
             e.printStackTrace();
             return;
