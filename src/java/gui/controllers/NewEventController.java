@@ -350,7 +350,12 @@ public class NewEventController implements Initializable {
      * @return
      */
     private LocalDateTime DateTimeExtract(DatePicker datePicker, TextField timeField) {
-        LocalDate date = datePicker.getValue();
+        LocalDate date = null;
+        if (datePicker.getValue() == null)
+            return null;
+
+        date = datePicker.getValue();
+
         LocalTime time = LocalTime.of(0, 0);
         if (timeField.getText() != null && !timeField.getText().isEmpty() && !timeField.getText().isBlank())
         {

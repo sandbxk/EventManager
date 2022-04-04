@@ -456,4 +456,7 @@ public class CoordinatorController implements Initializable {
         signOutMenu = new ContextMenu(signOut);
         signOutMenu.setAutoHide(true);
     }
+
+    public void onSaveAttendeesList(ActionEvent event) {
+    }
 }

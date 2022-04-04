@@ -27,7 +27,7 @@ public class DBConnection
         dataSource.setDatabaseName(property.getProperty("database"));
         dataSource.setUser(property.getProperty("username"));
         dataSource.setPassword(property.getProperty("password"));
-        dataSource.setPortNumber(Integer.parseInt(property.getProperty("port")));
+        //dataSource.setPortNumber(Integer.parseInt(property.getProperty("port")));
     }
 
     public Connection getConnection() throws SQLServerException
