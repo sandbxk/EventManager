@@ -1,7 +1,6 @@
 package dal;
 
 import be.*;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
@@ -28,7 +27,11 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
     @Override
     public boolean create(UserInfo input, String username, String password) {
 
-        String sqlUser = "INSERT INTO userTable (userName, loginName, loginPass, userAuth) VALUES (?, ?, ?, ?)";
+        String sqlUser = """
+        INSERT INTO userTable (userName, loginName, loginPass, userAuth)
+        VALUES (?, ?, ?, ?)
+        """;
+
         try (Connection connection = DBconnect.getConnection()) {
             PreparedStatement psUser = connection.prepareStatement(sqlUser);
 
@@ -46,7 +49,12 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
     @Override
     public UserInfo read(int id) throws SQLException {
-        String sqlUser = "SELECT userName FROM UserTable WHERE userID = ?";
+
+        String sqlUser = """
+                SELECT userName
+                FROM UserTable
+                WHERE userID = ?
+                """;
 
         try (Connection connection = DBconnect.getConnection()) {
             PreparedStatement psSQL = connection.prepareStatement(sqlUser);
@@ -139,9 +147,10 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
     public Venue getVenue (int id)
     {
         String sql = """
-                    SELECT 1 FROM venue
-                    WHERE id = ?
-                    """;
+               SELECT 1 FROM venue
+               WHERE id = ?
+               """;
+
         try (Connection connection = DBconnect.getConnection())
              {
                  PreparedStatement psSQL = connection.prepareStatement(sql);
