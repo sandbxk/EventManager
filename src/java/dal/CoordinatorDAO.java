@@ -290,8 +290,34 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         }
     }
 
-    public void updateEvent(Event event)
+    public void updateEvent(Event event, String colour)
     {
+        String sql = """
+                UPDATE events
+                SET eventTitle = ?, venueID = ?, description = ?, maxSeats = ?, ticketsSold = ?, beginAt = ?, endAt = ?, colour = ?, eventImage =?
+                WHERE id = ?
+                """;
+
+        try (Connection connection = DBconnect.getConnection())
+        {
+            PreparedStatement psState = connection.prepareStatement(sql);
+
+            psState.setString(1, event.getEventName());
+            psState.setInt(2, event.getLocation().getID());
+            psState.setString(3, event.getDescription());
+            psState.setInt(4, event.getTicketsRemaining());
+            psState.setInt(5, event.getTicketsSold());
+            psState.setTimestamp(6, Timestamp.valueOf(event.getStartDateTime()));
+            psState.setTimestamp(7, Timestamp.valueOf(event.getEndDateTime()));
+            psState.setString(8, colour);
+            psState.setNull(9, Types.BINARY);
+
+            psState.execute();
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
 
     }
 
@@ -406,14 +432,45 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
         String sql = """
                     SELECT * FROM userEvent
-                    WHERE EventID = ?
-                    JOIN 
+                    JOIN userTable ON userEvent.userID=userTable.id
+                    WHERE eventID = ?
                     """;
 
-        return null;
+        try (Connection connection = DBconnect.getConnection())
+        {
+            PreparedStatement psState = DBconnect.getConnection().prepareStatement(sql);
+            ResultSet resSet = psState.executeQuery();
+
+            while (resSet.next())
+            {
+                EUserType userType;
+
+                int userID = resSet.getInt("id");
+                String name = resSet.getString("loginName");
+                if (resSet.getInt("userAuth") == 1 )
+                {
+                    userType = EUserType.EVENT_COORDINATOR;
+                } else
+                {
+                    userType = EUserType.END_USER;
+                }
+                int zipCode = resSet.getInt("ZipCode");
+                String email = resSet.getString("email");
+
+
+                returnList.add(new UserInfo(userID, name, userType, zipCode, email));
+            }
+
+            return returnList;
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    public PreparedStatement createPrice(PriceGroup price, int id)
+    public PreparedStatement createPrice(String name, int price, String currency, int id)
     {
         String sql = """
                     INSERT INTO priceGroups (name, price, currency, eventID)
@@ -423,9 +480,9 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         {
             PreparedStatement psPrice = conneciton.prepareStatement(sql);
 
-            psPrice.setString(1, price.getName());
-            psPrice.setInt(2, price.getPrice());
-            psPrice.setString(3, price.getCurrency());
+            psPrice.setString(1, name);
+            psPrice.setInt(2, price);
+            psPrice.setString(3, currency);
             psPrice.setInt(4, id);
 
             psPrice.execute();

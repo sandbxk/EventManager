@@ -84,7 +84,9 @@ public final class DataManager {
 
     public void updateEvent(Event event)
     {
-        database.updateEvent(event);
+        String colour = event.getColor().getRed() + ", " + event.getColor().getGreen() + ", " + event.getColor().getBlue();
+
+        database.updateEvent(event, colour);
     }
 
     public ObservableList<Event> getAllEvents() throws SQLException
@@ -134,7 +136,7 @@ public final class DataManager {
         if (event == null) {
             this.priceGroups.add(priceGroup);
         }
-        else database.createPrice(priceGroup, event.getId());
+        else database.createPrice(priceGroup.getName(), priceGroup.getPrice(), priceGroup.getCurrency(), 1);
     }
 
     public void removePriceGroup(Event event, PriceGroup priceGroup){
