@@ -7,6 +7,8 @@ import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
@@ -350,5 +352,29 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public List<UserInfo> getAttendeesFromEvent(Event event) throws SQLServerException {
+        List<UserInfo> users = new ArrayList<>();
+        String sql = ("SELECT id, userName, email FROM userTable WHERE id = (SELECT userID FROM userEvent WHERE eventID = ?)");
+        try (Connection connection = DBconnect.getConnection()) {
+            PreparedStatement psSQL = connection.prepareStatement(sql);
+            psSQL.setInt(1, event.getId());
+
+            ResultSet rsUser = psSQL.executeQuery();
+
+            while (rsUser.next())
+            {
+                int id = rsUser.getInt("id");
+                String name = rsUser.getString("userName");
+                String email = rsUser.getString("email");
+                UserInfo user = new UserInfo(id,name, EUserType.END_USER);
+                user.setEmail(email);
+                users.add(user);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return users;
     }
 }
