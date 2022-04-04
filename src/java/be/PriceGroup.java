@@ -18,6 +18,7 @@ public class PriceGroup {
         this.price = new SimpleIntegerProperty();
         this.currency = new SimpleStringProperty();
 
+        this.id.set(id);
         this.name.set(name);
         this.price.set(price);
         this.currency.set(currency);

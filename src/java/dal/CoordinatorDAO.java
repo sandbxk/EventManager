@@ -291,13 +291,13 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         return null;
     }
 
-    public void createPrice(PriceGroup price)
+    public void createPrice(PriceGroup price, Event event)
     {
         String sql = """
-                    INSERT INTO priceGroups (name, price, currency)
-                    VALUES ('%s', '%s', '%s')
+                    INSERT INTO priceGroups (name, price, currency, eventID)
+                    VALUES ('%s', '%s', '%s', '%s')
                     
-                    """.formatted(price.getName(), price.getPrice(), price.getCurrency());
+                    """.formatted(price.getName(), price.getPrice(), price.getCurrency(), event.getId());
 
         this.execute(sql);
     }
@@ -305,7 +305,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
     public void deletePrice(PriceGroup price)
     {
         String sql = """
-                DELETE FROM priceGroups
+                DELETE FROM priceEvent
                 WHERE id = '%s'
                 """.formatted(price.getID());
 
@@ -315,7 +315,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
     public void updatePrice (PriceGroup price)
     {
          String sql = """
-                 UPDATE priceGroups
+                 UPDATE priceEvent
                  SET name = '%s', price = '%s', currency = '%s'
                  WHERE id = '%s'
                  """.formatted(price.getName(), price.getPrice(), price.getCurrency(), price.getID());
@@ -329,7 +329,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
             ObservableList<PriceGroup> returnList = FXCollections.observableArrayList();
 
             String sql = """
-                       SELECT * FROM priceGroups WHERE eventID = '%s'
+                       SELECT * FROM priceEvent WHERE eventID = '%s'
                        """.formatted(event.getId());
 
         Statement statement = DBconnect.getConnection().createStatement();

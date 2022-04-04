@@ -119,7 +119,7 @@ public final class DataManager {
         if (event == null) {
             return this.priceGroups;
         }
-        else return event.getPriceGroups();
+        else return database.getPriceGroup(event);
     }
 
     /**
@@ -133,14 +133,14 @@ public final class DataManager {
         if (event == null) {
             this.priceGroups.add(priceGroup);
         }
-        else event.getPriceGroups().add(priceGroup);
+        else database.createPrice(priceGroup, event);
     }
 
     public void removePriceGroup(Event event, PriceGroup priceGroup){
         if (event == null) {
             this.priceGroups.remove(priceGroup);
         }
-        else event.getPriceGroups().remove(priceGroup);
+        else database.deletePrice(priceGroup);
     }
 
     /**
@@ -157,11 +157,6 @@ public final class DataManager {
 
     public PriceGroup getSelectedPriceGroup() {
         return this.selectedPriceGroup;
-    }
-    
-    public ObservableList<PriceGroup> getPriceGroup(Event event)
-    {
-       return database.getPriceGroup(event);
     }
 
     public void setSelectedPriceGroup(PriceGroup priceGroup) {
