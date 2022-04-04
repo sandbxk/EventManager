@@ -208,10 +208,10 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
     public void createEvent(Event event) throws SQLException
     {
             String sql = """
-                    INSERT INTO Events (eventTitle, venueID, description, maxSeats, beginAt, endAt, price)
+                    INSERT INTO Events (eventTitle, venueID, description, maxSeats, beginAt, endAt)
                     VALUES ('%s', '%s', '%s')
                     
-                    """.formatted(event.getEventName(), event.getLocation(), event.getDescription(), event.getLocation(), event.getStartDateTime(), event.getEndDateTime(), event.getPriceGroupsProperty()); //Needs to store name
+                    """.formatted(event.getEventName(), event.getLocation(), event.getDescription(), event.getLocation(), event.getStartDateTime(), event.getEndDateTime());
 
             this.execute(sql);
     }
