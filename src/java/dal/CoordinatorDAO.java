@@ -147,7 +147,8 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
     public Venue getVenue (int id)
     {
         String sql = """
-               SELECT 1 FROM venue
+               SELECT * FROM venue
+               JOIN cityName ON venue.venueZipCode=cityName.zipCode
                WHERE id = ?
                """;
 
@@ -158,15 +159,16 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
                  ResultSet rsVenue = psSQL.executeQuery();
 
-                 rsVenue.next();
+                    rsVenue.next();
 
-                 int venueID = rsVenue.getInt("id");
-                 String location = rsVenue.getString("venueName");
-                 String streetName = rsVenue.getString("streetName");
-                 String zipCode = Integer.toString(rsVenue.getInt("venueZipCode"));
-                 String city = rsVenue.getString("cityName");
+                     int venueID = rsVenue.getInt("id");
+                     System.out.println(venueID);
+                     String location = rsVenue.getString("venueName");
+                     String streetName = rsVenue.getString("streetName");
+                     String zipCode = Integer.toString(rsVenue.getInt("venueZipCode"));
+                     String city = rsVenue.getString("cityName");
 
-                 return new Venue(venueID, location, streetName, zipCode, city);
+                     return new Venue(venueID, location, streetName, zipCode, city);
 
              } catch (SQLException e)
         {
@@ -203,7 +205,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
     {
         String sql = """
                    DELETE FROM Venue
-                   WHERE id = ?;
+                   WHERE id = ?
                    """;
 
         try (Connection connection = DBconnect.getConnection())
@@ -296,14 +298,16 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
     public void deleteEvent(int id)
     {
         String sql = """
-                    DELETE FROM events WHERE id = ?
+                    DELETE FROM events 
+                    WHERE id = ?
                     """;
 
         try (Connection connection = DBconnect.getConnection())
         {
             PreparedStatement psState = connection.prepareStatement(sql);
-
             psState.setInt(1, id);
+
+            psState.execute();
 
         } catch (SQLException e)
         {
@@ -396,7 +400,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         }
     }
 
-    public ObservableList<UserInfo> getUsersForEvent(Event event)
+    public ObservableList<UserInfo> getUsersForEvent(int id)
     {
         ObservableList<UserInfo> returnList = FXCollections.observableArrayList();
 
