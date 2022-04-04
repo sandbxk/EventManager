@@ -207,15 +207,27 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         return returnList;
     }
 
-    public void createEvent(Event event) throws SQLException
+    public void createEvent(Event event, String colour) throws SQLException
     {
-            String sql = """
-                    INSERT INTO Events (eventTitle, venueID, description, maxSeats, beginAt, endAt)
-                    VALUES ('%s', '%s', '%s')
-                    
-                    """.formatted(event.getEventName(), event.getLocation(), event.getDescription(), event.getLocation(), event.getStartDateTime(), event.getEndDateTime());
+        String sql = "INSERT INTO events (eventTitle, venueID, description, maxSeats, ticketsSold, beginAt, endAt, colour, eventImage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (Connection connection = DBconnect.getConnection()) {
+            PreparedStatement psSQL = connection.prepareStatement(sql);
 
-            this.execute(sql);
+            psSQL.setString(1, event.getEventName());
+            psSQL.setInt(2, event.getLocation().getID());
+            psSQL.setString(3, event.getDescription());
+            psSQL.setInt(4, event.getTicketsRemaining());
+            psSQL.setInt(5, event.getTicketsSold());
+            psSQL.setTimestamp(6, Timestamp.valueOf(event.getStartDateTime()));
+            psSQL.setTimestamp(7, Timestamp.valueOf(event.getEndDateTime()));
+            psSQL.setString(8, colour);
+            psSQL.setNull(9, Types.BINARY);
+
+            psSQL.execute();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void updateEvent(Event event)

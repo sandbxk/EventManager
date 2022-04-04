@@ -47,6 +47,8 @@ CREATE TABLE events (
 	ticketsSold INT,
     beginAt DATETIME,
     endAt DATETIME,
+	colour VARCHAR(255),
+	eventimage varbinary(max),
     PRIMARY KEY (id),
     FOREIGN KEY (venueID) REFERENCES venue (id)
 )

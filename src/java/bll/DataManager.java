@@ -72,7 +72,9 @@ public final class DataManager {
 
     public void newEvent(Event event) throws SQLException
     {
-        database.createEvent(event);
+        String colour = event.getColor().getRed() + ", " + event.getColor().getGreen() + ", " + event.getColor().getBlue();
+
+        database.createEvent(event, colour);
     }
 
     public void deleteEvent(Event event)
