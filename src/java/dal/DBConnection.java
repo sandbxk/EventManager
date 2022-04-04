@@ -19,7 +19,7 @@ public class DBConnection
         dataSource = new SQLServerDataSource();
 
         try {
-            property.load(new FileReader("config.properties"));
+            property.load(new FileReader(".config.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -27,7 +27,6 @@ public class DBConnection
         dataSource.setDatabaseName(property.getProperty("database"));
         dataSource.setUser(property.getProperty("username"));
         dataSource.setPassword(property.getProperty("password"));
-        //dataSource.setPortNumber(Integer.parseInt(property.getProperty("port")));
     }
 
     public Connection getConnection() throws SQLServerException

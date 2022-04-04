@@ -3,6 +3,8 @@ package gui.controllers;
 import be.Event;
 import be.PriceGroup;
 import bll.DataManager;
+import bll.ExporterList;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.model.SceneManager;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -95,6 +97,7 @@ public class CoordinatorController implements Initializable {
     private ContextMenu eventActionsMenu;
     private ContextMenu signOutMenu;
     private BooleanProperty showingAddress;
+    private ExporterList expoList;
 
 
 
@@ -103,6 +106,8 @@ public class CoordinatorController implements Initializable {
         selectedEvent.bind(DataManager.getInstance().getSelectedEventProperty());
         showingAddress = new SimpleBooleanProperty();
         showingAddress.set(false);
+        expoList = new ExporterList();
+
 
     }
 
@@ -457,6 +462,7 @@ public class CoordinatorController implements Initializable {
         signOutMenu.setAutoHide(true);
     }
 
-    public void onSaveAttendeesList(ActionEvent event) {
+    public void onSaveAttendeesList(ActionEvent event) throws SQLServerException, IOException {
+        expoList.createListOfAttendees(selectedEvent.get());
     }
 }
