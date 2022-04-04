@@ -158,6 +158,11 @@ public final class DataManager {
     public PriceGroup getSelectedPriceGroup() {
         return this.selectedPriceGroup;
     }
+    
+    public ObservableList<PriceGroup> getPriceGroup(Event event)
+    {
+       return database.getPriceGroup(event);
+    }
 
     public void setSelectedPriceGroup(PriceGroup priceGroup) {
         this.selectedPriceGroup = priceGroup;
@@ -190,9 +195,6 @@ public final class DataManager {
     public void setSelectedVenue(Venue venue) {
         this.selectedVenue = venue;
     }
-
-
-
 
     public void createNewUser(String userName, String login, String password, String email)
     {

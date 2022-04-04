@@ -105,7 +105,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
     @Override
     public boolean delete(UserInfo input) {
         try (Connection connection = DBconnect.getConnection()) {
-            String SQLDelete = "DELETE FROM UserTable WHERE userID=?";
+            String SQLDelete = "DELETE FROM UserTable WHERE id=?";
             PreparedStatement psDelete = connection.prepareStatement(SQLDelete);
             return psDelete.execute();
         } catch (SQLException throwables) {
@@ -205,23 +205,6 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         return returnList;
     }
 
-    public ObservableList<Event> getAllEvents() throws SQLException
-    {
-        ObservableList<Venue> returnList = FXCollections.observableArrayList();
-
-        String sql = "SELECT * FROM Events";
-
-            Statement statement = DBconnect.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(sql);
-
-            while (result.next())
-            {
-
-            }
-
-        return null;
-    }
-
     public void createEvent(Event event) throws SQLException
     {
             String sql = """
@@ -245,6 +228,28 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
                     """.formatted(event.getId());
 
         this.execute(sql);
+    }
+
+    public ObservableList<Event> getAllEvents() throws SQLException
+    {
+        try {
+            ObservableList<Event> returnList = FXCollections.observableArrayList();
+
+            String sql = "SELECT * FROM Events";
+
+            Statement statement = DBconnect.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+            while (result.next()) {
+
+            }
+
+            return returnList;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void addUserToEvent(UserInfo user, Event event)
@@ -318,14 +323,14 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
          this.execute(sql);
     }
 
-    public ObservableList<PriceGroup> getPriceGroup()
+    public ObservableList<PriceGroup> getPriceGroup(Event event)
     {
         try {
             ObservableList<PriceGroup> returnList = FXCollections.observableArrayList();
 
             String sql = """
-                       SELECT * FROM priceGroups
-                       """;
+                       SELECT * FROM priceGroups WHERE eventID = '%s'
+                       """.formatted(event.getId());
 
         Statement statement = DBconnect.getConnection().createStatement();
         ResultSet result = statement.executeQuery(sql);

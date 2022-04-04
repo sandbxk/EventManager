@@ -31,7 +31,7 @@ CREATE TABLE userTable (
 
 CREATE TABLE venue (
     id INT IDENTITY(1,1) NOT NULL,
-    locationName VARCHAR(255),
+    venueName VARCHAR(255),
     streetName VARCHAR(255),
     venueZipCode VARCHAR (255),
     PRIMARY KEY (id),
@@ -44,9 +44,9 @@ CREATE TABLE events (
     venueID INT,
     description VARCHAR(2048),
     maxSeats INT,
+	ticketsSold INT,
     beginAt DATETIME,
     endAt DATETIME,
-    price DECIMAL,
     PRIMARY KEY (id),
     FOREIGN KEY (venueID) REFERENCES venue (id)
 )
@@ -66,9 +66,19 @@ CREATE TABLE images (
 )
 
 CREATE TABLE eventImages (
-	eventid INT,
+	eventid INT IDENTITY(1,1) NOT NULL,
 	imageid INT,
 	FOREIGN KEY (imageid) REFERENCES images (id),
 	FOREIGN KEY (eventid) REFERENCES events (id),
 	PRIMARY KEY (eventid, imageid)
+)
+
+CREATE TABLE priceEvent (
+	id INT IDENTITY(1,1) NOT NULL,
+	name VARCHAR(255),
+	price INT,
+	currency VARCHAR(255),
+	eventID INT,
+    FOREIGN KEY (eventID) REFERENCES events (id),
+    PRIMARY KEY (id)
 )
