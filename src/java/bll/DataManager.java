@@ -79,7 +79,7 @@ public final class DataManager {
 
     public void deleteEvent(Event event)
     {
-        database.deleteEvent(event);
+        database.deleteEvent(event.getId());
     }
 
     public void updateEvent(Event event)
@@ -87,10 +87,9 @@ public final class DataManager {
         database.updateEvent(event);
     }
 
-    public ObservableList<Event> getAllEvents()
+    public ObservableList<Event> getAllEvents() throws SQLException
     {
-        //TODO: DB
-        return this.events;
+        return this.database.getAllEvents();
     }
 
     public void setEvents(ObservableList<Event> events) {
@@ -121,7 +120,7 @@ public final class DataManager {
         if (event == null) {
             return this.priceGroups;
         }
-        else return database.getPriceGroup(event);
+        else return database.getPriceGroup(event.getId());
     }
 
     /**
@@ -135,14 +134,14 @@ public final class DataManager {
         if (event == null) {
             this.priceGroups.add(priceGroup);
         }
-        else database.createPrice(priceGroup, event);
+        else database.createPrice(priceGroup, event.getId());
     }
 
     public void removePriceGroup(Event event, PriceGroup priceGroup){
         if (event == null) {
             this.priceGroups.remove(priceGroup);
         }
-        else database.deletePrice(priceGroup);
+        else database.deletePrice(priceGroup.getID());
     }
 
     /**
@@ -170,7 +169,9 @@ public final class DataManager {
 
     public ObservableList<Venue> getAllVenues() throws SQLException
     {
+            this.allVenues = database.getAllVenues();
             return database.getAllVenues();
+
     }
 
     public void newVenue(Venue venue) {

@@ -34,6 +34,7 @@ import javafx.util.Duration;
 import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Objects;
@@ -249,7 +250,12 @@ public class CoordinatorController implements Initializable {
         stage.setOnHiding(event1 -> {
             flowPaneEvents.getChildren().clear();
 
-            ObservableList<Event> allEvents = DataManager.getInstance().getAllEvents();
+            ObservableList<Event> allEvents = null;
+            try {
+                allEvents = DataManager.getInstance().getAllEvents();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
             for (Event e : allEvents)
             {

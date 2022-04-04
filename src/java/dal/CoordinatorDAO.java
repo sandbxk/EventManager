@@ -4,9 +4,12 @@ import be.*;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,29 +22,6 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
             DBconnect = new DBConnection();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    private void execute(String sql)
-    {
-        try
-        {
-            Statement statement = DBconnect.getConnection().createStatement();
-            statement.execute(sql);
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private ResultSet query(String sql)
-    {
-        try {
-            Statement statement = DBconnect.getConnection().createStatement();
-            return statement.executeQuery(sql);
-        }
-        catch (SQLException e) {
-            return null;
         }
     }
 
@@ -65,7 +45,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
     }
 
     @Override
-    public UserInfo read(int id) throws SQLException, IOException {
+    public UserInfo read(int id) throws SQLException {
         String sqlUser = "SELECT userName FROM UserTable WHERE userID = ?";
 
         try (Connection connection = DBconnect.getConnection()) {
@@ -93,14 +73,10 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
             }
             return false;
 
-        } catch (SQLException throwables) {
+        } catch (SQLException throwables)
+        {
             throwables.printStackTrace();
             return false;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-
         }
     }
 
@@ -118,16 +94,22 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
     public void createUser(String userName, String login, String password, String email)
     {
-        try (Connection connection = DBconnect.getConnection())
-        {
             String sql = """
             INSERT INTO UserTable (userName, loginName, loginPass, userAuth ,email)
-            VALUES ('%s', '%s', '%s', 1, '%s')
-            """.formatted(userName, login, password, email);
+            VALUES (?, ?, ?, ?, ?)
+            """;
 
-            this.execute(sql);
-        } catch (SQLServerException throwables) {
-            throwables.printStackTrace();
+            try (Connection connection = DBconnect.getConnection())
+            {
+                PreparedStatement psState = connection.prepareStatement(sql);
+
+                psState.setString(1, userName);
+                psState.setString(2, login);
+                psState.setString(3, password);
+                psState.setString(4, email);
+
+                psState.execute();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -135,53 +117,99 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
     public void createVenue (String location, String street, int zipcode)
     {
-        try (Connection connection = DBconnect.getConnection())
-        {
             String sql = """
                     INSERT INTO venue (venueName, StreetName, venueZipCode)
-                    VALUES ('%s', '%s', '%s')
-                    """.formatted(location, street, zipcode);
+                    VALUES (?, ?, ?)
+                    """;
 
-            this.execute(sql);
+            try (Connection connection = DBconnect.getConnection())
+            {
+                PreparedStatement psState = connection.prepareStatement(sql);
+                psState.setString(1,location);
+                psState.setString(2, street);
+                psState.setInt(3, zipcode);
 
-        } catch (SQLServerException throwables) {
-            throwables.printStackTrace();
-        } catch (SQLException e) {
+                psState.execute();
+            } catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+    }
+
+    public Venue getVenue (int id)
+    {
+        String sql = """
+                    SELECT 1 FROM venue
+                    WHERE id = ?
+                    """;
+        try (Connection connection = DBconnect.getConnection())
+             {
+                 PreparedStatement psSQL = connection.prepareStatement(sql);
+                 psSQL.setInt(1, id);
+
+                 ResultSet rsVenue = psSQL.executeQuery();
+
+                 rsVenue.next();
+
+                 int venueID = rsVenue.getInt("id");
+                 String location = rsVenue.getString("venueName");
+                 String streetName = rsVenue.getString("streetName");
+                 String zipCode = Integer.toString(rsVenue.getInt("venueZipCode"));
+                 String city = rsVenue.getString("cityName");
+
+                 return new Venue(venueID, location, streetName, zipCode, city);
+
+             } catch (SQLException e)
+        {
             e.printStackTrace();
+            return null;
         }
+
     }
 
     public void updateVenue (String location, String street, String zipcode, int venueID)
     {
-        try (Connection connection = DBconnect.getConnection())
-        {
             String sql = """
                     UPDATE Venue
-                    SET venueName = '%s', streetName = '%s', venueZipCode = '%s' 
-                    WHERE id = '%s';
-                    """.formatted(location, street, zipcode, venueID);
+                    SET venueName = ?, streetName = ?, venueZipCode = ?
+                    WHERE id = ?
+                    """;
 
-            this.execute(sql);
+            try (Connection connection = DBconnect.getConnection())
+            {
+                PreparedStatement psState = connection.prepareStatement(sql);
+                psState.setString(1, location);
+                psState.setString(2, street);
+                psState.setInt(3, Integer.parseInt(zipcode));
+                psState.setInt(4, venueID);
 
-        } catch (SQLServerException throwables) {
-            throwables.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+                psState.execute();
+            } catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
     }
 
     public void deleteVenue (int venueID)
     {
-
         String sql = """
                    DELETE FROM Venue
-                   WHERE id = '%s';
-                   """.formatted(venueID);
+                   WHERE id = ?;
+                   """;
 
-        this.execute(sql);
+        try (Connection connection = DBconnect.getConnection())
+        {
+            PreparedStatement psState = connection.prepareStatement(sql);
+            psState.setInt(1, venueID);
+            psState.execute();
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
     }
 
-    public ObservableList<Venue> getAllVenues() throws SQLException
+    public ObservableList<Venue> getAllVenues()
     {
         ObservableList<Venue> returnList = FXCollections.observableArrayList();
 
@@ -190,11 +218,12 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
                        JOIN cityName ON venue.venueZipCode=cityName.zipCode
                        """;
 
-        Statement statement = DBconnect.getConnection().createStatement();
-        ResultSet result = statement.executeQuery(sql);
+        try (Connection connection = DBconnect.getConnection())
+        {
+            PreparedStatement psState = connection.prepareStatement(sql);
+            ResultSet result = psState.executeQuery();
 
-            while (result.next())
-            {
+            while (result.next()) {
                 int id = result.getInt("id");
                 String location = result.getString("venueName");
                 String streetName = result.getString("streetName");
@@ -203,13 +232,19 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
                 returnList.add(new Venue(id, location, streetName, zipCode, city));
             }
-
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
         return returnList;
     }
 
-    public void createEvent(Event event, String colour) throws SQLException
+    public void createEvent(Event event, String colour)
     {
-        String sql = "INSERT INTO events (eventTitle, venueID, description, maxSeats, ticketsSold, beginAt, endAt, colour, eventImage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = """
+                     INSERT INTO events (eventTitle, venueID, description, maxSeats, ticketsSold, beginAt, endAt, colour, eventImage)
+                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                     """;
         try (Connection connection = DBconnect.getConnection()) {
             PreparedStatement psSQL = connection.prepareStatement(sql);
 
@@ -225,6 +260,20 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
             psSQL.execute();
 
+            //try (ResultSet returnedKey = psSQL.getGeneratedKeys())
+            //{
+            //    PreparedStatement addPrice = connection.prepareStatement();
+            //    if(returnedKey.next())
+            //    {
+            //        for (PriceGroup p : event.getPriceGroups())
+            //        {
+            //            createPrice(p, returnedKey.getInt(0), false).addBatch();
+            //        }
+            //        psSQL.executeBatch();
+            //    }
+            //}
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -235,128 +284,215 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
     }
 
-    public void deleteEvent(Event event)
+    public void deleteEvent(int id)
     {
         String sql = """
-                    DELETE FROM events WHERE id = '%s'                    
-                    """.formatted(event.getId());
+                    DELETE FROM events WHERE id = ?
+                    """;
 
-        this.execute(sql);
+        try (Connection connection = DBconnect.getConnection())
+        {
+            PreparedStatement psState = connection.prepareStatement(sql);
+
+            psState.setInt(1, id);
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
     }
 
-    public ObservableList<Event> getAllEvents() throws SQLException
+    public ObservableList<Event> getAllEvents()
     {
-        try {
-            ObservableList<Event> returnList = FXCollections.observableArrayList();
+        ObservableList<Event> returnList = FXCollections.observableArrayList();
 
-            String sql = "SELECT * FROM Events";
+        String sql = "SELECT * FROM events";
 
-            Statement statement = DBconnect.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(sql);
+        try (Connection connection = DBconnect.getConnection()) {
+            PreparedStatement psSQL = connection.prepareStatement(sql);
 
-            while (result.next()) {
+            ResultSet rsEvent = psSQL.executeQuery();
 
+            while (rsEvent.next())
+            {
+                int id = rsEvent.getInt("id");
+                String title = rsEvent.getString("eventTitle");
+                int venueID = rsEvent.getInt("venueID");
+                String description = rsEvent.getString("description");
+                int maxSeats = rsEvent.getInt("maxSeats");
+                int ticketsSold = rsEvent.getInt("ticketsSold");
+                LocalDateTime startTime = rsEvent.getTimestamp("beginAt").toLocalDateTime();
+                LocalDateTime endTime = rsEvent.getTimestamp("endAt").toLocalDateTime();
+
+                String colour = rsEvent.getString("colour");
+                String[] rgb = colour.split(",");
+                Color rbgColor = Color.color(Double.parseDouble(rgb[0]), Double.parseDouble(rgb[1]), Double.parseDouble(rgb[2]));
+
+                Venue venue = getVenue(venueID);
+
+                Image eventImage = null;
+
+
+                returnList.add(new Event(id, title, startTime, endTime, venue, ticketsSold, maxSeats, null, description, rbgColor, eventImage));
             }
-
             return returnList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return returnList;
+        }
+    }
 
-        } catch (Exception e) {
+    public void addUserToEvent(int userId, int eventID)
+    {
+        String sql = """
+                INSERT INTO userEvent (userID, eventID)
+                VALUES (?, ?)
+                """;
+
+        try (Connection connection = DBconnect.getConnection())
+        {
+            PreparedStatement psState = connection.prepareStatement(sql);
+
+            psState.setInt(1, userId);
+            psState.setInt(2, eventID);
+
+            psState.execute();
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public void removeUserFromEvent(int userid, int eventid)
+    {
+        String sql = """
+                DELETE FROM userEvent
+                WHERE userID = ? AND eventID = ?
+                """;
+
+        try (Connection connection = DBconnect.getConnection())
+        {
+            PreparedStatement psState = connection.prepareStatement(sql);
+            psState.setInt(1, userid);
+            psState.setInt(2, eventid);
+
+            psState.execute();
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public ObservableList<UserInfo> getUsersForEvent(Event event)
+    {
+        ObservableList<UserInfo> returnList = FXCollections.observableArrayList();
+
+        String sql = """
+                    SELECT * FROM userEvent
+                    WHERE EventID = ?
+                    JOIN 
+                    """;
+
+        return null;
+    }
+
+    public PreparedStatement createPrice(PriceGroup price, int id)
+    {
+        String sql = """
+                    INSERT INTO priceGroups (name, price, currency, eventID)
+                    VALUES (?, ?, ?, ?)
+                    """;
+        try (Connection conneciton = DBconnect.getConnection())
+        {
+            PreparedStatement psPrice = conneciton.prepareStatement(sql);
+
+            psPrice.setString(1, price.getName());
+            psPrice.setInt(2, price.getPrice());
+            psPrice.setString(3, price.getCurrency());
+            psPrice.setInt(4, id);
+
+            psPrice.execute();
+            return psPrice;
+
+        } catch (Exception e)
+        {
             e.printStackTrace();
             return null;
         }
     }
 
-    public void addUserToEvent(UserInfo user, Event event)
+    public void createMultiplePriceGroup(ObservableList<PriceGroup> priceGroups, int id)
     {
-        String sql = """
-                INSERT INTO userEvent (userID, eventID)
-                VALUES ('%s', '%s')
-                """.formatted(user.getId(), event.getId());
 
-        this.execute(sql);
     }
 
-    public void removeUserFromEvent(UserInfo user, Event event)
-    {
-        String sql = """
-                DELETE FROM userEvent
-                WHERE userID = '%s' AND eventID = '%s'
-                """.formatted(user.getId(), event.getId());
-
-        this.execute(sql);
-    }
-
-    public ObservableList<UserInfo> getUsersForEvent(Event event) throws SQLException
-    {
-        ObservableList<UserInfo> returnList = FXCollections.observableArrayList();
-
-        String sql = """
-                    SELECT * FROM userEvent WHERE EventID_FK = '%s'
-                    """.formatted(event.getId());
-
-            Statement statement = DBconnect.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(sql);
-
-            while (result.next())
-            {
-
-            }
-
-        return null;
-    }
-
-    public void createPrice(PriceGroup price, Event event)
-    {
-        String sql = """
-                    INSERT INTO priceGroups (name, price, currency, eventID)
-                    VALUES ('%s', '%s', '%s', '%s')
-                    
-                    """.formatted(price.getName(), price.getPrice(), price.getCurrency(), event.getId());
-
-        this.execute(sql);
-    }
-
-    public void deletePrice(PriceGroup price)
+    public void deletePrice(int id)
     {
         String sql = """
                 DELETE FROM priceEvent
-                WHERE id = '%s'
-                """.formatted(price.getID());
+                WHERE id = ?
+                """;
+        try (Connection connection = DBconnect.getConnection())
+        {
+            PreparedStatement psState = connection.prepareStatement(sql);
+            psState.setInt(1, id);
 
-        execute(sql);
+            psState.execute();
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
     }
 
-    public void updatePrice (PriceGroup price)
+    public void updatePrice (String name, int price, String currency, int id)
     {
          String sql = """
                  UPDATE priceEvent
-                 SET name = '%s', price = '%s', currency = '%s'
-                 WHERE id = '%s'
-                 """.formatted(price.getName(), price.getPrice(), price.getCurrency(), price.getID());
+                 SET name = ?, price = ?, currency = ?
+                 WHERE id = ?
+                 """;
 
-         this.execute(sql);
+         try (Connection connection = DBconnect.getConnection())
+         {
+             PreparedStatement psState = connection.prepareStatement(sql);
+             psState.setString(1, name);
+             psState.setInt(2, price);
+             psState.setString(3, currency);
+             psState.setInt(4, id);
+
+             psState.execute();
+
+         } catch (SQLException e)
+         {
+             e.printStackTrace();
+         }
     }
 
-    public ObservableList<PriceGroup> getPriceGroup(Event event)
+    public ObservableList<PriceGroup> getPriceGroup(int id)
     {
         try {
             ObservableList<PriceGroup> returnList = FXCollections.observableArrayList();
 
             String sql = """
                        SELECT * FROM priceEvent WHERE eventID = '%s'
-                       """.formatted(event.getId());
+                       """.formatted(id);
 
         Statement statement = DBconnect.getConnection().createStatement();
         ResultSet result = statement.executeQuery(sql);
 
         while (result.next())
         {
-            int id = result.getInt("id");
+            int priceid = result.getInt("id");
             String name = result.getString("name");
             int price = result.getInt("price");
             String currency = result.getString("currency");
 
-            returnList.add(new PriceGroup(id, name, price, currency));
+            returnList.add(new PriceGroup(priceid, name, price, currency));
         }
             return returnList;
         } catch (Exception e)
@@ -366,7 +502,9 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         }
     }
 
-    public List<UserInfo> getAttendeesFromEvent(Event event) throws SQLServerException {
+
+
+    public List<UserInfo> getAttendeesFromEvent(Event event) {
         List<UserInfo> users = new ArrayList<>();
         String sql = ("SELECT id, userName, email FROM userTable WHERE id = (SELECT userID FROM userEvent WHERE eventID = ?)");
         try (Connection connection = DBconnect.getConnection()) {
