@@ -167,7 +167,6 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
                     rsVenue.next();
 
                      int venueIDgotten = rsVenue.getInt("id");
-                     System.out.println(venueID);
                      String location = rsVenue.getString("venueName");
                      String streetName = rsVenue.getString("streetName");
                      String zipCode = Integer.toString(rsVenue.getInt("venueZipCode"));

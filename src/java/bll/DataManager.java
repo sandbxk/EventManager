@@ -158,7 +158,7 @@ public final class DataManager {
     }
 
     public void updatePriceGroup(PriceGroup selectedPriceGroup) {
-        database.updatePrice(selectedPriceGroup.getName(), selectedPriceGroup.getPrice(), selectedPriceGroup.getCurrency(), -1);
+        database.updatePrice(selectedPriceGroup.getName(), selectedPriceGroup.getPrice(), selectedPriceGroup.getCurrency(), selectedPriceGroup.getID());
     }
 
     public PriceGroup getSelectedPriceGroup() {
