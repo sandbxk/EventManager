@@ -361,10 +361,12 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
                 Venue venue = getVenue(venueID);
 
+                ObservableList<PriceGroup> priceGroups = getPriceGroup(id);
+
                 Image eventImage = null;
 
 
-                returnList.add(new Event(id, title, startTime, endTime, venue, ticketsSold, maxSeats, null, description, rbgColor, eventImage));
+                returnList.add(new Event(id, title, startTime, endTime, venue, ticketsSold, maxSeats, priceGroups, description, rbgColor, eventImage));
             }
             return returnList;
         } catch (SQLException e) {
@@ -462,7 +464,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         }
     }
 
-    public PreparedStatement createPrice(String name, int price, String currency, int id)
+    public void createPrice(String name, int price, String currency, int id)
     {
         String sql = """
                     INSERT INTO priceGroups (name, price, currency, eventID)
@@ -478,18 +480,11 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
             psPrice.setInt(4, id);
 
             psPrice.execute();
-            return psPrice;
 
         } catch (Exception e)
         {
             e.printStackTrace();
-            return null;
         }
-    }
-
-    public void createMultiplePriceGroup(ObservableList<PriceGroup> priceGroups, int id)
-    {
-
     }
 
     public void deletePrice(int id)
@@ -537,15 +532,19 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
     public ObservableList<PriceGroup> getPriceGroup(int id)
     {
-        try {
-            ObservableList<PriceGroup> returnList = FXCollections.observableArrayList();
+        ObservableList<PriceGroup> returnList = FXCollections.observableArrayList();
 
-            String sql = """
-                       SELECT * FROM priceEvent WHERE eventID = '%s'
-                       """.formatted(id);
+        String sql = """
+                       SELECT * FROM priceEvent
+                       WHERE eventID = ?
+                       """;
 
-        Statement statement = DBconnect.getConnection().createStatement();
-        ResultSet result = statement.executeQuery(sql);
+            try (Connection connection = DBconnect.getConnection()){
+
+            PreparedStatement psState = connection.prepareStatement(sql);
+            psState.setInt(1, id);
+
+            ResultSet result = psState.executeQuery();
 
         while (result.next())
         {
