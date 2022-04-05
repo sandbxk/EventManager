@@ -166,14 +166,14 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
                     rsVenue.next();
 
-                     int venueID = rsVenue.getInt("id");
+                     int venueIDgotten = rsVenue.getInt("id");
                      System.out.println(venueID);
                      String location = rsVenue.getString("venueName");
                      String streetName = rsVenue.getString("streetName");
                      String zipCode = Integer.toString(rsVenue.getInt("venueZipCode"));
                      String city = rsVenue.getString("cityName");
 
-                     return new Venue(venueID, location, streetName, zipCode, city);
+                     return new Venue(venueIDgotten, location, streetName, zipCode, city);
 
              } catch (SQLException e)
         {
@@ -318,6 +318,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
             psState.setTimestamp(7, Timestamp.valueOf(event.getEndDateTime()));
             psState.setString(8, colour);
             psState.setNull(9, Types.BINARY);
+            psState.setInt(10, event.getId());
 
             psState.execute();
 
@@ -398,7 +399,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
     public void createPrice(String name, int price, String currency, int eventID)
     {
         String sql = """
-                    INSERT INTO priceGroups (name, price, currency, eventID)
+                    INSERT INTO priceEvent (name, price, currency, eventID)
                     VALUES (?, ?, ?, ?)
                     """;
         try (Connection conneciton = DBconnect.getConnection())
