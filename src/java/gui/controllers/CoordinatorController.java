@@ -98,6 +98,7 @@ public class CoordinatorController implements Initializable {
     private BooleanProperty showingAddress;
     private ExporterList expoList;
     private ListProperty<Event> eventsList;
+    private ObservableList<Event> allEvents;
 
 
 
@@ -121,7 +122,6 @@ public class CoordinatorController implements Initializable {
         eventToggle = new ToggleGroup();
         try {
             eventsList.bind(DataManager.getInstance().getEventListProperty());
-            DataManager.getInstance().getAllEvents();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -136,11 +136,25 @@ public class CoordinatorController implements Initializable {
 
     private void initEventFlowPaneListener(){
         this.eventsList.addListener((ListChangeListener.Change<? extends Event> c) -> {
+
+            ObservableList toggles = FXCollections.observableArrayList();
             flowPaneEvents.getChildren().clear();
-            eventsList.get().forEach(event -> {
-                flowPaneEvents.getChildren().add(event.getEventTile());
-                eventToggle.getToggles().add(event.getEventTile());
-            });
+
+            ObservableList<Event> allEvents = null;
+            try {
+                allEvents = DataManager.getInstance().getAllEvents();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            for (Event e : allEvents)
+            {
+                flowPaneEvents.getChildren().add(e.getEventTile());
+                toggles.addAll(e.getEventTile());
+            }
+
+            eventToggle.getToggles().clear();
+            eventToggle.getToggles().addAll(toggles);
         });
     }
 
@@ -261,7 +275,7 @@ public class CoordinatorController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+/*
         ObservableList toggles = FXCollections.observableArrayList();
 
         stage.setOnHiding(event1 -> {
@@ -283,8 +297,30 @@ public class CoordinatorController implements Initializable {
             eventToggle.getToggles().clear();
             eventToggle.getToggles().addAll(toggles);
         });
+
+ */
     }
 
+    private void updateEventFlowPane(){
+        ObservableList toggles = FXCollections.observableArrayList();
+        flowPaneEvents.getChildren().clear();
+
+        ObservableList<Event> allEvents = null;
+        try {
+            allEvents = DataManager.getInstance().getAllEvents();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        for (Event e : allEvents)
+        {
+            flowPaneEvents.getChildren().add(e.getEventTile());
+            toggles.addAll(e.getEventTile());
+        }
+
+        eventToggle.getToggles().clear();
+        eventToggle.getToggles().addAll(toggles);
+    }
 
     public void onUser(MouseEvent mouseEvent) {
         //Location of the node

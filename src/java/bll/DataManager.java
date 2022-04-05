@@ -50,14 +50,18 @@ public final class DataManager {
     public DataManager()
     {
         this.instance = this;
+        database = new CoordinatorDAO();
         this.selectedEvent = new SimpleObjectProperty<>();
 
         //Avoid nullPointers
         this.events = new SimpleListProperty<>();
+        try {
+            getAllEvents();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         this.allVenues = FXCollections.observableArrayList();
         this.priceGroups = FXCollections.observableArrayList();
-
-        database = new CoordinatorDAO();
     }
 
     public static DataManager getInstance()
@@ -95,13 +99,12 @@ public final class DataManager {
 
     public ObservableList<Event> getAllEvents() throws SQLException
     {
-        this.events.set(this.database.getAllEvents());
+        this.events.set(database.getAllEvents());
         return this.events.get();
     }
 
     public ListProperty<Event> getEventListProperty() throws SQLException
     {
-        this.events.set(this.database.getAllEvents());
         return this.events;
     }
 
