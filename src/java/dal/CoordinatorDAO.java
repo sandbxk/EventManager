@@ -568,18 +568,15 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         }
     }
 
-    public void createPriceGroup(ObservableList<PriceGroup> priceGroups, int id)
-    {
+    public void createPriceGroup(ObservableList<PriceGroup> priceGroups, int id) {
         String sql = """
                 INSERT INTO priceEvent (name, price, currency, eventID)
                 VALUES (?, ?, ?, ?)
                 """;
 
-        try (Connection connection = DBconnect.getConnection())
-        {
+        try (Connection connection = DBconnect.getConnection()) {
             PreparedStatement psState = connection.prepareStatement(sql);
-            for (PriceGroup price : priceGroups)
-            {
+            for (PriceGroup price : priceGroups) {
                 psState.setString(1, price.getName());
                 psState.setInt(2, price.getPrice());
                 psState.setString(3, price.getCurrency());
@@ -589,6 +586,44 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
             }
 
             psState.executeBatch();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteAllPrices(int eventID)
+    {
+        String sql = """
+                DELETE FROM priceEvent
+                WHERE eventID = ?        
+                """;
+
+        try (Connection connection = DBconnect.getConnection())
+        {
+            PreparedStatement psState = connection.prepareStatement(sql);
+            psState.setInt(1, eventID);
+
+            psState.execute();
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteAllUsersFromEvent (int id)
+    {
+        String sql = """
+                DELETE FROM userEvent
+                WHERE eventID = ?
+                """;
+
+        try (Connection connection = DBconnect.getConnection())
+        {
+            PreparedStatement psState = connection.prepareStatement(sql);
+            psState.setInt(1, id);
+
+            psState.execute();
 
         } catch (SQLException e)
         {
