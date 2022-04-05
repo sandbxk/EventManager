@@ -365,7 +365,7 @@ public class NewEventController implements Initializable {
         LocalTime time = LocalTime.of(0, 0);
         if (timeField.getText() != null && !timeField.getText().isEmpty() && !timeField.getText().isBlank())
         {
-            time = LocalTime.parse(txtFieldStartTime.getText());
+            time = LocalTime.parse(timeField.getText());
         }
         LocalDateTime dateTime = date.atTime(time);
 

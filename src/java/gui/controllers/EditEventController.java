@@ -24,12 +24,15 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import javafx.util.converter.DateTimeStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -84,6 +87,11 @@ public class EditEventController implements Initializable {
         txtFieldTicketsSold.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), 0, integerFilter()));
         txtFieldTicketsSold.setOnMouseClicked(event -> txtFieldTicketsSold.clear());
         txtFieldTicketRemaining.setOnMouseClicked(event -> txtFieldTicketRemaining.clear());
+
+        txtFieldStartTime.setTextFormatter(dateTextFormatter());
+        txtFieldEndTime.setTextFormatter(dateTextFormatter());
+
+
         initTableViews();
         initImageView();
         initRadioBtnListener();
@@ -383,9 +391,11 @@ public class EditEventController implements Initializable {
         LocalDate date = datePicker.getValue();
         LocalTime time = LocalTime.of(0, 0);
         if (timeField.getText() != null && !timeField.getText().isEmpty() && !timeField.getText().isBlank())
+
         {
-            time = LocalTime.parse(txtFieldStartTime.getText());
+            time = LocalTime.parse(timeField.getText());
         }
+
         LocalDateTime dateTime = date.atTime(time);
 
         return dateTime;
@@ -459,6 +469,17 @@ public class EditEventController implements Initializable {
         };
 
         return integerFilter;
+    }
+
+    private TextFormatter dateTextFormatter(){
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+        try {
+            TextFormatter textFormatter = new TextFormatter<>(new DateTimeStringConverter(format), format.parse("00:00"));
+            return textFormatter;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return new TextFormatter(new DateTimeStringConverter());
+        }
     }
 
 }
