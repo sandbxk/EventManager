@@ -139,7 +139,7 @@ public final class DataManager {
         if (event == null) {
             this.priceGroups.add(priceGroup);
         }
-        else database.createPrice(priceGroup.getName(), priceGroup.getPrice(), priceGroup.getCurrency(), 1);
+        else database.createPrice(priceGroup.getName(), priceGroup.getPrice(), priceGroup.getCurrency(), event.getId());
     }
 
     public void removePriceGroup(Event event, PriceGroup priceGroup){
