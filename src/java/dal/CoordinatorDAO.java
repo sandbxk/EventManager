@@ -123,6 +123,11 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         }
     }
 
+    /**
+     * VENUES
+     * Getters, setters, deleters and readers for venues.
+     */
+
     public void createVenue (String location, String street, int zipcode)
     {
             String sql = """
@@ -249,6 +254,11 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         }
         return returnList;
     }
+
+    /**
+     * EVENTS
+     * Getters, setters, readers and deleters for events.
+     */
 
     public int createEvent(Event event, String colour)
     {
@@ -380,94 +390,10 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         }
     }
 
-    public void addUserToEvent(int userId, int eventID)
-    {
-        String sql = """
-                INSERT INTO userEvent (userID, eventID)
-                VALUES (?, ?)
-                """;
-
-        try (Connection connection = DBconnect.getConnection())
-        {
-            PreparedStatement psState = connection.prepareStatement(sql);
-
-            psState.setInt(1, userId);
-            psState.setInt(2, eventID);
-
-            psState.execute();
-
-        } catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
-
-
-    }
-
-    public void removeUserFromEvent(int userid, int eventid)
-    {
-        String sql = """
-                DELETE FROM userEvent
-                WHERE userID = ? AND eventID = ?
-                """;
-
-        try (Connection connection = DBconnect.getConnection())
-        {
-            PreparedStatement psState = connection.prepareStatement(sql);
-            psState.setInt(1, userid);
-            psState.setInt(2, eventid);
-
-            psState.execute();
-
-        } catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    public ObservableList<UserInfo> getUsersForEvent(int id)
-    {
-        ObservableList<UserInfo> returnList = FXCollections.observableArrayList();
-
-        String sql = """
-                    SELECT * FROM userEvent
-                    JOIN userTable ON userEvent.userID=userTable.id
-                    WHERE eventID = ?
-                    """;
-
-        try (Connection connection = DBconnect.getConnection())
-        {
-            PreparedStatement psState = DBconnect.getConnection().prepareStatement(sql);
-            ResultSet resSet = psState.executeQuery();
-
-            while (resSet.next())
-            {
-                EUserType userType;
-
-                int userID = resSet.getInt("id");
-                String name = resSet.getString("loginName");
-                if (resSet.getInt("userAuth") == 1 )
-                {
-                    userType = EUserType.EVENT_COORDINATOR;
-                } else
-                {
-                    userType = EUserType.END_USER;
-                }
-                int zipCode = resSet.getInt("ZipCode");
-                String email = resSet.getString("email");
-
-
-                returnList.add(new UserInfo(userID, name, userType, zipCode, email));
-            }
-
-            return returnList;
-
-        } catch (SQLException e)
-        {
-            e.printStackTrace();
-            return null;
-        }
-    }
+    /**
+     * PRICES
+     * Getters, setters, readers and deleters for price management.
+     */
 
     public void createPrice(String name, int price, String currency, int id)
     {
@@ -608,6 +534,100 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         } catch (SQLException e)
         {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * USERS
+     * Deleters, readers, setters and getters for users.
+     */
+
+    public void addUserToEvent(int userId, int eventID)
+    {
+        String sql = """
+                INSERT INTO userEvent (userID, eventID)
+                VALUES (?, ?)
+                """;
+
+        try (Connection connection = DBconnect.getConnection())
+        {
+            PreparedStatement psState = connection.prepareStatement(sql);
+
+            psState.setInt(1, userId);
+            psState.setInt(2, eventID);
+
+            psState.execute();
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public void removeUserFromEvent(int userid, int eventid)
+    {
+        String sql = """
+                DELETE FROM userEvent
+                WHERE userID = ? AND eventID = ?
+                """;
+
+        try (Connection connection = DBconnect.getConnection())
+        {
+            PreparedStatement psState = connection.prepareStatement(sql);
+            psState.setInt(1, userid);
+            psState.setInt(2, eventid);
+
+            psState.execute();
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public ObservableList<UserInfo> getUsersForEvent(int id)
+    {
+        ObservableList<UserInfo> returnList = FXCollections.observableArrayList();
+
+        String sql = """
+                    SELECT * FROM userEvent
+                    JOIN userTable ON userEvent.userID=userTable.id
+                    WHERE eventID = ?
+                    """;
+
+        try (Connection connection = DBconnect.getConnection())
+        {
+            PreparedStatement psState = DBconnect.getConnection().prepareStatement(sql);
+            ResultSet resSet = psState.executeQuery();
+
+            while (resSet.next())
+            {
+                EUserType userType;
+
+                int userID = resSet.getInt("id");
+                String name = resSet.getString("loginName");
+                if (resSet.getInt("userAuth") == 1 )
+                {
+                    userType = EUserType.EVENT_COORDINATOR;
+                } else
+                {
+                    userType = EUserType.END_USER;
+                }
+                int zipCode = resSet.getInt("ZipCode");
+                String email = resSet.getString("email");
+
+
+                returnList.add(new UserInfo(userID, name, userType, zipCode, email));
+            }
+
+            return returnList;
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            return null;
         }
     }
 
