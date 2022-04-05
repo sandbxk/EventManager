@@ -80,6 +80,8 @@ public final class DataManager {
 
     public void deleteEvent(Event event)
     {
+        database.deleteAllUsersFromEvent(event.getId());
+        database.deleteAllPrices(event.getId());
         database.deleteEvent(event.getId());
     }
 
