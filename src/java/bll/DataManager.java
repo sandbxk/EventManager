@@ -4,7 +4,9 @@ import be.Event;
 import be.PriceGroup;
 import be.Venue;
 import dal.CoordinatorDAO;
+import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,7 +31,7 @@ public final class DataManager {
     /**
      * List of all valid events. User dependent.
      */
-    private ObservableList<Event> events;
+    private ListProperty<Event> events;
 
     /**
      * List of all Venues. Not user dependent.
@@ -51,7 +53,7 @@ public final class DataManager {
         this.selectedEvent = new SimpleObjectProperty<>();
 
         //Avoid nullPointers
-        this.events = FXCollections.observableArrayList();
+        this.events = new SimpleListProperty<>();
         this.allVenues = FXCollections.observableArrayList();
         this.priceGroups = FXCollections.observableArrayList();
 
@@ -75,10 +77,12 @@ public final class DataManager {
         String colour = event.getColor().getRed() + ", " + event.getColor().getGreen() + ", " + event.getColor().getBlue();
 
         database.createEvent(event, colour);
+        this.events.get().add(event);
     }
 
     public void deleteEvent(Event event)
     {
+        this.events.get().remove(event);
         database.deleteEvent(event.getId());
     }
 
@@ -91,11 +95,19 @@ public final class DataManager {
 
     public ObservableList<Event> getAllEvents() throws SQLException
     {
-        return this.database.getAllEvents();
+        this.events.set(this.database.getAllEvents());
+        return this.events.get();
     }
 
+    public ListProperty<Event> getEventListProperty() throws SQLException
+    {
+        this.events.set(this.database.getAllEvents());
+        return this.events;
+    }
+
+
     public void setEvents(ObservableList<Event> events) {
-        this.events = events;
+        this.events.set(events);
     }
 
     public ObjectProperty<Event> getSelectedEventProperty(){
@@ -172,7 +184,7 @@ public final class DataManager {
     public ObservableList<Venue> getAllVenues() throws SQLException
     {
             this.allVenues = database.getAllVenues();
-            return database.getAllVenues();
+            return allVenues;
 
     }
 

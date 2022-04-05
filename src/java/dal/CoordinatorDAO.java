@@ -276,6 +276,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
             //    PreparedStatement addPrice = connection.prepareStatement();
             //    if(returnedKey.next())
             //    {
+            //        event.setId(returnedKey.getInt(0);
             //        for (PriceGroup p : event.getPriceGroups())
             //        {
             //            createPrice(p, returnedKey.getInt(0), false).addBatch();

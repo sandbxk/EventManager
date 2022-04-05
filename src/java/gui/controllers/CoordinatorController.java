@@ -9,11 +9,9 @@ import gui.model.SceneManager;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -99,6 +97,7 @@ public class CoordinatorController implements Initializable {
     private ContextMenu signOutMenu;
     private BooleanProperty showingAddress;
     private ExporterList expoList;
+    private ListProperty<Event> eventsList;
 
 
 
@@ -108,6 +107,7 @@ public class CoordinatorController implements Initializable {
         showingAddress = new SimpleBooleanProperty();
         showingAddress.set(false);
         expoList = new ExporterList();
+        eventsList = new SimpleListProperty<>();
 
 
     }
@@ -119,12 +119,29 @@ public class CoordinatorController implements Initializable {
     public void initialize(URL location, ResourceBundle resources)
     {
         eventToggle = new ToggleGroup();
+        try {
+            eventsList.bind(DataManager.getInstance().getEventListProperty());
+            DataManager.getInstance().getAllEvents();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         onShowHideMenu(new ActionEvent());
         hideDetailsPanelComponents(true);
+        initEventFlowPaneListener();
         initTableViews();
         initEventListener();
         initEventActionsMenu();
         initSignOutMenu();
+    }
+
+    private void initEventFlowPaneListener(){
+        this.eventsList.addListener((ListChangeListener.Change<? extends Event> c) -> {
+            flowPaneEvents.getChildren().clear();
+            eventsList.get().forEach(event -> {
+                flowPaneEvents.getChildren().add(event.getEventTile());
+                eventToggle.getToggles().add(event.getEventTile());
+            });
+        });
     }
 
     private void initTableViews(){

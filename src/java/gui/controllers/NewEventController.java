@@ -324,6 +324,7 @@ public class NewEventController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR, "The program ran into an error. Please check your input values.");
             alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
             alert.show();
+            e.printStackTrace();
         }
     }
 
