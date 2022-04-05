@@ -5,7 +5,6 @@ import be.PriceGroup;
 import bll.DataManager;
 import bll.ExporterList;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
-import gui.model.SceneManager;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -19,7 +18,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -27,11 +25,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -58,14 +54,15 @@ public class CoordinatorController implements Initializable {
     @FXML public Label lblEventDate;
     @FXML public Label lblEventTime;
     @FXML public Label lblEventVenue;
+    @FXML public Label lblTotalTickets;
     @FXML public Label lblRemainingTickets;
-    @FXML public Label lblSoldTickets;
     @FXML public TableView<PriceGroup> tblViewTicketGroup;
     @FXML public TableColumn<PriceGroup, String> tblClmnGroupName;
     @FXML public TableColumn<PriceGroup, Number> tblClmnGroupPrice;
     @FXML public TableColumn<PriceGroup, String> tblClmnGroupCurrency;
     @FXML public TextArea txtAreaInfo;
 
+    @Deprecated
     @FXML public ImageView imgViewTicketIcon;
     @FXML public Label lblEventDateSpacer;
     @FXML public Label lblAtVenue;
@@ -168,8 +165,8 @@ public class CoordinatorController implements Initializable {
 
             txtAreaInfo.setText(newValue.getDescription());
 
-            lblSoldTickets.setText(newValue.getTicketsSold() + "");
-            lblRemainingTickets.setText(newValue.getTicketsRemaining() + "");
+            lblRemainingTickets.setText(newValue.getTicketsSold() + "");
+            lblTotalTickets.setText(newValue.getTicketsRemaining() + "");
 
             tblViewTicketGroup.setItems(newValue.getPriceGroups());
             hideDetailsPanelComponents(false);
@@ -203,8 +200,8 @@ public class CoordinatorController implements Initializable {
         KeyFrame op6 = new KeyFrame(Duration.millis(duration), new KeyValue(lblEventVenue.opacityProperty(), endValue));
 
         KeyFrame op7 = new KeyFrame(Duration.millis(duration), new KeyValue(txtAreaInfo.opacityProperty(), endValue));
-        KeyFrame op8 = new KeyFrame(Duration.millis(duration), new KeyValue(lblRemainingTickets.opacityProperty(), endValue));
-        KeyFrame op9 = new KeyFrame(Duration.millis(duration), new KeyValue(lblSoldTickets.opacityProperty(), endValue));
+        KeyFrame op8 = new KeyFrame(Duration.millis(duration), new KeyValue(lblTotalTickets.opacityProperty(), endValue));
+        KeyFrame op9 = new KeyFrame(Duration.millis(duration), new KeyValue(lblRemainingTickets.opacityProperty(), endValue));
 
         KeyFrame op10 = new KeyFrame(Duration.millis(duration), new KeyValue(tblViewTicketGroup.opacityProperty(), endValue));
 
@@ -336,8 +333,8 @@ public class CoordinatorController implements Initializable {
 
         txtAreaInfo.setText(selectedEvent.get().getDescription());
 
-        lblSoldTickets.setText(selectedEvent.get().getTicketsSold() + "");
-        lblRemainingTickets.setText(selectedEvent.get().getTicketsRemaining() + "");
+        lblRemainingTickets.setText(selectedEvent.get().getTicketsSold() + "");
+        lblTotalTickets.setText(selectedEvent.get().getTicketsRemaining() + "");
 
         tblViewTicketGroup.setItems(selectedEvent.get().getPriceGroups());
     }

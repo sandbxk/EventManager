@@ -273,7 +273,7 @@
                                                       <Insets left="5.0" />
                                                    </HBox.margin>
                                                 </Label>
-                                                <Label fx:id="lblRemainingTickets" prefHeight="22.0" prefWidth="67.0" styleClass="Text" />
+                                                <Label fx:id="lblTotalTickets" prefHeight="22.0" prefWidth="67.0" styleClass="Text" />
                                              </children>
                                           </HBox>
                                           <HBox prefHeight="9.0" prefWidth="305.0">
@@ -283,7 +283,7 @@
                                                       <Insets left="5.0" />
                                                    </HBox.margin>
                                                 </Label>
-                                                <Label fx:id="lblSoldTickets" prefHeight="22.0" prefWidth="67.0" styleClass="Text">
+                                                <Label fx:id="lblRemainingTickets" prefHeight="22.0" prefWidth="67.0" styleClass="Text">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>
