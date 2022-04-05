@@ -78,7 +78,7 @@ public class EditEventController implements Initializable {
         editedEvent = DataManager.getInstance().getSelectedEvent();
 
         priceGroups = editedEvent.getPriceGroups();
-        DataManager.getInstance().setPriceGroups(priceGroups);
+        DataManager.getInstance().setPriceGroupList(priceGroups);
 
         txtFieldTicketRemaining.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), 0, integerFilter()));
         txtFieldTicketsSold.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), 0, integerFilter()));
@@ -258,7 +258,7 @@ public class EditEventController implements Initializable {
         openStage("createPriceGroup.fxml", "New Price Group", new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
-                priceGroups = DataManager.getInstance().getPriceGroups(editedEvent);
+                priceGroups = DataManager.getInstance().getPriceGroupList(editedEvent);
             }
         });
 
@@ -270,7 +270,7 @@ public class EditEventController implements Initializable {
         if (tblViewNewEventTicketGroup.getSelectionModel().getSelectedItem() != null) {
             PriceGroup selectedItem = tblViewNewEventTicketGroup.getSelectionModel().getSelectedItem();
             DataManager.getInstance().removePriceGroup(editedEvent, selectedItem);
-            tblViewNewEventTicketGroup.setItems(DataManager.getInstance().getPriceGroups(editedEvent));
+            tblViewNewEventTicketGroup.setItems(DataManager.getInstance().getPriceGroupList(editedEvent));
         }
     }
 
