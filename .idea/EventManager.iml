@@ -18,5 +18,9 @@
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="mssql-jdbc-9.4.1.jre16" level="project" />
     <orderEntry type="library" name="activation-1.1.1" level="project" />
+    <orderEntry type="library" name="activation-1.1.1" level="project" />
+    <orderEntry type="library" name="commons-email-1.5" level="project" />
+    <orderEntry type="library" name="commons-email-1.5-javadoc" level="project" />
+    <orderEntry type="library" name="javax.mail" level="project" />
   </component>
 </module>

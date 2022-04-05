@@ -250,14 +250,14 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         return returnList;
     }
 
-    public void createEvent(Event event, String colour)
+    public int createEvent(Event event, String colour)
     {
         String sql = """
                      INSERT INTO events (eventTitle, venueID, description, maxSeats, ticketsSold, beginAt, endAt, colour, eventImage)
                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
                      """;
         try (Connection connection = DBconnect.getConnection()) {
-            PreparedStatement psSQL = connection.prepareStatement(sql);
+            PreparedStatement psSQL = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             psSQL.setString(1, event.getEventName());
             psSQL.setInt(2, event.getLocation().getID());
@@ -271,22 +271,14 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
             psSQL.execute();
 
-            //try (ResultSet returnedKey = psSQL.getGeneratedKeys())
-            //{
-            //    PreparedStatement addPrice = connection.prepareStatement();
-            //    if(returnedKey.next())
-            //    {
-            //        for (PriceGroup p : event.getPriceGroups())
-            //        {
-            //            createPrice(p, returnedKey.getInt(0), false).addBatch();
-            //        }
-            //        psSQL.executeBatch();
-            //    }
-            //}
-
+            try (ResultSet keys = psSQL.getGeneratedKeys()) {
+            keys.next();
+            return keys.getInt(1);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
+            return -1;
         }
     }
 
@@ -572,7 +564,33 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         }
     }
 
+    public void createPriceGroup(ObservableList<PriceGroup> priceGroups, int id)
+    {
+        String sql = """
+                INSERT INTO priceEvent (name, price, currency, eventID)
+                VALUES (?, ?, ?, ?)
+                """;
 
+        try (Connection connection = DBconnect.getConnection())
+        {
+            PreparedStatement psState = connection.prepareStatement(sql);
+            for (PriceGroup price : priceGroups)
+            {
+                psState.setString(1, price.getName());
+                psState.setInt(2, price.getPrice());
+                psState.setString(3, price.getCurrency());
+                psState.setInt(4, id);
+
+                psState.addBatch();
+            }
+
+            psState.executeBatch();
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
 
     public List<UserInfo> getAttendeesFromEvent(Event event) {
         List<UserInfo> users = new ArrayList<>();

@@ -70,11 +70,12 @@ public final class DataManager {
      * EVENTS
      */
 
-    public void newEvent(Event event) throws SQLException
+    public void newEvent(Event event)
     {
         String colour = event.getColor().getRed() + ", " + event.getColor().getGreen() + ", " + event.getColor().getBlue();
 
-        database.createEvent(event, colour);
+        int eventid = database.createEvent(event, colour);
+        database.createPriceGroup(event.getPriceGroups(), eventid);
     }
 
     public void deleteEvent(Event event)
@@ -155,7 +156,7 @@ public final class DataManager {
     }
 
     public void updatePriceGroup(PriceGroup selectedPriceGroup) {
-        //TODO: DB
+        database.updatePrice(selectedPriceGroup.getName(), selectedPriceGroup.getPrice(), selectedPriceGroup.getCurrency(), -1);
     }
 
     public PriceGroup getSelectedPriceGroup() {
