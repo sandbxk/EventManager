@@ -123,7 +123,12 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         }
     }
 
-    public void createVenue (String location, String street, int zipcode)
+    /**
+     * VENUES
+     * Getters, setters, deleters and readers for venues.
+     */
+
+    public void createVenue (String location, String street, int zipCode)
     {
             String sql = """
                     INSERT INTO venue (venueName, StreetName, venueZipCode)
@@ -135,7 +140,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
                 PreparedStatement psState = connection.prepareStatement(sql);
                 psState.setString(1,location);
                 psState.setString(2, street);
-                psState.setInt(3, zipcode);
+                psState.setInt(3, zipCode);
 
                 psState.execute();
             } catch (SQLException e)
@@ -144,7 +149,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
             }
     }
 
-    public Venue getVenue (int id)
+    public Venue getVenue (int venueID)
     {
         String sql = """
                SELECT * FROM venue
@@ -155,7 +160,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         try (Connection connection = DBconnect.getConnection())
              {
                  PreparedStatement psSQL = connection.prepareStatement(sql);
-                 psSQL.setInt(1, id);
+                 psSQL.setInt(1, venueID);
 
                  ResultSet rsVenue = psSQL.executeQuery();
 
@@ -250,6 +255,11 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         return returnList;
     }
 
+    /**
+     * EVENTS
+     * Getters, setters, readers and deleters for events.
+     */
+
     public int createEvent(Event event, String colour)
     {
         String sql = """
@@ -318,7 +328,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
     }
 
-    public void deleteEvent(int id)
+    public void deleteEvent(int eventID)
     {
         String sql = """
                     DELETE FROM events 
@@ -328,7 +338,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         try (Connection connection = DBconnect.getConnection())
         {
             PreparedStatement psState = connection.prepareStatement(sql);
-            psState.setInt(1, id);
+            psState.setInt(1, eventID);
 
             psState.execute();
 
@@ -380,7 +390,159 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         }
     }
 
-    public void addUserToEvent(int userId, int eventID)
+    /**
+     * PRICES
+     * Getters, setters, readers and deleters for price management.
+     */
+
+    public void createPrice(String name, int price, String currency, int eventID)
+    {
+        String sql = """
+                    INSERT INTO priceGroups (name, price, currency, eventID)
+                    VALUES (?, ?, ?, ?)
+                    """;
+        try (Connection conneciton = DBconnect.getConnection())
+        {
+            PreparedStatement psPrice = conneciton.prepareStatement(sql);
+
+            psPrice.setString(1, name);
+            psPrice.setInt(2, price);
+            psPrice.setString(3, currency);
+            psPrice.setInt(4, eventID);
+
+            psPrice.execute();
+
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void deletePrice(int priceID)
+    {
+        String sql = """
+                DELETE FROM priceEvent
+                WHERE id = ?
+                """;
+        try (Connection connection = DBconnect.getConnection())
+        {
+            PreparedStatement psState = connection.prepareStatement(sql);
+            psState.setInt(1, priceID);
+
+            psState.execute();
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void updatePrice (String name, int price, String currency, int priceID)
+    {
+         String sql = """
+                 UPDATE priceEvent
+                 SET name = ?, price = ?, currency = ?
+                 WHERE id = ?
+                 """;
+
+         try (Connection connection = DBconnect.getConnection())
+         {
+             PreparedStatement psState = connection.prepareStatement(sql);
+             psState.setString(1, name);
+             psState.setInt(2, price);
+             psState.setString(3, currency);
+             psState.setInt(4, priceID);
+
+             psState.execute();
+
+         } catch (SQLException e)
+         {
+             e.printStackTrace();
+         }
+    }
+
+    public ObservableList<PriceGroup> getPriceGroup(int eventID)
+    {
+        ObservableList<PriceGroup> returnList = FXCollections.observableArrayList();
+
+        String sql = """
+                       SELECT * FROM priceEvent
+                       WHERE eventID = ?
+                       """;
+
+            try (Connection connection = DBconnect.getConnection()){
+
+            PreparedStatement psState = connection.prepareStatement(sql);
+            psState.setInt(1, eventID);
+
+            ResultSet result = psState.executeQuery();
+
+        while (result.next())
+        {
+            int priceid = result.getInt("id");
+            String name = result.getString("name");
+            int price = result.getInt("price");
+            String currency = result.getString("currency");
+
+            returnList.add(new PriceGroup(priceid, name, price, currency));
+        }
+            return returnList;
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void createPriceGroup(ObservableList<PriceGroup> priceGroups, int eventID) {
+        String sql = """
+                INSERT INTO priceEvent (name, price, currency, eventID)
+                VALUES (?, ?, ?, ?)
+                """;
+
+        try (Connection connection = DBconnect.getConnection()) {
+            PreparedStatement psState = connection.prepareStatement(sql);
+            for (PriceGroup price : priceGroups) {
+                psState.setString(1, price.getName());
+                psState.setInt(2, price.getPrice());
+                psState.setString(3, price.getCurrency());
+                psState.setInt(4, eventID);
+
+                psState.addBatch();
+            }
+
+            psState.executeBatch();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteAllPrices(int eventID)
+    {
+        String sql = """
+                DELETE FROM priceEvent
+                WHERE eventID = ?        
+                """;
+
+        try (Connection connection = DBconnect.getConnection())
+        {
+            PreparedStatement psState = connection.prepareStatement(sql);
+            psState.setInt(1, eventID);
+
+            psState.execute();
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * USERS
+     * Deleters, readers, setters and getters for users.
+     */
+
+    public void addUserToEvent(int userID, int eventID)
     {
         String sql = """
                 INSERT INTO userEvent (userID, eventID)
@@ -391,7 +553,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         {
             PreparedStatement psState = connection.prepareStatement(sql);
 
-            psState.setInt(1, userId);
+            psState.setInt(1, userID);
             psState.setInt(2, eventID);
 
             psState.execute();
@@ -404,7 +566,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
     }
 
-    public void removeUserFromEvent(int userid, int eventid)
+    public void removeUserFromEvent(int userID, int eventID)
     {
         String sql = """
                 DELETE FROM userEvent
@@ -414,8 +576,8 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         try (Connection connection = DBconnect.getConnection())
         {
             PreparedStatement psState = connection.prepareStatement(sql);
-            psState.setInt(1, userid);
-            psState.setInt(2, eventid);
+            psState.setInt(1, userID);
+            psState.setInt(2, eventID);
 
             psState.execute();
 
@@ -425,7 +587,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         }
     }
 
-    public ObservableList<UserInfo> getUsersForEvent(int id)
+    public ObservableList<UserInfo> getUsersForEvent(int eventID)
     {
         ObservableList<UserInfo> returnList = FXCollections.observableArrayList();
 
@@ -438,6 +600,8 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         try (Connection connection = DBconnect.getConnection())
         {
             PreparedStatement psState = DBconnect.getConnection().prepareStatement(sql);
+            psState.setInt(1, eventID);
+
             ResultSet resSet = psState.executeQuery();
 
             while (resSet.next())
@@ -469,149 +633,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         }
     }
 
-    public void createPrice(String name, int price, String currency, int id)
-    {
-        String sql = """
-                    INSERT INTO priceGroups (name, price, currency, eventID)
-                    VALUES (?, ?, ?, ?)
-                    """;
-        try (Connection conneciton = DBconnect.getConnection())
-        {
-            PreparedStatement psPrice = conneciton.prepareStatement(sql);
-
-            psPrice.setString(1, name);
-            psPrice.setInt(2, price);
-            psPrice.setString(3, currency);
-            psPrice.setInt(4, id);
-
-            psPrice.execute();
-
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    public void deletePrice(int id)
-    {
-        String sql = """
-                DELETE FROM priceEvent
-                WHERE id = ?
-                """;
-        try (Connection connection = DBconnect.getConnection())
-        {
-            PreparedStatement psState = connection.prepareStatement(sql);
-            psState.setInt(1, id);
-
-            psState.execute();
-
-        } catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    public void updatePrice (String name, int price, String currency, int id)
-    {
-         String sql = """
-                 UPDATE priceEvent
-                 SET name = ?, price = ?, currency = ?
-                 WHERE id = ?
-                 """;
-
-         try (Connection connection = DBconnect.getConnection())
-         {
-             PreparedStatement psState = connection.prepareStatement(sql);
-             psState.setString(1, name);
-             psState.setInt(2, price);
-             psState.setString(3, currency);
-             psState.setInt(4, id);
-
-             psState.execute();
-
-         } catch (SQLException e)
-         {
-             e.printStackTrace();
-         }
-    }
-
-    public ObservableList<PriceGroup> getPriceGroup(int id)
-    {
-        ObservableList<PriceGroup> returnList = FXCollections.observableArrayList();
-
-        String sql = """
-                       SELECT * FROM priceEvent
-                       WHERE eventID = ?
-                       """;
-
-            try (Connection connection = DBconnect.getConnection()){
-
-            PreparedStatement psState = connection.prepareStatement(sql);
-            psState.setInt(1, id);
-
-            ResultSet result = psState.executeQuery();
-
-        while (result.next())
-        {
-            int priceid = result.getInt("id");
-            String name = result.getString("name");
-            int price = result.getInt("price");
-            String currency = result.getString("currency");
-
-            returnList.add(new PriceGroup(priceid, name, price, currency));
-        }
-            return returnList;
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public void createPriceGroup(ObservableList<PriceGroup> priceGroups, int id) {
-        String sql = """
-                INSERT INTO priceEvent (name, price, currency, eventID)
-                VALUES (?, ?, ?, ?)
-                """;
-
-        try (Connection connection = DBconnect.getConnection()) {
-            PreparedStatement psState = connection.prepareStatement(sql);
-            for (PriceGroup price : priceGroups) {
-                psState.setString(1, price.getName());
-                psState.setInt(2, price.getPrice());
-                psState.setString(3, price.getCurrency());
-                psState.setInt(4, id);
-
-                psState.addBatch();
-            }
-
-            psState.executeBatch();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void deleteAllPrices(int eventID)
-    {
-        String sql = """
-                DELETE FROM priceEvent
-                WHERE eventID = ?        
-                """;
-
-        try (Connection connection = DBconnect.getConnection())
-        {
-            PreparedStatement psState = connection.prepareStatement(sql);
-            psState.setInt(1, eventID);
-
-            psState.execute();
-        } catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    public void deleteAllUsersFromEvent (int id)
+    public void deleteAllUsersFromEvent (int eventID)
     {
         String sql = """
                 DELETE FROM userEvent
@@ -621,7 +643,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         try (Connection connection = DBconnect.getConnection())
         {
             PreparedStatement psState = connection.prepareStatement(sql);
-            psState.setInt(1, id);
+            psState.setInt(1, eventID);
 
             psState.execute();
 
