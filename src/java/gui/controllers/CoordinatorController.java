@@ -44,53 +44,94 @@ import java.util.ResourceBundle;
 public class CoordinatorController implements Initializable {
 
 
-    @FXML public Button btnCreateActions;
-    @FXML public Label lblUser;
-    @FXML public ImageView imgViewUser;
+    @FXML
+    public Button btnCreateActions;
+    @FXML
+    public Label lblUser;
+    @FXML
+    public ImageView imgViewUser;
 
-    @FXML public FlowPane flowPaneEvents;
+    @FXML
+    public FlowPane flowPaneEvents;
 
 
-    @FXML public AnchorPane imgDetailBackground;
-    @FXML public ImageView imgViewEvent;
-    @FXML public Button btnEventActions;
-    @FXML public Label lblEventName;
-    @FXML public Label lblEventDate;
-    @FXML public Label lblEventTime;
-    @FXML public Label lblEventVenue;
-    @FXML public Label lblRemainingTickets;
-    @FXML public Label lblSoldTickets;
-    @FXML public TableView<PriceGroup> tblViewTicketGroup;
-    @FXML public TableColumn<PriceGroup, String> tblClmnGroupName;
-    @FXML public TableColumn<PriceGroup, Number> tblClmnGroupPrice;
-    @FXML public TableColumn<PriceGroup, String> tblClmnGroupCurrency;
-    @FXML public TextArea txtAreaInfo;
+    @FXML
+    public AnchorPane imgDetailBackground;
+    @FXML
+    public ImageView imgViewEvent;
+    @FXML
+    public Button btnEventActions;
+    @FXML
+    public Label lblEventName;
+    @FXML
+    public Label lblEventDate;
+    @FXML
+    public Label lblEventTime;
+    @FXML
+    public Label lblEventVenue;
+    @FXML
+    public Label lblRemainingTickets;
+    @FXML
+    public Label lblSoldTickets;
+    @FXML
+    public TableView<PriceGroup> tblViewTicketGroup;
+    @FXML
+    public TableColumn<PriceGroup, String> tblClmnGroupName;
+    @FXML
+    public TableColumn<PriceGroup, Number> tblClmnGroupPrice;
+    @FXML
+    public TableColumn<PriceGroup, String> tblClmnGroupCurrency;
+    @FXML
+    public TextArea txtAreaInfo;
 
-    @FXML public ImageView imgViewTicketIcon;
-    @FXML public Label lblEventDateSpacer;
-    @FXML public Label lblAtVenue;
-    @FXML public Label lblDescriptionHeader;
-    @FXML public Label lblRemaining;
-    @FXML public Label lblSold;
-    @FXML public Label lblTicketPricing;
+    @FXML
+    public ImageView imgViewTicketIcon;
+    @FXML
+    public Label lblEventDateSpacer;
+    @FXML
+    public Label lblAtVenue;
+    @FXML
+    public Label lblDescriptionHeader;
+    @FXML
+    public Label lblRemaining;
+    @FXML
+    public Label lblSold;
+    @FXML
+    public Label lblTicketPricing;
 
-    @FXML public TextField txtFieldSearch;
-    @FXML public Button btnSearch;
-    @FXML public TableView tblViewAttendees;
-    @FXML public TableColumn tblClmAttFirstName;
-    @FXML public TableColumn tblClmAttLastName;
-    @FXML public TableColumn tblClmAttEmail;
-    @FXML public TableColumn tblClmAttPhone;
-    @FXML public TableColumn tblClmAttTicketGroup;
-    @FXML public TableColumn tblClmAttTicketNo;
-    @FXML public TableColumn tblClmAttSeatNo;
+    @FXML
+    public TextField txtFieldSearch;
+    @FXML
+    public Button btnSearch;
+    @FXML
+    public TableView tblViewAttendees;
+    @FXML
+    public TableColumn tblClmAttFirstName;
+    @FXML
+    public TableColumn tblClmAttLastName;
+    @FXML
+    public TableColumn tblClmAttEmail;
+    @FXML
+    public TableColumn tblClmAttPhone;
+    @FXML
+    public TableColumn tblClmAttTicketGroup;
+    @FXML
+    public TableColumn tblClmAttTicketNo;
+    @FXML
+    public TableColumn tblClmAttSeatNo;
 
-    @FXML public ToggleButton tglBtnShowHideMenu;
-    @FXML public AnchorPane anchorPaneAttendeeMenu;
-    @FXML public Button btnSendTicket;
-    @FXML public Button btnDLTicket;
-    @FXML public Button btnEditAttendeeInfo;
-    @FXML public Button btnRemoveAttendee;
+    @FXML
+    public ToggleButton tglBtnShowHideMenu;
+    @FXML
+    public AnchorPane anchorPaneAttendeeMenu;
+    @FXML
+    public Button btnSendTicket;
+    @FXML
+    public Button btnDLTicket;
+    @FXML
+    public Button btnEditAttendeeInfo;
+    @FXML
+    public Button btnRemoveAttendee;
 
     private ToggleGroup eventToggle;
     private static final double SLIDE_MENU_WIDTH = 490;
@@ -99,7 +140,6 @@ public class CoordinatorController implements Initializable {
     private ContextMenu signOutMenu;
     private BooleanProperty showingAddress;
     private ExporterList expoList;
-
 
 
     public CoordinatorController() {
@@ -116,8 +156,7 @@ public class CoordinatorController implements Initializable {
 
 
     @Override
-    public void initialize(URL location, ResourceBundle resources)
-    {
+    public void initialize(URL location, ResourceBundle resources) {
         eventToggle = new ToggleGroup();
         onShowHideMenu(new ActionEvent());
         hideDetailsPanelComponents(true);
@@ -128,7 +167,7 @@ public class CoordinatorController implements Initializable {
         updateEventsFlowPane();
     }
 
-    private void initTableViews(){
+    private void initTableViews() {
         tblClmnGroupName.setCellValueFactory(param -> param.getValue().nameProperty());
         tblClmnGroupPrice.setCellValueFactory(param -> param.getValue().priceProperty());
         tblClmnGroupCurrency.setCellValueFactory(param -> param.getValue().currencyProperty());
@@ -137,7 +176,7 @@ public class CoordinatorController implements Initializable {
     private void initEventListener() {
         lblEventVenue.setOnMouseClicked(event -> showingAddress.set(!showingAddress.get()));
         showingAddress.addListener((observable, oldValue, newValue) -> {
-            if (showingAddress.get() && selectedEvent != null){
+            if (showingAddress.get() && selectedEvent != null) {
                 String address = selectedEvent.get().getLocation().getAddress();
                 String zipcode = selectedEvent.get().getLocation().getZipCode();
                 String city = selectedEvent.get().getLocation().getCity();
@@ -154,13 +193,13 @@ public class CoordinatorController implements Initializable {
 
         selectedEvent.addListener((observable, oldValue, newValue) -> {
 
-            if (newValue == null){
+            if (newValue == null) {
                 hideDetailsPanelComponents(true);
                 return;
             }
 
             imgViewEvent.setImage(newValue.getEventImage());
-            imgDetailBackground.setStyle("-fx-background-color: rgb(" + newValue.getColor().getRed()*255 +", " + newValue.getColor().getGreen()*255 + ", " + newValue.getColor().getBlue()*255 + ");");
+            imgDetailBackground.setStyle("-fx-background-color: rgb(" + newValue.getColor().getRed() * 255 + ", " + newValue.getColor().getGreen() * 255 + ", " + newValue.getColor().getBlue() * 255 + ");");
             lblEventName.setText(newValue.getEventName());
             lblEventDate.setText(newValue.getStartDateTime().toLocalDate().toString());
             lblEventTime.setText(newValue.getStartDateTime().toLocalTime().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)));
@@ -175,23 +214,23 @@ public class CoordinatorController implements Initializable {
             hideDetailsPanelComponents(false);
 
             //tblViewAttendees.setItems();
-            
+
             //TODO: tblview Attendees
         });
     }
 
     /**
      * Fade animation for the event details panel. Fades out if no event is selected, fades in if an event is selected.
+     *
      * @param hidden
      */
-    private void hideDetailsPanelComponents(boolean hidden){
+    private void hideDetailsPanelComponents(boolean hidden) {
         Timeline timeline = new Timeline();
         int endValue = 0;
         int duration = 300;
-        if (hidden){
+        if (hidden) {
             endValue = 0;
-        }
-        else if (!hidden){
+        } else if (!hidden) {
             endValue = 1;
         }
 
@@ -218,17 +257,17 @@ public class CoordinatorController implements Initializable {
         KeyFrame opBtn8 = new KeyFrame(Duration.millis(duration), new KeyValue(btnEventActions.opacityProperty(), endValue));
 
 
-        timeline.getKeyFrames().addAll(op1, op2, op3, op4, op5, op6, op7, op8, op9, op10,  opLbl1, opLbl2, opLbl3, opLbl4, opLbl5, opLbl6, opImg7, opBtn8);
+        timeline.getKeyFrames().addAll(op1, op2, op3, op4, op5, op6, op7, op8, op9, op10, opLbl1, opLbl2, opLbl3, opLbl4, opLbl5, opLbl6, opImg7, opBtn8);
 
         timeline.play();
     }
 
     /**
      * Opens the NewEventView.fxml. On closing, updates the list of events in flowPaneEvents with a list of all events.getEventTile.
+     *
      * @param event
      */
-    public void onCreate(ActionEvent event)
-    {
+    public void onCreate(ActionEvent event) {
         if (eventToggle.getSelectedToggle() != null)
             eventToggle.getSelectedToggle().setSelected(false);
         DataManager.getInstance().setSelectedEvent(null);
@@ -249,25 +288,24 @@ public class CoordinatorController implements Initializable {
         stage.setOnHiding(event1 -> updateEventsFlowPane());
     }
 
-    private void updateEventsFlowPane(){
+    private void updateEventsFlowPane() {
         ObservableList toggles = FXCollections.observableArrayList();
-            flowPaneEvents.getChildren().clear();
+        flowPaneEvents.getChildren().clear();
 
-            ObservableList<Event> allEvents = null;
-            try {
-                allEvents = DataManager.getInstance().getAllEvents();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        ObservableList<Event> allEvents = null;
+        try {
+            allEvents = DataManager.getInstance().getAllEvents();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-            for (Event e : allEvents)
-            {
-                flowPaneEvents.getChildren().add(e.getEventTile());
-                toggles.addAll(e.getEventTile());
-            }
+        for (Event e : allEvents) {
+            flowPaneEvents.getChildren().add(e.getEventTile());
+            toggles.addAll(e.getEventTile());
+        }
 
-            eventToggle.getToggles().clear();
-            eventToggle.getToggles().addAll(toggles);
+        eventToggle.getToggles().clear();
+        eventToggle.getToggles().addAll(toggles);
     }
 
     public void onUser(MouseEvent mouseEvent) {
@@ -276,7 +314,7 @@ public class CoordinatorController implements Initializable {
         double onScreenY = imgViewUser.getScene().getWindow().getY() + imgViewUser.getFitWidth() + imgViewUser.localToScene(imgViewUser.getBoundsInLocal()).getMinY();
 
         double offsetX = imgViewUser.getFitWidth() * 2;
-        double offsetY = imgViewUser.getFitHeight()*0.8;
+        double offsetY = imgViewUser.getFitHeight() * 0.8;
 
         //ContextMenu showed at the location of the button, with offsets applied
         signOutMenu.show(imgViewUser, onScreenX - offsetX, onScreenY + offsetY);
@@ -292,7 +330,7 @@ public class CoordinatorController implements Initializable {
         alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             DataManager.getInstance().deleteEvent(selectedEvent.get());
             updateEventsFlowPane();
         }
@@ -302,7 +340,7 @@ public class CoordinatorController implements Initializable {
      * Opens the EditEventView.fxml. Updates the event details panel upon closing.
      */
     public void onEditEvent() {
-        if (DataManager.getInstance().getSelectedEvent() == null){
+        if (DataManager.getInstance().getSelectedEvent() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("No event selected");
             alert.setContentText("Please select an event to edit");
@@ -327,9 +365,9 @@ public class CoordinatorController implements Initializable {
     /**
      * Re sets every component present in the details panel.
      */
-    private void updateEventDetail(){
+    private void updateEventDetail() {
         imgViewEvent.setImage(selectedEvent.get().getEventImage());
-        imgDetailBackground.setStyle("-fx-background-color: rgb(" + selectedEvent.get().getColor().getRed()*255 +", " + selectedEvent.get().getColor().getGreen()*255 + ", " + selectedEvent.get().getColor().getBlue()*255 + ");");
+        imgDetailBackground.setStyle("-fx-background-color: rgb(" + selectedEvent.get().getColor().getRed() * 255 + ", " + selectedEvent.get().getColor().getGreen() * 255 + ", " + selectedEvent.get().getColor().getBlue() * 255 + ");");
         lblEventName.setText(selectedEvent.get().getEventName());
         lblEventDate.setText(selectedEvent.get().getStartDateTime().toLocalDate().toString());
         lblEventTime.setText(selectedEvent.get().getStartDateTime().toLocalTime().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)));
@@ -346,12 +384,13 @@ public class CoordinatorController implements Initializable {
     /**
      * Hides or shows the menu for attendee action (e.g. delete, edit, send ticket) through an animation.
      * Both the size, opacity, and rotation of the showHide button are rotated for a smooth look.
+     *
      * @param event
      */
     public void onShowHideMenu(ActionEvent event) {
         Timeline timeline = new Timeline();
         Timeline opacity = new Timeline();
-        if (tglBtnShowHideMenu.isSelected()){
+        if (tglBtnShowHideMenu.isSelected()) {
             //Rotation of the pressed button
             Timeline btnRotate = new Timeline(new KeyFrame(Duration.millis(100), new KeyValue(tglBtnShowHideMenu.rotateProperty(), -90)));
 
@@ -363,7 +402,7 @@ public class CoordinatorController implements Initializable {
             opacity.getKeyFrames().addAll(btn1KF, btn2KF, btn3KF, btn4KF);
 
             //Opacity for the menu container
-            KeyFrame paneKF= new KeyFrame(Duration.millis(100), new KeyValue(anchorPaneAttendeeMenu.opacityProperty(), 1));
+            KeyFrame paneKF = new KeyFrame(Duration.millis(100), new KeyValue(anchorPaneAttendeeMenu.opacityProperty(), 1));
             Timeline paneOpacity = new Timeline(paneKF);
 
             //Size for the menu container
@@ -376,13 +415,12 @@ public class CoordinatorController implements Initializable {
             btnRotate.setOnFinished(event1 -> paneOpacity.play());
             paneOpacity.setOnFinished(event1 -> timeline.play());
             timeline.setOnFinished(event1 -> opacity.play());
-        }
-        else {
+        } else {
             //Rotation of the pressed button
             Timeline btnRotate = new Timeline(new KeyFrame(Duration.millis(100), new KeyValue(tglBtnShowHideMenu.rotateProperty(), 0)));
 
             //Size of the menu container
-            KeyFrame kf1 = new KeyFrame(Duration.millis(200), new KeyValue(anchorPaneAttendeeMenu.maxWidthProperty(),0));
+            KeyFrame kf1 = new KeyFrame(Duration.millis(200), new KeyValue(anchorPaneAttendeeMenu.maxWidthProperty(), 0));
             KeyFrame kf2 = new KeyFrame(Duration.millis(200), new KeyValue(anchorPaneAttendeeMenu.prefWidthProperty(), 0));
             KeyFrame kf3 = new KeyFrame(Duration.millis(200), new KeyValue(anchorPaneAttendeeMenu.minWidthProperty(), 0));
             timeline.getKeyFrames().addAll(kf1, kf2, kf3);
@@ -422,6 +460,7 @@ public class CoordinatorController implements Initializable {
 
     /**
      * Shows a dropdown/contextmenu from the btnEventActions button.
+     *
      * @param event
      */
     public void onEventActions(ActionEvent event) {
@@ -430,13 +469,13 @@ public class CoordinatorController implements Initializable {
         double onScreenY = btnEventActions.getScene().getWindow().getY() + btnEventActions.getWidth() + btnEventActions.localToScene(btnEventActions.getBoundsInLocal()).getMinY();
 
         double offsetX = btnEventActions.getWidth() * 2;
-        double offsetY = btnEventActions.getHeight()*1.5;
+        double offsetY = btnEventActions.getHeight() * 1.5;
 
         //ContextMenu showed at the location of the button, with offsets applied
         eventActionsMenu.show(btnEventActions, onScreenX - offsetX, onScreenY + offsetY);
     }
 
-    private void signOut(){
+    private void signOut() {
         //TODO: Temp?
         Parent root = null;
         Stage thisStage = (Stage) lblUser.getScene().getWindow();
@@ -451,7 +490,7 @@ public class CoordinatorController implements Initializable {
     }
 
 
-    private void initEventActionsMenu(){
+    private void initEventActionsMenu() {
         MenuItem editEvent = new MenuItem("Edit Event");
         editEvent.setOnAction(event -> onEditEvent());
         MenuItem deleteEvent = new MenuItem("Delete Event");
@@ -462,7 +501,7 @@ public class CoordinatorController implements Initializable {
         eventActionsMenu.setAutoHide(true);
     }
 
-    private void initSignOutMenu(){
+    private void initSignOutMenu() {
         MenuItem signOut = new MenuItem("Sign out");
         signOut.setOnAction(event -> signOut());
 
@@ -471,6 +510,8 @@ public class CoordinatorController implements Initializable {
     }
 
     public void onSaveAttendeesList(ActionEvent event) throws SQLServerException, IOException {
-        expoList.createListOfAttendees(selectedEvent.get());
+        if (selectedEvent.get() != null) {
+            expoList.createListOfAttendees(selectedEvent.get());
+        }
     }
 }

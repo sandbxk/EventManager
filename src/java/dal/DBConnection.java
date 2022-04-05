@@ -19,7 +19,7 @@ public class DBConnection
         dataSource = new SQLServerDataSource();
 
         try {
-            property.load(new FileReader("config.properties"));
+            property.load(new FileReader(".config.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }
