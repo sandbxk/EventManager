@@ -125,6 +125,7 @@ public class CoordinatorController implements Initializable {
         initEventListener();
         initEventActionsMenu();
         initSignOutMenu();
+        updateEventsFlowPane();
     }
 
     private void initTableViews(){
@@ -245,9 +246,11 @@ public class CoordinatorController implements Initializable {
             e.printStackTrace();
         }
 
-        ObservableList toggles = FXCollections.observableArrayList();
+        stage.setOnHiding(event1 -> updateEventsFlowPane());
+    }
 
-        stage.setOnHiding(event1 -> {
+    private void updateEventsFlowPane(){
+        ObservableList toggles = FXCollections.observableArrayList();
             flowPaneEvents.getChildren().clear();
 
             ObservableList<Event> allEvents = null;
@@ -265,9 +268,7 @@ public class CoordinatorController implements Initializable {
 
             eventToggle.getToggles().clear();
             eventToggle.getToggles().addAll(toggles);
-        });
     }
-
 
     public void onUser(MouseEvent mouseEvent) {
         //Location of the node
@@ -293,6 +294,7 @@ public class CoordinatorController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
             DataManager.getInstance().deleteEvent(selectedEvent.get());
+            updateEventsFlowPane();
         }
     }
 
