@@ -81,7 +81,7 @@ public class NewEventController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         priceGroups = FXCollections.observableArrayList();
-        DataManager.getInstance().setPriceGroups(priceGroups);
+        DataManager.getInstance().setPriceGroupList(priceGroups);
 
         txtFieldTicketRemaining.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), 0, integerFilter()));
         txtFieldTicketsSold.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), 0, integerFilter()));
@@ -236,7 +236,7 @@ public class NewEventController implements Initializable {
         openStage("createPriceGroup.fxml", "New Price Group", new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
-                priceGroups = DataManager.getInstance().getPriceGroups(null);
+                priceGroups = DataManager.getInstance().getPriceGroupList(null);
             }
         });
 
@@ -248,7 +248,7 @@ public class NewEventController implements Initializable {
         if (tblViewNewEventTicketGroup.getSelectionModel().getSelectedItem() != null) {
             PriceGroup selectedItem = tblViewNewEventTicketGroup.getSelectionModel().getSelectedItem();
             DataManager.getInstance().removePriceGroup(null, selectedItem);
-            tblViewNewEventTicketGroup.setItems(DataManager.getInstance().getPriceGroups(null));
+            tblViewNewEventTicketGroup.setItems(DataManager.getInstance().getPriceGroupList(null));
         }
     }
 
@@ -311,7 +311,7 @@ public class NewEventController implements Initializable {
             int ticketsRemaining = Integer.parseInt(txtFieldTicketRemaining.getText());
 
             //PriceGroups
-            ObservableList<PriceGroup> priceGroups = DataManager.getInstance().getPriceGroups(null);
+            ObservableList<PriceGroup> priceGroups = DataManager.getInstance().getPriceGroupList(null);
 
             //Description
             String description = txtAreaNewEventInfo.getText();

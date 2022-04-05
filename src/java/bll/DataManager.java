@@ -121,7 +121,7 @@ public final class DataManager {
      * @param event
      * @return
      */
-    public ObservableList<PriceGroup> getPriceGroups(Event event){
+    public ObservableList<PriceGroup> getPriceGroupList(Event event){
         if (event == null) {
             return this.priceGroups;
         }
@@ -153,7 +153,7 @@ public final class DataManager {
      * Sets the this.PriceGroups. Used as a reset for working with an event in creation, or an existing event.
      * @param priceGroups
      */
-    public void setPriceGroups(ObservableList<PriceGroup> priceGroups){
+    public void setPriceGroupList(ObservableList<PriceGroup> priceGroups){
         this.priceGroups = priceGroups;
     }
 
