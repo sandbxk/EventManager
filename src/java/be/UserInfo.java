@@ -11,6 +11,7 @@ public class UserInfo
     private int zipCode;
     private String email;
     public UserInfo(){}
+
     public UserInfo(int id, String name, EUserType type,int zipCode, String email) {
         this.id = id;
         this.name = name;

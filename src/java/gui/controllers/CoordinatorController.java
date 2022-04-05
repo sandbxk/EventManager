@@ -44,94 +44,53 @@ import java.util.ResourceBundle;
 public class CoordinatorController implements Initializable {
 
 
-    @FXML
-    public Button btnCreateActions;
-    @FXML
-    public Label lblUser;
-    @FXML
-    public ImageView imgViewUser;
+    @FXML public Button btnCreateActions;
+    @FXML public Label lblUser;
+    @FXML public ImageView imgViewUser;
 
-    @FXML
-    public FlowPane flowPaneEvents;
+    @FXML public FlowPane flowPaneEvents;
 
 
-    @FXML
-    public AnchorPane imgDetailBackground;
-    @FXML
-    public ImageView imgViewEvent;
-    @FXML
-    public Button btnEventActions;
-    @FXML
-    public Label lblEventName;
-    @FXML
-    public Label lblEventDate;
-    @FXML
-    public Label lblEventTime;
-    @FXML
-    public Label lblEventVenue;
-    @FXML
-    public Label lblRemainingTickets;
-    @FXML
-    public Label lblSoldTickets;
-    @FXML
-    public TableView<PriceGroup> tblViewTicketGroup;
-    @FXML
-    public TableColumn<PriceGroup, String> tblClmnGroupName;
-    @FXML
-    public TableColumn<PriceGroup, Number> tblClmnGroupPrice;
-    @FXML
-    public TableColumn<PriceGroup, String> tblClmnGroupCurrency;
-    @FXML
-    public TextArea txtAreaInfo;
+    @FXML public AnchorPane imgDetailBackground;
+    @FXML public ImageView imgViewEvent;
+    @FXML public Button btnEventActions;
+    @FXML public Label lblEventName;
+    @FXML public Label lblEventDate;
+    @FXML public Label lblEventTime;
+    @FXML public Label lblEventVenue;
+    @FXML public Label lblRemainingTickets;
+    @FXML public Label lblSoldTickets;
+    @FXML public TableView<PriceGroup> tblViewTicketGroup;
+    @FXML public TableColumn<PriceGroup, String> tblClmnGroupName;
+    @FXML public TableColumn<PriceGroup, Number> tblClmnGroupPrice;
+    @FXML public TableColumn<PriceGroup, String> tblClmnGroupCurrency;
+    @FXML public TextArea txtAreaInfo;
 
-    @FXML
-    public ImageView imgViewTicketIcon;
-    @FXML
-    public Label lblEventDateSpacer;
-    @FXML
-    public Label lblAtVenue;
-    @FXML
-    public Label lblDescriptionHeader;
-    @FXML
-    public Label lblRemaining;
-    @FXML
-    public Label lblSold;
-    @FXML
-    public Label lblTicketPricing;
+    @FXML public ImageView imgViewTicketIcon;
+    @FXML public Label lblEventDateSpacer;
+    @FXML public Label lblAtVenue;
+    @FXML public Label lblDescriptionHeader;
+    @FXML public Label lblRemaining;
+    @FXML public Label lblSold;
+    @FXML public Label lblTicketPricing;
 
-    @FXML
-    public TextField txtFieldSearch;
-    @FXML
-    public Button btnSearch;
-    @FXML
-    public TableView tblViewAttendees;
-    @FXML
-    public TableColumn tblClmAttFirstName;
-    @FXML
-    public TableColumn tblClmAttLastName;
-    @FXML
-    public TableColumn tblClmAttEmail;
-    @FXML
-    public TableColumn tblClmAttPhone;
-    @FXML
-    public TableColumn tblClmAttTicketGroup;
-    @FXML
-    public TableColumn tblClmAttTicketNo;
-    @FXML
-    public TableColumn tblClmAttSeatNo;
+    @FXML public TextField txtFieldSearch;
+    @FXML public Button btnSearch;
+    @FXML public TableView tblViewAttendees;
+    @FXML public TableColumn tblClmAttFirstName;
+    @FXML public TableColumn tblClmAttLastName;
+    @FXML public TableColumn tblClmAttEmail;
+    @FXML public TableColumn tblClmAttPhone;
+    @FXML public TableColumn tblClmAttTicketGroup;
+    @FXML public TableColumn tblClmAttTicketNo;
 
-    @FXML
-    public ToggleButton tglBtnShowHideMenu;
-    @FXML
-    public AnchorPane anchorPaneAttendeeMenu;
-    @FXML
-    public Button btnSendTicket;
-    @FXML
-    public Button btnDLTicket;
-    @FXML
-    public Button btnEditAttendeeInfo;
-    @FXML
-    public Button btnRemoveAttendee;
+    @FXML public ToggleButton tglBtnShowHideMenu;
+    @FXML public AnchorPane anchorPaneAttendeeMenu;
+    @FXML public Button btnSendTicket;
+    @FXML public Button btnDLTicket;
+    @FXML public Button btnEditAttendeeInfo;
+    @FXML public Button btnRemoveAttendee;
+    
 
     private ToggleGroup eventToggle;
     private static final double SLIDE_MENU_WIDTH = 490;
@@ -171,6 +130,8 @@ public class CoordinatorController implements Initializable {
         tblClmnGroupName.setCellValueFactory(param -> param.getValue().nameProperty());
         tblClmnGroupPrice.setCellValueFactory(param -> param.getValue().priceProperty());
         tblClmnGroupCurrency.setCellValueFactory(param -> param.getValue().currencyProperty());
+
+
     }
 
     private void initEventListener() {
