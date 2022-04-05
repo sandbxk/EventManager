@@ -265,7 +265,12 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
             psSQL.setInt(4, event.getTicketsRemaining());
             psSQL.setInt(5, event.getTicketsSold());
             psSQL.setTimestamp(6, Timestamp.valueOf(event.getStartDateTime()));
-            psSQL.setTimestamp(7, Timestamp.valueOf(event.getEndDateTime()));
+            if (event.getEndDateTime() != null) {
+                psSQL.setTimestamp(7, Timestamp.valueOf(event.getEndDateTime()));
+            }
+            else {
+                psSQL.setNull(7, Types.TIMESTAMP);
+            }
             psSQL.setString(8, colour);
             psSQL.setNull(9, Types.BINARY);
 

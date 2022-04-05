@@ -16,7 +16,7 @@ public class ExporterList {
 
 public void createListOfAttendees(Event event) throws SQLServerException, IOException {
     CoordinatorDAO CDAO = new CoordinatorDAO();
-    FileWriter fl = new FileWriter(new File("C:/Users/kaspe/Desktop/EventManager/.design/liste.txt"));
+    FileWriter fl = new FileWriter(new File(".design/listeTest"));
     List<UserInfo> users = new ArrayList<>();
     CDAO.getAttendeesFromEvent(event);
     for (UserInfo user: users)
