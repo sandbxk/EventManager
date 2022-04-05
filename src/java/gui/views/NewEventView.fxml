@@ -229,7 +229,7 @@
                                        </HBox>
                                        <HBox prefHeight="9.0" prefWidth="305.0">
                                            <children>
-                                               <Label prefHeight="46.0" prefWidth="87.0" styleClass="Text" text="Tickets sold:  ">
+                                               <Label prefHeight="46.0" prefWidth="87.0" styleClass="Text" text="Total Tickets:  ">
                                                    <HBox.margin>
                                                        <Insets left="5.0" />
                                                    </HBox.margin>
