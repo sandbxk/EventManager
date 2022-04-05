@@ -83,7 +83,6 @@ public class CoordinatorController implements Initializable {
     @FXML public TableColumn tblClmAttPhone;
     @FXML public TableColumn tblClmAttTicketGroup;
     @FXML public TableColumn tblClmAttTicketNo;
-    @FXML public TableColumn tblClmAttSeatNo;
 
     @FXML public ToggleButton tglBtnShowHideMenu;
     @FXML public AnchorPane anchorPaneAttendeeMenu;
@@ -132,6 +131,8 @@ public class CoordinatorController implements Initializable {
         tblClmnGroupName.setCellValueFactory(param -> param.getValue().nameProperty());
         tblClmnGroupPrice.setCellValueFactory(param -> param.getValue().priceProperty());
         tblClmnGroupCurrency.setCellValueFactory(param -> param.getValue().currencyProperty());
+
+
     }
 
     private void initEventListener() {
