@@ -326,7 +326,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
             psState.setTimestamp(7, Timestamp.valueOf(event.getEndDateTime()));
             psState.setString(8, colour);
 
-            if (event.getEventImage() != null)
+            if (event.HasImage())
             {
                 FileInputStream fileInputStream = new FileInputStream(event.getEventImage().getUrl());
                 psState.setBinaryStream(9, fileInputStream, fileInputStream.available());
