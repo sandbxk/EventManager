@@ -55,6 +55,7 @@ public class CoordinatorController implements Initializable {
     @FXML public Label lblEventTime;
     @FXML public Label lblEventVenue;
     @FXML public Label lblTotalTickets;
+    @FXML public Label lblSoldTickets;
     @FXML public Label lblRemainingTickets;
     @FXML public TableView<PriceGroup> tblViewTicketGroup;
     @FXML public TableColumn<PriceGroup, String> tblClmnGroupName;
@@ -69,6 +70,7 @@ public class CoordinatorController implements Initializable {
     @FXML public Label lblDescriptionHeader;
     @FXML public Label lblRemaining;
     @FXML public Label lblSold;
+    @FXML public Label lblTotal;
     @FXML public Label lblTicketPricing;
 
     @FXML public TextField txtFieldSearch;
@@ -165,8 +167,9 @@ public class CoordinatorController implements Initializable {
 
             txtAreaInfo.setText(newValue.getDescription());
 
-            lblRemainingTickets.setText(newValue.getTicketsSold() + "");
-            lblTotalTickets.setText(newValue.getTicketsRemaining() + "");
+            lblSoldTickets.setText(newValue.getTicketsSold() + "");
+            lblRemainingTickets.setText(newValue.getTicketsRemaining() + "");
+            lblTotalTickets.setText(newValue.getTicketsTotal() + "");
 
             tblViewTicketGroup.setItems(newValue.getPriceGroups());
             hideDetailsPanelComponents(false);
@@ -202,6 +205,7 @@ public class CoordinatorController implements Initializable {
         KeyFrame op7 = new KeyFrame(Duration.millis(duration), new KeyValue(txtAreaInfo.opacityProperty(), endValue));
         KeyFrame op8 = new KeyFrame(Duration.millis(duration), new KeyValue(lblTotalTickets.opacityProperty(), endValue));
         KeyFrame op9 = new KeyFrame(Duration.millis(duration), new KeyValue(lblRemainingTickets.opacityProperty(), endValue));
+        KeyFrame op11 = new KeyFrame(Duration.millis(duration), new KeyValue(lblSoldTickets.opacityProperty(), endValue));
 
         KeyFrame op10 = new KeyFrame(Duration.millis(duration), new KeyValue(tblViewTicketGroup.opacityProperty(), endValue));
 
@@ -210,12 +214,13 @@ public class CoordinatorController implements Initializable {
         KeyFrame opLbl3 = new KeyFrame(Duration.millis(duration), new KeyValue(lblDescriptionHeader.opacityProperty(), endValue));
         KeyFrame opLbl4 = new KeyFrame(Duration.millis(duration), new KeyValue(lblRemaining.opacityProperty(), endValue));
         KeyFrame opLbl5 = new KeyFrame(Duration.millis(duration), new KeyValue(lblSold.opacityProperty(), endValue));
+        KeyFrame opLbl7 = new KeyFrame(Duration.millis(duration), new KeyValue(lblTotal.opacityProperty(), endValue));
         KeyFrame opLbl6 = new KeyFrame(Duration.millis(duration), new KeyValue(lblTicketPricing.opacityProperty(), endValue));
         KeyFrame opImg7 = new KeyFrame(Duration.millis(duration), new KeyValue(imgViewTicketIcon.opacityProperty(), endValue));
         KeyFrame opBtn8 = new KeyFrame(Duration.millis(duration), new KeyValue(btnEventActions.opacityProperty(), endValue));
 
 
-        timeline.getKeyFrames().addAll(op1, op2, op3, op4, op5, op6, op7, op8, op9, op10, opLbl1, opLbl2, opLbl3, opLbl4, opLbl5, opLbl6, opImg7, opBtn8);
+        timeline.getKeyFrames().addAll(op1, op2, op3, op4, op5, op6, op7, op8, op9, op10, op11, opLbl1, opLbl2, opLbl3, opLbl4, opLbl5, opLbl6, opLbl7, opImg7, opBtn8);
 
         timeline.play();
     }
@@ -333,8 +338,9 @@ public class CoordinatorController implements Initializable {
 
         txtAreaInfo.setText(selectedEvent.get().getDescription());
 
-        lblRemainingTickets.setText(selectedEvent.get().getTicketsSold() + "");
-        lblTotalTickets.setText(selectedEvent.get().getTicketsRemaining() + "");
+        lblSoldTickets.setText(selectedEvent.get().getTicketsSold() + "");
+        lblRemainingTickets.setText(selectedEvent.get().getTicketsRemaining() + "");
+        lblTotalTickets.setText(selectedEvent.get().getTicketsTotal() + "");
 
         tblViewTicketGroup.setItems(selectedEvent.get().getPriceGroups());
     }

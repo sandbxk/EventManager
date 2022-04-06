@@ -115,7 +115,7 @@ public class EditEventController implements Initializable {
         }
 
         txtAreaEditEventInfo.setText(editedEvent.getDescription());
-        txtFieldTicketRemaining.setText(editedEvent.getTicketsRemaining()+"");
+        txtFieldTicketRemaining.setText(editedEvent.getTicketsTotal()+"");
         txtFieldTicketsSold.setText(editedEvent.getTicketsSold() + "");
 
         imgViewEvent.setImage(editedEvent.getEventImage());
@@ -338,7 +338,7 @@ public class EditEventController implements Initializable {
             int ticketSold = Integer.parseInt(txtFieldTicketsSold.getText());
             editedEvent.setTicketsSold(ticketSold);
             int ticketsRemaining = Integer.parseInt(txtFieldTicketRemaining.getText());
-            editedEvent.setTicketsRemaining(ticketsRemaining);
+            editedEvent.setTicketsTotal(ticketsRemaining);
 
             //PriceGroups
             editedEvent.setPriceGroups(tblViewNewEventTicketGroup.getItems());

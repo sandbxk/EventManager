@@ -272,7 +272,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
             psSQL.setString(1, event.getEventName());
             psSQL.setInt(2, event.getLocation().getID());
             psSQL.setString(3, event.getDescription());
-            psSQL.setInt(4, event.getTicketsRemaining());
+            psSQL.setInt(4, event.getTicketsTotal());
             psSQL.setInt(5, event.getTicketsSold());
             psSQL.setTimestamp(6, Timestamp.valueOf(event.getStartDateTime()));
             if (event.getEndDateTime() != null) {
@@ -320,7 +320,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
             psState.setString(1, event.getEventName());
             psState.setInt(2, event.getLocation().getID());
             psState.setString(3, event.getDescription());
-            psState.setInt(4, event.getTicketsRemaining());
+            psState.setInt(4, event.getTicketsTotal());
             psState.setInt(5, event.getTicketsSold());
             psState.setTimestamp(6, Timestamp.valueOf(event.getStartDateTime()));
             psState.setTimestamp(7, Timestamp.valueOf(event.getEndDateTime()));
@@ -402,7 +402,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
                 InputStream is = rsEvent.getBinaryStream("eventImage");
                 if (is != null) {
-                    eventImage = new Image(is, 250, 300, true, true);
+                    eventImage = new Image(is, 350, 400, true, true);
                 }
 
                 returnList.add(new Event(id, title, startTime, endTime, venue, ticketsSold, maxSeats, priceGroups, description, rbgColor, eventImage));

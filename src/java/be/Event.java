@@ -27,6 +27,7 @@ public class Event {
     private LocalDateTime endDateTime;
     private ObjectProperty<Venue> location;
     private int ticketsSold;
+    private int ticketsTotal;
     private int ticketsRemaining;
     private ListProperty<PriceGroup> priceGroupsList;
     private String description;
@@ -56,12 +57,12 @@ public class Event {
      * @param endDateTime
      * @param venue
      * @param ticketsSold
-     * @param ticketsRemaining
+     * @param ticketsTotal
      * @param priceGroupList
      * @param description
      * @param color
      */
-    public Event(int id, String eventName, LocalDateTime startDateTime, LocalDateTime endDateTime, Venue venue, int ticketsSold, int ticketsRemaining, ObservableList<PriceGroup> priceGroupList, String description, Color color, Image image) {
+    public Event(int id, String eventName, LocalDateTime startDateTime, LocalDateTime endDateTime, Venue venue, int ticketsSold, int ticketsTotal, ObservableList<PriceGroup> priceGroupList, String description, Color color, Image image) {
 
         this.id = id;
         this.eventName = new SimpleStringProperty();
@@ -73,7 +74,7 @@ public class Event {
         this.location.set(venue);
 
         this.ticketsSold = ticketsSold;
-        this.ticketsRemaining = ticketsRemaining;
+        this.ticketsTotal = ticketsTotal;
         this.priceGroupsList = new SimpleListProperty<>();
         this.priceGroupsList.set(priceGroupList);
         this.description = description;
@@ -199,12 +200,17 @@ public class Event {
         this.ticketsSold = ticketsSold;
     }
 
-    public int getTicketsRemaining() {
-        return ticketsRemaining;
+    public int getTicketsTotal() {
+        return ticketsTotal;
     }
 
-    public void setTicketsRemaining(int ticketsRemaining) {
-        this.ticketsRemaining = ticketsRemaining;
+    public void setTicketsTotal(int ticketsTotal) {
+        this.ticketsTotal = ticketsTotal;
+    }
+
+    public int getTicketsRemaining()
+    {
+        return getTicketsTotal() - getTicketsSold();
     }
 
     public ObservableList<PriceGroup> getPriceGroups() {
