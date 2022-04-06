@@ -1,13 +1,14 @@
 package be;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public class UserInfo
 {
     private int id;
 
 
-
+    private StringProperty nameProperty;
     private String name;
     private EUserType type;
     private int zipCode;
@@ -15,11 +16,15 @@ public class UserInfo
     public UserInfo(){}
 
     public UserInfo(int id, String name, EUserType type,int zipCode, String email) {
+        this.nameProperty = new SimpleStringProperty();
+
         this.id = id;
         this.name = name;
         this.type = type;
         this.zipCode = zipCode;
         this.email = email;
+
+        nameProperty.set(name);
     }
 
 
@@ -40,9 +45,9 @@ public class UserInfo
         return name;
     }
 
-    public SimpleStringProperty GetSimpleName()
+    public StringProperty getNameProperty()
     {
-        return new SimpleStringProperty(this.name);
+        return nameProperty;
     }
 
     public void setName(String name) {

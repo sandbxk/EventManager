@@ -79,8 +79,8 @@ public class CoordinatorController implements Initializable {
     @FXML public Button btnSearch;
     @FXML public TableView<UserInfo> tblViewAttendees;
     @FXML public TableColumn<UserInfo, String> tblClmAttFirstName;
-    @FXML public TableColumn tblClmAttLastName;
-    @FXML public TableColumn tblClmAttEmail;
+    @FXML public TableColumn<UserInfo, String> tblClmAttLastName;
+    @FXML public TableColumn<UserInfo, String> tblClmAttEmail;
     @FXML public TableColumn tblClmAttPhone;
     @FXML public TableColumn tblClmAttTicketGroup;
     @FXML public TableColumn tblClmAttTicketNo;
@@ -132,7 +132,8 @@ public class CoordinatorController implements Initializable {
         tblClmnGroupPrice.setCellValueFactory(param -> param.getValue().priceProperty());
         tblClmnGroupCurrency.setCellValueFactory(param -> param.getValue().currencyProperty());
 
-        tblClmAttFirstName.setCellValueFactory(param -> param.getValue().GetSimpleName());
+        tblClmAttFirstName.setCellValueFactory(param -> param.getValue().getNameProperty());
+        tblClmAttLastName.setCellValueFactory(param -> param.getValue().getNameProperty());
     }
 
     private void initEventListener() {
