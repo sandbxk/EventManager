@@ -50,7 +50,7 @@
              // integration
              message.setContent(multipart);
              // store file
-             message.writeTo(new FileOutputStream(new File("C:\\Users\\kaspe\\Desktop\\ " + to + ".eml")));
+             message.writeTo(new FileOutputStream(new File(".design/mails/" + to + ".eml")));
          } catch (MessagingException ex) {System.out.println("error");
          }
      }
