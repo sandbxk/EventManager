@@ -1,5 +1,7 @@
 package be;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class UserInfo
 {
     private int id;
@@ -36,6 +38,11 @@ public class UserInfo
 
     public String getName() {
         return name;
+    }
+
+    public SimpleStringProperty GetSimpleName()
+    {
+        return new SimpleStringProperty(this.name);
     }
 
     public void setName(String name) {

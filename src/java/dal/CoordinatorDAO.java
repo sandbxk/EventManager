@@ -704,7 +704,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
         return users;
     }
 
-    public Boolean addUserToEvent(UserInfo user, Event event) throws SQLServerException {
+    public Boolean addUserToEvent(UserInfo user, Event event) {
         String sql = "INSERT INTO userEvent (userID, eventID) VALUES (?, ?)";
 
         try (Connection connection = DBconnect.getConnection())

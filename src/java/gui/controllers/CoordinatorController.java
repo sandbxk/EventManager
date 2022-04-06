@@ -2,6 +2,7 @@ package gui.controllers;
 
 import be.Event;
 import be.PriceGroup;
+import be.UserInfo;
 import bll.DataManager;
 import bll.ExporterList;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -21,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -75,8 +77,8 @@ public class CoordinatorController implements Initializable {
 
     @FXML public TextField txtFieldSearch;
     @FXML public Button btnSearch;
-    @FXML public TableView tblViewAttendees;
-    @FXML public TableColumn tblClmAttFirstName;
+    @FXML public TableView<UserInfo> tblViewAttendees;
+    @FXML public TableColumn<UserInfo, String> tblClmAttFirstName;
     @FXML public TableColumn tblClmAttLastName;
     @FXML public TableColumn tblClmAttEmail;
     @FXML public TableColumn tblClmAttPhone;
@@ -130,7 +132,7 @@ public class CoordinatorController implements Initializable {
         tblClmnGroupPrice.setCellValueFactory(param -> param.getValue().priceProperty());
         tblClmnGroupCurrency.setCellValueFactory(param -> param.getValue().currencyProperty());
 
-
+        tblClmAttFirstName.setCellValueFactory(param -> param.getValue().GetSimpleName());
     }
 
     private void initEventListener() {
@@ -421,6 +423,7 @@ public class CoordinatorController implements Initializable {
     }
 
     public void onRemoveAttendee(ActionEvent event) {
+        DataManager.getInstance().removeUserFromEvent(tblViewAttendees.getSelectionModel().getSelectedItem(), selectedEvent.get());
     }
 
     /**

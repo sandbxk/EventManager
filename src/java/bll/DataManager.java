@@ -2,6 +2,7 @@ package bll;
 
 import be.Event;
 import be.PriceGroup;
+import be.UserInfo;
 import be.Venue;
 import dal.CoordinatorDAO;
 import javafx.beans.property.ObjectProperty;
@@ -202,6 +203,11 @@ public final class DataManager {
     public void createNewUser(String userName, String login, String password, String email)
     {
         database.createUser(userName, login, password, email);
+    }
+
+    public void removeUserFromEvent(UserInfo user, Event event)
+    {
+        database.removeUserFromEvent(user.getId(), event.getId());
     }
 }
 
