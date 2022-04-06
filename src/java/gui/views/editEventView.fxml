@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
@@ -18,7 +19,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.RadioButton?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="549.0" styleClass="background" stylesheets="@../styles/mainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.EditEventController">
     <center>
         <GridPane BorderPane.alignment="CENTER">
@@ -219,7 +219,7 @@
                                     <children>
                                         <HBox prefHeight="29.0" prefWidth="455.0">
                                             <children>
-                                                <Label prefHeight="34.0" prefWidth="124.0" styleClass="Text" text="Tickets remaining:  ">
+                                                <Label prefHeight="34.0" prefWidth="124.0" styleClass="Text" text="Tickets Total:  ">
                                                     <HBox.margin>
                                                         <Insets left="5.0" />
                                                     </HBox.margin>
@@ -229,7 +229,7 @@
                                         </HBox>
                                         <HBox prefHeight="9.0" prefWidth="305.0">
                                             <children>
-                                                <Label prefHeight="46.0" prefWidth="87.0" styleClass="Text" text="Tickets sold:  ">
+                                                <Label prefHeight="46.0" prefWidth="87.0" styleClass="Text" text="Tickets Sold:  ">
                                                     <HBox.margin>
                                                         <Insets left="5.0" />
                                                     </HBox.margin>
