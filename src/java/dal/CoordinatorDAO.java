@@ -283,9 +283,14 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
             }
             psSQL.setString(8, colour);
 
-            FileInputStream fileInputStream = new FileInputStream(event.getEventImage().getUrl());
-
-            psSQL.setBinaryStream(9, fileInputStream,fileInputStream.available());
+            if (event.getEventImage() != null)
+            {
+                FileInputStream fileInputStream = new FileInputStream(event.getEventImage().getUrl());
+                psSQL.setBinaryStream(9, fileInputStream, fileInputStream.available());
+            } else
+            {
+                psSQL.setNull(9, Types.BINARY);
+            }
 
             psSQL.execute();
 
@@ -320,13 +325,24 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
             psState.setTimestamp(6, Timestamp.valueOf(event.getStartDateTime()));
             psState.setTimestamp(7, Timestamp.valueOf(event.getEndDateTime()));
             psState.setString(8, colour);
-            psState.setNull(9, Types.BINARY);
+
+            if (event.getEventImage() != null)
+            {
+                FileInputStream fileInputStream = new FileInputStream(event.getEventImage().getUrl());
+                psState.setBinaryStream(9, fileInputStream, fileInputStream.available());
+            } else
+            {
+                psState.setNull(9, Types.BINARY);
+            }
+
             psState.setInt(10, event.getId());
 
             psState.execute();
 
-        } catch (SQLException e)
+        } catch (SQLException | FileNotFoundException e)
         {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -384,6 +400,10 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
 
                 Image eventImage = null;
 
+                InputStream is = rsEvent.getBinaryStream("eventImage");
+                if (is != null) {
+                    eventImage = new Image(is, 250, 300, true, true);
+                }
 
                 returnList.add(new Event(id, title, startTime, endTime, venue, ticketsSold, maxSeats, priceGroups, description, rbgColor, eventImage));
             }
