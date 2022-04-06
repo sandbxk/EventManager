@@ -133,7 +133,7 @@ public class CoordinatorController implements Initializable {
         tblClmnGroupCurrency.setCellValueFactory(param -> param.getValue().currencyProperty());
 
         tblClmAttFirstName.setCellValueFactory(param -> param.getValue().getNameProperty());
-        tblClmAttLastName.setCellValueFactory(param -> param.getValue().getNameProperty());
+        tblClmAttEmail.setCellValueFactory(param -> param.getValue().getEmailProperty());
     }
 
     private void initEventListener() {

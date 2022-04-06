@@ -1,5 +1,7 @@
 package be;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -8,7 +10,9 @@ public class UserInfo
     private int id;
 
 
+    private StringProperty emailProperty;
     private StringProperty nameProperty;
+    private IntegerProperty zipCodeProperty;
     private String name;
     private EUserType type;
     private int zipCode;
@@ -17,6 +21,8 @@ public class UserInfo
 
     public UserInfo(int id, String name, EUserType type,int zipCode, String email) {
         this.nameProperty = new SimpleStringProperty();
+        this.emailProperty = new SimpleStringProperty();
+        this.zipCodeProperty = new SimpleIntegerProperty();
 
         this.id = id;
         this.name = name;
@@ -25,6 +31,8 @@ public class UserInfo
         this.email = email;
 
         nameProperty.set(name);
+        emailProperty.set(email);
+        zipCodeProperty.set(zipCode);
     }
 
 
@@ -66,6 +74,8 @@ public class UserInfo
         return zipCode;
     }
 
+    public IntegerProperty getZipCodeProperty(){return zipCodeProperty;}
+
     public void setZipCode(int zipCode) {
         this.zipCode = zipCode;
     }
@@ -73,6 +83,8 @@ public class UserInfo
     public String getEmail() {
         return email;
     }
+
+    public StringProperty getEmailProperty(){ return emailProperty;}
 
     public void setEmail(String email) {
         this.email = email;
