@@ -2,6 +2,7 @@ package dal;
 
 import be.*;
 import be.Event;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
@@ -701,5 +702,21 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
             throwables.printStackTrace();
         }
         return users;
+    }
+
+    public Boolean addUserToEvent(UserInfo user, Event event) throws SQLServerException {
+        String sql = "INSERT INTO userEvent (userID, eventID) VALUES (?, ?)";
+
+        try (Connection connection = DBconnect.getConnection())
+        {
+            PreparedStatement psSQL =connection.prepareStatement(sql);
+            psSQL.setInt(1, user.getId());
+            psSQL.setInt(2,event.getId());
+
+            return psSQL.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
     }
 }
