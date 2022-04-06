@@ -2,7 +2,7 @@ package gui.controllers;
 
 import be.EUserType;
 import be.UserInfo;
-import dal.CoordinatorDAO;
+import dal.DAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -25,10 +25,10 @@ public class NewCoordinatorController {
     @FXML
     private Button btnCancel;
 
-    private CoordinatorDAO corDAO;
+    private DAO corDAO;
 
     public NewCoordinatorController() throws IOException {
-        corDAO = new CoordinatorDAO();
+        corDAO = new DAO();
     }
 
     public void handleSubmit(ActionEvent actionEvent) {

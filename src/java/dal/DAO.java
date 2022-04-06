@@ -14,11 +14,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
+public class DAO implements IUserCrudDAO<UserInfo> {
 
     private DBConnection DBconnect;
 
-    public CoordinatorDAO() {
+    public DAO() {
         try {
             DBconnect = new DBConnection();
         } catch (IOException e) {

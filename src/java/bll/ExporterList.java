@@ -3,7 +3,7 @@ package bll;
 import be.Event;
 import be.UserInfo;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
-import dal.CoordinatorDAO;
+import dal.DAO;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -15,7 +15,7 @@ public class ExporterList {
 
 
 public void createListOfAttendees(Event event) throws SQLServerException, IOException {
-    CoordinatorDAO CDAO = new CoordinatorDAO();
+    DAO CDAO = new DAO();
     FileWriter fl = new FileWriter(new File(".design/lister/"+ event.getEventName() +".txt"));
     List<UserInfo> users = new ArrayList<>();
     CDAO.getAttendeesFromEvent(event);

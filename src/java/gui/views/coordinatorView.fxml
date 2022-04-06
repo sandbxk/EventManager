@@ -148,9 +148,9 @@
                   </Label>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="panel" GridPane.rowIndex="1">
                      <top>
-                        <VBox prefHeight="164.0" prefWidth="324.0" BorderPane.alignment="CENTER">
+                        <VBox prefHeight="178.0" prefWidth="324.0" BorderPane.alignment="CENTER">
                            <children>
-                              <GridPane minHeight="50.0" prefHeight="95.0" prefWidth="324.0">
+                              <GridPane minHeight="50.0" prefHeight="106.0" prefWidth="324.0">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="257.0" />
                                 </columnConstraints>
@@ -158,20 +158,23 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <AnchorPane fx:id="imgDetailBackground" prefHeight="200.0" prefWidth="200.0" styleClass="imgViewDetailBackground">
+                                    <AnchorPane fx:id="imgDetailBackground" prefHeight="65.0" prefWidth="314.0" styleClass="imgViewDetailBackground">
                                        <GridPane.margin>
                                           <Insets left="5.0" right="5.0" top="5.0" />
                                        </GridPane.margin>
+                                       <children>
+                                          <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="314.0">
+                                             <children>
+                                                <ImageView fx:id="imgViewEvent" fitHeight="65.0" fitWidth="288.0" pickOnBounds="true" />
+                                             </children>
+                                          </HBox>
+                                       </children>
                                     </AnchorPane>
-                                    <ImageView fx:id="imgViewEvent" fitHeight="64.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
-                                       <GridPane.margin>
-                                          <Insets top="6.0" />
-                                       </GridPane.margin></ImageView>
                                  </children>
                               </GridPane>
                               <VBox prefHeight="118.0" prefWidth="324.0">
                                  <children>
-                                    <GridPane minHeight="30.0" minWidth="20.0" prefHeight="33.0" prefWidth="324.0">
+                                    <GridPane minHeight="24.0" minWidth="20.0" prefHeight="24.0" prefWidth="324.0">
                                        <columnConstraints>
                                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                                        </columnConstraints>
@@ -199,7 +202,7 @@
                                     </GridPane>
                                     <HBox prefHeight="24.0" prefWidth="277.0">
                                        <children>
-                                          <Label fx:id="lblEventDate" prefHeight="35.0" prefWidth="112.0" styleClass="InternalPanelSubHeading" text="Date">
+                                          <Label fx:id="lblEventDate" prefHeight="35.0" prefWidth="112.0" styleClass="InternalPanelSubHeading" text="Start Date">
                                              <padding>
                                                 <Insets left="5.0" />
                                              </padding>
@@ -218,6 +221,25 @@
                                        <VBox.margin>
                                           <Insets top="7.0" />
                                        </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="24.0" prefWidth="277.0">
+                                       <children>
+                                          <Label fx:id="lblEventDateEnd" prefHeight="35.0" prefWidth="112.0" styleClass="InternalPanelSubHeading" text="End Date">
+                                             <padding>
+                                                <Insets left="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label fx:id="lblEventDateSpacer1" prefHeight="35.0" prefWidth="22.0" styleClass="InternalPanelSubHeading" text=" | ">
+                                             <padding>
+                                                <Insets left="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label fx:id="lblEventTimeEnd" prefHeight="26.0" prefWidth="91.0" styleClass="InternalPanelSubHeading" text="00.00">
+                                             <padding>
+                                                <Insets left="5.0" />
+                                             </padding>
+                                          </Label>
+                                       </children>
                                     </HBox>
                                     <HBox prefHeight="21.0" prefWidth="277.0">
                                        <children>
@@ -315,7 +337,7 @@
                                           <Insets left="5.0" top="15.0" />
                                        </padding>
                                     </Label>
-                                    <TableView fx:id="tblViewTicketGroup" minHeight="-Infinity" minWidth="-Infinity" prefHeight="123.0" prefWidth="314.0">
+                                    <TableView fx:id="tblViewTicketGroup" minHeight="-Infinity" minWidth="-Infinity" prefHeight="128.0" prefWidth="314.0">
                                       <columns>
                                         <TableColumn fx:id="tblClmnGroupName" maxWidth="150.0" prefWidth="150.0" text="Tier" />
                                         <TableColumn fx:id="tblClmnGroupPrice" maxWidth="75.0" prefWidth="75.0" text="Price" />
@@ -400,7 +422,7 @@
                             <TableColumn fx:id="tblClmAttFirstName" editable="false" maxWidth="300.0" minWidth="-Infinity" prefWidth="300.0" text="First Name" />
                             <TableColumn fx:id="tblClmAttLastName" editable="false" maxWidth="160.0" minWidth="-Infinity" prefWidth="107.0" text="Last Name" visible="false" />
                               <TableColumn fx:id="tblClmAttEmail" editable="false" maxWidth="444.0" minWidth="-Infinity" prefWidth="389.0" text="Email" />
-                              <TableColumn fx:id="tblClmAttPhone" editable="false" maxWidth="200.0" minWidth="-Infinity" prefWidth="200.0" text="Phone" />
+                              <TableColumn fx:id="tblClmAttPhone" editable="false" maxWidth="200.0" minWidth="-Infinity" prefWidth="200.0" text="Phone" visible="false" />
                               <TableColumn fx:id="tblClmAttTicketGroup" editable="false" maxWidth="392.0" minWidth="-Infinity" prefWidth="283.0" text="Ticket Group" visible="false" />
                               <TableColumn fx:id="tblClmAttTicketNo" editable="false" maxWidth="588.0" minWidth="-Infinity" prefWidth="114.0" text="Ticket no." visible="false" />
                           </columns>

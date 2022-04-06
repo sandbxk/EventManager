@@ -4,7 +4,7 @@ import be.Event;
 import be.PriceGroup;
 import be.UserInfo;
 import be.Venue;
-import dal.CoordinatorDAO;
+import dal.DAO;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -14,7 +14,7 @@ import java.sql.SQLException;
 
 public final class DataManager {
 
-    private CoordinatorDAO database;
+    private DAO database;
 
     private static DataManager instance;
 
@@ -56,7 +56,7 @@ public final class DataManager {
         this.allVenues = FXCollections.observableArrayList();
         this.priceGroups = FXCollections.observableArrayList();
 
-        database = new CoordinatorDAO();
+        database = new DAO();
     }
 
     public static DataManager getInstance()
