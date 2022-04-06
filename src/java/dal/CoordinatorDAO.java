@@ -1,12 +1,13 @@
 package dal;
 
 import be.*;
+import be.Event;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
-import java.io.IOException;
+import java.io.*;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -281,7 +282,10 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
                 psSQL.setNull(7, Types.TIMESTAMP);
             }
             psSQL.setString(8, colour);
-            psSQL.setNull(9, Types.BINARY);
+
+            FileInputStream fileInputStream = new FileInputStream(event.getEventImage().getUrl());
+
+            psSQL.setBinaryStream(9, fileInputStream,fileInputStream.available());
 
             psSQL.execute();
 
