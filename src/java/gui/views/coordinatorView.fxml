@@ -368,7 +368,7 @@
                               <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <HBox prefHeight="53.0" prefWidth="642.0">
+                              <HBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="507.0">
                                  <children>
                                     <TextField fx:id="txtFieldSearch" prefHeight="26.0" prefWidth="344.0">
                                        <HBox.margin>

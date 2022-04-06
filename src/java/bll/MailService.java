@@ -26,12 +26,13 @@
          mailConnect = new MailConnector();
      }
 
-     public void sendMail(String to, String from, String subject, String body, List<File> attachments) throws MessagingException, IOException {
+     public void sendMail(String to, File attachments) throws MessagingException, IOException {
 
-
+         String subject = "welcome and thanks for buying this ticket";
+         String body = "please hold onto this ticket, since it is your ticket for a good time," + "\n" + "you can print the ticket out or just show it on your phone";
          try {
              Message message = new MimeMessage(Session.getInstance(System.getProperties()));
-             message.setFrom(new InternetAddress(from));
+             message.setFrom(new InternetAddress("ticketguru12@gmail.com"));
              message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
              message.setSubject(subject);
              // create the message part
@@ -41,27 +42,22 @@
              Multipart multipart = new MimeMultipart();
              multipart.addBodyPart(content);
              // add attachments
-             for(File file : attachments) {
                  MimeBodyPart attachment = new MimeBodyPart();
-                 DataSource source = new FileDataSource(file);        attachment.setDataHandler(new DataHandler(source));
-                 attachment.setFileName(file.getName());
+                 DataSource source = new FileDataSource(attachments);
+                 attachment.setDataHandler(new DataHandler(source));
+                 attachment.setFileName(attachments.getName());
                  multipart.addBodyPart(attachment);
-             }
              // integration
              message.setContent(multipart);
              // store file
-             message.writeTo(new FileOutputStream(new File("C:\\Users\\kaspe\\Desktop\\mail.eml")));
+             message.writeTo(new FileOutputStream(new File(".design/mails/" + to + ".eml")));
          } catch (MessagingException ex) {System.out.println("error");
          }
      }
 
      public static void main(String[] args) throws IOException, MessagingException {
          File file = new File(".design/ticketprint/A4 - 1.png");
-         List<File> files = new ArrayList<>();
-         files.add(file);
          MailService ms = new MailService();
-         ms.sendMail("Kasperpro9@gmail.com", "kasp441b@easv.dk", "just a little test", "test1", files);
-         Desktop.getDesktop().open(new File("C:\\Users\\kaspe\\Desktop\\mail.eml"));
-
+         ms.sendMail("Kasperpro9@gmail.com", file);
      }
  }
