@@ -22,7 +22,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -52,9 +51,13 @@ public class CoordinatorController implements Initializable {
     @FXML public AnchorPane imgDetailBackground;
     @FXML public ImageView imgViewEvent;
     @FXML public Button btnEventActions;
+    @FXML public Label lblEventStartDateLabel;
+    @FXML public Label lblEventDateEndLabel;
     @FXML public Label lblEventName;
-    @FXML public Label lblEventDate;
-    @FXML public Label lblEventTime;
+    @FXML public Label lblEventDateStart;
+    @FXML public Label lblEventDateEnd;
+    @FXML public Label lblEventTimeStart;
+    @FXML public Label lblEventTimeEnd;
     @FXML public Label lblEventVenue;
     @FXML public Label lblTotalTickets;
     @FXML public Label lblSoldTickets;
@@ -67,7 +70,10 @@ public class CoordinatorController implements Initializable {
 
     @Deprecated
     @FXML public ImageView imgViewTicketIcon;
-    @FXML public Label lblEventDateSpacer;
+    @FXML public Label lblEventDateSpacer1;
+    @FXML public Label lblEventDateSpacer2;
+    @FXML public Label lblEventDateSpacer3;
+    @FXML public Label lblEventDateSpacer4;
     @FXML public Label lblAtVenue;
     @FXML public Label lblDescriptionHeader;
     @FXML public Label lblRemaining;
@@ -164,8 +170,10 @@ public class CoordinatorController implements Initializable {
             imgViewEvent.setImage(newValue.getEventImage());
             imgDetailBackground.setStyle("-fx-background-color: rgb(" + newValue.getColor().getRed() * 255 + ", " + newValue.getColor().getGreen() * 255 + ", " + newValue.getColor().getBlue() * 255 + ");");
             lblEventName.setText(newValue.getEventName());
-            lblEventDate.setText(newValue.getStartDateTime().toLocalDate().toString());
-            lblEventTime.setText(newValue.getStartDateTime().toLocalTime().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)));
+            lblEventDateStart.setText(newValue.getStartDateTime().toLocalDate().toString());
+            lblEventDateEnd.setText(newValue.getEndDateTime().toLocalDate().toString());
+            lblEventTimeStart.setText(newValue.getStartDateTime().toLocalTime().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)));
+            lblEventTimeEnd.setText(newValue.getEndDateTime().toLocalTime().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)));
             lblEventVenue.setText(newValue.getLocation().getVenueName());
 
             txtAreaInfo.setText(newValue.getDescription());
@@ -202,9 +210,13 @@ public class CoordinatorController implements Initializable {
         KeyFrame op1 = new KeyFrame(Duration.millis(duration), new KeyValue(imgViewEvent.opacityProperty(), endValue));
         KeyFrame op2 = new KeyFrame(Duration.millis(duration), new KeyValue(imgDetailBackground.opacityProperty(), endValue));
         KeyFrame op3 = new KeyFrame(Duration.millis(duration), new KeyValue(lblEventName.opacityProperty(), endValue));
-        KeyFrame op4 = new KeyFrame(Duration.millis(duration), new KeyValue(lblEventDate.opacityProperty(), endValue));
-        KeyFrame op5 = new KeyFrame(Duration.millis(duration), new KeyValue(lblEventTime.opacityProperty(), endValue));
+        KeyFrame op4 = new KeyFrame(Duration.millis(duration), new KeyValue(lblEventDateStart.opacityProperty(), endValue));
+        KeyFrame op5 = new KeyFrame(Duration.millis(duration), new KeyValue(lblEventTimeStart.opacityProperty(), endValue));
+        KeyFrame op12 = new KeyFrame(Duration.millis(duration), new KeyValue(lblEventTimeEnd.opacityProperty(), endValue));
         KeyFrame op6 = new KeyFrame(Duration.millis(duration), new KeyValue(lblEventVenue.opacityProperty(), endValue));
+        KeyFrame op13 = new KeyFrame(Duration.millis(duration), new KeyValue(lblEventStartDateLabel.opacityProperty(), endValue));
+        KeyFrame op14= new KeyFrame(Duration.millis(duration), new KeyValue(lblEventDateEndLabel.opacityProperty(), endValue));
+        KeyFrame op15 = new KeyFrame(Duration.millis(duration), new KeyValue(lblEventDateEnd.opacityProperty(), endValue));
 
         KeyFrame op7 = new KeyFrame(Duration.millis(duration), new KeyValue(txtAreaInfo.opacityProperty(), endValue));
         KeyFrame op8 = new KeyFrame(Duration.millis(duration), new KeyValue(lblTotalTickets.opacityProperty(), endValue));
@@ -213,7 +225,10 @@ public class CoordinatorController implements Initializable {
 
         KeyFrame op10 = new KeyFrame(Duration.millis(duration), new KeyValue(tblViewTicketGroup.opacityProperty(), endValue));
 
-        KeyFrame opLbl1 = new KeyFrame(Duration.millis(duration), new KeyValue(lblEventDateSpacer.opacityProperty(), endValue));
+        KeyFrame opLbl11 = new KeyFrame(Duration.millis(duration), new KeyValue(lblEventDateSpacer1.opacityProperty(), endValue));
+        KeyFrame opLbl10 = new KeyFrame(Duration.millis(duration), new KeyValue(lblEventDateSpacer2.opacityProperty(), endValue));
+        KeyFrame opLbl9 = new KeyFrame(Duration.millis(duration), new KeyValue(lblEventDateSpacer3.opacityProperty(), endValue));
+        KeyFrame opLbl1 = new KeyFrame(Duration.millis(duration), new KeyValue(lblEventDateSpacer4.opacityProperty(), endValue));
         KeyFrame opLbl2 = new KeyFrame(Duration.millis(duration), new KeyValue(lblAtVenue.opacityProperty(), endValue));
         KeyFrame opLbl3 = new KeyFrame(Duration.millis(duration), new KeyValue(lblDescriptionHeader.opacityProperty(), endValue));
         KeyFrame opLbl4 = new KeyFrame(Duration.millis(duration), new KeyValue(lblRemaining.opacityProperty(), endValue));
@@ -224,7 +239,7 @@ public class CoordinatorController implements Initializable {
         KeyFrame opBtn8 = new KeyFrame(Duration.millis(duration), new KeyValue(btnEventActions.opacityProperty(), endValue));
 
 
-        timeline.getKeyFrames().addAll(op1, op2, op3, op4, op5, op6, op7, op8, op9, op10, op11, opLbl1, opLbl2, opLbl3, opLbl4, opLbl5, opLbl6, opLbl7, opImg7, opBtn8);
+        timeline.getKeyFrames().addAll(op1, op2, op3, op4, op5, op6, op7, op8, op9, op10, op11, op12, op13, op14, op15, opLbl1, opLbl2, opLbl3, opLbl4, opLbl5, opLbl6, opLbl7, opLbl9, opLbl10, opLbl11,opImg7, opBtn8);
 
         timeline.play();
     }
@@ -336,8 +351,9 @@ public class CoordinatorController implements Initializable {
         imgViewEvent.setImage(selectedEvent.get().getEventImage());
         imgDetailBackground.setStyle("-fx-background-color: rgb(" + selectedEvent.get().getColor().getRed() * 255 + ", " + selectedEvent.get().getColor().getGreen() * 255 + ", " + selectedEvent.get().getColor().getBlue() * 255 + ");");
         lblEventName.setText(selectedEvent.get().getEventName());
-        lblEventDate.setText(selectedEvent.get().getStartDateTime().toLocalDate().toString());
-        lblEventTime.setText(selectedEvent.get().getStartDateTime().toLocalTime().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)));
+        lblEventDateStart.setText(selectedEvent.get().getStartDateTime().toLocalDate().toString());
+        lblEventTimeStart.setText(selectedEvent.get().getStartDateTime().toLocalTime().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)));
+        lblEventTimeEnd.setText(selectedEvent.get().getEndDateTime().toLocalTime().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)));
         lblEventVenue.setText(selectedEvent.get().getLocation().getVenueName());
 
         txtAreaInfo.setText(selectedEvent.get().getDescription());

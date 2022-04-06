@@ -165,7 +165,7 @@
                                        <children>
                                           <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="314.0">
                                              <children>
-                                                <ImageView fx:id="imgViewEvent" fitHeight="65.0" fitWidth="288.0" pickOnBounds="true" />
+                                                <ImageView fx:id="imgViewEvent" fitHeight="66.0" fitWidth="288.0" pickOnBounds="true" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -202,17 +202,27 @@
                                     </GridPane>
                                     <HBox prefHeight="24.0" prefWidth="277.0">
                                        <children>
-                                          <Label fx:id="lblEventDate" prefHeight="35.0" prefWidth="112.0" styleClass="InternalPanelSubHeading" text="Start Date">
+                                          <Label fx:id="lblEventStartDateLabel" prefHeight="25.0" prefWidth="81.0" styleClass="InternalPanelSubHeading" text="Start Date">
                                              <padding>
                                                 <Insets left="5.0" />
                                              </padding>
                                           </Label>
-                                          <Label fx:id="lblEventDateSpacer" prefHeight="35.0" prefWidth="22.0" styleClass="InternalPanelSubHeading" text=" | ">
+                                          <Label fx:id="lblEventDateSpacer2" prefHeight="35.0" prefWidth="22.0" styleClass="InternalPanelSubHeading" text=" | ">
                                              <padding>
                                                 <Insets left="5.0" />
                                              </padding>
                                           </Label>
-                                          <Label fx:id="lblEventTime" prefHeight="26.0" prefWidth="91.0" styleClass="InternalPanelSubHeading" text="00.00">
+                                          <Label fx:id="lblEventDateStart" prefHeight="35.0" prefWidth="112.0" styleClass="InternalPanelSubHeading" text="Start Date">
+                                             <padding>
+                                                <Insets left="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label fx:id="lblEventDateSpacer1" prefHeight="35.0" prefWidth="22.0" styleClass="InternalPanelSubHeading" text=" | ">
+                                             <padding>
+                                                <Insets left="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label fx:id="lblEventTimeStart" prefHeight="26.0" prefWidth="91.0" styleClass="InternalPanelSubHeading" text="00.00">
                                              <padding>
                                                 <Insets left="5.0" />
                                              </padding>
@@ -224,12 +234,22 @@
                                     </HBox>
                                     <HBox prefHeight="24.0" prefWidth="277.0">
                                        <children>
+                                          <Label fx:id="lblEventDateEndLabel" prefHeight="25.0" prefWidth="81.0" styleClass="InternalPanelSubHeading" text="End Date">
+                                             <padding>
+                                                <Insets left="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label fx:id="lblEventDateSpacer3" prefHeight="35.0" prefWidth="22.0" styleClass="InternalPanelSubHeading" text=" | ">
+                                             <padding>
+                                                <Insets left="5.0" />
+                                             </padding>
+                                          </Label>
                                           <Label fx:id="lblEventDateEnd" prefHeight="35.0" prefWidth="112.0" styleClass="InternalPanelSubHeading" text="End Date">
                                              <padding>
                                                 <Insets left="5.0" />
                                              </padding>
                                           </Label>
-                                          <Label fx:id="lblEventDateSpacer1" prefHeight="35.0" prefWidth="22.0" styleClass="InternalPanelSubHeading" text=" | ">
+                                          <Label fx:id="lblEventDateSpacer4" prefHeight="35.0" prefWidth="22.0" styleClass="InternalPanelSubHeading" text=" | ">
                                              <padding>
                                                 <Insets left="5.0" />
                                              </padding>
@@ -337,7 +357,7 @@
                                           <Insets left="5.0" top="15.0" />
                                        </padding>
                                     </Label>
-                                    <TableView fx:id="tblViewTicketGroup" minHeight="-Infinity" minWidth="-Infinity" prefHeight="128.0" prefWidth="314.0">
+                                    <TableView fx:id="tblViewTicketGroup" minHeight="-Infinity" minWidth="-Infinity" prefHeight="95.0" prefWidth="314.0">
                                       <columns>
                                         <TableColumn fx:id="tblClmnGroupName" maxWidth="150.0" prefWidth="150.0" text="Tier" />
                                         <TableColumn fx:id="tblClmnGroupPrice" maxWidth="75.0" prefWidth="75.0" text="Price" />
