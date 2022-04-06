@@ -30,6 +30,7 @@ public class Event {
     private int ticketsTotal;
     private int ticketsRemaining;
     private ListProperty<PriceGroup> priceGroupsList;
+    private ListProperty<UserInfo> attendeesList;
     private String description;
     private Image eventImage;
     private Color color;
@@ -62,7 +63,7 @@ public class Event {
      * @param description
      * @param color
      */
-    public Event(int id, String eventName, LocalDateTime startDateTime, LocalDateTime endDateTime, Venue venue, int ticketsSold, int ticketsTotal, ObservableList<PriceGroup> priceGroupList, String description, Color color, Image image) {
+    public Event(int id, String eventName, LocalDateTime startDateTime, LocalDateTime endDateTime, Venue venue, int ticketsSold, int ticketsTotal, ObservableList<PriceGroup> priceGroupList, String description, Color color, Image image, ObservableList<UserInfo> attendeesList) {
 
         this.id = id;
         this.eventName = new SimpleStringProperty();
@@ -77,6 +78,8 @@ public class Event {
         this.ticketsTotal = ticketsTotal;
         this.priceGroupsList = new SimpleListProperty<>();
         this.priceGroupsList.set(priceGroupList);
+        this.attendeesList = new SimpleListProperty<>();
+        this.attendeesList.set(attendeesList);
         this.description = description;
 
         initImageAndColor(image, color);
@@ -212,6 +215,14 @@ public class Event {
     {
         return getTicketsTotal() - getTicketsSold();
     }
+
+    public ObservableList<UserInfo> getAttendeesList() {return this.attendeesList.get();};
+
+    public void setAttendeesList(ObservableList<UserInfo> list){this.attendeesList.set(list);}
+
+    public void addAttendee(UserInfo user){this.attendeesList.get().add(user);}
+
+    public void removeAttendee(UserInfo user){this.attendeesList.get().remove(user);}
 
     public ObservableList<PriceGroup> getPriceGroups() {
         return this.priceGroupsList.get();

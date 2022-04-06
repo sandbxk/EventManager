@@ -174,7 +174,7 @@ public class CoordinatorController implements Initializable {
             tblViewTicketGroup.setItems(newValue.getPriceGroups());
             hideDetailsPanelComponents(false);
 
-            //tblViewAttendees.setItems();
+            tblViewAttendees.setItems(newValue.getAttendeesList());
 
             //TODO: tblview Attendees
         });
@@ -185,6 +185,7 @@ public class CoordinatorController implements Initializable {
      *
      * @param hidden
      */
+
     private void hideDetailsPanelComponents(boolean hidden) {
         Timeline timeline = new Timeline();
         int endValue = 0;

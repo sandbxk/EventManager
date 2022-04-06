@@ -320,7 +320,7 @@ public class NewEventController implements Initializable {
             Object[] imageAndColor = saveImageAndColor();
 
 
-            Event newEvent = new Event(id, name, times[0], times[1], venue, ticketSold, ticketsRemaining, priceGroups, description, (Color) imageAndColor[0], (Image) imageAndColor[1]);
+            Event newEvent = new Event(id, name, times[0], times[1], venue, ticketSold, ticketsRemaining, priceGroups, description, (Color) imageAndColor[0], (Image) imageAndColor[1], null);
             DataManager.getInstance().newEvent(newEvent);
 
 

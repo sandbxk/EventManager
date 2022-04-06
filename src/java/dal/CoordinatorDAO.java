@@ -405,7 +405,9 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
                     eventImage = new Image(is, 350, 400, true, true);
                 }
 
-                returnList.add(new Event(id, title, startTime, endTime, venue, ticketsSold, maxSeats, priceGroups, description, rbgColor, eventImage));
+                ObservableList<UserInfo> attendeesList = getUsersForEvent(id);
+
+                returnList.add(new Event(id, title, startTime, endTime, venue, ticketsSold, maxSeats, priceGroups, description, rbgColor, eventImage, attendeesList));
             }
             return returnList;
         } catch (SQLException e) {
