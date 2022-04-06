@@ -283,7 +283,7 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
             }
             psSQL.setString(8, colour);
 
-            if (event.getEventImage() != null)
+            if (event.getEventName() != null)
             {
                 FileInputStream fileInputStream = new FileInputStream(event.getEventImage().getUrl());
                 psSQL.setBinaryStream(9, fileInputStream, fileInputStream.available());
