@@ -695,7 +695,6 @@ public class CoordinatorDAO implements IUserCrudDAO<UserInfo> {
                 String name = rsUser.getString("userName");
                 String email = rsUser.getString("email");
                 UserInfo user = new UserInfo(id,name, EUserType.END_USER);
-                user.setEmail(email);
                 users.add(user);
             }
         } catch (SQLException throwables) {
