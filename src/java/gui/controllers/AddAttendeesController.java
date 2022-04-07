@@ -1,11 +1,9 @@
 package gui.controllers;
 
-import be.Event;
 import be.PriceGroup;
 import be.UserInfo;
 import bll.DataManager;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,8 +12,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
+import javax.xml.crypto.Data;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -52,18 +53,32 @@ public class AddAttendeesController implements Initializable {
 
     public void initEventListeners()
     {
-        tblClmAttName.setCellValueFactory(new PropertyValueFactory<UserInfo, String>("nameProperty"));
-
-        clmAddedUserName.setCellValueFactory(new PropertyValueFactory<UserInfo, String>("nameProperty"));
+        tblClmAttName.setCellValueFactory(new PropertyValueFactory<>("nameProperty"));
+        clmAddedUserName.setCellValueFactory(new PropertyValueFactory<>("nameProperty"));
     }
+
+    /**
+     * Saves the list of people to add to an event and closes the menu, or closes the menu without saving.
+     */
 
     public void onSaveNewAttendee(ActionEvent actionEvent)
     {
+        //TODO Save list and add users to database for the selected event.
+        DataManager.getInstance().addUserToEvent(tblAddedUsers, DataManager.getInstance().getSelectedEvent());
+
+        Stage stage = (Stage) btnAttendeeCancel.getScene().getWindow();
+        stage.close();
     }
 
     public void onCancelAddAttendee(ActionEvent actionEvent)
     {
-    }
+        Stage stage = (Stage) btnAttendeeCancel.getScene().getWindow();
+        stage.close();
+     }
+
+    /**
+     * Adds/Removes Users from the tableViews.
+     */
 
     public void addAttendeeToList(ActionEvent actionEvent)
     {
@@ -80,7 +95,12 @@ public class AddAttendeesController implements Initializable {
 
         if(selection != null)
         {
-            tblAddedUsers.getItems().remove(UserInfo);
+            tblAddedUsers.getItems().remove(selection);
         }
     }
+
+    /**
+     * Methods
+     */
+
 }

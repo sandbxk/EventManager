@@ -608,7 +608,7 @@ public class DAO implements IUserCrudDAO<UserInfo> {
         }
     }
 
-    public void addUserToEvent(int userID, int eventID)
+    public void addUserToEvent(List<UserInfo> userList, int eventID)
     {
         String sql = """
                 INSERT INTO userEvent (userID, eventID)
@@ -619,10 +619,14 @@ public class DAO implements IUserCrudDAO<UserInfo> {
         {
             PreparedStatement psState = connection.prepareStatement(sql);
 
-            psState.setInt(1, userID);
-            psState.setInt(2, eventID);
+            for (UserInfo user: userList) {
+                psState.setInt(1, user.getId());
+                psState.setInt(2, eventID);
 
-            psState.execute();
+                psState.addBatch();
+            }
+
+            psState.executeBatch();
 
         } catch (SQLException e)
         {

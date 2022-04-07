@@ -9,8 +9,11 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TableView;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class DataManager {
 
@@ -198,6 +201,12 @@ public final class DataManager {
 
     public void setSelectedVenue(Venue venue) {
         this.selectedVenue = venue;
+    }
+
+    public void addUserToEvent(TableView<UserInfo> tableView, Event event)
+    {
+        List<UserInfo> userList = tableView.getItems();
+         database.addUserToEvent(userList, event.getId());
     }
 
     public ObservableList<UserInfo> getAllUsers()
