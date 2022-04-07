@@ -50,8 +50,8 @@ public class AddAttendeesController implements Initializable {
 
     public void initEventListeners()
     {
-        tblClmAttName.setCellValueFactory(new PropertyValueFactory<>("nameProperty"));
-        clmAddedUserName.setCellValueFactory(new PropertyValueFactory<>("nameProperty"));
+        tblClmAttName.setCellValueFactory(param -> param.getValue().getNameProperty());
+        clmAddedUserName.setCellValueFactory(param -> param.getValue().getNameProperty());
 
         //Wrap ObservableList of UserInfo in a FilteredList.
         FilteredList<UserInfo> filteredData = new FilteredList<>(DataManager.getInstance().getAllUsers(), b -> true);

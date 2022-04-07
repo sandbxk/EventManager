@@ -448,6 +448,8 @@ public class CoordinatorController implements Initializable {
 
     public void onRemoveAttendee(ActionEvent event) {
         DataManager.getInstance().removeUserFromEvent(tblViewAttendees.getSelectionModel().getSelectedItem(), selectedEvent.get());
+
+        tblViewAttendees.setItems(selectedEvent.get().getAttendeesList());
     }
 
     /**
@@ -504,19 +506,18 @@ public class CoordinatorController implements Initializable {
     public void onSaveAttendeesList(ActionEvent event) throws SQLServerException, IOException {
         if (selectedEvent.get() != null) {
             expoList.createListOfAttendees(selectedEvent.get());
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "A list has been made");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "A list has been made.");
             alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
             alert.show();
         } else {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Please select an event");
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please select an event.");
             alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
             alert.show();
         }
     }
 
     /**
-     * Opens the Add Attendees menu.
-     *
+     * Opens the Add Attendees menu if event is selected, else warns that an event must be selected.
      */
     public void btnAddAttendeesMenu(ActionEvent actionEvent)
     {
@@ -534,6 +535,10 @@ public class CoordinatorController implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please select an event.");
+            alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
+            alert.show();
         }
         else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Please select an event");
