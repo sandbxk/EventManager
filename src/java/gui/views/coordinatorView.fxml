@@ -457,7 +457,7 @@
                      <bottom>
                         <AnchorPane prefHeight="60.0" prefWidth="642.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button layoutX="22.0" layoutY="14.0" maxHeight="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="128.0" style="-fx-font-size: 16;" styleClass="actionButton" text="Add attendee" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="10.0" />
+                              <Button fx:id="btnAddAttendees" layoutX="22.0" layoutY="14.0" maxHeight="43.0" mnemonicParsing="false" onAction="#btnAddAttendeesMenu" prefHeight="43.0" prefWidth="128.0" style="-fx-font-size: 16;" styleClass="actionButton" text="Add attendee" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="10.0" />
                               <AnchorPane fx:id="anchorPaneAttendeeMenu" layoutX="143.0" layoutY="9.0" prefHeight="43.0" prefWidth="487.0" styleClass="actionPane" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="143.0">
                                  <children>
                                     <Button fx:id="btnDLTicket" layoutX="136.0" layoutY="9.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#onDownloadTicket" prefHeight="30.0" prefWidth="119.0" styleClass="baseMenuButton" text="Download Ticket" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="142.0" />

@@ -636,7 +636,7 @@ public class DAO implements IUserCrudDAO<UserInfo> {
                 EUserType userType;
 
                 int userID = resSet.getInt("id");
-                String name = resSet.getString("loginName");
+                String name = resSet.getString("userName");
                 if (resSet.getInt("userAuth") == 1 )
                 {
                     userType = EUserType.EVENT_COORDINATOR;

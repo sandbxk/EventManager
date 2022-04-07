@@ -238,8 +238,10 @@ public class CoordinatorController implements Initializable {
         KeyFrame opImg7 = new KeyFrame(Duration.millis(duration), new KeyValue(imgViewTicketIcon.opacityProperty(), endValue));
         KeyFrame opBtn8 = new KeyFrame(Duration.millis(duration), new KeyValue(btnEventActions.opacityProperty(), endValue));
 
+        KeyFrame tbl1 = new KeyFrame(Duration.millis(duration), new KeyValue(tblViewAttendees.opacityProperty(), endValue));
 
-        timeline.getKeyFrames().addAll(op1, op2, op3, op4, op5, op6, op7, op8, op9, op10, op11, op12, op13, op14, op15, opLbl1, opLbl2, opLbl3, opLbl4, opLbl5, opLbl6, opLbl7, opLbl9, opLbl10, opLbl11,opImg7, opBtn8);
+
+        timeline.getKeyFrames().addAll(op1, op2, op3, op4, op5, op6, op7, op8, op9, op10, op11, op12, op13, op14, op15, opLbl1, opLbl2, opLbl3, opLbl4, opLbl5, opLbl6, opLbl7, opLbl9, opLbl10, opLbl11,opImg7, opBtn8, tbl1);
 
         timeline.play();
     }
@@ -504,6 +506,22 @@ public class CoordinatorController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.WARNING, "please select an event");
             alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
             alert.show();
+        }
+    }
+
+    public void btnAddAttendeesMenu(ActionEvent actionEvent)
+    {
+        Parent root = null;
+        Stage stage = new Stage();
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gui/views/addAttendee.fxml")));
+            stage.setTitle("Add Attendee");
+            stage.setMinWidth(511);
+            stage.setMinHeight(737);
+            stage.setScene(new Scene(root, 849, 650));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
