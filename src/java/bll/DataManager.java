@@ -200,6 +200,11 @@ public final class DataManager {
         this.selectedVenue = venue;
     }
 
+    public ObservableList<UserInfo> getAllUsers()
+    {
+        return database.getAllUsers();
+    }
+
     public void createNewUser(String userName, String login, String password, String email)
     {
         database.createUser(userName, login, password, email);
