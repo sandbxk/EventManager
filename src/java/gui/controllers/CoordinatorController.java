@@ -351,7 +351,12 @@ public class CoordinatorController implements Initializable {
      */
     private void updateEventDetail() {
         imgViewEvent.setImage(selectedEvent.get().getEventImage());
-        imgDetailBackground.setStyle("-fx-background-color: rgb(" + selectedEvent.get().getColor().getRed() * 255 + ", " + selectedEvent.get().getColor().getGreen() * 255 + ", " + selectedEvent.get().getColor().getBlue() * 255 + ");");
+        if (!selectedEvent.get().hasImage()) {
+            imgDetailBackground.setStyle("-fx-background-color: rgb(" + selectedEvent.get().getColor().getRed() * 255 + ", " + selectedEvent.get().getColor().getGreen() * 255 + ", " + selectedEvent.get().getColor().getBlue() * 255 + ");");
+        }
+        else {
+            imgDetailBackground.setStyle("-fx-background-color: #b2da41;");
+        }
         lblEventName.setText(selectedEvent.get().getEventName());
         lblEventDateStart.setText(selectedEvent.get().getStartDateTime().toLocalDate().toString());
         lblEventTimeStart.setText(selectedEvent.get().getStartDateTime().toLocalTime().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)));
@@ -529,6 +534,11 @@ public class CoordinatorController implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Please select an event");
+            alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
+            alert.show();
         }
     }
 }

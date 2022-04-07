@@ -92,7 +92,12 @@ public class Event {
         node.setOnAction(event -> DataManager.getInstance().setSelectedEvent(this));
 
         //Event Node init
-        imgViewContainer.setStyle("-fx-background-color: rgb(" + color.getRed()*255 + ", " + color.getGreen()*255 + ", " + color.getBlue()*255 + ");");
+        if (!hasImage) {
+            imgViewContainer.setStyle("-fx-background-color: rgb(" + color.getRed()*255 + ", " + color.getGreen()*255 + ", " + color.getBlue()*255 + ");");
+        }
+        else {
+            imgViewContainer.setStyle("-fx-background-color: #b2da41 ");
+        }
         Rectangle clip = new Rectangle(imgViewBanner.getFitWidth(), imgViewBanner.getFitHeight());
         clip.setArcHeight(9);
         clip.setArcWidth(9);
@@ -270,7 +275,7 @@ public class Event {
         this.imgViewContainer.setStyle("-fx-background-color: rgb(" + color.getRed()*255 + ", " + color.getGreen()*255 + ", " + color.getBlue()*255 + ");");
     }
 
-    public boolean HasImage() {
+    public boolean hasImage() {
         return hasImage;
     }
 

@@ -2,7 +2,6 @@ package dal;
 
 import be.*;
 import be.Event;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
@@ -327,7 +326,7 @@ public class DAO implements IUserCrudDAO<UserInfo> {
             psState.setTimestamp(7, Timestamp.valueOf(event.getEndDateTime()));
             psState.setString(8, colour);
 
-            if (event.HasImage())
+            if (event.hasImage())
             {
                 FileInputStream fileInputStream = new FileInputStream(event.getEventImage().getUrl());
                 psState.setBinaryStream(9, fileInputStream, fileInputStream.available());
