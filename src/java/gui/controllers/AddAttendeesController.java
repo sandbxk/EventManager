@@ -3,24 +3,22 @@ package gui.controllers;
 import be.PriceGroup;
 import be.UserInfo;
 import bll.DataManager;
-import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import javax.xml.crypto.Data;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 
 public class AddAttendeesController implements Initializable {
+
+    @FXML public TextField txtUserSearch;
 
     @FXML public TableView<UserInfo> tblAllUsersTable;
     @FXML public TableColumn<UserInfo, String> tblClmAttName;
@@ -48,13 +46,42 @@ public class AddAttendeesController implements Initializable {
 
     public void initTableViews()
     {
-        tblAllUsersTable.setItems(DataManager.getInstance().getAllUsers());
     }
 
     public void initEventListeners()
     {
         tblClmAttName.setCellValueFactory(new PropertyValueFactory<>("nameProperty"));
         clmAddedUserName.setCellValueFactory(new PropertyValueFactory<>("nameProperty"));
+
+        //Wrap ObservableList of UserInfo in a FilteredList.
+        FilteredList<UserInfo> filteredData = new FilteredList<>(DataManager.getInstance().getAllUsers(), b -> true);
+
+        //Sets the filter predict when filter changes.
+        txtUserSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(user -> {
+
+                //If filter is empty, display all users.
+                if (newValue == null || newValue.isEmpty())
+                {
+                    return true;
+                }
+
+                //Compare user name with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (user.getName().toLowerCase().indexOf(lowerCaseFilter) != -1)
+                {
+                    return true;
+                } else return false;
+
+            });
+        });
+
+        SortedList<UserInfo> sortedUsers = new SortedList<>(filteredData);
+
+        sortedUsers.comparatorProperty().bind(tblAllUsersTable.comparatorProperty());
+
+        tblAllUsersTable.setItems(sortedUsers);
     }
 
     /**
