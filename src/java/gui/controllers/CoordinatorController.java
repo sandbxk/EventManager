@@ -515,17 +515,20 @@ public class CoordinatorController implements Initializable {
      */
     public void btnAddAttendeesMenu(ActionEvent actionEvent)
     {
-        Parent root = null;
-        Stage stage = new Stage();
-        try {
-            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gui/views/addAttendees.fxml")));
-            stage.setTitle("Add Attendee");
-            stage.setMinWidth(511);
-            stage.setMinHeight(737);
-            stage.setScene(new Scene(root, 849, 650));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (DataManager.getInstance().getSelectedEvent() != null)
+        {
+            Parent root = null;
+            Stage stage = new Stage();
+            try {
+                root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gui/views/addAttendees.fxml")));
+                stage.setTitle("Add Attendees");
+                stage.setMinWidth(511);
+                stage.setMinHeight(737);
+                stage.setScene(new Scene(root, 849, 650));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
