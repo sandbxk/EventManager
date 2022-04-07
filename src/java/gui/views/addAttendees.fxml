@@ -28,9 +28,9 @@
             </BorderPane>
             <VBox alignment="CENTER" prefHeight="521.0" prefWidth="55.0">
                <children>
-                  <Button fx:id="btnAddUser" mnemonicParsing="false" prefHeight="34.0" prefWidth="34.0" text="Button" />
+                  <Button fx:id="btnAddUser" mnemonicParsing="false" onAction="#addAttendeeToList" prefHeight="34.0" prefWidth="34.0" text="Button" />
                   <AnchorPane prefHeight="75.0" prefWidth="34.0" />
-                  <Button fx:id="btnRemoveUser" mnemonicParsing="false" prefHeight="34.0" prefWidth="34.0" text="Button" />
+                  <Button fx:id="btnRemoveUser" mnemonicParsing="false" onAction="#removeAttendeeFromList" prefHeight="34.0" prefWidth="34.0" text="Button" />
                </children>
             </VBox>
             <BorderPane prefHeight="521.0" prefWidth="332.0" styleClass="panel">

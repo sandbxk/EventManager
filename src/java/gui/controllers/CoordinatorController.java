@@ -518,7 +518,7 @@ public class CoordinatorController implements Initializable {
         Parent root = null;
         Stage stage = new Stage();
         try {
-            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gui/views/addAttendee.fxml")));
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gui/views/addAttendees.fxml")));
             stage.setTitle("Add Attendee");
             stage.setMinWidth(511);
             stage.setMinHeight(737);

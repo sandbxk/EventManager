@@ -574,7 +574,7 @@ public class DAO implements IUserCrudDAO<UserInfo> {
         ObservableList<UserInfo> returnList = FXCollections.observableArrayList();
 
         String sql = """
-                    SELECT * FROM userEvent
+                    SELECT * FROM userTable
                      """;
 
         try (Connection connection = DBconnect.getConnection())
