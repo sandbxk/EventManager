@@ -5,6 +5,7 @@ import be.PriceGroup;
 import be.UserInfo;
 import bll.DataManager;
 import bll.ExporterList;
+import bll.Search;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -106,6 +107,7 @@ public class CoordinatorController implements Initializable {
     private ContextMenu signOutMenu;
     private BooleanProperty showingAddress;
     private ExporterList expoList;
+    private Search searcher;
 
 
     public CoordinatorController() {
@@ -114,6 +116,7 @@ public class CoordinatorController implements Initializable {
         showingAddress = new SimpleBooleanProperty();
         showingAddress.set(false);
         expoList = new ExporterList();
+        searcher = new Search();
 
 
     }
@@ -540,5 +543,11 @@ public class CoordinatorController implements Initializable {
             alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
             alert.show();
         }
+    }
+
+    public void updateList(ActionEvent actionEvent) {
+        selectedEvent.get().setAttendeesList((ObservableList<UserInfo>) searcher.search(selectedEvent.get().getAttendeesList(), txtFieldSearch.getText()));
+        updateEventDetail();
+        tblViewAttendees.refresh();
     }
 }
