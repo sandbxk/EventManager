@@ -16,6 +16,8 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -190,7 +192,38 @@ public class CoordinatorController implements Initializable {
 
             tblViewAttendees.setItems(newValue.getAttendeesList());
 
-            //TODO: tblview Attendees
+            /**
+             *
+             */
+            //Wrap ObservableList of UserInfo in a FilteredList.
+            FilteredList<UserInfo> filteredData = new FilteredList<>(DataManager.getInstance().getAllUsers(), b -> true);
+
+            //Sets the filter predict when filter changes.
+            txtFieldSearch.textProperty().addListener((observable1, oldValue1, newValue1) -> {
+                filteredData.setPredicate(user -> {
+
+                    //If filter is empty, display all users.
+                    if (newValue1 == null || newValue1.isEmpty())
+                    {
+                        return true;
+                    }
+
+                    //Compare user name with filter text.
+                    String lowerCaseFilter = newValue1.toLowerCase();
+
+                    if (user.getName().toLowerCase().indexOf(lowerCaseFilter) != -1)
+                    {
+                        return true;
+                    } else return false;
+
+                });
+            });
+
+            SortedList<UserInfo> sortedUsers = new SortedList<>(filteredData);
+
+            sortedUsers.comparatorProperty().bind(tblViewAttendees.comparatorProperty());
+
+            tblViewAttendees.setItems(sortedUsers);
         });
     }
 

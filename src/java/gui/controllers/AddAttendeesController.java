@@ -1,8 +1,11 @@
 package gui.controllers;
 
+import be.Event;
 import be.PriceGroup;
 import be.UserInfo;
 import bll.DataManager;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
@@ -42,6 +45,7 @@ public class AddAttendeesController implements Initializable {
     {
         initTableViews();
         initEventListeners();
+
     }
 
     public void initTableViews()
@@ -129,5 +133,10 @@ public class AddAttendeesController implements Initializable {
     /**
      * Methods
      */
+
+    public void updateAttendeesList()
+    {
+        DataManager.getInstance().getSelectedEvent().setAttendeesList(DataManager.getInstance().getUsersForEvent(DataManager.getInstance().getSelectedEvent()));
+    }
 
 }

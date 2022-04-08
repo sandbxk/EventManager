@@ -223,5 +223,10 @@ public final class DataManager {
     {
         database.removeUserFromEvent(user.getId(), event.getId());
     }
+
+    public ObservableList<UserInfo> getUsersForEvent(Event event)
+    {
+        return database.getUsersForEvent(event.getId());
+    }
 }
 
