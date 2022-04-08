@@ -283,7 +283,7 @@ public class DAO implements IUserCrudDAO<UserInfo> {
             }
             psSQL.setString(8, colour);
 
-            if (event.getEventName() != null)
+            if (event.hasImage() == true)
             {
                 FileInputStream fileInputStream = new FileInputStream(event.getEventImage().getUrl());
                 psSQL.setBinaryStream(9, fileInputStream, fileInputStream.available());
