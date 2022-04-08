@@ -19,11 +19,9 @@ CREATE TABLE cityName (
 CREATE TABLE userTable (
     id INT IDENTITY(1,1) NOT NULL,
     userName VARCHAR(50),
-    loginName VARCHAR(50),
-    loginPass VARCHAR(50),
-	email VARCHAR(50) UNIQUE,
+    num VARCHAR(11)
+	email VARCHAR(50),
     zipCode VARCHAR(255),
-    userAuth INT,
     PRIMARY KEY (id),
     FOREIGN KEY (zipCode) REFERENCES cityName (zipCode)
 )
