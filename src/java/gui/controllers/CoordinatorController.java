@@ -540,10 +540,5 @@ public class CoordinatorController implements Initializable {
             alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
             alert.show();
         }
-        else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Please select an event");
-            alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
-            alert.show();
-        }
     }
 }
