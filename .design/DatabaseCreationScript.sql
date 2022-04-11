@@ -16,19 +16,6 @@ CREATE TABLE cityName (
     PRIMARY KEY (zipCode)
 )
 
-CREATE TABLE userTable (
-    id INT IDENTITY(1,1) NOT NULL,
-    userName VARCHAR(50),
-    loginName VARCHAR(50),
-    loginPass VARCHAR(50),
-	email VARCHAR(50) UNIQUE,
-    zipCode VARCHAR(255),
-    userAuth INT,
-    PRIMARY KEY (id),
-    FOREIGN KEY (zipCode) REFERENCES cityName (zipCode)
-)
-
-
 CREATE TABLE venue (
     id INT IDENTITY(1,1) NOT NULL,
     venueName VARCHAR(255),
@@ -53,26 +40,27 @@ CREATE TABLE events (
     FOREIGN KEY (venueID) REFERENCES venue (id)
 )
 
-CREATE TABLE userEvent (
-    userID INT, 
-    eventID INT,
-    FOREIGN KEY (userID) REFERENCES userTable (id),
-    FOREIGN KEY (eventID) REFERENCES events (id),
-    PRIMARY KEY (userID, eventID)
+CREATE TABLE userTable (
+    id INT IDENTITY(1,1) NOT NULL,
+    userName VARCHAR(50),
+    loginName VARCHAR(50),
+    loginPass VARCHAR(50),
+	email VARCHAR(50),
+    zipCode VARCHAR(255),
+	eventID INT,
+    PRIMARY KEY (id),
+    FOREIGN KEY (zipCode) REFERENCES cityName (zipCode),
+	FOREIGN KEY (eventID) REFERENCES events (id)
 )
 
-CREATE TABLE images (
-	id INT IDENTITY(1,1) NOT NULL,
-	imageURL VARCHAR(255) UNIQUE,
-	PRIMARY KEY (id)
-)
-
-CREATE TABLE eventImages (
-	eventid INT IDENTITY(1,1) NOT NULL,
-	imageid INT,
-	FOREIGN KEY (imageid) REFERENCES images (id),
+CREATE TABLE userTickets (
+	userID INT,
+	eventID INT,
+	priceID INT,
+	FOREIGN KEY (userID) REFERENCES userTable (id),
 	FOREIGN KEY (eventid) REFERENCES events (id),
-	PRIMARY KEY (eventid, imageid)
+	FOREIGN KEY (priceID) REFERENCES priceEvent (id),
+	PRIMARY KEY (userID, eventID, priceID)
 )
 
 CREATE TABLE priceEvent (
