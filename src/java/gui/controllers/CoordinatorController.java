@@ -391,7 +391,7 @@ public class CoordinatorController implements Initializable {
             imgDetailBackground.setStyle("-fx-background-color: rgb(" + selectedEvent.get().getColor().getRed() * 255 + ", " + selectedEvent.get().getColor().getGreen() * 255 + ", " + selectedEvent.get().getColor().getBlue() * 255 + ");");
         }
         else {
-            imgDetailBackground.setStyle("-fx-background-color: #b2da41;");
+            imgDetailBackground.setStyle("-fx-background-color: #CBA189;;");
         }
         lblEventName.setText(selectedEvent.get().getEventName());
         lblEventDateStart.setText(selectedEvent.get().getStartDateTime().toLocalDate().toString());
