@@ -2,7 +2,6 @@ package dal;
 
 import be.*;
 import be.Event;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
@@ -284,7 +283,7 @@ public class DAO implements IUserCrudDAO<UserInfo> {
             }
             psSQL.setString(8, colour);
 
-            if (event.getEventName() != null)
+            if (event.hasImage() == true)
             {
                 FileInputStream fileInputStream = new FileInputStream(event.getEventImage().getUrl());
                 psSQL.setBinaryStream(9, fileInputStream, fileInputStream.available());
@@ -327,7 +326,7 @@ public class DAO implements IUserCrudDAO<UserInfo> {
             psState.setTimestamp(7, Timestamp.valueOf(event.getEndDateTime()));
             psState.setString(8, colour);
 
-            if (event.HasImage())
+            if (event.hasImage())
             {
                 FileInputStream fileInputStream = new FileInputStream(event.getEventImage().getUrl());
                 psState.setBinaryStream(9, fileInputStream, fileInputStream.available());
@@ -569,7 +568,46 @@ public class DAO implements IUserCrudDAO<UserInfo> {
      * Deleters, readers, setters and getters for users.
      */
 
-    public void addUserToEvent(int userID, int eventID)
+    public ObservableList<UserInfo> getAllUsers()
+    {
+        ObservableList<UserInfo> returnList = FXCollections.observableArrayList();
+
+        String sql = """
+                    SELECT * FROM userTable
+                     """;
+
+        try (Connection connection = DBconnect.getConnection())
+        {
+            PreparedStatement psState = connection.prepareStatement(sql);
+            ResultSet resSet = psState.executeQuery();
+
+            while (resSet.next())
+            {
+                EUserType userType;
+
+                int userID = resSet.getInt("id");
+                String name = resSet.getString("userName");
+                if (resSet.getInt("userAuth") == 1) {
+                    userType = EUserType.EVENT_COORDINATOR;
+                } else {
+                    userType = EUserType.END_USER;
+                }
+                int zipCode = resSet.getInt("ZipCode");
+                String email = resSet.getString("email");
+
+
+                returnList.add(new UserInfo(userID, name, userType, zipCode, email));
+            }
+        return returnList;
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void addUserToEvent(List<UserInfo> userList, int eventID)
     {
         String sql = """
                 INSERT INTO userEvent (userID, eventID)
@@ -580,10 +618,14 @@ public class DAO implements IUserCrudDAO<UserInfo> {
         {
             PreparedStatement psState = connection.prepareStatement(sql);
 
-            psState.setInt(1, userID);
-            psState.setInt(2, eventID);
+            for (UserInfo user: userList) {
+                psState.setInt(1, user.getId());
+                psState.setInt(2, eventID);
 
-            psState.execute();
+                psState.addBatch();
+            }
+
+            psState.executeBatch();
 
         } catch (SQLException e)
         {
@@ -626,7 +668,7 @@ public class DAO implements IUserCrudDAO<UserInfo> {
 
         try (Connection connection = DBconnect.getConnection())
         {
-            PreparedStatement psState = DBconnect.getConnection().prepareStatement(sql);
+            PreparedStatement psState = connection.prepareStatement(sql);
             psState.setInt(1, eventID);
 
             ResultSet resSet = psState.executeQuery();
@@ -636,7 +678,7 @@ public class DAO implements IUserCrudDAO<UserInfo> {
                 EUserType userType;
 
                 int userID = resSet.getInt("id");
-                String name = resSet.getString("loginName");
+                String name = resSet.getString("userName");
                 if (resSet.getInt("userAuth") == 1 )
                 {
                     userType = EUserType.EVENT_COORDINATOR;
@@ -701,21 +743,5 @@ public class DAO implements IUserCrudDAO<UserInfo> {
             throwables.printStackTrace();
         }
         return users;
-    }
-
-    public Boolean addUserToEvent(UserInfo user, Event event) {
-        String sql = "INSERT INTO userEvent (userID, eventID) VALUES (?, ?)";
-
-        try (Connection connection = DBconnect.getConnection())
-        {
-            PreparedStatement psSQL =connection.prepareStatement(sql);
-            psSQL.setInt(1, user.getId());
-            psSQL.setInt(2,event.getId());
-
-            return psSQL.execute();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return false;
-        }
     }
 }

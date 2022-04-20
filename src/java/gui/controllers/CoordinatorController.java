@@ -5,6 +5,7 @@ import be.PriceGroup;
 import be.UserInfo;
 import bll.DataManager;
 import bll.ExporterList;
+import bll.Search;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -15,6 +16,8 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -106,6 +109,7 @@ public class CoordinatorController implements Initializable {
     private ContextMenu signOutMenu;
     private BooleanProperty showingAddress;
     private ExporterList expoList;
+    private Search searcher;
 
 
     public CoordinatorController() {
@@ -114,6 +118,7 @@ public class CoordinatorController implements Initializable {
         showingAddress = new SimpleBooleanProperty();
         showingAddress.set(false);
         expoList = new ExporterList();
+        searcher = new Search();
 
 
     }
@@ -187,7 +192,38 @@ public class CoordinatorController implements Initializable {
 
             tblViewAttendees.setItems(newValue.getAttendeesList());
 
-            //TODO: tblview Attendees
+            /**
+             *
+             */
+            //Wrap ObservableList of UserInfo in a FilteredList.
+            FilteredList<UserInfo> filteredData = new FilteredList<>(DataManager.getInstance().getAllUsers(), b -> true);
+
+            //Sets the filter predict when filter changes.
+            txtFieldSearch.textProperty().addListener((observable1, oldValue1, newValue1) -> {
+                filteredData.setPredicate(user -> {
+
+                    //If filter is empty, display all users.
+                    if (newValue1 == null || newValue1.isEmpty())
+                    {
+                        return true;
+                    }
+
+                    //Compare user name with filter text.
+                    String lowerCaseFilter = newValue1.toLowerCase();
+
+                    if (user.getName().toLowerCase().indexOf(lowerCaseFilter) != -1)
+                    {
+                        return true;
+                    } else return false;
+
+                });
+            });
+
+            SortedList<UserInfo> sortedUsers = new SortedList<>(filteredData);
+
+            sortedUsers.comparatorProperty().bind(tblViewAttendees.comparatorProperty());
+
+            tblViewAttendees.setItems(sortedUsers);
         });
     }
 
@@ -238,8 +274,10 @@ public class CoordinatorController implements Initializable {
         KeyFrame opImg7 = new KeyFrame(Duration.millis(duration), new KeyValue(imgViewTicketIcon.opacityProperty(), endValue));
         KeyFrame opBtn8 = new KeyFrame(Duration.millis(duration), new KeyValue(btnEventActions.opacityProperty(), endValue));
 
+        KeyFrame tbl1 = new KeyFrame(Duration.millis(duration), new KeyValue(tblViewAttendees.opacityProperty(), endValue));
 
-        timeline.getKeyFrames().addAll(op1, op2, op3, op4, op5, op6, op7, op8, op9, op10, op11, op12, op13, op14, op15, opLbl1, opLbl2, opLbl3, opLbl4, opLbl5, opLbl6, opLbl7, opLbl9, opLbl10, opLbl11,opImg7, opBtn8);
+
+        timeline.getKeyFrames().addAll(op1, op2, op3, op4, op5, op6, op7, op8, op9, op10, op11, op12, op13, op14, op15, opLbl1, opLbl2, opLbl3, opLbl4, opLbl5, opLbl6, opLbl7, opLbl9, opLbl10, opLbl11,opImg7, opBtn8, tbl1);
 
         timeline.play();
     }
@@ -349,7 +387,12 @@ public class CoordinatorController implements Initializable {
      */
     private void updateEventDetail() {
         imgViewEvent.setImage(selectedEvent.get().getEventImage());
-        imgDetailBackground.setStyle("-fx-background-color: rgb(" + selectedEvent.get().getColor().getRed() * 255 + ", " + selectedEvent.get().getColor().getGreen() * 255 + ", " + selectedEvent.get().getColor().getBlue() * 255 + ");");
+        if (!selectedEvent.get().hasImage()) {
+            imgDetailBackground.setStyle("-fx-background-color: rgb(" + selectedEvent.get().getColor().getRed() * 255 + ", " + selectedEvent.get().getColor().getGreen() * 255 + ", " + selectedEvent.get().getColor().getBlue() * 255 + ");");
+        }
+        else {
+            imgDetailBackground.setStyle("-fx-background-color: #b2da41;");
+        }
         lblEventName.setText(selectedEvent.get().getEventName());
         lblEventDateStart.setText(selectedEvent.get().getStartDateTime().toLocalDate().toString());
         lblEventTimeStart.setText(selectedEvent.get().getStartDateTime().toLocalTime().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)));
@@ -441,6 +484,8 @@ public class CoordinatorController implements Initializable {
 
     public void onRemoveAttendee(ActionEvent event) {
         DataManager.getInstance().removeUserFromEvent(tblViewAttendees.getSelectionModel().getSelectedItem(), selectedEvent.get());
+
+        tblViewAttendees.setItems(selectedEvent.get().getAttendeesList());
     }
 
     /**
@@ -497,13 +542,45 @@ public class CoordinatorController implements Initializable {
     public void onSaveAttendeesList(ActionEvent event) throws SQLServerException, IOException {
         if (selectedEvent.get() != null) {
             expoList.createListOfAttendees(selectedEvent.get());
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "a list have been made");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "A list has been made.");
             alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
             alert.show();
         } else {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "please select an event");
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please select an event.");
             alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
             alert.show();
         }
+    }
+
+    /**
+     * Opens the Add Attendees menu if event is selected, else warns that an event must be selected.
+     */
+    public void btnAddAttendeesMenu(ActionEvent actionEvent)
+    {
+        if (DataManager.getInstance().getSelectedEvent() != null)
+        {
+            Parent root = null;
+            Stage stage = new Stage();
+            try {
+                root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gui/views/addAttendees.fxml")));
+                stage.setTitle("Add Attendees");
+                stage.setMinWidth(511);
+                stage.setMinHeight(737);
+                stage.setScene(new Scene(root, 849, 650));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please select an event.");
+            alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/gui/styles/mainStylesheet.css")).toExternalForm());
+            alert.show();
+        }
+    }
+
+    public void updateList(ActionEvent actionEvent) {
+        selectedEvent.get().setAttendeesList((ObservableList<UserInfo>) searcher.search(selectedEvent.get().getAttendeesList(), txtFieldSearch.getText()));
+        updateEventDetail();
+        tblViewAttendees.refresh();
     }
 }

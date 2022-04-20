@@ -36,7 +36,7 @@ public class NewCoordinatorController {
         if(!txtFirstName.getText().isEmpty() && !txtUserName.getText().isEmpty() && !txtPassword.getText().isEmpty())
         {
             String name = "" + txtFirstName.getText() + " " + txtLastName.getText();
-            UserInfo user = new UserInfo(1, name, EUserType.EVENT_COORDINATOR);
+            UserInfo user = new UserInfo(-1, name, EUserType.EVENT_COORDINATOR);
             user.setName(name);
             corDAO.create(user,txtUserName.getText(),txtPassword.getText());
             Stage stage = (Stage) btnSubmit.getScene().getWindow();

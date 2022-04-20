@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="635.0" prefWidth="771.0" style="-fx-border-color: #fc8f51;" styleClass="background" stylesheets="@../styles/mainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.AddAttendeesController">
+    <children>
+        <Button fx:id="btnAttendeeSave" layoutX="222.0" layoutY="244.0" mnemonicParsing="false" onAction="#onSaveNewAttendee" styleClass="roundButton" text="Save" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="27.0" />
+        <Button fx:id="btnAttendeeCancel" layoutX="146.0" layoutY="244.0" mnemonicParsing="false" onAction="#onCancelAddAttendee" styleClass="roundButton" text="Cancel" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="90.0" />
+      <HBox alignment="CENTER" layoutX="30.0" layoutY="57.0" prefHeight="523.0" prefWidth="710.0" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="56.0">
+         <children>
+            <BorderPane prefHeight="523.0" prefWidth="333.0" styleClass="panel">
+               <top>
+                  <TableView fx:id="tblAllUsersTable" prefHeight="521.0" prefWidth="345.0" BorderPane.alignment="CENTER">
+                    <columns>
+                      <TableColumn fx:id="tblClmAttName" prefWidth="323.0" text="Name" />
+                    </columns>
+                  </TableView>
+               </top>
+            </BorderPane>
+            <VBox alignment="CENTER" prefHeight="521.0" prefWidth="55.0">
+               <children>
+                  <Button fx:id="btnAddUser" mnemonicParsing="false" onAction="#addAttendeeToList" prefHeight="34.0" prefWidth="34.0" text="Button" />
+                  <AnchorPane prefHeight="75.0" prefWidth="34.0" />
+                  <Button fx:id="btnRemoveUser" mnemonicParsing="false" onAction="#removeAttendeeFromList" prefHeight="34.0" prefWidth="34.0" text="Button" />
+               </children>
+            </VBox>
+            <BorderPane prefHeight="521.0" prefWidth="332.0" styleClass="panel">
+               <center>
+                  <TableView fx:id="tblAddedUsers" prefHeight="521.0" prefWidth="253.0" BorderPane.alignment="CENTER">
+                    <columns>
+                      <TableColumn fx:id="clmAddedUserName" prefWidth="149.0" text="Name" />
+                      <TableColumn prefWidth="144.0" text="Ticket" />
+                    </columns>
+                  </TableView>
+               </center>
+            </BorderPane>
+         </children>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="507.0">
+         <children>
+            <TextField fx:id="txtUserSearch" prefHeight="26.0" prefWidth="344.0">
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin>
+            </TextField>
+            <Button fx:id="btnSearch" mnemonicParsing="false" prefHeight="23.0" prefWidth="36.0" />
+            <ComboBox fx:id="comboBoxTicketType" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="86.0">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </ComboBox>
+         </children>
+      </HBox>
+    </children>
+</AnchorPane>

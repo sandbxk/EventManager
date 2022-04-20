@@ -120,7 +120,7 @@ public class EditEventController implements Initializable {
 
         imgViewEvent.setImage(editedEvent.getEventImage());
 
-        if (editedEvent.HasImage()){
+        if (editedEvent.hasImage()){
             imageColorToggleGroup.selectToggle(radioButtonImage);
         }
         else {
