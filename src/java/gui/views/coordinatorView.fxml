@@ -1,11 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane styleClass="background" stylesheets="@../styles/mainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.CoordinatorController">
    <top>
@@ -17,36 +32,16 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="385.0" GridPane.halignment="RIGHT">
+            <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="122.0" GridPane.halignment="RIGHT">
                <children>
                   <Button fx:id="btnCreateActions" contentDisplay="CENTER" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onCreate" prefHeight="36.0" prefWidth="116.0" styleClass="actionButton" text="New event" wrapText="true">
                      <HBox.margin>
-                        <Insets top="6.0" />
+                        <Insets right="10.0" top="6.0" />
                      </HBox.margin>
                      <padding>
                         <Insets bottom="1.0" />
                      </padding>
                   </Button>
-                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="48.0" prefWidth="270.0">
-                     <children>
-                        <ImageView fx:id="imgViewUser" fitHeight="46.0" fitWidth="32.0" onMouseClicked="#onUser" pickOnBounds="true" preserveRatio="true">
-                           <HBox.margin>
-                              <Insets left="10.0" top="8.0" />
-                           </HBox.margin>
-                           <image>
-                              <Image url="@../styles/img/usericon128-2.png" />
-                           </image>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </ImageView>
-                        <Label fx:id="lblUser" prefHeight="25.0" prefWidth="214.0" styleClass="Text" text="coordinator">
-                           <HBox.margin>
-                              <Insets left="10.0" top="11.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                  </HBox>
                </children>
             </HBox>
             <ImageView fitHeight="47.0" fitWidth="229.0" pickOnBounds="true" preserveRatio="true" />

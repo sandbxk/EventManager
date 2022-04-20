@@ -178,7 +178,7 @@ public class EditEventController implements Initializable {
     public void onAddImage(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Standard image files", "*.png", "*.jpg", "*.jpeg"));
-        File imageFile = fileChooser.sa //.showOpenDialog((Stage) btnAddImage.getScene().getWindow());
+        File imageFile = fileChooser.showOpenDialog((Stage) btnAddImage.getScene().getWindow());
         Image image = new Image(imageFile.getAbsolutePath());
         imgViewEvent.setImage(image);
         imgViewEvent.setFitWidth(367);
