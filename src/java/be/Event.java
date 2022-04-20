@@ -96,7 +96,7 @@ public class Event {
             imgViewContainer.setStyle("-fx-background-color: rgb(" + color.getRed()*255 + ", " + color.getGreen()*255 + ", " + color.getBlue()*255 + ");");
         }
         else {
-            imgViewContainer.setStyle("-fx-background-color: #b2da41 ");
+            imgViewContainer.setStyle("-fx-background-color: #CBA189; ");
         }
         Rectangle clip = new Rectangle(imgViewBanner.getFitWidth(), imgViewBanner.getFitHeight());
         clip.setArcHeight(9);

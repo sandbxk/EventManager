@@ -1,30 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Inline+Text:wght@600&display=swap');
 
+
+/* Color variables      */
+
 * {
-    -fx-bgBase: #F5F5F5;
-    -fx-panelBase: #DFE5DF;
+    -fx-bgBase: #303030;
+    -fx-panelBase: #404040;
     -fx-borderBase: #ababab;
-    -fx-txtBase: #494949;
-    -fx-txtBaseHover: #a4a4a4;
-    -fx-accent1: #b2da41;
-    -fx-accent1Hover: #88de07;
-    -fx-accent1Pressed: #eede2e;
-    -fx-accent2Hover: #9ec530;
-    -fx-accent2Pressed: #c2b635;
-    -fx-accent2Derive1: #a1be4e;
-    -fx-accent2Derive2: #d2ca5a;
+    -fx-txtBase: #f8f8f8;
+    -fx-txtBaseHover: #adadad;
+    -fx-accent1: #56AE4E;
+    -fx-accent1Hover: #70e365;
+    -fx-accent1Pressed: #70e365;
+    -fx-accent2Hover: #fc8f51;
+    -fx-accent2Pressed: #C57040;
+    -fx-accent2Derive1: #ce5f1c;
+    -fx-accent2Derive2: #da5b0e;
 
 
     /*For Event Node representation*/
-    -fx-eventRoot: #b2da41;
-    -fx-eventRootHover: #88de07;
-    -fx-eventRootSelected: #eede2e;
-    -fx-eventBorderSelected: #d9b70c;
-    -fx-eventRootSelectedHover: #e1d982;
-    -fx-eventBorderSelectedHover: #c6e371;
-    -fx-eventImgContainer: #dae1aa;
-    -fx-eventTxt: #676767;
+    -fx-eventRoot: #ee6c23;
+    -fx-eventRootHover: #fc8f51;
+    -fx-eventRootSelected: #e3a60a;
+    -fx-eventBorderSelected: #e5b71e;
+    -fx-eventRootSelectedHover: #ecaa53;
+    -fx-eventBorderSelectedHover: #f6c083;
+    -fx-eventImgContainer: #CBA189;
+    -fx-eventTxt: #f8f8f8;
 }
+
+
 
 
 
@@ -43,6 +48,32 @@
 }
 
 .actionButton {
+    -fx-background-color: -fx-accent1;
+    -fx-background-radius: 30;
+    -fx-text-fill: -fx-txtBase;
+    -fx-font-size: 20;
+    -fx-font-family: "Roboto";
+}
+
+
+.actionButton:hover {
+    -fx-background-color: -fx-accent1Hover;
+    -fx-background-radius: 30;
+    -fx-text-fill: -fx-txtBase;
+    -fx-font-size: 20;
+    -fx-font-family: "Roboto";
+}
+
+.actionButton:pressed {
+    -fx-background-color: -fx-accent1Pressed;
+    -fx-background-radius: 30;
+    -fx-text-fill: -fx-txtBase;
+    -fx-font-size: 20;
+    -fx-font-family: "Roboto";
+}
+
+
+.newEventButton {
     -fx-background-color: -fx-txtBase;
     -fx-background-radius: 30;
     -fx-text-fill: -fx-accent1;
@@ -51,7 +82,7 @@
 }
 
 
-.actionButton:hover {
+.newEventButton:hover {
     -fx-background-color: derive(-fx-eventRootSelected, 80%);
     -fx-background-radius: 30;
     -fx-text-fill: -fx-accent1;
@@ -59,7 +90,7 @@
     -fx-font-family: "Roboto";
 }
 
-.actionButton:pressed {
+.newEventButton:pressed {
     -fx-background-color: derive(-fx-accent1Pressed, 10%)/*derive(-fx-eventRootSelectedHover, 150%)*/;
     -fx-background-radius: 30;
     -fx-text-fill: -fx-accent1;
@@ -68,23 +99,23 @@
 }
 
 .actionPane {
-    -fx-background-color: -fx-txtBase;
+    -fx-background-color: -fx-accent1;
     -fx-background-radius: 20;
 }
 
 .actionToggle {
-    -fx-background-color: -fx-txtBase;
+    -fx-background-color: -fx-accent1;
     -fx-background-radius: 30;
-    -fx-text-fill: -fx-accent1;
+    -fx-text-fill: -fx-txtBase;
     -fx-border-width: 0;
     -fx-font-size: 17;
     -fx-font-weight: bold;
 }
 
 .actionToggle:hover {
-    -fx-background-color: derive(-fx-eventRootSelected, 80%);
+    -fx-background-color: -fx-accent1Hover;
     -fx-background-radius: 30;
-    -fx-text-fill: -fx-accent1;
+    -fx-text-fill: -fx-txtBase;
     -fx-border-width: 0;
     -fx-font-size: 17;
     -fx-font-weight: bold;
@@ -92,44 +123,44 @@
 }
 
 .actionToggle:selected:hover {
-    -fx-background-color: derive(-fx-eventRootSelected, 80%);
+    -fx-background-color: -fx-accent1Pressed;
     -fx-background-radius: 30;
     -fx-border-radius: 30;
     -fx-border-width: 2;
-    -fx-border-color: -fx-borderBase;
-    -fx-text-fill: -fx-accent1;
+    -fx-border-color: -fx-txtBase;
+    -fx-text-fill: -fx-txtBase;
     -fx-font-size: 17;
     -fx-font-weight: bold;
 
 }
 .actionToggle:selected:focused:hover {
-    -fx-background-color: derive(-fx-eventRootSelected, 80%);
+    -fx-background-color: -fx-accent1Pressed;
     -fx-background-radius: 30;
     -fx-border-radius: 30;
     -fx-border-width: 2;
-    -fx-border-color: -fx-accent1;
-    -fx-text-fill: -fx-accent1;
+    -fx-border-color: -fx-txtBase;
+    -fx-text-fill: -fx-txtBase;
     -fx-font-size: 17;
     -fx-font-weight: bold;
 }
 
 .actionToggle:selected {
-    -fx-background-color: -fx-txtBase;
+    -fx-background-color: -fx-accent1;
     -fx-background-radius: 30;
     -fx-border-width: 2;
     -fx-border-radius: 30;
-    -fx-border-color: -fx-borderBase;
-    -fx-text-fill: -fx-accent1;
+    -fx-border-color: -fx-txtBase;
+    -fx-text-fill: -fx-txtBase;
     -fx-font-size: 17;
     -fx-font-weight: bold;
 
 }
 .actionToggle:selected:focused {
-    -fx-background-color: -fx-txtBase;
+    -fx-background-color: -fx-accent1;
     -fx-background-radius: 30;
     -fx-border-width: 2;
-    -fx-border-color: -fx-borderBase;
-    -fx-text-fill: -fx-accent1;
+    -fx-border-color: -fx-txtBase;
+    -fx-text-fill: -fx-txtBase;
     -fx-font-size: 17;
     -fx-font-weight: bold;
 }
@@ -139,9 +170,9 @@
     -fx-background-radius: 30;
     -fx-padding: 0;
     -fx-border-radius: 30;
-    -fx-text-fill: -fx-bgBase;
+    -fx-text-fill: -fx-txtBase;
     -fx-border-width: 1;
-    -fx-border-color: -fx-bgBase;
+    -fx-border-color: -fx-txtBase;
     -fx-font-size: 14;
     -fx-font-family: "Roboto";
 }
@@ -152,9 +183,9 @@
     -fx-background-radius: 30;
     -fx-border-radius: 30;
     -fx-padding: 0;
-    -fx-text-fill: -fx-accent1;
+    -fx-text-fill: -fx-panelBase;
     -fx-border-width: 1;
-    -fx-border-color: -fx-accent1;
+    -fx-border-color: -fx-panelBase;
     -fx-font-size: 14;
     -fx-font-family: "Roboto";
 }
@@ -165,9 +196,9 @@
     -fx-background-radius: 30;
     -fx-border-radius: 30;
     -fx-padding: 0;
-    -fx-text-fill: -fx-accent1Pressed;
+    -fx-text-fill: -fx-bgBase;
     -fx-border-width: 1;
-    -fx-border-color: -fx-accent1Pressed;
+    -fx-border-color: -fx-bgBase;
     -fx-font-size: 14;
     -fx-font-family: "Roboto";
 }
@@ -835,7 +866,7 @@ table-view:focused .table-row-cell:filled:focused:selected {
 
 
 #colorPicker .color-palette{
-    -fx-background-color: -fx-accent2Derive1;
+    -fx-background-color: -fx-accent1Hover;
     -fx-text-fill: -fx-txtBase;
 }
 
