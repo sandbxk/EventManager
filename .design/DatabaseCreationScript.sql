@@ -16,6 +16,17 @@ CREATE TABLE cityName (
     PRIMARY KEY (zipCode)
 )
 
+
+CREATE TABLE userTable (
+    id INT IDENTITY(1,1) NOT NULL,
+    userName VARCHAR(50),
+    num VARCHAR(11)
+	email VARCHAR(50),
+    zipCode VARCHAR(255),
+    PRIMARY KEY (id),
+    FOREIGN KEY (zipCode) REFERENCES cityName (zipCode)
+)
+
 CREATE TABLE venue (
     id INT IDENTITY(1,1) NOT NULL,
     venueName VARCHAR(255),

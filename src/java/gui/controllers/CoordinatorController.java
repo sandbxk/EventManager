@@ -45,8 +45,6 @@ public class CoordinatorController implements Initializable {
 
 
     @FXML public Button btnCreateActions;
-    @FXML public Label lblUser;
-    @FXML public ImageView imgViewUser;
 
     @FXML public FlowPane flowPaneEvents;
 
@@ -134,7 +132,6 @@ public class CoordinatorController implements Initializable {
         initTableViews();
         initEventListener();
         initEventActionsMenu();
-        initSignOutMenu();
         updateEventsFlowPane();
     }
 
@@ -328,17 +325,6 @@ public class CoordinatorController implements Initializable {
         eventToggle.getToggles().addAll(toggles);
     }
 
-    public void onUser(MouseEvent mouseEvent) {
-        //Location of the node
-        double onScreenX = imgViewUser.getScene().getWindow().getX() + imgViewUser.getFitHeight() + imgViewUser.localToScene(imgViewUser.getBoundsInLocal()).getMinX();
-        double onScreenY = imgViewUser.getScene().getWindow().getY() + imgViewUser.getFitWidth() + imgViewUser.localToScene(imgViewUser.getBoundsInLocal()).getMinY();
-
-        double offsetX = imgViewUser.getFitWidth() * 2;
-        double offsetY = imgViewUser.getFitHeight() * 0.8;
-
-        //ContextMenu showed at the location of the button, with offsets applied
-        signOutMenu.show(imgViewUser, onScreenX - offsetX, onScreenY + offsetY);
-    }
 
     /**
      * Deletes the selected event.
@@ -505,19 +491,6 @@ public class CoordinatorController implements Initializable {
         eventActionsMenu.show(btnEventActions, onScreenX - offsetX, onScreenY + offsetY);
     }
 
-    private void signOut() {
-        //TODO: Temp?
-        Parent root = null;
-        Stage thisStage = (Stage) lblUser.getScene().getWindow();
-        try {
-            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gui/views/SignIn.fxml")));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-        thisStage.setScene(new Scene(root));
-
-    }
 
 
     private void initEventActionsMenu() {
@@ -531,13 +504,7 @@ public class CoordinatorController implements Initializable {
         eventActionsMenu.setAutoHide(true);
     }
 
-    private void initSignOutMenu() {
-        MenuItem signOut = new MenuItem("Sign out");
-        signOut.setOnAction(event -> signOut());
 
-        signOutMenu = new ContextMenu(signOut);
-        signOutMenu.setAutoHide(true);
-    }
 
     public void onSaveAttendeesList(ActionEvent event) throws SQLServerException, IOException {
         if (selectedEvent.get() != null) {
