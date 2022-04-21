@@ -18,10 +18,12 @@ public void createListOfAttendees(Event event) throws SQLServerException, IOExce
     DAO CDAO = new DAO();
     FileWriter fl = new FileWriter(new File(".design/lister/"+ event.getEventName() +".txt"));
     List<UserInfo> users = new ArrayList<>();
-    CDAO.getAttendeesFromEvent(event);
+    users.addAll(CDAO.getUsersForEvent(event.getId()));
     for (UserInfo user: users)
     {
-        fl.append(user.getName() +" | " + user.getEmail() + "\n");
+        System.out.println(user.getName());
+        fl.write(user.getName() +" | " + user.getEmail() + "\n");
+        fl.flush();
     }
 }
 }
