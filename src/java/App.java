@@ -1,12 +1,8 @@
-import gui.model.SceneManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.FileReader;
-import java.util.Properties;
 
 public class App extends Application {
 
@@ -14,7 +10,11 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-        SceneManager.init(primaryStage);
+        Parent root = FXMLLoader.load(getClass().getResource("gui/views/coordinatorView.fxml"));
+        primaryStage.setTitle("EventManager");
+        primaryStage.setScene(new Scene(root, 1200, 900));
+        primaryStage.show();
+
     }
 
     public static void main(String[] args) {

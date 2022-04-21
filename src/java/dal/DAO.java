@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DAO implements IUserCrudDAO<UserInfo> {
+public class DAO {
 
     private DBConnection DBconnect;
 
@@ -25,7 +25,7 @@ public class DAO implements IUserCrudDAO<UserInfo> {
         }
     }
 
-    @Override
+
     public boolean create(UserInfo input, String username, String password) {
 
         String sqlUser = """
@@ -48,7 +48,7 @@ public class DAO implements IUserCrudDAO<UserInfo> {
         }
     }
 
-    @Override
+
     public UserInfo read(int id) throws SQLException {
 
         String sqlUser = """
@@ -68,7 +68,7 @@ public class DAO implements IUserCrudDAO<UserInfo> {
         }
     }
 
-    @Override
+
     public boolean update(UserInfo input) {
         try (Connection connection = DBconnect.getConnection()) {
             String SQLUpdate = "UPDATE UserTable SET userName=?, zipCode=?, userAuth=?";
@@ -89,7 +89,7 @@ public class DAO implements IUserCrudDAO<UserInfo> {
         }
     }
 
-    @Override
+
     public boolean delete(UserInfo input) {
         try (Connection connection = DBconnect.getConnection()) {
             String SQLDelete = "DELETE FROM UserTable WHERE id=?";
