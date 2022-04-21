@@ -9,21 +9,13 @@
  import javax.mail.internet.MimeBodyPart;
  import javax.mail.internet.MimeMessage;
  import javax.mail.internet.MimeMultipart;
- import java.awt.*;
  import java.io.*;
- import java.util.ArrayList;
- import java.util.List;
- import java.util.Properties;
- import java.util.logging.Level;
- import java.util.logging.Logger;
+
 
  public class MailService
  {
 
-     private MailConnector mailConnect;
-
      public MailService() throws IOException {
-         mailConnect = new MailConnector();
      }
 
      public void sendMail(String to, File attachments) throws MessagingException, IOException {
