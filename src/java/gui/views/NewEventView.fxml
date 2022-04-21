@@ -71,12 +71,12 @@
                                           <Insets left="5.0" right="100.0" />
                                        </GridPane.margin>
                                     </TextField>
-                                    <RadioButton fx:id="radioButtonImage" mnemonicParsing="false" text="Use Image" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                                    <RadioButton fx:id="radioButtonImage" mnemonicParsing="false" text="Use Image" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
                                        <GridPane.margin>
                                           <Insets bottom="5.0" right="5.0" />
                                        </GridPane.margin>
                                     </RadioButton>
-                                    <RadioButton fx:id="radioButtonColor" mnemonicParsing="false" text="Use Color" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+                                    <RadioButton fx:id="radioButtonColor" mnemonicParsing="false" text="Use Color" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
                                        <GridPane.margin>
                                           <Insets right="10.0" top="5.0" />
                                        </GridPane.margin>
